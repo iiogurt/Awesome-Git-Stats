@@ -29,7 +29,7 @@ npm run dev            # http://localhost:3000
 
 ## Making changes
 
-1. Create a branch from `main`.
+1. Create a short-lived branch from `main` (see [Branches](#branches)).
 2. Make your change and add or update tests.
 3. If the cards look different, run `npm run examples` and commit the updated SVGs. CI checks
    that they are up to date.
@@ -41,6 +41,38 @@ npm run dev            # http://localhost:3000
 Add an entry to `src/themes.js` defining all seven colour tokens, add it to the `<select>` in
 `public/index.html` and to the theme lists in `README.md`, then run `npm run examples` and
 regenerate the table in `docs/themes.md`. Check that text is readable on the background.
+
+## Branches
+
+`main` is the only long-lived branch. It is always releasable and protected: nobody pushes to
+it directly, and every change lands through a squash-merged pull request with green CI.
+
+Name work branches `<type>/<short-description>`, using the same types as commit messages:
+
+| Example                    | For                     |
+| -------------------------- | ----------------------- |
+| `feat/heatmap-layout`      | New features            |
+| `fix/long-repo-names`      | Bug fixes               |
+| `docs/action-example`      | Documentation only      |
+| `ci/node-24`, `chore/deps` | Tooling and maintenance |
+
+Keep branches small and short-lived, update them by merging or rebasing on `main`, and let
+GitHub delete them after merge. Bot branches (`dependabot/…`, `release-please--…`) are created
+and cleaned up automatically.
+
+### Repository settings (maintainers)
+
+- **Default branch:** `main`.
+- **Rulesets:** import [`.github/rulesets/main.json`](.github/rulesets/main.json) and
+  [`.github/rulesets/release-tags.json`](.github/rulesets/release-tags.json) under
+  _Settings → Rules → Rulesets → New ruleset → Import a ruleset_. They require pull requests,
+  passing checks and linear history on `main`, and make `vX.Y.Z` tags immutable.
+- **Pull requests:** allow squash merging only, use the PR title as the commit message, and
+  enable _Automatically delete head branches_.
+- **Actions:** allow GitHub Actions to create pull requests (needed by release-please).
+
+Release pull requests opened by release-please don't trigger CI (GitHub doesn't run workflows
+for changes made with `GITHUB_TOKEN`), so an admin merges them using the ruleset bypass.
 
 ## Commit messages and releases
 
