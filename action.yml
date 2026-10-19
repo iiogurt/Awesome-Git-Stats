@@ -1,0 +1,49 @@
+name: Awesome Git Stats
+description: Render a beautiful GitHub stars card into your repository, no hosting required.
+author: iiogurt
+branding:
+  icon: star
+  color: yellow
+
+inputs:
+  username:
+    description: GitHub username or organization to render.
+    required: false
+    default: ${{ github.repository_owner }}
+  layout:
+    description: 'Card layout: overview, repos, compact or badge.'
+    required: false
+    default: overview
+  theme:
+    description: Theme name, see the README for the full list.
+    required: false
+    default: default
+  options:
+    description: 'Extra card options as a query string, e.g. "hide_border=true&count=8".'
+    required: false
+    default: ''
+  path:
+    description: Where to write the SVG, relative to the workspace.
+    required: false
+    default: awesome-git-stats.svg
+  token:
+    description: Token used to query the GitHub GraphQL API.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: Render card
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/scripts/action.js"
+      env:
+        INPUT_USERNAME: ${{ inputs.username }}
+        INPUT_LAYOUT: ${{ inputs.layout }}
+        INPUT_THEME: ${{ inputs.theme }}
+        INPUT_OPTIONS: ${{ inputs.options }}
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_TOKEN: ${{ inputs.token }}

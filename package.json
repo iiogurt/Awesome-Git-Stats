@@ -1,0 +1,56 @@
+{
+  "name": "awesome-git-stats",
+  "version": "1.0.0",
+  "description": "Beautiful, themeable GitHub star cards for your profile README — just drop in a link.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "awesome-git-stats": "bin/cli.js"
+  },
+  "files": [
+    "api",
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "test": "node --test test/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage test/*.test.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "examples": "node scripts/generate-examples.js",
+    "check": "npm run lint && npm run format:check && npm test"
+  },
+  "keywords": [
+    "github",
+    "readme",
+    "profile",
+    "stars",
+    "stats",
+    "svg",
+    "card",
+    "themes"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iiogurt/Awesome-Git-Stats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iiogurt/Awesome-Git-Stats/issues"
+  },
+  "homepage": "https://github.com/iiogurt/Awesome-Git-Stats#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10"
+  }
+}

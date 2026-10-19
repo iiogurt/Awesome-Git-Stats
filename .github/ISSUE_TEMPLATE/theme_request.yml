@@ -1,0 +1,26 @@
+name: Theme request
+description: Propose a new built-in theme.
+labels: [theme]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Theme name
+      placeholder: everforest
+    validations:
+      required: true
+  - type: textarea
+    id: colors
+    attributes:
+      label: Colours
+      description: Hex values for each token.
+      value: |
+        bg:
+        border:
+        title:
+        text:
+        muted:
+        accent:
+        track:
+    validations:
+      required: true

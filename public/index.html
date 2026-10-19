@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Awesome Git Stats</title>
+    <meta
+      name="description"
+      content="Beautiful, themeable GitHub star cards for your profile README."
+    />
+    <style>
+      :root {
+        --bg: #f6f8fa;
+        --panel: #ffffff;
+        --text: #1f2328;
+        --muted: #59636e;
+        --border: #d1d9e0;
+        --accent: #e3b341;
+        --focus: #0969da;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --panel: #161b22;
+          --text: #e6edf3;
+          --muted: #9198a1;
+          --border: #30363d;
+          --accent: #f2cc60;
+          --focus: #4493f8;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.5 -apple-system,
+          'Segoe UI',
+          Ubuntu,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 40px 16px 64px;
+      }
+      h1 {
+        font-size: 30px;
+        margin: 0 0 4px;
+      }
+      h1 span {
+        color: var(--accent);
+      }
+      p.lead {
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      label {
+        display: grid;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      label.check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      input[type='text'],
+      select {
+        font: inherit;
+        color: var(--text);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 7px 10px;
+        width: 100%;
+      }
+      input:focus-visible,
+      select:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 1px;
+      }
+      .preview {
+        margin: 24px 0 12px;
+        min-height: 120px;
+        display: grid;
+        place-items: center;
+      }
+      .preview img {
+        max-width: 100%;
+      }
+      .snippet {
+        display: flex;
+        gap: 8px;
+      }
+      code {
+        flex: 1;
+        overflow-x: auto;
+        white-space: nowrap;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+      button {
+        font: inherit;
+        font-weight: 600;
+        border: 0;
+        border-radius: 8px;
+        padding: 0 16px;
+        background: var(--accent);
+        color: #1b1f24;
+        cursor: pointer;
+      }
+      footer {
+        margin-top: 40px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      a {
+        color: var(--focus);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><span>★</span> Awesome Git Stats</h1>
+      <p class="lead">
+        Show off the stars your projects have earned. Pick a style, copy the line, paste it into
+        your profile README.
+      </p>
+
+      <form id="builder">
+        <label>
+          GitHub username
+          <input type="text" name="username" value="octocat" autocomplete="off" required />
+        </label>
+        <label>
+          Layout
+          <select name="layout">
+            <option value="overview">Overview</option>
+            <option value="repos">Top repos</option>
+            <option value="compact">Compact</option>
+            <option value="badge">Badge</option>
+          </select>
+        </label>
+        <label>
+          Theme
+          <select name="theme">
+            <option>default</option>
+            <option>auto</option>
+            <option>dark</option>
+            <option>github_dark</option>
+            <option>tokyonight</option>
+            <option>dracula</option>
+            <option>nord</option>
+            <option>gruvbox</option>
+            <option>catppuccin</option>
+            <option>catppuccin_latte</option>
+            <option>rose_pine</option>
+            <option>solarized_light</option>
+            <option>solarized_dark</option>
+            <option>monokai</option>
+            <option>radical</option>
+            <option>sunset</option>
+            <option>aurora</option>
+            <option>ocean</option>
+            <option>candy</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" name="hide_border" /> Hide border</label>
+        <label class="check"><input type="checkbox" name="hide_title" /> Hide title</label>
+        <label class="check">
+          <input type="checkbox" name="disable_animations" /> No animations
+        </label>
+      </form>
+
+      <div class="preview"><img id="preview" alt="Card preview" /></div>
+
+      <div class="snippet">
+        <code id="markdown"></code>
+        <button type="button" id="copy">Copy</button>
+      </div>
+
+      <footer>
+        Open source on
+        <a href="https://github.com/iiogurt/Awesome-Git-Stats">GitHub</a>. All options are
+        documented in the README.
+      </footer>
+    </main>
+
+    <script>
+      const form = document.getElementById('builder');
+      const preview = document.getElementById('preview');
+      const markdown = document.getElementById('markdown');
+      const copy = document.getElementById('copy');
+      let timer;
+
+      function buildUrl() {
+        const data = new FormData(form);
+        const params = new URLSearchParams();
+        const defaults = { layout: 'overview', theme: 'default' };
+        for (const [key, raw] of data) {
+          const value = raw === 'on' ? 'true' : raw.trim();
+          if (value && defaults[key] !== value) params.set(key, value);
+        }
+        return `${location.origin}/api/stars?${params}`;
+      }
+
+      function update() {
+        const url = buildUrl();
+        markdown.textContent = `![GitHub stars](${url})`;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          preview.src = url;
+        }, 350);
+      }
+
+      form.addEventListener('input', update);
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(markdown.textContent);
+          copy.textContent = 'Copied!';
+        } catch {
+          copy.textContent = 'Copy failed';
+        }
+        setTimeout(() => (copy.textContent = 'Copy'), 1500);
+      });
+      update();
+    </script>
+  </body>
+</html>

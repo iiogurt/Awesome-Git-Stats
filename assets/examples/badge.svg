@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="28" viewBox="0 0 128 28" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev: 17,656 GitHub stars</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#161b22;--border:#30363d;--title:#58a6ff;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-opacity:1}
+    
+    
+    .badge-left{fill:var(--accent)}
+    .badge-ink{fill:#1b1f24}
+    .badge-label{font-size:12px;font-weight:600;fill:#1b1f24}
+    .badge-value{font-size:12px;font-weight:700;fill:var(--title)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="127" height="27" class="card"/>
+  
+  <g transform="translate(0 0)">
+  <clipPath id="ags-badge"><rect width="128" height="28" rx="10"/></clipPath>
+  <g clip-path="url(#ags-badge)">
+    <rect width="74" height="28" class="badge-left"/>
+  </g>
+  <path class="badge-ink" transform="translate(11 7) scale(0.875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+  <text x="31" y="18.5" class="badge-label">stars</text>
+  <text x="101" y="18.5" class="badge-value" text-anchor="middle">17.7k</text></g>
+</svg>
