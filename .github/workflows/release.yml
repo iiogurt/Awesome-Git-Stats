@@ -3,6 +3,9 @@ name: Release
 on:
   push:
     branches: [main]
+  # Releases published by hand (e.g. the first v1.0.0) also move the major tag.
+  release:
+    types: [published]
 
 permissions:
   contents: write
@@ -10,30 +13,40 @@ permissions:
 
 jobs:
   release-please:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
-      major: ${{ steps.release.outputs.major }}
     steps:
       - uses: googleapis/release-please-action@v5
         id: release
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+          target-branch: main
 
   # Keep a moving major tag (v1, v2, ...) so Action users can pin
   # `iiogurt/Awesome-Git-Stats@v1` and receive compatible updates.
   update-major-tag:
     needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
+    if: >-
+      always() &&
+      (needs.release-please.outputs.release_created == 'true' ||
+       (github.event_name == 'release' && !github.event.release.prerelease))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Move major tag
         env:
-          TAG: ${{ needs.release-please.outputs.tag_name }}
-          MAJOR: v${{ needs.release-please.outputs.major }}
+          TAG: ${{ needs.release-please.outputs.tag_name || github.event.release.tag_name }}
         run: |
-          git tag -f "$MAJOR" "$TAG"
-          git push -f origin "$MAJOR"
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Unexpected tag '$TAG'"
+            exit 1
+          fi
+          MAJOR="${TAG%%.*}"
+          git tag -f "$MAJOR" "$TAG^{commit}"
+          git push -f origin "refs/tags/$MAJOR"

@@ -131,7 +131,7 @@ instance. It takes about two minutes:
 | `ALLOWED_USERNAMES`  | Optional comma separated allowlist, so your instance only serves your cards. |
 
 The function is a plain Node.js request handler (`src/handler.js`), so it also runs on any
-Node 20+ host; see `scripts/dev.js` for a minimal server.
+Node 22+ host; see `scripts/dev.js` for a minimal server.
 
 ## GitHub Action
 
@@ -191,7 +191,7 @@ GITHUB_TOKEN=... npx github:iiogurt/Awesome-Git-Stats --username octocat --layou
 
 ## Development
 
-Requires Node.js 20 or newer.
+Requires Node.js 22 or newer.
 
 ```sh
 npm install

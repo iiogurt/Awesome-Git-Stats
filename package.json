@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/iiogurt/Awesome-Git-Stats#readme",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

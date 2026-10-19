@@ -70,6 +70,9 @@ and cleaned up automatically.
 - **Pull requests:** allow squash merging only, use the PR title as the commit message, and
   enable _Automatically delete head branches_.
 - **Actions:** allow GitHub Actions to create pull requests (needed by release-please).
+- **First release:** publish `v1.0.0` by hand (_Releases → Draft a new release_, new tag
+  `v1.0.0` on `main`, notes from `CHANGELOG.md`). The Release workflow then creates the `v1`
+  tag, and release-please takes over from that release.
 
 Release pull requests opened by release-please don't trigger CI (GitHub doesn't run workflows
 for changes made with `GITHUB_TOKEN`), so an admin merges them using the ruleset bypass.

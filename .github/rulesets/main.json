@@ -30,7 +30,6 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           { "context": "Lint & format" },
-          { "context": "Test (Node 20)" },
           { "context": "Test (Node 22)" },
           { "context": "Test (Node 24)" },
           { "context": "Examples up to date" },
