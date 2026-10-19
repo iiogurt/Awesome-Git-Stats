@@ -153,7 +153,7 @@ jobs:
   card:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: iiogurt/Awesome-Git-Stats@v1
         with:
           layout: overview
