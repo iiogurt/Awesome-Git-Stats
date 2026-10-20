@@ -105,11 +105,16 @@ it.
   start the Release workflow. Give the workflows their own identity, either:
   - **a GitHub App (recommended, never expires):** create one under _Settings → Developer
     settings → GitHub Apps → New GitHub App_ with no webhook and the repository permissions
-    _Contents: Read and write_ and _Pull requests: Read and write_. Install it on this
+    _Contents_, _Pull requests_ and _Workflows_, all _Read and write_. Install it on this
     repository, then add its App ID as the Actions **variable** `RELEASE_APP_ID` and a
     generated private key as the Actions **secret** `RELEASE_APP_PRIVATE_KEY`; or
-  - **a fine-grained personal access token:** limited to this repository with the same two
+  - **a fine-grained personal access token:** limited to this repository with the same three
     permissions, saved as the Actions secret `RELEASE_TOKEN`. Renew it before it expires.
+
+  _Workflows_ is needed because GitHub only lets a token with that permission tag a commit
+  whose workflow files differ from `main`, which happens when a workflow change lands between
+  a release PR's merge and its release.
+
 - **First release:** run the _Release_ workflow manually on `main` (_Actions → Release → Run
   workflow_). It publishes `v1.0.0` from `CHANGELOG.md` and creates the `v1` tag; release-please
   takes over from there.
