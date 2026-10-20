@@ -1,7 +1,7 @@
 import { ART_STYLES } from './render/art.js';
 import { themes, resolveTheme } from './themes.js';
 
-export const LAYOUTS = ['overview', 'repos', 'compact', 'badge'];
+export const LAYOUTS = ['overview', 'repos', 'compact', 'badge', 'dashboard'];
 
 export const CACHE = {
   default: 4 * 60 * 60,

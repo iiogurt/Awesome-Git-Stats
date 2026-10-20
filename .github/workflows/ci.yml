@@ -73,3 +73,11 @@ jobs:
           path: out/card.svg
           commit: false
       - run: grep -q '<svg' out/card.svg
+      # The dashboard runs the contribution-activity query against the real API.
+      - uses: ./
+        with:
+          username: ${{ github.repository_owner }}
+          layout: dashboard
+          path: out/dashboard.svg
+          commit: false
+      - run: grep -q 'Current streak' out/dashboard.svg

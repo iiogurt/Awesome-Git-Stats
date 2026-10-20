@@ -43,6 +43,8 @@ const files = {
   'compact.svg': render({ layout: 'compact', theme: 'dracula' }),
   'badge.svg': render({ layout: 'badge', theme: 'github_dark' }),
   'auto.svg': render({ theme: 'auto' }),
+  'dashboard.svg': render({ layout: 'dashboard', theme: 'tokyonight' }),
+  'dashboard-synthwave.svg': render({ layout: 'dashboard', theme: 'synthwave' }),
 };
 for (const theme of themeNames) {
   const layout = themes[theme].art ? 'overview' : 'compact';

@@ -1,5 +1,6 @@
 import { renderBadge } from './badge.js';
 import { renderCompact } from './compact.js';
+import { renderDashboard } from './dashboard.js';
 import { renderOverview } from './overview.js';
 import { renderRepos } from './repos.js';
 
@@ -10,6 +11,7 @@ const renderers = {
   repos: renderRepos,
   compact: renderCompact,
   badge: renderBadge,
+  dashboard: renderDashboard,
 };
 
 /** Render the requested layout for already computed stats. */

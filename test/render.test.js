@@ -100,3 +100,32 @@ describe('repos without a language', () => {
     assert.doesNotMatch(svg, /fill="var\(/);
   });
 });
+
+describe('dashboard layout', () => {
+  it('shows tiles, heatmap, charts and repos', () => {
+    const svg = render({ layout: 'dashboard' });
+    assertWellFormed(svg);
+    for (const text of [
+      'Current streak',
+      '19 days',
+      '39 days',
+      'Weekly rhythm',
+      'Monthly activity',
+    ]) {
+      assert.match(svg, new RegExp(text), text);
+    }
+    assert.equal((svg.match(/class="hm\d"/g) ?? []).length, 371 + 5);
+    assert.match(svg, /On GitHub since 2018 · 8 years/);
+  });
+
+  it('falls back gracefully without contribution data', () => {
+    const org = { ...sampleAccount, type: 'Organization', followers: null, activity: null };
+    const svg = render({ layout: 'dashboard' }, org);
+    assertWellFormed(svg);
+    assert.match(svg, /only available for user accounts/);
+    assert.match(svg, />Public repos</);
+    assert.doesNotMatch(svg, /class="hm\d"/);
+    const user = render({ layout: 'dashboard' }, { ...sampleAccount, activity: null });
+    assert.match(user, /needs a GitHub token/);
+  });
+});

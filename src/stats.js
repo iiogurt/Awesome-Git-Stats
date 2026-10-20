@@ -1,3 +1,5 @@
+import { computeActivity } from './activity.js';
+
 const OTHER_COLOR = '#8b949e';
 
 /**
@@ -54,5 +56,7 @@ export function computeStats(account, { exclude = [], languages = 5 } = {}) {
     starredRepoCount: repos.filter((repo) => repo.stars > 0).length,
     topRepos: repos,
     languages: languageStats,
+    languageCount: byLanguage.size,
+    activity: computeActivity(account.activity),
   };
 }
