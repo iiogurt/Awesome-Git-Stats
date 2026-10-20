@@ -14,29 +14,144 @@
 
 ## Features
 
-- **Just a link.** Paste one Markdown line into your README. No build step, no JavaScript.
 - **Four layouts.** A rich overview, a top repos chart, a compact card and a tiny badge.
 - **20 themes.** From `tokyonight` and `dracula` to gradient themes like `sunset` and `aurora`.
 - **Follows dark mode.** The `auto` theme switches with the viewer's GitHub theme.
 - **Smooth animations.** Subtle, and switched off for people who prefer reduced motion.
 - **Users and organizations.** Works for any public GitHub account.
-- **Fast and friendly.** Cached responses, and a readable error card instead of a broken image.
+- **No server needed.** Generate the card with a GitHub Action, or serve it live if you prefer.
 
-## Quick start
+## How it works: pick one of two ways
 
-Add this to your profile README (the repository named after your username), replacing
-`YOUR-DEPLOYMENT` with your instance (see [Deploy your own](#deploy-your-own)) and `octocat`
-with your username:
+A README can only show images. Something has to fetch your stars from the GitHub API and draw
+that image, and there are two places where this can happen:
 
-```md
-![My GitHub stars](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat)
+|                 | **1. GitHub Action** (recommended)           | **2. Live link**                                        |
+| --------------- | -------------------------------------------- | ------------------------------------------------------- |
+| What you set up | One workflow file in your profile repository | A link to a running instance                            |
+| Hosting         | **None.** GitHub Actions runs it for free    | A Vercel deployment (yours, or someone's public one)    |
+| Token           | None, the workflow's built-in token is used  | The instance owner provides one or more                 |
+| Card updates    | On your schedule, e.g. daily                 | On view, cached for a few hours                         |
+| Depends on      | Only GitHub                                  | The instance staying up and within GitHub's rate limits |
+| In your README  | `![Stars](assets/stars.svg)`                 | `![Stars](https://…/api/stars?username=you)`            |
+
+Star counts change slowly, so for a personal profile the Action is the simplest and most
+reliable choice. Choose the live link if you want to share one instance with others or need
+the card to update within hours rather than once a day.
+
+Services such as github-readme-stats work the second way: their maintainers pay for and run
+one public instance for everybody, which is why you don't host anything, and why their cards
+can break for everyone when that instance hits GitHub's limits.
+
+## Option 1: GitHub Action (no hosting)
+
+Everything happens inside your profile repository (the repository named after your username).
+
+**1. Add a workflow.** Create `.github/workflows/stars.yml`:
+
+```yaml
+name: Update stars card
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # every day at 03:00 UTC
+  workflow_dispatch: # adds a "Run workflow" button
+
+permissions:
+  contents: write # lets the Action commit the card
+
+jobs:
+  card:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: iiogurt/Awesome-Git-Stats@v1
+        with:
+          theme: tokyonight
+          path: assets/stars.svg
 ```
 
-That's it. Prefer not to host anything? Use the [GitHub Action](#github-action) instead.
+**2. Run it once.** Open the _Actions_ tab, pick _Update stars card_ and click _Run workflow_.
+The Action renders the card and commits `assets/stars.svg`. Afterwards it runs daily and
+commits only when your numbers changed.
+
+**3. Show it in your README:**
+
+```md
+![My GitHub stars](assets/stars.svg)
+```
+
+### More cards, and options
+
+Add one step per card. Any [option](#options) goes into `options` as a query string:
+
+```yaml
+- uses: iiogurt/Awesome-Git-Stats@v1
+  with:
+    layout: repos
+    theme: dracula
+    options: count=8&hide_border=true&exclude=dotfiles
+    path: assets/top-repos.svg
+```
+
+### Action inputs
+
+| Input            | Description                                      | Default                           |
+| ---------------- | ------------------------------------------------ | --------------------------------- |
+| `username`       | Account to render                                | Repository owner                  |
+| `layout`         | `overview`, `repos`, `compact` or `badge`        | `overview`                        |
+| `theme`          | Any [theme](docs/themes.md)                      | `default`                         |
+| `options`        | Any other [options](#options), as a query string |                                   |
+| `path`           | Output file                                      | `awesome-git-stats.svg`           |
+| `commit`         | Commit and push the card when it changed         | `true`                            |
+| `commit-message` | Message for that commit                          | `chore: update GitHub stars card` |
+| `token`          | Token for the GitHub API                         | `${{ github.token }}`             |
+
+Outputs: `path` (the written file) and `changed` (`true` when a new card was committed). Set
+`commit: false` to commit yourself, for example to bundle several files into one commit.
+
+## Option 2: Live link (hosted instance)
+
+The card is drawn on request by a small serverless function. There's nothing to maintain once
+it's deployed, but it does need a Vercel account (the free plan is enough).
+
+### Deploy an instance
+
+1. Create a [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new).
+   It needs no permissions at all, because only public data is read.
+2. Click the button, sign in to Vercel and paste the token as `GITHUB_TOKEN`:
+
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fiiogurt%2FAwesome-Git-Stats&env=GITHUB_TOKEN&envDescription=A%20GitHub%20token%20with%20no%20extra%20scopes)
+
+3. Open the deployment's home page. It has a link builder with a live preview, so you can
+   pick a layout and theme and copy the Markdown line:
+
+   ```md
+   ![My GitHub stars](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat)
+   ```
+
+### Just for you, or for everyone
+
+- **Personal instance:** set `ALLOWED_USERNAMES=your-name` so nobody else can use up your
+  token's rate limit. A single token is plenty.
+- **Public instance:** leave the allowlist empty and share the link. GitHub allows each token
+  roughly 5,000 uncached cards per hour, so for many users add more tokens (ideally from
+  different accounts) in `GITHUB_TOKENS`. Requests are spread across all of them, and when one
+  token hits its limit the next one is used automatically. Responses are cached by Vercel's CDN
+  (4 hours by default), so popular cards cost almost nothing.
+
+| Environment variable | Description                                                                    |
+| -------------------- | ------------------------------------------------------------------------------ |
+| `GITHUB_TOKEN`       | A GitHub token. Without any token the REST API is used (60 requests per hour). |
+| `GITHUB_TOKENS`      | More tokens for a busy instance, separated by commas or new lines.             |
+| `ALLOWED_USERNAMES`  | Optional comma separated allowlist of accounts this instance serves.           |
+
+The function is a plain Node.js request handler (`src/handler.js`), so it also runs on any
+Node 22+ host; see `scripts/dev.js` for a minimal server.
 
 ## Layouts
 
-Choose a layout with `&layout=`.
+Choose a layout with `layout:` in the Action or `&layout=` in a live link.
 
 | Layout               | Preview                                                             |
 | -------------------- | ------------------------------------------------------------------- |
@@ -62,7 +177,8 @@ See them all in the **[theme gallery](docs/themes.md)**.
 ### Match GitHub's light and dark mode
 
 Use `theme=auto` and the card follows the viewer's colour scheme. Or pick a different theme for
-each mode with GitHub's `<picture>` support:
+each mode with GitHub's `<picture>` support. With the Action, render two files (for example
+`assets/stars-dark.svg` and `assets/stars-light.svg`) and use those paths instead of the links:
 
 ```html
 <picture>
@@ -79,8 +195,9 @@ each mode with GitHub's `<picture>` support:
 
 ## Options
 
-All options are URL query parameters. Unknown values fall back to defaults, so a typo will
-never break your README.
+The same options work in both ways of using the project: as `options:` in the Action
+(`count=8&hide_border=true`) or as URL parameters in a live link. Unknown values fall back to
+defaults, so a typo will never break your README.
 
 | Parameter            | Description                                                                       | Default    |
 | -------------------- | --------------------------------------------------------------------------------- | ---------- |
@@ -111,77 +228,6 @@ Example with a few options combined:
 
 Stars on the account's **public, owned, non-fork repositories** (add `include_forks=true` to
 include forks). Stars per language use each repository's primary language.
-
-## Deploy your own
-
-GitHub limits how often its API can be queried, so every user (or team) runs their own free
-instance. It takes about two minutes:
-
-1. Create a [personal access token](https://github.com/settings/personal-access-tokens/new).
-   No permissions are needed: public data only.
-2. Click the button below, sign in to Vercel and set `GITHUB_TOKEN` to your token.
-
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fiiogurt%2FAwesome-Git-Stats&env=GITHUB_TOKEN&envDescription=A%20GitHub%20token%20with%20no%20extra%20scopes)
-
-3. Open your deployment's home page to build your card link interactively.
-
-| Environment variable | Description                                                                  |
-| -------------------- | ---------------------------------------------------------------------------- |
-| `GITHUB_TOKEN`       | GitHub token. Without it the slower REST API is used (60 requests per hour). |
-| `ALLOWED_USERNAMES`  | Optional comma separated allowlist, so your instance only serves your cards. |
-
-The function is a plain Node.js request handler (`src/handler.js`), so it also runs on any
-Node 22+ host; see `scripts/dev.js` for a minimal server.
-
-## GitHub Action
-
-Don't want to host anything? Generate the card inside your profile repository on a schedule
-and reference the file instead:
-
-```yaml
-# .github/workflows/stars.yml
-name: Update stars card
-on:
-  schedule:
-    - cron: '0 3 * * *'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  card:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: iiogurt/Awesome-Git-Stats@v1
-        with:
-          layout: overview
-          theme: tokyonight
-          options: hide_border=true
-          path: assets/stars.svg
-      - run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add assets/stars.svg
-          git commit -m 'chore: update stars card' || exit 0
-          git push
-```
-
-Then in your README:
-
-```md
-![My GitHub stars](assets/stars.svg)
-```
-
-| Input      | Description                          | Default                 |
-| ---------- | ------------------------------------ | ----------------------- |
-| `username` | Account to render                    | Repository owner        |
-| `layout`   | Card layout                          | `overview`              |
-| `theme`    | Theme                                | `default`               |
-| `options`  | Any other options, as a query string |                         |
-| `path`     | Output file                          | `awesome-git-stats.svg` |
-| `token`    | Token for the GitHub API             | `${{ github.token }}`   |
 
 ## Command line
 
