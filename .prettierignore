@@ -3,3 +3,4 @@ coverage/
 assets/
 package-lock.json
 CHANGELOG.md
+.release-please-manifest.json
