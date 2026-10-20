@@ -1,6 +1,6 @@
 {
   "name": "awesome-git-stats",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Beautiful, themeable GitHub star cards for your profile README — just drop in a link.",
   "type": "module",
   "main": "src/index.js",
