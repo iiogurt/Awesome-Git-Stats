@@ -106,6 +106,8 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
 - Release PRs are opened with the release bot's token (`RELEASE_APP_ID` +
   `RELEASE_APP_PRIVATE_KEY`, or `RELEASE_TOKEN`), so they get CI and auto-merge like any PR.
   Without that secret they fall back to `GITHUB_TOKEN`, get no CI and stay blocked.
+- The Release workflow also runs hourly and on demand, so merges that didn't trigger it (made
+  with `GITHUB_TOKEN`) are still released within the hour.
 - `vX.Y.Z` tags are immutable (ruleset); only major tags like `v1` move.
 
 ## Repository setup (already done)

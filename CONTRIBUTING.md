@@ -84,6 +84,8 @@ Nobody needs to merge, squash or clean up by hand:
   any other pull request, which tags the version, publishes the GitHub release and moves the
   major tag (`v1`).
 - Vercel deploys `main` to production after every merge.
+- As a safety net the Release workflow also runs every hour, so a merged release pull request
+  is always published even if its merge didn't start the workflow.
 
 To stop a pull request from merging automatically, mark it as a draft or disable auto-merge on
 it.
