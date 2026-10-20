@@ -1,3 +1,5 @@
+import { sampleActivity } from './activity.js';
+
 /** A fictional account used by tests and to generate README examples. */
 export const sampleAccount = {
   login: 'stellar-dev',
@@ -5,6 +7,7 @@ export const sampleAccount = {
   type: 'User',
   followers: 2480,
   totalRepos: 64,
+  activity: sampleActivity,
   repos: [
     {
       name: 'nebula-ui',

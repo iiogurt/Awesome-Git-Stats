@@ -19,12 +19,14 @@ function allowedUsernames(env) {
 }
 
 async function loadAccount(options, { tokens, fetchImpl }) {
-  const key = `${options.username.toLowerCase()}:${options.includeForks}`;
+  const activity = options.layout === 'dashboard';
+  const key = `${options.username.toLowerCase()}:${options.includeForks}:${activity}`;
   const cached = accountCache.get(key);
   if (cached) return cached;
   const pending = fetchAccount(options.username, {
     tokens,
     includeForks: options.includeForks,
+    activity,
     fetchImpl,
   });
   // Cache the promise so concurrent requests share one GitHub round trip.

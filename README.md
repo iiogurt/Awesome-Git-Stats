@@ -14,7 +14,8 @@
 
 ## Features
 
-- **Four layouts.** A rich overview, a top repos chart, a compact card and a tiny badge.
+- **Five layouts.** A rich overview, a top repos chart, a compact card, a tiny badge and a
+  full **dashboard** with streaks, a contribution heatmap and activity charts.
 - **33 themes.** 13 artistic themes with generated background art (starry skies, synthwave
   grids, aurora, blueprints, contour maps…), plus 20 classic palettes like `tokyonight`.
 - **13 art styles.** Put any art style on any theme. The art is generated from your username,
@@ -166,18 +167,40 @@ Node 22+ host; see `scripts/dev.js` for a minimal server.
 
 Choose a layout with `layout:` in the Action or `&layout=` in a live link.
 
-| Layout               | Preview                                                             |
-| -------------------- | ------------------------------------------------------------------- |
-| `overview` (default) | <img src="assets/examples/overview.svg" alt="overview" width="400"> |
-| `repos`              | <img src="assets/examples/repos.svg" alt="repos" width="400">       |
-| `compact`            | <img src="assets/examples/compact.svg" alt="compact" width="300">   |
-| `badge`              | <img src="assets/examples/badge.svg" alt="badge">                   |
+| Layout               | Preview                                                               |
+| -------------------- | --------------------------------------------------------------------- |
+| `overview` (default) | <img src="assets/examples/overview.svg" alt="overview" width="400">   |
+| `repos`              | <img src="assets/examples/repos.svg" alt="repos" width="400">         |
+| `compact`            | <img src="assets/examples/compact.svg" alt="compact" width="300">     |
+| `badge`              | <img src="assets/examples/badge.svg" alt="badge">                     |
+| `dashboard`          | <img src="assets/examples/dashboard.svg" alt="dashboard" width="400"> |
 
 ```md
 ![Top repos](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat&layout=repos&theme=tokyonight)
 ![Stars](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat&layout=compact&theme=dracula)
 ![Stars](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat&layout=badge)
+![My GitHub](https://YOUR-DEPLOYMENT.vercel.app/api/stars?username=octocat&layout=dashboard&theme=synthwave)
 ```
+
+### The dashboard
+
+<img src="assets/examples/dashboard-synthwave.svg" alt="dashboard layout with the synthwave theme" width="820">
+
+`layout=dashboard` puts everything on one 820 px wide card:
+
+- **Headline tiles:** stars, contributions in the last 12 months, current and longest streak,
+  all-time pull requests and followers.
+- **Contribution heatmap** for the last year, with your best day, daily average and number of
+  active days, plus your **weekly rhythm** (which weekdays you're most active).
+- **Monthly activity** trend, the **contribution mix** (commits, pull requests, code reviews,
+  issues), repos contributed to and private contributions.
+- **Most starred repos** and **stars by language**.
+
+Streaks count consecutive days with at least one contribution. A streak still counts as current
+if you haven't contributed yet today. Contribution data comes from GitHub's GraphQL API, so it
+needs a token (the GitHub Action uses its built-in one) and is only available for user
+accounts; organisations get repository statistics instead. It includes private contributions
+only if you've enabled _Include private contributions on my profile_ in your GitHub settings.
 
 ## Themes
 

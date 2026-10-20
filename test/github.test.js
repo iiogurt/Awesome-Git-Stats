@@ -176,3 +176,69 @@ describe('multiple tokens', () => {
     assert.equal(calls.length, 1);
   });
 });
+
+describe('fetchAccount activity', () => {
+  const activityResponse = {
+    data: {
+      user: {
+        createdAt: '2020-01-01T00:00:00Z',
+        following: { totalCount: 3 },
+        pullRequests: { totalCount: 40 },
+        issues: { totalCount: 12 },
+        repositoriesContributedTo: { totalCount: 9 },
+        contributionsCollection: {
+          totalCommitContributions: 100,
+          totalPullRequestContributions: 10,
+          totalIssueContributions: 5,
+          totalPullRequestReviewContributions: 7,
+          restrictedContributionsCount: 2,
+          contributionCalendar: {
+            totalContributions: 3,
+            weeks: [
+              {
+                contributionDays: [
+                  { date: '2026-01-04', contributionCount: 1 },
+                  { date: '2026-01-05', contributionCount: 2 },
+                ],
+              },
+            ],
+          },
+        },
+      },
+    },
+  };
+
+  it('fetches contributions for users when asked', async () => {
+    const { fetchImpl, calls } = mockFetch(({ body }) =>
+      body.query.includes('contributionsCollection')
+        ? { json: activityResponse }
+        : { json: graphqlPage([graphqlRepo('a', 1)]) },
+    );
+    const account = await fetchAccount('octocat', { token: 't', activity: true, fetchImpl });
+    assert.equal(calls.length, 2);
+    assert.equal(calls[1].body.variables.login, 'octocat');
+    assert.deepEqual(account.activity.days, [
+      { date: '2026-01-04', count: 1 },
+      { date: '2026-01-05', count: 2 },
+    ]);
+    assert.equal(account.activity.pullRequests, 40);
+    assert.equal(account.activity.reviews, 7);
+  });
+
+  it('skips the extra query unless asked, and for organisations', async () => {
+    const plain = mockFetch(() => ({ json: graphqlPage([graphqlRepo('a', 1)]) }));
+    await fetchAccount('octocat', { token: 't', fetchImpl: plain.fetchImpl });
+    assert.equal(plain.calls.length, 1);
+
+    const orgPage = graphqlPage([graphqlRepo('a', 1)]);
+    orgPage.data.repositoryOwner.__typename = 'Organization';
+    const org = mockFetch(() => ({ json: orgPage }));
+    const account = await fetchAccount('acme', {
+      token: 't',
+      activity: true,
+      fetchImpl: org.fetchImpl,
+    });
+    assert.equal(org.calls.length, 1);
+    assert.equal(account.activity, null);
+  });
+});

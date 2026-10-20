@@ -45,6 +45,53 @@ query ($login: String!, $after: String, $isFork: Boolean) {
   }
 }`;
 
+// Extra data for the dashboard layout. Only users have contributions.
+const ACTIVITY_QUERY = `
+query ($login: String!) {
+  user(login: $login) {
+    createdAt
+    following { totalCount }
+    pullRequests { totalCount }
+    issues { totalCount }
+    repositoriesContributedTo(
+      contributionTypes: [COMMIT, PULL_REQUEST, ISSUE, PULL_REQUEST_REVIEW]
+    ) { totalCount }
+    contributionsCollection {
+      totalCommitContributions
+      totalPullRequestContributions
+      totalIssueContributions
+      totalPullRequestReviewContributions
+      restrictedContributionsCount
+      contributionCalendar {
+        totalContributions
+        weeks { contributionDays { date contributionCount } }
+      }
+    }
+  }
+}`;
+
+function normaliseActivity(user) {
+  if (!user) return null;
+  const collection = user.contributionsCollection;
+  const calendar = collection?.contributionCalendar;
+  return {
+    createdAt: user.createdAt ?? null,
+    following: user.following?.totalCount ?? null,
+    pullRequests: user.pullRequests?.totalCount ?? null,
+    issues: user.issues?.totalCount ?? null,
+    contributedTo: user.repositoriesContributedTo?.totalCount ?? null,
+    commits: collection?.totalCommitContributions ?? 0,
+    prsThisYear: collection?.totalPullRequestContributions ?? 0,
+    issuesThisYear: collection?.totalIssueContributions ?? 0,
+    reviews: collection?.totalPullRequestReviewContributions ?? 0,
+    restricted: collection?.restrictedContributionsCount ?? 0,
+    totalContributions: calendar?.totalContributions ?? 0,
+    days: (calendar?.weeks ?? [])
+      .flatMap((week) => week.contributionDays)
+      .map((day) => ({ date: day.date, count: day.contributionCount })),
+  };
+}
+
 function normaliseRepo(node) {
   const language = node.primaryLanguage?.name ?? node.language ?? null;
   return {
@@ -61,7 +108,7 @@ function normaliseRepo(node) {
   };
 }
 
-async function graphql(fetchImpl, token, variables) {
+async function graphql(fetchImpl, token, variables, query = QUERY) {
   const response = await fetchImpl(`${API_URL}/graphql`, {
     method: 'POST',
     headers: {
@@ -69,7 +116,7 @@ async function graphql(fetchImpl, token, variables) {
       'content-type': 'application/json',
       'user-agent': USER_AGENT,
     },
-    body: JSON.stringify({ query: QUERY, variables }),
+    body: JSON.stringify({ query, variables }),
   });
   if (response.status === 401) {
     throw new GitHubError('The server GitHub token is invalid', { status: 500, code: 'BAD_TOKEN' });
@@ -108,12 +155,12 @@ let rotation = 0;
  * limited or invalid. `state.index` remembers the token that worked so
  * later pages of the same request reuse it.
  */
-async function graphqlWithFailover(fetchImpl, tokens, variables, state) {
+async function graphqlWithFailover(fetchImpl, tokens, variables, state, query) {
   let lastError;
   for (let attempt = 0; attempt < tokens.length; attempt += 1) {
     const index = (state.index + attempt) % tokens.length;
     try {
-      const data = await graphql(fetchImpl, tokens[index], variables);
+      const data = await graphql(fetchImpl, tokens[index], variables, query);
       state.index = index;
       return data;
     } catch (error) {
@@ -124,7 +171,7 @@ async function graphqlWithFailover(fetchImpl, tokens, variables, state) {
   throw lastError;
 }
 
-async function fetchWithGraphQL(username, { tokens, includeForks, fetchImpl }) {
+async function fetchWithGraphQL(username, { tokens, includeForks, activity, fetchImpl }) {
   const repos = [];
   const state = { index: rotation++ % tokens.length };
   let owner = null;
@@ -152,7 +199,18 @@ async function fetchWithGraphQL(username, { tokens, includeForks, fetchImpl }) {
     if (!node.repositories.pageInfo.hasNextPage || lastStars === 0) break;
     after = node.repositories.pageInfo.endCursor;
   }
-  return { ...owner, repos };
+  let activityData = null;
+  if (activity && owner.type === 'User') {
+    const data = await graphqlWithFailover(
+      fetchImpl,
+      tokens,
+      { login: owner.login },
+      state,
+      ACTIVITY_QUERY,
+    );
+    activityData = normaliseActivity(data?.user);
+  }
+  return { ...owner, repos, activity: activityData };
 }
 
 async function rest(fetchImpl, path) {
@@ -195,6 +253,8 @@ async function fetchWithRest(username, { includeForks, fetchImpl }) {
     followers: user.type === 'User' ? (user.followers ?? null) : null,
     totalRepos: filtered.length,
     repos: filtered,
+    // Contribution data is only available through the GraphQL API.
+    activity: null,
   };
 }
 
@@ -217,12 +277,21 @@ export function tokensFromEnv(env = process.env) {
  * @param {object} [options]
  * @param {string} [options.token]     a single token (overrides `tokens`)
  * @param {string[]} [options.tokens]  tokens to use, defaults to tokensFromEnv()
+ * @param {boolean} [options.activity]  also fetch contribution activity (users only)
  */
 export async function fetchAccount(
   username,
-  { token, tokens = tokensFromEnv(), includeForks = false, fetchImpl = globalThis.fetch } = {},
+  {
+    token,
+    tokens = tokensFromEnv(),
+    includeForks = false,
+    activity = false,
+    fetchImpl = globalThis.fetch,
+  } = {},
 ) {
   const usable = token !== undefined ? [token].filter(Boolean) : tokens.filter(Boolean);
-  if (usable.length) return fetchWithGraphQL(username, { tokens: usable, includeForks, fetchImpl });
+  if (usable.length) {
+    return fetchWithGraphQL(username, { tokens: usable, includeForks, activity, fetchImpl });
+  }
   return fetchWithRest(username, { includeForks, fetchImpl });
 }

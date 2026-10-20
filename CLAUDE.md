@@ -9,7 +9,9 @@ A service that renders SVG cards of the GitHub stars an account (user or organiz
 earned, for embedding in profile READMEs with one Markdown image link:
 `https://<deployment>/api/stars?username=octocat&layout=repos&theme=tokyonight`.
 
-- Layouts: `overview` (default), `repos`, `compact`, `badge`.
+- Layouts: `overview` (default), `repos`, `compact`, `badge`, `dashboard`. The dashboard also
+  fetches contribution activity (a second GraphQL query, users only, token required) and
+  derives streaks, heatmap levels and weekday/monthly totals in `src/activity.js`.
 - 33 themes in `src/themes.js`: 20 classic palettes (`auto` follows light/dark mode) and 13
   artistic themes that add background art, fonts and glow. `*_color` overrides work on all.
 - 13 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
@@ -31,6 +33,7 @@ earned, for embedding in profile READMEs with one Markdown image link:
 | `src/options.js`               | Query parsing/validation; unknown values fall back to defaults         |
 | `src/github.js`                | GraphQL (with token) or REST fallback; normalises repos; `GitHubError` |
 | `src/stats.js`                 | Totals, top repos, stars per language (rest grouped into "Other")      |
+| `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar      |
 | `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`) |
 | `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers         |
 | `src/render/art.js`            | Background art styles, drawn by the frame behind the content           |

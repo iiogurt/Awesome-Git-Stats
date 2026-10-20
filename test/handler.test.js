@@ -105,3 +105,23 @@ describe('createCard tokens', () => {
     assert.match(calls[0].init.headers.authorization, /pool-1/);
   });
 });
+
+describe('createCard dashboard', () => {
+  beforeEach(() => clearCache());
+
+  it('requests contribution activity only for the dashboard layout', async () => {
+    const { fetchImpl, calls } = mockFetch(({ body }) =>
+      body.query.includes('contributionsCollection')
+        ? { json: { data: { user: null } } }
+        : { json: graphqlPage([graphqlRepo('a', 1)]) },
+    );
+    await createCard({ username: 'octocat' }, { env: {}, token: 't', fetchImpl });
+    assert.equal(calls.length, 1);
+    const result = await createCard(
+      { username: 'octocat', layout: 'dashboard' },
+      { env: {}, token: 't', fetchImpl },
+    );
+    assert.equal(result.status, 200);
+    assert.equal(calls.length, 3);
+  });
+});

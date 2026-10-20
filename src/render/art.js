@@ -123,7 +123,8 @@ const styles = {
   synthwave(rand, { width, height }) {
     const horizon = r1(height * 0.66);
     const cx = r1(width * 0.8);
-    const sunR = r1(height * 0.3);
+    // Cap the sun so it stays a backdrop on tall cards such as the dashboard.
+    const sunR = r1(Math.min(height * 0.3, 62));
     const sunY = r1(horizon - sunR * 0.35);
     let stripes = '';
     for (let i = 0; i < 5; i += 1) {
