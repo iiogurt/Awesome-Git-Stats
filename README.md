@@ -118,12 +118,17 @@ it's deployed, but it does need a Vercel account (the free plan is enough).
 ### Deploy an instance
 
 1. Create a [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new).
-   It needs no permissions at all, because only public data is read.
+   It needs no permissions at all, because only public data is read. Give it an expiry date
+   and renew it when it runs out.
 2. Click the button, sign in to Vercel and paste the token as `GITHUB_TOKEN`:
 
    [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fiiogurt%2FAwesome-Git-Stats&env=GITHUB_TOKEN&envDescription=A%20GitHub%20token%20with%20no%20extra%20scopes)
 
-3. Open the deployment's home page. It has a link builder with a live preview, so you can
+3. In the Vercel project, open _Settings → Environment Variables_ and make sure `GITHUB_TOKEN`
+   (and `GITHUB_TOKENS`, if you use it) is marked **Sensitive**, so its value can't be read
+   back, even by project members. If Vercel shows "Needs Attention", use _Rotate Variable_ and
+   save the token again as Sensitive, then redeploy.
+4. Open the deployment's home page. It has a link builder with a live preview, so you can
    pick a layout and theme and copy the Markdown line:
 
    ```md
@@ -145,6 +150,11 @@ it's deployed, but it does need a Vercel account (the free plan is enough).
 | `GITHUB_TOKEN`       | A GitHub token. Without any token the REST API is used (60 requests per hour). |
 | `GITHUB_TOKENS`      | More tokens for a busy instance, separated by commas or new lines.             |
 | `ALLOWED_USERNAMES`  | Optional comma separated allowlist of accounts this instance serves.           |
+
+Tokens stay on the server: they are only sent to `api.github.com` and never appear in a card,
+an error message or the link builder. A token without permissions can only read public data,
+so the worst a leaked one allows is using up its rate limit. Still, revoke and replace a token
+you've shared by accident.
 
 The function is a plain Node.js request handler (`src/handler.js`), so it also runs on any
 Node 22+ host; see `scripts/dev.js` for a minimal server.
@@ -254,6 +264,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow, commit conventions and 
 This project follows [Semantic Versioning](https://semver.org/). The URL parameters and the
 Action inputs are the public API: breaking changes to them only happen in a new major version.
 All notable changes are listed in the [changelog](CHANGELOG.md).
+
+## Acknowledgements
+
+This project was inspired by
+[github-stats-extended](https://github.com/stats-organization/github-stats-extended) and the
+project it builds on, [github-readme-stats](https://github.com/anuraghazra/github-readme-stats).
+Their cards showed how much a small SVG can add to a profile README, and the idea of a public
+link builder, themes and per-colour overrides comes from them. Awesome Git Stats is an
+independent implementation focused on stars, with a GitHub Action so nobody has to host
+anything. Thank you to their authors and contributors.
 
 ## License
 
