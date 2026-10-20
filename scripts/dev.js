@@ -5,6 +5,8 @@ import { createServer } from 'node:http';
 import handler from '../src/handler.js';
 
 const port = Number(process.env.PORT) || 3000;
+// Loopback only by default, so other machines on the network can't spend your token.
+const host = process.env.HOST || '127.0.0.1';
 const indexHtml = new URL('../public/index.html', import.meta.url);
 
 createServer(async (req, res) => {
@@ -16,7 +18,7 @@ createServer(async (req, res) => {
   }
   res.statusCode = 404;
   res.end('Not found');
-}).listen(port, () => {
+}).listen(port, host, () => {
   const auth = process.env.GITHUB_TOKEN ? 'GraphQL (token)' : 'REST (no token, 60 req/h)';
   console.log(`Awesome Git Stats running at http://localhost:${port} using ${auth}`);
   console.log(`Try http://localhost:${port}/api/stars?username=octocat&theme=tokyonight`);
