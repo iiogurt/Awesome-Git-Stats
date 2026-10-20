@@ -1,5 +1,5 @@
 import { TtlCache } from './cache.js';
-import { GitHubError, fetchAccount } from './github.js';
+import { GitHubError, fetchAccount, tokensFromEnv } from './github.js';
 import { OptionsError, fallbackOptions, parseOptions } from './options.js';
 import { renderCard, renderError } from './render/index.js';
 import { computeStats } from './stats.js';
@@ -18,12 +18,12 @@ function allowedUsernames(env) {
   );
 }
 
-async function loadAccount(options, { token, fetchImpl }) {
+async function loadAccount(options, { tokens, fetchImpl }) {
   const key = `${options.username.toLowerCase()}:${options.includeForks}`;
   const cached = accountCache.get(key);
   if (cached) return cached;
   const pending = fetchAccount(options.username, {
-    token,
+    tokens,
     includeForks: options.includeForks,
     fetchImpl,
   });
@@ -45,7 +45,7 @@ async function loadAccount(options, { token, fetchImpl }) {
  */
 export async function createCard(
   query,
-  { env = process.env, fetchImpl = globalThis.fetch, token = env.GITHUB_TOKEN } = {},
+  { env = process.env, fetchImpl = globalThis.fetch, token } = {},
 ) {
   let options;
   try {
@@ -72,7 +72,8 @@ export async function createCard(
   }
 
   try {
-    const account = await loadAccount(options, { token, fetchImpl });
+    const tokens = token !== undefined ? [token].filter(Boolean) : tokensFromEnv(env);
+    const account = await loadAccount(options, { tokens, fetchImpl });
     const languages =
       options.layout === 'overview' ? Math.min(options.langsCount, 4) : options.langsCount;
     const stats = computeStats(account, { exclude: options.exclude, languages });
