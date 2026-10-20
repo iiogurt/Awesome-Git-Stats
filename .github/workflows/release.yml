@@ -6,9 +6,12 @@ on:
   # Releases published by hand (e.g. the first v1.0.0) also move the major tag.
   release:
     types: [published]
-  # Publishes the version currently in package.json if it has no release yet.
-  # Used once to publish v1.0.0; release-please handles every later release.
+  # Run on demand, and hourly as a safety net: merges made with the built-in
+  # GITHUB_TOKEN (auto-merge without a release bot) don't trigger the push
+  # event, so a merged release PR is still published within the hour.
   workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
 
 permissions:
   contents: write
@@ -16,7 +19,7 @@ permissions:
 
 jobs:
   release-please:
-    if: github.event_name == 'push'
+    if: github.event_name != 'release' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -50,6 +53,9 @@ jobs:
           manifest-file: .release-please-manifest.json
           target-branch: main
 
+  # Publishes the very first release (v1.0.0) from package.json and the
+  # changelog, when the workflow is run by hand on a repository without any
+  # release yet. From then on release-please handles everything.
   publish-current-version:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -61,12 +67,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          VERSION="$(node -p "require('./package.json').version")"
-          TAG="v$VERSION"
-          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-            echo "$TAG already exists, nothing to do."
+          if [ -n "$(git tag --list 'v*.*.*')" ]; then
+            echo "A release already exists; release-please takes care of new ones."
             exit 0
           fi
+          VERSION="$(node -p "require('./package.json').version")"
+          TAG="v$VERSION"
           awk -v v="$VERSION" '/^## /{p = index($0, "## " v " ") == 1; next} p' CHANGELOG.md > notes.md
           gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md --latest
           git fetch --tags
