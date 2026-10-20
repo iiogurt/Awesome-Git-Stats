@@ -3,7 +3,7 @@
   <defs><linearGradient id="ags-bg" gradientTransform="rotate(160 0.5 0.5)"><stop offset="0%" stop-color="#0d47a8"/><stop offset="100%" stop-color="#0a2f6e"/></linearGradient><pattern id="ags-grid-minor" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" class="art-line" stroke-width=".5" opacity=".14"/></pattern>
         <pattern id="ags-grid-major" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" class="art-line" stroke-width=".9" opacity=".22"/></pattern></defs>
   <style>
-    svg{--bg:#0b3d91;--border:#9fb8e8;--title:#ffffff;--text:#dbe7ff;--muted:#9fb8e8;--accent:#ffd166;--track:#ffffff26;--art1:#ffffff;--art2:#ffffff;--art3:#ffd166}
+    svg{--bg:#0b3d91;--border:#9fb8e8;--title:#ffffff;--text:#dbe7ff;--muted:#9fb8e8;--accent:#ffd166;--track:#ffffff26;--art1:#ffffff;--art2:#ffffff;--art3:#ffd166;--shade:#000000}
     
     text{font-family:'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace;letter-spacing:-.06em}
     .title{font-size:18px;font-weight:600;fill:var(--title)}

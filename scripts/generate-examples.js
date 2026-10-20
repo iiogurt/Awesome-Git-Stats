@@ -2,33 +2,19 @@
 // Renders example cards from fixture data into assets/examples, and the theme
 // gallery in docs/themes.md, so the docs can show previews without hitting the
 // GitHub API. Run with `npm run examples`; CI checks the output is up to date.
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { parseOptions } from '../src/options.js';
-import { ART_STYLES } from '../src/render/art.js';
+import { ART_DESCRIPTIONS, ART_STYLES } from '../src/render/art.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
-import { themeNames, themes } from '../src/themes.js';
+import { format, resolveConfig } from 'prettier';
+import { designs, themeNames, themes } from '../src/themes.js';
 import { sampleAccount } from '../test/fixtures/account.js';
 
 const outDir = fileURLToPath(new URL('../assets/examples/', import.meta.url));
 const docsFile = fileURLToPath(new URL('../docs/themes.md', import.meta.url));
-
-const ART_DESCRIPTIONS = {
-  starfield: 'A night sky of twinkling stars and sparkles, unique to every username.',
-  constellation: 'Stars joined into a constellation that draws itself in.',
-  aurora: 'Soft, drifting bands of northern lights.',
-  synthwave: 'A striped retro sun over a neon perspective grid.',
-  waves: 'Layered ocean waves rolling along the bottom edge.',
-  topography: 'Hand-drawn contour lines, like a hiking map.',
-  blueprint: 'Engineering grid paper with corner crop marks.',
-  halftone: 'Pop-art halftone dots fading in from a corner.',
-  scanlines: 'CRT scanlines, a vignette and a slow refresh beam.',
-  grain: 'Paper grain and a warm vignette, like an old print.',
-  bokeh: 'Blurred, floating circles of light.',
-  sakura: 'Cherry blossom petals swaying in the breeze.',
-  circuit: 'Circuit traces with data pulsing through them.',
-};
+const pageFile = fileURLToPath(new URL('../public/index.html', import.meta.url));
 
 function render(query) {
   const options = parseOptions({ username: sampleAccount.login, ...query });
@@ -54,10 +40,16 @@ for (const art of ART_STYLES) {
   files[`art-${art}.svg`] = render({ layout: 'compact', theme: 'dark', art });
 }
 
-const classic = themeNames.filter((name) => !themes[name].art);
-const artistic = themeNames.filter((name) => themes[name].art);
 const img = (file, alt, width) =>
   `<img src="../assets/examples/${file}" alt="${alt}" width="${width}">`;
+const designRows = (list) =>
+  list
+    .map((d) => {
+      const art = themes[d.light].art ? `<br>art: \`${themes[d.light].art}\`` : '';
+      const preview = (name) => img(`theme-${name}.svg`, `${name} theme`, 300);
+      return `| **${d.label}**${art}<br>${d.description} | \`${d.light}\`<br>${preview(d.light)} | \`${d.dark}\`<br>${preview(d.dark)} |`;
+    })
+    .join('\n');
 
 const docs = `# Theme gallery
 
@@ -66,22 +58,32 @@ const docs = `# Theme gallery
 Pick a theme with \`theme=<name>\` (or \`theme:\` in the GitHub Action). Every theme works with
 every layout.
 
+Every design comes in a **light and a dark variant** that share their colours, art and font, so
+they belong together when your card follows GitHub's light and dark mode. In the Action, set
+\`dark-theme: match\` to use both (see the
+[README](../README.md#match-githubs-light-and-dark-mode)); the link builder does it by default.
+
 ## Artistic themes
 
 Each artistic theme pairs a palette with a background [art style](#art-styles), and some add a
-matching font or a neon glow. The art is generated from your username, so your card's starfield
-or contour map is unique to you. Animations are subtle and switch off for people who prefer
-reduced motion.
+matching font or a neon glow (dark variants only). The art is generated from your username, so
+your card's starfield or contour map is unique to you. Animations are subtle and switch off for
+people who prefer reduced motion.
 
-| Theme | Preview |
-| --- | --- |
-${artistic.map((name) => `| \`${name}\`<br>art: \`${themes[name].art}\` | ${img(`theme-${name}.svg`, `${name} theme`, 420)} |`).join('\n')}
+| Design | Light mode | Dark mode |
+| --- | --- | --- |
+${designRows(designs.filter((d) => d.artistic))}
 
 ## Classic themes
 
-| Theme | Preview |
-| --- | --- |
-${classic.map((name) => `| \`${name}\` | ${img(`theme-${name}.svg`, `${name} theme`, 350)} |`).join('\n')}
+| Design | Light mode | Dark mode |
+| --- | --- | --- |
+${designRows(designs.filter((d) => !d.artistic))}
+
+\`light\` is the same as \`default\`. \`auto\` switches between \`default\` and \`dark\` inside a single
+image, following the viewer's operating system rather than their GitHub setting:
+
+${img('theme-auto.svg', 'auto theme', 300)}
 
 ## Art styles
 
@@ -115,9 +117,12 @@ Any theme can be tweaked with colour overrides (hex, with or without \`#\`):
 Want a theme or art style added? Open a [theme request](https://github.com/iiogurt/Awesome-Git-Stats/issues/new?template=theme_request.yml).
 `;
 
-for (const art of ART_STYLES) {
-  if (!ART_DESCRIPTIONS[art]) throw new Error(`Missing description for art style "${art}"`);
-}
+// The link builder gets its design and art lists from the same source.
+const catalog = JSON.stringify({ designs, art: ART_DESCRIPTIONS });
+const page = (await readFile(pageFile, 'utf8')).replace(
+  /(\/\/ catalog:start\n)[\s\S]*?(\n\s*\/\/ catalog:end)/,
+  `$1const CATALOG = ${catalog};$2`,
+);
 
 await mkdir(outDir, { recursive: true });
 await Promise.all([
@@ -125,5 +130,9 @@ await Promise.all([
     writeFile(new URL(name, `file://${outDir}`), `${svg}\n`),
   ),
   writeFile(docsFile, docs),
+  writeFile(
+    pageFile,
+    await format(page, { ...(await resolveConfig(pageFile)), filepath: pageFile }),
+  ),
 ]);
-console.log(`Wrote ${Object.keys(files).length} examples and docs/themes.md`);
+console.log(`Wrote ${Object.keys(files).length} examples, docs/themes.md and public/index.html`);

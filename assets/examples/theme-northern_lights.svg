@@ -2,7 +2,7 @@
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
   <defs><linearGradient id="ags-bg" gradientTransform="rotate(170 0.5 0.5)"><stop offset="0%" stop-color="#020b12"/><stop offset="50%" stop-color="#04141f"/><stop offset="100%" stop-color="#062a2e"/></linearGradient><filter id="ags-aurora" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs>
   <style>
-    svg{--bg:#04141f;--border:#7cf5c633;--title:#b8fff1;--text:#d6f5ee;--muted:#86b3ab;--accent:#7cf5c6;--track:#ffffff1a;--art1:#2de2a6;--art2:#b8fff1;--art3:#7b6cff}
+    svg{--bg:#04141f;--border:#7cf5c633;--title:#b8fff1;--text:#d6f5ee;--muted:#86b3ab;--accent:#7cf5c6;--track:#ffffff1a;--art1:#2de2a6;--art2:#b8fff1;--art3:#7b6cff;--shade:#000000}
     
     text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
     .title{font-size:18px;font-weight:600;fill:var(--title)}

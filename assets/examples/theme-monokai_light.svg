@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#faf4f2;--border:#e6dcd8;--title:#e14775;--text:#29242a;--muted:#706b6d;--accent:#cc7a0a;--track:#ede4e1;--art1:#cc7a0a;--art2:#e14775;--art3:#cc7a0a;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
+    
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
+  <g clip-path="url(#ags-bar)"><g class="grow"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade">
+      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade">
+      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade">
+      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

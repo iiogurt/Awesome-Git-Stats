@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
   <defs><pattern id="ags-scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1.4" class="art-c1" opacity=".09"/></pattern>
-        <radialGradient id="ags-vignette" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+        <radialGradient id="ags-vignette" cx=".5" cy=".5" r=".75"><stop offset=".55" style="stop-color:var(--shade)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--shade)" stop-opacity=".55"/></radialGradient>
         <linearGradient id="ags-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--art1)" stop-opacity="0"/><stop offset=".5" style="stop-color:var(--art1)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--art1)" stop-opacity="0"/></linearGradient></defs>
   <style>
-    svg{--bg:#0c0f0a;--border:#39ff1455;--title:#39ff14;--text:#b6ffb0;--muted:#5fa85a;--accent:#39ff14;--track:#1a2a18;--art1:#39ff14;--art2:#39ff14;--art3:#39ff14}
+    svg{--bg:#0c0f0a;--border:#39ff1455;--title:#39ff14;--text:#b6ffb0;--muted:#5fa85a;--accent:#39ff14;--track:#1a2a18;--art1:#39ff14;--art2:#39ff14;--art3:#39ff14;--shade:#000000}
     
     text{font-family:'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace;letter-spacing:-.06em}
     .title{font-size:18px;font-weight:600;fill:var(--title)}

@@ -55,7 +55,7 @@ jobs:
       - run: npm run examples
       - name: Check for changes
         run: |
-          if ! git diff --exit-code -- assets/examples docs/themes.md || [ -n "$(git status --porcelain -- assets/examples)" ]; then
+          if ! git diff --exit-code -- assets/examples docs/themes.md public/index.html || [ -n "$(git status --porcelain -- assets/examples)" ]; then
             echo "::error::Example cards are out of date. Run 'npm run examples' and commit the result."
             exit 1
           fi
@@ -76,12 +76,13 @@ jobs:
       - uses: ./
         with:
           username: ${{ github.repository_owner }}
-          theme: catppuccin_latte
-          dark-theme: tokyonight
+          theme: sakura
+          dark-theme: match
           dark-options: art=starfield
           path: out/pair.svg
           commit: false
-      - run: grep -q '<svg' out/pair.svg && grep -q 'art-layer' out/pair-dark.svg
+      # match: sakura (light) + sakura_dark, whose background is #2a1420.
+      - run: grep -q 'art-layer' out/pair.svg && grep -q -- '--bg:#2a1420' out/pair-dark.svg
       # The dashboard runs the contribution-activity query against the real API.
       - uses: ./
         with:

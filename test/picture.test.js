@@ -39,6 +39,26 @@ describe('variantQueries', () => {
     });
   });
 
+  it('uses the matching light and dark variant of a design', () => {
+    const { light, dark } = variantQueries({
+      base: { username: 'octocat', theme: 'tokyonight' },
+      options: 'hide_border=true',
+      darkTheme: 'match',
+      darkOptions: 'art=starfield',
+    });
+    assert.equal(light.theme, 'tokyonight_light');
+    assert.equal(dark.theme, 'tokyonight');
+    assert.equal(light.hide_border, 'true');
+    assert.equal(dark.art, 'starfield');
+    assert.equal(light.art, undefined);
+  });
+
+  it('matches the default theme when none is given', () => {
+    const { light, dark } = variantQueries({ base: { username: 'octocat' }, darkTheme: 'match' });
+    assert.equal(light.theme, 'default');
+    assert.equal(dark.theme, 'dark');
+  });
+
   it('renders a dark card from dark options alone', () => {
     const { dark } = variantQueries({ base, darkOptions: 'bg_color=000000' });
     assert.equal(dark.theme, 'catppuccin_latte');
