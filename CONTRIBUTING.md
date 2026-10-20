@@ -73,22 +73,44 @@ Keep branches small and short-lived, update them by merging or rebasing on `main
 GitHub delete them after merge. Bot branches (`dependabot/…`, `release-please--…`) are created
 and cleaned up automatically.
 
-### Repository settings (maintainers)
+### Automation
+
+Nobody needs to merge, squash or clean up by hand:
+
+- The **Auto-merge** workflow turns on squash auto-merge for pull requests from the repository
+  owner, Dependabot and release-please. Each one merges by itself once every required check is
+  green, and its branch is deleted afterwards. Pull requests from anyone else wait for a review.
+- The **Release** workflow keeps a release pull request open on `main`. It is auto-merged like
+  any other pull request, which tags the version, publishes the GitHub release and moves the
+  major tag (`v1`).
+- Vercel deploys `main` to production after every merge.
+
+To stop a pull request from merging automatically, mark it as a draft or disable auto-merge on
+it.
+
+### Repository settings (maintainers, one-time)
 
 - **Default branch:** `main`.
 - **Rulesets:** import [`.github/rulesets/main.json`](.github/rulesets/main.json) and
   [`.github/rulesets/release-tags.json`](.github/rulesets/release-tags.json) under
   _Settings → Rules → Rulesets → New ruleset → Import a ruleset_. They require pull requests,
   passing checks and linear history on `main`, and make `vX.Y.Z` tags immutable.
-- **Pull requests:** allow squash merging only, use the PR title as the commit message, and
-  enable _Automatically delete head branches_.
-- **Actions:** allow GitHub Actions to create pull requests (needed by release-please).
+- **Pull requests:** allow squash merging only, use the PR title as the commit message, enable
+  _Allow auto-merge_ and _Automatically delete head branches_.
+- **Actions:** allow GitHub Actions to create and approve pull requests.
+- **Release bot:** GitHub doesn't run workflows for pull requests or merges made with the
+  built-in `GITHUB_TOKEN`, so release pull requests would never get CI and merges wouldn't
+  start the Release workflow. Give the workflows their own identity, either:
+  - **a GitHub App (recommended, never expires):** create one under _Settings → Developer
+    settings → GitHub Apps → New GitHub App_ with no webhook and the repository permissions
+    _Contents: Read and write_ and _Pull requests: Read and write_. Install it on this
+    repository, then add its App ID as the Actions **variable** `RELEASE_APP_ID` and a
+    generated private key as the Actions **secret** `RELEASE_APP_PRIVATE_KEY`; or
+  - **a fine-grained personal access token:** limited to this repository with the same two
+    permissions, saved as the Actions secret `RELEASE_TOKEN`. Renew it before it expires.
 - **First release:** run the _Release_ workflow manually on `main` (_Actions → Release → Run
   workflow_). It publishes `v1.0.0` from `CHANGELOG.md` and creates the `v1` tag; release-please
   takes over from there.
-
-Release pull requests opened by release-please don't trigger CI (GitHub doesn't run workflows
-for changes made with `GITHUB_TOKEN`), so an admin merges them using the ruleset bypass.
 
 ## Commit messages and releases
 

@@ -32,10 +32,20 @@ jobs:
           else
             echo "::notice::No release yet. Run this workflow manually to publish the first one."
           fi
+      # With the built-in token, GitHub runs no CI on the release PR, so its
+      # required checks never report and it can't auto-merge. A GitHub App
+      # token (or RELEASE_TOKEN) makes it a normal PR; see CONTRIBUTING.md.
+      - id: app-token
+        if: steps.baseline.outputs.found == 'true' && vars.RELEASE_APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - uses: googleapis/release-please-action@v5
         if: steps.baseline.outputs.found == 'true'
         id: release
         with:
+          token: ${{ steps.app-token.outputs.token || secrets.RELEASE_TOKEN || github.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           target-branch: main

@@ -85,6 +85,9 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
 
 - `main` is the default and only long-lived branch. It is **protected**: no direct pushes,
   changes land through pull requests that are **squash-merged** with green CI.
+- Merging is **automatic**: the Auto-merge workflow enables squash auto-merge for PRs from the
+  owner, Dependabot and release-please, and deletes the branch after merge. So a PR opened
+  here merges as soon as CI is green; open it as a draft if it should wait for review.
 - Work branches: `<type>/<short-description>` (e.g. `feat/heatmap-layout`), short-lived,
   deleted after merge. (Claude sessions may be assigned a `claude/…` branch; use that one.)
 - Commit messages and PR titles follow **Conventional Commits** (`feat:`, `fix:`, `docs:`,
@@ -100,14 +103,15 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
   commits on `main`; merging it bumps `package.json`, updates `CHANGELOG.md`, tags `vX.Y.Z`,
   publishes the GitHub release and moves the major tag (`v1`) used by Action users.
 - **Never** bump the version, edit released `CHANGELOG.md` sections or create tags by hand.
-- Release PRs don't trigger CI (created with `GITHUB_TOKEN`); an admin merges them via the
-  ruleset bypass.
+- Release PRs are opened with the release bot's token (`RELEASE_APP_ID` +
+  `RELEASE_APP_PRIVATE_KEY`, or `RELEASE_TOKEN`), so they get CI and auto-merge like any PR.
+  Without that secret they fall back to `GITHUB_TOKEN`, get no CI and stay blocked.
 - `vX.Y.Z` tags are immutable (ruleset); only major tags like `v1` move.
 
 ## Repository setup (already done)
 
-Rulesets from `.github/rulesets/` are imported, squash-only merging with auto-delete of head
-branches is on, Actions may create PRs, Dependabot groups GitHub Actions updates into one PR,
+Rulesets from `.github/rulesets/` are imported, squash-only merging with auto-merge and
+auto-delete of head branches is on, Actions may create PRs, Dependabot groups GitHub Actions updates into one PR,
 CodeQL runs weekly and on PRs. `CODEOWNERS` assigns `@iiogurt`.
 
 ## Environment notes
