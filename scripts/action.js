@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Entry point for the GitHub Action defined in action.yml. Inputs arrive as
 // environment variables so they are never interpolated into a shell.
-import { mkdir, writeFile } from 'node:fs/promises';
+import { appendFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { createCard } from '../src/handler.js';
 
@@ -23,4 +23,5 @@ if (status !== 200) {
 }
 await mkdir(dirname(path), { recursive: true });
 await writeFile(path, `${svg}\n`);
+if (env.GITHUB_OUTPUT) await appendFile(env.GITHUB_OUTPUT, `path=${path}\n`);
 console.log(`Wrote ${path}`);

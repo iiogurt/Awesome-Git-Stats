@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { GitHubError, fetchAccount } from '../src/github.js';
+import { GitHubError, fetchAccount, tokensFromEnv } from '../src/github.js';
 import { graphqlPage, graphqlRepo, mockFetch } from './helpers.js';
 
 describe('fetchAccount (GraphQL)', () => {
@@ -119,5 +119,60 @@ describe('fetchAccount (REST fallback)', () => {
   it('reports unknown users', async () => {
     const { fetchImpl } = mockFetch(() => ({ status: 404, json: {} }));
     await assert.rejects(fetchAccount('ghost', { token: '', fetchImpl }), { code: 'NOT_FOUND' });
+  });
+});
+
+describe('multiple tokens', () => {
+  it('reads GITHUB_TOKEN and GITHUB_TOKENS without duplicates', () => {
+    assert.deepEqual(tokensFromEnv({ GITHUB_TOKEN: 'a', GITHUB_TOKENS: 'b, c\nd,,a' }), [
+      'a',
+      'b',
+      'c',
+      'd',
+    ]);
+    assert.deepEqual(tokensFromEnv({}), []);
+  });
+
+  it('fails over to the next token when one is rate limited or invalid', async () => {
+    const { fetchImpl, calls } = mockFetch(({ init }) => {
+      const auth = init.headers.authorization;
+      if (auth.endsWith('limited')) return { status: 403, json: {} };
+      if (auth.endsWith('revoked')) return { status: 401, json: {} };
+      return { json: graphqlPage([graphqlRepo('a', 5)]) };
+    });
+    const tokens = ['limited', 'revoked', 'good'];
+    for (let i = 0; i < tokens.length; i += 1) {
+      const account = await fetchAccount('octocat', { tokens, fetchImpl });
+      assert.equal(account.repos[0].stars, 5);
+    }
+    assert.ok(calls.every((call) => call.init.headers.authorization));
+    assert.ok(calls.some((call) => call.init.headers.authorization.endsWith('good')));
+  });
+
+  it('spreads requests across tokens', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ json: graphqlPage([graphqlRepo('a', 1)]) }));
+    const tokens = ['one', 'two'];
+    await fetchAccount('octocat', { tokens, fetchImpl });
+    await fetchAccount('octocat', { tokens, fetchImpl });
+    const used = new Set(calls.map((call) => call.init.headers.authorization));
+    assert.equal(used.size, 2);
+  });
+
+  it('reports a rate limit when every token is exhausted', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ status: 403, json: {} }));
+    await assert.rejects(fetchAccount('octocat', { tokens: ['x', 'y'], fetchImpl }), {
+      code: 'RATE_LIMITED',
+    });
+    assert.equal(calls.length, 2);
+  });
+
+  it('does not fail over on errors that are not about the token', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({
+      json: { errors: [{ type: 'NOT_FOUND', message: 'x' }] },
+    }));
+    await assert.rejects(fetchAccount('ghost', { tokens: ['x', 'y'], fetchImpl }), {
+      code: 'NOT_FOUND',
+    });
+    assert.equal(calls.length, 1);
   });
 });

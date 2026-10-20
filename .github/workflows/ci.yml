@@ -71,4 +71,5 @@ jobs:
           layout: compact
           theme: tokyonight
           path: out/card.svg
+          commit: false
       - run: grep -q '<svg' out/card.svg

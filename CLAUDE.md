@@ -11,9 +11,10 @@ earned, for embedding in profile READMEs with one Markdown image link:
 
 - Layouts: `overview` (default), `repos`, `compact`, `badge`.
 - 20 themes in `src/themes.js` (`auto` follows light/dark mode), plus `*_color` overrides.
-- No shared public instance: each user deploys their own copy to Vercel with a `GITHUB_TOKEN`
-  (optional `ALLOWED_USERNAMES` allowlist), or uses the GitHub Action / CLI to write the SVG
-  into their own repo.
+- Two ways to use it (README "How it works"): the **GitHub Action** (recommended, no hosting;
+  renders on a schedule and commits the SVG itself, see `action.yml`) or a **live link** to a
+  Vercel deployment. A deployment can be personal (`ALLOWED_USERNAMES`) or public, spreading
+  requests across `GITHUB_TOKEN` + `GITHUB_TOKENS` with failover on rate limits.
 - The URL query parameters and the Action inputs are the **public API**. Removing or changing
   the meaning of one is a breaking change (major version).
 

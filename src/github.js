@@ -99,16 +99,43 @@ async function graphql(fetchImpl, token, variables) {
   return payload.data;
 }
 
-async function fetchWithGraphQL(username, { token, includeForks, fetchImpl }) {
+// Round-robin start position so a deployment with several tokens spreads
+// its requests across all of them.
+let rotation = 0;
+
+/**
+ * Run a GraphQL query, failing over to the next token when one is rate
+ * limited or invalid. `state.index` remembers the token that worked so
+ * later pages of the same request reuse it.
+ */
+async function graphqlWithFailover(fetchImpl, tokens, variables, state) {
+  let lastError;
+  for (let attempt = 0; attempt < tokens.length; attempt += 1) {
+    const index = (state.index + attempt) % tokens.length;
+    try {
+      const data = await graphql(fetchImpl, tokens[index], variables);
+      state.index = index;
+      return data;
+    } catch (error) {
+      if (!['RATE_LIMITED', 'BAD_TOKEN'].includes(error.code)) throw error;
+      lastError = error;
+    }
+  }
+  throw lastError;
+}
+
+async function fetchWithGraphQL(username, { tokens, includeForks, fetchImpl }) {
   const repos = [];
+  const state = { index: rotation++ % tokens.length };
   let owner = null;
   let after = null;
   for (let page = 0; page < MAX_PAGES; page += 1) {
-    const data = await graphql(fetchImpl, token, {
-      login: username,
-      after,
-      isFork: includeForks ? null : false,
-    });
+    const data = await graphqlWithFailover(
+      fetchImpl,
+      tokens,
+      { login: username, after, isFork: includeForks ? null : false },
+      state,
+    );
     const node = data?.repositoryOwner;
     if (!node) throw new GitHubError('User not found', { status: 404, code: 'NOT_FOUND' });
     owner ??= {
@@ -172,14 +199,30 @@ async function fetchWithRest(username, { includeForks, fetchImpl }) {
 }
 
 /**
+ * Collect the GitHub tokens configured for a deployment: `GITHUB_TOKEN` plus
+ * any number in `GITHUB_TOKENS` (separated by commas or whitespace).
+ */
+export function tokensFromEnv(env = process.env) {
+  const all = [env.GITHUB_TOKEN, ...String(env.GITHUB_TOKENS ?? '').split(/[\s,]+/)];
+  return [...new Set(all.map((token) => token?.trim()).filter(Boolean))];
+}
+
+/**
  * Fetch an account's public, owned repositories. Uses the GraphQL API when a
- * token is available (fast, includes language colours) and falls back to the
- * unauthenticated REST API otherwise (handy for local development).
+ * token is available (fast, includes language colours), failing over between
+ * tokens when one is rate limited, and falls back to the unauthenticated REST
+ * API otherwise (handy for local development).
+ *
+ * @param {string} username
+ * @param {object} [options]
+ * @param {string} [options.token]     a single token (overrides `tokens`)
+ * @param {string[]} [options.tokens]  tokens to use, defaults to tokensFromEnv()
  */
 export async function fetchAccount(
   username,
-  { token = process.env.GITHUB_TOKEN, includeForks = false, fetchImpl = globalThis.fetch } = {},
+  { token, tokens = tokensFromEnv(), includeForks = false, fetchImpl = globalThis.fetch } = {},
 ) {
-  if (token) return fetchWithGraphQL(username, { token, includeForks, fetchImpl });
+  const usable = token !== undefined ? [token].filter(Boolean) : tokens.filter(Boolean);
+  if (usable.length) return fetchWithGraphQL(username, { tokens: usable, includeForks, fetchImpl });
   return fetchWithRest(username, { includeForks, fetchImpl });
 }

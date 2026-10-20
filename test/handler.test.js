@@ -91,3 +91,17 @@ describe('handler', () => {
     assert.match(res.body, /Missing &quot;username&quot;/);
   });
 });
+
+describe('createCard tokens', () => {
+  beforeEach(() => clearCache());
+
+  it('uses tokens from GITHUB_TOKENS', async () => {
+    const { fetchImpl, calls } = okFetch();
+    const result = await createCard(
+      { username: 'octocat' },
+      { env: { GITHUB_TOKENS: 'pool-1' }, fetchImpl },
+    );
+    assert.equal(result.status, 200);
+    assert.match(calls[0].init.headers.authorization, /pool-1/);
+  });
+});
