@@ -30,6 +30,24 @@ inputs:
     description: Token used to query the GitHub GraphQL API.
     required: false
     default: ${{ github.token }}
+  commit:
+    description: >-
+      Commit and push the card when it changed. Needs `permissions: contents: write`.
+      Set to false to handle committing yourself.
+    required: false
+    default: 'true'
+  commit-message:
+    description: Commit message used when the card changed.
+    required: false
+    default: 'chore: update GitHub stars card'
+
+outputs:
+  path:
+    description: Path of the written SVG.
+    value: ${{ steps.render.outputs.path }}
+  changed:
+    description: '"true" when the card differs from the committed version.'
+    value: ${{ steps.commit.outputs.changed }}
 
 runs:
   using: composite
@@ -38,6 +56,7 @@ runs:
       with:
         node-version: 22
     - name: Render card
+      id: render
       shell: bash
       run: node "$GITHUB_ACTION_PATH/scripts/action.js"
       env:
@@ -47,3 +66,24 @@ runs:
         INPUT_OPTIONS: ${{ inputs.options }}
         INPUT_PATH: ${{ inputs.path }}
         INPUT_TOKEN: ${{ inputs.token }}
+    - name: Commit card
+      id: commit
+      if: inputs.commit == 'true'
+      shell: bash
+      env:
+        CARD_PATH: ${{ inputs.path }}
+        COMMIT_MESSAGE: ${{ inputs.commit-message }}
+      run: |
+        git add -- "$CARD_PATH"
+        if git diff --cached --quiet -- "$CARD_PATH"; then
+          echo "Card unchanged, nothing to commit."
+          echo "changed=false" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        git -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "$COMMIT_MESSAGE" -- "$CARD_PATH"
+        # Another job may have pushed meanwhile; replay our commit on top.
+        git pull --rebase --autostash
+        git push
+        echo "changed=true" >> "$GITHUB_OUTPUT"
