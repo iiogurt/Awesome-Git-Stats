@@ -10,7 +10,11 @@ earned, for embedding in profile READMEs with one Markdown image link:
 `https://<deployment>/api/stars?username=octocat&layout=repos&theme=tokyonight`.
 
 - Layouts: `overview` (default), `repos`, `compact`, `badge`.
-- 20 themes in `src/themes.js` (`auto` follows light/dark mode), plus `*_color` overrides.
+- 33 themes in `src/themes.js`: 20 classic palettes (`auto` follows light/dark mode) and 13
+  artistic themes that add background art, fonts and glow. `*_color` overrides work on all.
+- 13 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
+  disable), generated from a PRNG seeded with the username, so each account's art is unique
+  but stable.
 - Two ways to use it (README "How it works"): the **GitHub Action** (recommended, no hosting;
   renders on a schedule and commits the SVG itself, see `action.yml`) or a **live link** to a
   Vercel deployment. A deployment can be personal (`ALLOWED_USERNAMES`) or public, spreading
@@ -29,11 +33,12 @@ earned, for embedding in profile READMEs with one Markdown image link:
 | `src/stats.js`                 | Totals, top repos, stars per language (rest grouped into "Other")      |
 | `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`) |
 | `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers         |
+| `src/render/art.js`            | Background art styles, drawn by the frame behind the content           |
 | `src/cache.js`                 | In-memory TTL cache (stores promises to dedupe concurrent requests)    |
 | `public/index.html`            | Link builder page served at the deployment root                        |
 | `bin/cli.js`                   | CLI; `scripts/action.js` + `action.yml` for the GitHub Action          |
 | `scripts/dev.js`               | Local server on :3000                                                  |
-| `scripts/generate-examples.js` | Renders `assets/examples/*.svg` from `test/fixtures/account.js`        |
+| `scripts/generate-examples.js` | Renders `assets/examples/*.svg` and `docs/themes.md` from fixtures     |
 
 Zero runtime dependencies. Dev dependencies: ESLint (flat config), Prettier.
 
@@ -64,6 +69,8 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
 - **No `var(--x)` in presentation attributes** (`fill="var(--accent)"` does not work). Use a
   CSS class (`.accent`, `.track`, …) or a `style`; theme colours are CSS custom properties.
 - Text cannot be measured in an `<img>`; layout uses the `measureText`/`truncate` heuristics.
+- Art must use the seeded `rand()` (never `Math.random()`), colour via `--art1..3` classes, stay
+  subtle behind text, and put animations in `motion` (dropped for reduced motion).
 - Animations are CSS only (no JS in SVGs), must end in a visible state (`forwards`), and are
   disabled under `prefers-reduced-motion` and with `disable_animations`.
 - Errors render as an on-theme error card, never a broken image or a thrown exception.

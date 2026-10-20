@@ -15,7 +15,10 @@
 ## Features
 
 - **Four layouts.** A rich overview, a top repos chart, a compact card and a tiny badge.
-- **20 themes.** From `tokyonight` and `dracula` to gradient themes like `sunset` and `aurora`.
+- **33 themes.** 13 artistic themes with generated background art (starry skies, synthwave
+  grids, aurora, blueprints, contour maps…), plus 20 classic palettes like `tokyonight`.
+- **13 art styles.** Put any art style on any theme. The art is generated from your username,
+  so your starfield is yours alone.
 - **Follows dark mode.** The `auto` theme switches with the viewer's GitHub theme.
 - **Smooth animations.** Subtle, and switched off for people who prefer reduced motion.
 - **Users and organizations.** Works for any public GitHub account.
@@ -178,11 +181,29 @@ Choose a layout with `layout:` in the Action or `&layout=` in a live link.
 
 ## Themes
 
+### Artistic themes
+
+<img src="assets/examples/theme-synthwave.svg" alt="synthwave theme" width="400"> <img src="assets/examples/theme-starry_night.svg" alt="starry_night theme" width="400">
+<img src="assets/examples/theme-blueprint.svg" alt="blueprint theme" width="400"> <img src="assets/examples/theme-sakura.svg" alt="sakura theme" width="400">
+
+`starry_night` · `constellation` · `northern_lights` · `synthwave` · `cyberpunk` · `terminal` ·
+`blueprint` · `parchment` · `topographic` · `pop_art` · `glass` · `sakura` · `deep_sea`
+
+### Classic themes
+
 `default` · `light` · `dark` · `auto` · `github_dark` · `tokyonight` · `dracula` · `nord` ·
 `gruvbox` · `catppuccin` · `catppuccin_latte` · `rose_pine` · `solarized_light` ·
 `solarized_dark` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy`
 
-See them all in the **[theme gallery](docs/themes.md)**.
+### Art styles
+
+Combine any theme with any art style using `art=`, for example `theme=dracula&art=starfield`
+(or `options: art=starfield` in the Action). `art=none` switches the art off.
+
+`starfield` · `constellation` · `aurora` · `synthwave` · `waves` · `topography` · `blueprint` ·
+`halftone` · `scanlines` · `grain` · `bokeh` · `sakura` · `circuit`
+
+See every theme and art style in the **[theme gallery](docs/themes.md)**.
 
 ### Match GitHub's light and dark mode
 
@@ -214,6 +235,7 @@ defaults, so a typo will never break your README.
 | `username`           | GitHub user or organization (**required**)                                        |            |
 | `layout`             | `overview`, `repos`, `compact` or `badge`                                         | `overview` |
 | `theme`              | Any [theme](docs/themes.md)                                                       | `default`  |
+| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                      | theme's    |
 | `custom_title`       | Replace the card title (max 60 characters)                                        |            |
 | `hide_title`         | Hide the title                                                                    | `false`    |
 | `hide_border`        | Hide the border                                                                   | `false`    |

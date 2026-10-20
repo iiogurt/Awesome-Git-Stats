@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-wave{from{transform:translateX(0)}to{transform:translateX(-175px)}}
+        .art-wave{animation:ags-wave 12s linear infinite}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><path d="M0 106.2Q43.8 101 87.5 106.2T175 106.2Q218.8 101 262.5 106.2T350 106.2Q393.8 101 437.5 106.2T525 106.2Q568.8 101 612.5 106.2T700 106.2V128H0Z" class="art-c1 art-wave" opacity="0.1" style="animation-duration:14s"/><path d="M0 115.2Q43.8 108.4 87.5 115.2T175 115.2Q218.8 108.4 262.5 115.2T350 115.2Q393.8 108.4 437.5 115.2T525 115.2Q568.8 108.4 612.5 115.2T700 115.2V128H0Z" class="art-c2 art-wave" opacity="0.2" style="animation-duration:18s"/><path d="M0 124.2Q43.8 116.3 87.5 124.2T175 124.2Q218.8 116.3 262.5 124.2T350 124.2Q393.8 116.3 437.5 124.2T525 124.2Q568.8 116.3 612.5 124.2T700 124.2V128H0Z" class="art-c3 art-wave" opacity="0.2" style="animation-duration:22s"/></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

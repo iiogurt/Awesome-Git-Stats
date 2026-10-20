@@ -38,9 +38,22 @@ npm run dev            # http://localhost:3000
 
 ### Adding a theme
 
-Add an entry to `src/themes.js` defining all seven colour tokens, add it to the `<select>` in
-`public/index.html` and to the theme lists in `README.md`, then run `npm run examples` and
-regenerate the table in `docs/themes.md`. Check that text is readable on the background.
+Add an entry to `src/themes.js` defining all seven colour tokens, and optionally `gradient`,
+`art`, `art1`–`art3`, `font`, `glow` or `borderWidth` (documented at the top of the file).
+Add it to the `<select>` in `public/index.html` and to the theme lists in `README.md`, then run
+`npm run examples`, which also regenerates `docs/themes.md`. Check that text stays readable on
+the background, including on top of the art.
+
+### Adding an art style
+
+Add a generator to `styles` in `src/render/art.js` and its name to `ART_STYLES`, plus a
+description in `scripts/generate-examples.js` and an `<option>` in `public/index.html`. Rules:
+
+- Use the seeded `rand()` for every random choice, so cards are stable for each username.
+- Colour through the `art-c1`/`art-c2`/`art-c3`/`art-line` classes or `style="…var(--art1)"`,
+  never `fill="var(…)"`, so the art follows the theme, colour overrides and dark mode.
+- Keep it subtle (low opacity, away from text) and small: a few KB per card.
+- Put animations in `motion`; they are dropped for `disable_animations` and reduced motion.
 
 ## Branches
 
