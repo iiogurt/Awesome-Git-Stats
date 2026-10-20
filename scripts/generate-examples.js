@@ -31,6 +31,9 @@ const files = {
   'auto.svg': render({ theme: 'auto' }),
   'dashboard.svg': render({ layout: 'dashboard', theme: 'tokyonight' }),
   'dashboard-synthwave.svg': render({ layout: 'dashboard', theme: 'synthwave' }),
+  // README header: the starry_night design in GitHub's dark and light mode.
+  'hero-dark.svg': render({ layout: 'dashboard', theme: 'starry_night' }),
+  'hero-light.svg': render({ layout: 'dashboard', theme: 'starry_night_light' }),
 };
 for (const theme of themeNames) {
   const layout = themes[theme].art ? 'overview' : 'compact';
