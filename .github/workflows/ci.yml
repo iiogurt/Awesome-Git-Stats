@@ -55,7 +55,7 @@ jobs:
       - run: npm run examples
       - name: Check for changes
         run: |
-          if ! git diff --exit-code -- assets/examples; then
+          if ! git diff --exit-code -- assets/examples docs/themes.md || [ -n "$(git status --porcelain -- assets/examples)" ]; then
             echo "::error::Example cards are out of date. Run 'npm run examples' and commit the result."
             exit 1
           fi

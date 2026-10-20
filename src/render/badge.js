@@ -38,6 +38,7 @@ export function renderBadge(stats, options) {
     height: HEIGHT,
     theme: options.theme,
     options: { ...options, radius, animate: false },
+    withArt: false,
     title: null,
     body,
     css,

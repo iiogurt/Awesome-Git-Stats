@@ -2,7 +2,7 @@
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
   <defs><linearGradient id="ags-bg" gradientTransform="rotate(35 0.5 0.5)"><stop offset="0%" stop-color="#2b1055"/><stop offset="50%" stop-color="#7a1f5c"/><stop offset="100%" stop-color="#d5573b"/></linearGradient></defs>
   <style>
-    svg{--bg:#2b1055;--border:#ffffff33;--title:#ffffff;--text:#ffe9d6;--muted:#ffc9a8;--accent:#ffd166;--track:#ffffff26}
+    svg{--bg:#2b1055;--border:#ffffff33;--title:#ffffff;--text:#ffe9d6;--muted:#ffc9a8;--accent:#ffd166;--track:#ffffff26;--art1:#ffd166;--art2:#ffffff;--art3:#ffd166}
     
     text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
     .title{font-size:18px;font-weight:600;fill:var(--title)}
@@ -12,7 +12,9 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
-    .card{fill:url(#ags-bg);stroke:var(--border);stroke-opacity:1}
+    .card{fill:url(#ags-bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
     
     
     .big{font-size:28px;font-weight:800;fill:var(--title)}
@@ -20,6 +22,7 @@
     .legend{font-size:11px;fill:var(--text)}
   </style>
   <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  
   <text x="25" y="35" class="title fade">Stellar Dev</text>
   <g transform="translate(0 0)">
   <g class="rise">

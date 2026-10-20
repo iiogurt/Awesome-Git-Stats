@@ -1,4 +1,10 @@
-const FONT_FAMILY = "'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+import { renderArt } from './art.js';
+
+const FONTS = {
+  sans: "'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+  mono: "'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace",
+  serif: "Georgia, Cambria, 'Times New Roman', Times, serif",
+};
 
 /** Escape a value so it is safe to embed in SVG text and attribute values. */
 export function escapeXml(value) {
@@ -95,6 +101,9 @@ function themeVars(colors) {
     `--muted:${colors.muted}`,
     `--accent:${colors.accent}`,
     `--track:${colors.track}`,
+    `--art1:${colors.art1 ?? colors.accent}`,
+    `--art2:${colors.art2 ?? colors.title}`,
+    `--art3:${colors.art3 ?? colors.accent}`,
   ].join(';');
 }
 
@@ -113,7 +122,17 @@ function backgroundDefs(theme, id) {
  * custom properties so the `auto` theme can follow the viewer's colour
  * scheme via a media query.
  */
-export function renderFrame({ width, height, theme, options, title, body, css = '', label }) {
+export function renderFrame({
+  width,
+  height,
+  theme,
+  options,
+  title,
+  body,
+  css = '',
+  label,
+  withArt = true,
+}) {
   const { radius, hideBorder, hideTitle, animate } = options;
   const gradId = 'ags-bg';
   const bgFill = theme.gradient ? `url(#${gradId})` : 'var(--bg)';
@@ -136,14 +155,29 @@ export function renderFrame({ width, height, theme, options, title, body, css = 
     hideTitle || !title ? '' : `<text x="25" y="35" class="title fade">${escapeXml(title)}</text>`;
   const offset = hideTitle && title ? -25 : 0;
   const finalHeight = height + offset;
+  const font = FONTS[theme.font] ?? FONTS.sans;
+  const strokeWidth = theme.borderWidth ?? 1;
+  const inset = strokeWidth / 2;
+  const glow = theme.glow
+    ? '.title,.big{filter:drop-shadow(0 0 6px var(--accent))}.icon-accent{filter:drop-shadow(0 0 4px var(--accent))}'
+    : '';
+  const artName = options.art ?? theme.art;
+  const art =
+    withArt && artName && artName !== 'none'
+      ? renderArt(artName, { width, height: finalHeight, seed: options.username, animate })
+      : null;
+  const artLayer = art
+    ? `<clipPath id="ags-clip"><rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true">${art.layer}</g>`
+    : '';
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${finalHeight}" viewBox="0 0 ${width} ${finalHeight}" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">${escapeXml(label || title || 'GitHub stars')}</title>
-  <defs>${backgroundDefs(theme, gradId)}</defs>
+  <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}</defs>
   <style>
     svg{${themeVars(theme)}}
     ${darkBlock}
-    text{font-family:${FONT_FAMILY}}
+    text{font-family:${font}${theme.font === 'mono' ? ';letter-spacing:-.06em' : ''}}
     .title{font-size:18px;font-weight:600;fill:var(--title)}
     .text{fill:var(--text)}
     .muted{fill:var(--muted)}
@@ -151,11 +185,14 @@ export function renderFrame({ width, height, theme, options, title, body, css = 
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
-    .card{fill:${bgFill};stroke:var(--border);stroke-opacity:${borderOpacity}}
+    .card{fill:${bgFill};stroke:var(--border);stroke-width:${strokeWidth};stroke-opacity:${borderOpacity}}
+    ${glow}
     ${motion}
+    ${art?.css ?? ''}
     ${css}
   </style>
-  <rect x="0.5" y="0.5" rx="${radius}" width="${width - 1}" height="${finalHeight - 1}" class="card"/>
+  <rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}" class="card"/>
+  ${artLayer}
   ${titleBlock}
   <g transform="translate(0 ${offset})">${body}</g>
 </svg>`;

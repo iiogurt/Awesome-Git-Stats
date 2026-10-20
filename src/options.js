@@ -1,3 +1,4 @@
+import { ART_STYLES } from './render/art.js';
 import { themes, resolveTheme } from './themes.js';
 
 export const LAYOUTS = ['overview', 'repos', 'compact', 'badge'];
@@ -79,6 +80,10 @@ export function parseOptions(query = {}) {
     if (query[param] !== undefined) overrides[key] = first(query[param]);
   }
 
+  // Art: a known style, "none" to switch a theme's art off, or the theme's default.
+  const artParam = String(first(query.art) ?? '').toLowerCase();
+  const art = artParam === 'none' || ART_STYLES.includes(artParam) ? artParam : undefined;
+
   const customTitle = first(query.custom_title);
   const label = first(query.label);
 
@@ -87,6 +92,7 @@ export function parseOptions(query = {}) {
     layout,
     themeName,
     theme: resolveTheme(themeName, overrides),
+    art,
     hideBorder: bool(query.hide_border),
     hideTitle: bool(query.hide_title),
     animate: !bool(query.disable_animations),

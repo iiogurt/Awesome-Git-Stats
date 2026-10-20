@@ -2,7 +2,7 @@
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
   <defs></defs>
   <style>
-    svg{--bg:#ffffff;--border:#e4e2e2;--title:#1f2328;--text:#424a53;--muted:#6e7781;--accent:#e3b341;--track:#eaeef2}
+    svg{--bg:#ffffff;--border:#e4e2e2;--title:#1f2328;--text:#424a53;--muted:#6e7781;--accent:#e3b341;--track:#eaeef2;--art1:#e3b341;--art2:#1f2328;--art3:#e3b341}
     
     text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
     .title{font-size:18px;font-weight:600;fill:var(--title)}
@@ -12,7 +12,8 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
-    .card{fill:var(--bg);stroke:var(--border);stroke-opacity:1}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
     @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
     @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -22,6 +23,7 @@
     .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
     
     .big{font-size:32px;font-weight:800;fill:var(--title)}
     .caption{font-size:12.5px;fill:var(--muted)}
@@ -37,6 +39,7 @@
     @media (prefers-reduced-motion: reduce){.pop{animation:none;opacity:1;transform:none}}
   </style>
   <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
+  
   <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
   <g transform="translate(0 0)">
   <g class="rise" style="animation-delay:100ms">
