@@ -11,7 +11,7 @@ inputs:
     required: false
     default: ${{ github.repository_owner }}
   layout:
-    description: 'Card layout: overview, repos, compact or badge.'
+    description: 'Card layout: overview, repos, compact, badge or dashboard.'
     required: false
     default: overview
   theme:
@@ -22,10 +22,26 @@ inputs:
     description: 'Extra card options as a query string, e.g. "hide_border=true&count=8".'
     required: false
     default: ''
+  dark-theme:
+    description: >-
+      Theme for GitHub's dark mode. Renders a second card next to the first one (`theme` is then
+      the light mode card); show both with a <picture> element.
+    required: false
+    default: ''
+  dark-options:
+    description: >-
+      Extra options for the dark card only, on top of `options`, e.g. "art=starfield". Also
+      renders the dark card on its own.
+    required: false
+    default: ''
   path:
     description: Where to write the SVG, relative to the workspace.
     required: false
     default: awesome-git-stats.svg
+  dark-path:
+    description: Where to write the dark card. Defaults to `path` with "-dark" before the extension.
+    required: false
+    default: ''
   token:
     description: Token used to query the GitHub GraphQL API.
     required: false
@@ -45,6 +61,9 @@ outputs:
   path:
     description: Path of the written SVG.
     value: ${{ steps.render.outputs.path }}
+  dark-path:
+    description: Path of the dark card, empty when none was rendered.
+    value: ${{ steps.render.outputs.dark-path }}
   changed:
     description: '"true" when the card differs from the committed version.'
     value: ${{ steps.commit.outputs.changed }}
@@ -64,25 +83,31 @@ runs:
         INPUT_LAYOUT: ${{ inputs.layout }}
         INPUT_THEME: ${{ inputs.theme }}
         INPUT_OPTIONS: ${{ inputs.options }}
+        INPUT_DARK_THEME: ${{ inputs.dark-theme }}
+        INPUT_DARK_OPTIONS: ${{ inputs.dark-options }}
         INPUT_PATH: ${{ inputs.path }}
+        INPUT_DARK_PATH: ${{ inputs.dark-path }}
         INPUT_TOKEN: ${{ inputs.token }}
     - name: Commit card
       id: commit
       if: inputs.commit == 'true'
       shell: bash
       env:
-        CARD_PATH: ${{ inputs.path }}
+        CARD_PATH: ${{ steps.render.outputs.path }}
+        DARK_PATH: ${{ steps.render.outputs.dark-path }}
         COMMIT_MESSAGE: ${{ inputs.commit-message }}
       run: |
-        git add -- "$CARD_PATH"
-        if git diff --cached --quiet -- "$CARD_PATH"; then
+        files=("$CARD_PATH")
+        if [ -n "$DARK_PATH" ]; then files+=("$DARK_PATH"); fi
+        git add -- "${files[@]}"
+        if git diff --cached --quiet -- "${files[@]}"; then
           echo "Card unchanged, nothing to commit."
           echo "changed=false" >> "$GITHUB_OUTPUT"
           exit 0
         fi
         git -c user.name='github-actions[bot]' \
             -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-            commit -m "$COMMIT_MESSAGE" -- "$CARD_PATH"
+            commit -m "$COMMIT_MESSAGE" -- "${files[@]}"
         # Another job may have pushed meanwhile; replay our commit on top.
         git pull --rebase --autostash
         git push

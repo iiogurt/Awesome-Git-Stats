@@ -105,6 +105,28 @@
       .preview img {
         max-width: 100%;
       }
+      .preview.pair {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+      .preview figure {
+        margin: 0;
+        display: grid;
+        gap: 6px;
+        justify-items: center;
+      }
+      .preview figcaption {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .preview figcaption:empty {
+        display: none;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 8px 0 0;
+      }
       .snippet {
         display: flex;
         gap: 8px;
@@ -223,6 +245,18 @@
             <option>circuit</option>
           </select>
         </label>
+        <label>
+          Dark mode theme
+          <select name="dark_theme" id="dark-theme">
+            <option value="">Same card in both modes</option>
+          </select>
+        </label>
+        <label>
+          Dark mode art
+          <select name="dark_art" id="dark-art" disabled>
+            <option value="">Same as light</option>
+          </select>
+        </label>
         <label class="check"><input type="checkbox" name="hide_border" /> Hide border</label>
         <label class="check"><input type="checkbox" name="hide_title" /> Hide title</label>
         <label class="check">
@@ -230,12 +264,25 @@
         </label>
       </form>
 
-      <div class="preview"><img id="preview" alt="Card preview" /></div>
+      <div class="preview" id="previews">
+        <figure>
+          <img id="preview" alt="Card preview" />
+          <figcaption id="light-caption"></figcaption>
+        </figure>
+        <figure hidden id="dark-figure">
+          <img id="preview-dark" alt="Dark mode card preview" />
+          <figcaption>Dark mode</figcaption>
+        </figure>
+      </div>
 
       <div class="snippet">
         <code id="markdown"></code>
         <button type="button" id="copy">Copy</button>
       </div>
+      <p class="note" id="picture-note" hidden>
+        GitHub shows the dark card to people who use GitHub in dark mode and the light card to
+        everyone else, following their GitHub appearance setting.
+      </p>
 
       <footer>
         Open source on
@@ -247,27 +294,64 @@
     <script>
       const form = document.getElementById('builder');
       const preview = document.getElementById('preview');
+      const previewDark = document.getElementById('preview-dark');
+      const previews = document.getElementById('previews');
+      const darkFigure = document.getElementById('dark-figure');
+      const lightCaption = document.getElementById('light-caption');
+      const pictureNote = document.getElementById('picture-note');
+      const darkTheme = document.getElementById('dark-theme');
+      const darkArt = document.getElementById('dark-art');
       const markdown = document.getElementById('markdown');
       const copy = document.getElementById('copy');
       let timer;
 
-      function buildUrl() {
+      // The dark mode pickers offer the same themes and art styles as the main ones.
+      for (const [from, to] of [
+        [form.elements.theme, darkTheme],
+        [form.elements.art, darkArt],
+      ]) {
+        for (const child of from.children) {
+          if (child.value !== '') to.append(child.cloneNode(true));
+        }
+      }
+
+      function buildUrl(overrides = {}) {
         const data = new FormData(form);
         const params = new URLSearchParams();
         const defaults = { layout: 'overview', theme: 'default' };
         for (const [key, raw] of data) {
+          if (key.startsWith('dark_')) continue;
           const value = raw === 'on' ? 'true' : raw.trim();
           if (value && defaults[key] !== value) params.set(key, value);
+        }
+        for (const [key, value] of Object.entries(overrides)) {
+          if (!value) continue;
+          if (defaults[key] === value) params.delete(key);
+          else params.set(key, value);
         }
         return `${location.origin}/api/stars?${params}`;
       }
 
+      function escapeAttr(value) {
+        return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+      }
+
       function update() {
         const url = buildUrl();
-        markdown.textContent = `![GitHub stars](${url})`;
+        const dual = Boolean(darkTheme.value);
+        darkArt.disabled = !dual;
+        const darkUrl = dual ? buildUrl({ theme: darkTheme.value, art: darkArt.value }) : '';
+        markdown.textContent = dual
+          ? `<picture><source media="(prefers-color-scheme: dark)" srcset="${escapeAttr(darkUrl)}" /><img alt="GitHub stars" src="${escapeAttr(url)}" /></picture>`
+          : `![GitHub stars](${url})`;
+        previews.classList.toggle('pair', dual);
+        darkFigure.hidden = !dual;
+        pictureNote.hidden = !dual;
+        lightCaption.textContent = dual ? 'Light mode' : '';
         clearTimeout(timer);
         timer = setTimeout(() => {
           preview.src = url;
+          if (dual) previewDark.src = darkUrl;
         }, 350);
       }
 

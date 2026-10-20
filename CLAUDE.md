@@ -17,6 +17,10 @@ earned, for embedding in profile READMEs with one Markdown image link:
 - 13 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
   disable), generated from a PRNG seeded with the username, so each account's art is unique
   but stable.
+- Light and dark mode: two separate cards shown through a `<picture>` element, which GitHub
+  switches by the viewer's GitHub appearance setting (Action input `dark-theme`/`dark-options`,
+  link builder "Dark mode theme"). `theme=auto` is the single-image fallback; it follows the
+  OS colour scheme and only swaps colours.
 - Two ways to use it (README "How it works"): the **GitHub Action** (recommended, no hosting;
   renders on a schedule and commits the SVG itself, see `action.yml`) or a **live link** to a
   Vercel deployment. A deployment can be personal (`ALLOWED_USERNAMES`) or public, spreading
@@ -26,22 +30,23 @@ earned, for embedding in profile READMEs with one Markdown image link:
 
 ## Architecture
 
-| Path                           | Role                                                                   |
-| ------------------------------ | ---------------------------------------------------------------------- |
-| `api/stars.js`                 | Vercel function; re-exports `src/handler.js`                           |
-| `src/handler.js`               | `createCard(query)` → `{ status, svg, cacheSeconds }`; never throws    |
-| `src/options.js`               | Query parsing/validation; unknown values fall back to defaults         |
-| `src/github.js`                | GraphQL (with token) or REST fallback; normalises repos; `GitHubError` |
-| `src/stats.js`                 | Totals, top repos, stars per language (rest grouped into "Other")      |
-| `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar      |
-| `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`) |
-| `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers         |
-| `src/render/art.js`            | Background art styles, drawn by the frame behind the content           |
-| `src/cache.js`                 | In-memory TTL cache (stores promises to dedupe concurrent requests)    |
-| `public/index.html`            | Link builder page served at the deployment root                        |
-| `bin/cli.js`                   | CLI; `scripts/action.js` + `action.yml` for the GitHub Action          |
-| `scripts/dev.js`               | Local server on :3000                                                  |
-| `scripts/generate-examples.js` | Renders `assets/examples/*.svg` and `docs/themes.md` from fixtures     |
+| Path                           | Role                                                                    |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| `api/stars.js`                 | Vercel function; re-exports `src/handler.js`                            |
+| `src/handler.js`               | `createCard(query)` → `{ status, svg, cacheSeconds }`; never throws     |
+| `src/options.js`               | Query parsing/validation; unknown values fall back to defaults          |
+| `src/github.js`                | GraphQL (with token) or REST fallback; normalises repos; `GitHubError`  |
+| `src/stats.js`                 | Totals, top repos, stars per language (rest grouped into "Other")       |
+| `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar       |
+| `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`)  |
+| `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers          |
+| `src/render/art.js`            | Background art styles, drawn by the frame behind the content            |
+| `src/picture.js`               | Light/dark card pairs: dark queries, `-dark` paths, `<picture>` snippet |
+| `src/cache.js`                 | In-memory TTL cache (stores promises to dedupe concurrent requests)     |
+| `public/index.html`            | Link builder page served at the deployment root                         |
+| `bin/cli.js`                   | CLI; `scripts/action.js` + `action.yml` for the GitHub Action           |
+| `scripts/dev.js`               | Local server on :3000                                                   |
+| `scripts/generate-examples.js` | Renders `assets/examples/*.svg` and `docs/themes.md` from fixtures      |
 
 Zero runtime dependencies. Dev dependencies: ESLint (flat config), Prettier.
 

@@ -73,6 +73,15 @@ jobs:
           path: out/card.svg
           commit: false
       - run: grep -q '<svg' out/card.svg
+      - uses: ./
+        with:
+          username: ${{ github.repository_owner }}
+          theme: catppuccin_latte
+          dark-theme: tokyonight
+          dark-options: art=starfield
+          path: out/pair.svg
+          commit: false
+      - run: grep -q '<svg' out/pair.svg && grep -q 'art-layer' out/pair-dark.svg
       # The dashboard runs the contribution-activity query against the real API.
       - uses: ./
         with:
