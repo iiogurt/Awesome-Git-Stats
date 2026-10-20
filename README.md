@@ -20,7 +20,8 @@
   grids, aurora, blueprints, contour maps…), plus 20 classic palettes like `tokyonight`.
 - **13 art styles.** Put any art style on any theme. The art is generated from your username,
   so your starfield is yours alone.
-- **Follows dark mode.** The `auto` theme switches with the viewer's GitHub theme.
+- **Separate light and dark cards.** Pick a different theme, art and colours for GitHub's light
+  and dark mode, and the card switches with each viewer's GitHub appearance setting.
 - **Smooth animations.** Subtle, and switched off for people who prefer reduced motion.
 - **Users and organizations.** Works for any public GitHub account.
 - **No server needed.** Generate the card with a GitHub Action, or serve it live if you prefer.
@@ -100,19 +101,23 @@ Add one step per card. Any [option](#options) goes into `options` as a query str
 
 ### Action inputs
 
-| Input            | Description                                      | Default                           |
-| ---------------- | ------------------------------------------------ | --------------------------------- |
-| `username`       | Account to render                                | Repository owner                  |
-| `layout`         | `overview`, `repos`, `compact` or `badge`        | `overview`                        |
-| `theme`          | Any [theme](docs/themes.md)                      | `default`                         |
-| `options`        | Any other [options](#options), as a query string |                                   |
-| `path`           | Output file                                      | `awesome-git-stats.svg`           |
-| `commit`         | Commit and push the card when it changed         | `true`                            |
-| `commit-message` | Message for that commit                          | `chore: update GitHub stars card` |
-| `token`          | Token for the GitHub API                         | `${{ github.token }}`             |
+| Input            | Description                                               | Default                           |
+| ---------------- | --------------------------------------------------------- | --------------------------------- |
+| `username`       | Account to render                                         | Repository owner                  |
+| `layout`         | `overview`, `repos`, `compact`, `badge`, `dashboard`      | `overview`                        |
+| `theme`          | Any [theme](docs/themes.md)                               | `default`                         |
+| `dark-theme`     | Theme for [dark mode](#match-githubs-light-and-dark-mode) |                                   |
+| `dark-options`   | Extra options for the dark card only                      |                                   |
+| `options`        | Any other [options](#options), as a query string          |                                   |
+| `path`           | Output file                                               | `awesome-git-stats.svg`           |
+| `dark-path`      | Output file of the dark card                              | `path` + `-dark`                  |
+| `commit`         | Commit and push the card when it changed                  | `true`                            |
+| `commit-message` | Message for that commit                                   | `chore: update GitHub stars card` |
+| `token`          | Token for the GitHub API                                  | `${{ github.token }}`             |
 
-Outputs: `path` (the written file) and `changed` (`true` when a new card was committed). Set
-`commit: false` to commit yourself, for example to bundle several files into one commit.
+Outputs: `path` and `dark-path` (the written files) and `changed` (`true` when a new card was
+committed). Set `commit: false` to commit yourself, for example to bundle several files into
+one commit.
 
 ## Option 2: Live link (hosted instance)
 
@@ -230,9 +235,36 @@ See every theme and art style in the **[theme gallery](docs/themes.md)**.
 
 ### Match GitHub's light and dark mode
 
-Use `theme=auto` and the card follows the viewer's colour scheme. Or pick a different theme for
-each mode with GitHub's `<picture>` support. With the Action, render two files (for example
-`assets/stars-dark.svg` and `assets/stars-light.svg`) and use those paths instead of the links:
+Design one card for each mode and GitHub shows each viewer the one matching their GitHub
+appearance setting (_Settings → Appearance_, including "sync with system"). The two cards are
+completely independent: different themes, art styles, colours, even layouts.
+
+**With the Action**, add `dark-theme`. `theme` becomes the light card, and a second file is
+written next to it (`assets/stars-dark.svg` here). `options` apply to both cards,
+`dark-options` only to the dark one:
+
+```yaml
+- uses: iiogurt/Awesome-Git-Stats@v1
+  with:
+    layout: dashboard
+    theme: sakura # light mode
+    dark-theme: starry_night # dark mode
+    options: hide_border=true
+    dark-options: art=aurora&accent_color=ffd700
+    path: assets/stars.svg
+```
+
+Then show both with a `<picture>` element (the Action's run summary prints this snippet too):
+
+```html
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stars-dark.svg" />
+  <img alt="My GitHub stars" src="assets/stars.svg" />
+</picture>
+```
+
+**With a live link**, use the same `<picture>` element with two links. The link builder on your
+deployment's home page writes it for you when you pick a _Dark mode theme_:
 
 ```html
 <picture>
@@ -246,6 +278,10 @@ each mode with GitHub's `<picture>` support. With the Action, render two files (
   />
 </picture>
 ```
+
+The simpler `theme=auto` switches between the `light` and `dark` colours with a single image,
+but it follows the viewer's operating system rather than their GitHub setting and can only
+change colours, not art or fonts.
 
 ## Options
 
