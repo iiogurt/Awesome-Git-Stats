@@ -4,7 +4,7 @@
         <radialGradient id="ags-dot-fade" cx="475.2" cy="184" r="247.5" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
         <mask id="ags-dot-mask"><rect width="495" height="195" fill="url(#ags-dot-fade)"/></mask></defs>
   <style>
-    svg{--bg:#fff200;--border:#111111;--title:#111111;--text:#111111;--muted:#3a3a3a;--accent:#e4002b;--track:#00000022;--art1:#e4002b;--art2:#111111;--art3:#e4002b}
+    svg{--bg:#fff200;--border:#111111;--title:#111111;--text:#111111;--muted:#3a3a3a;--accent:#e4002b;--track:#00000022;--art1:#e4002b;--art2:#111111;--art3:#e4002b;--shade:#000000}
     
     text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
     .title{font-size:18px;font-weight:600;fill:var(--title)}

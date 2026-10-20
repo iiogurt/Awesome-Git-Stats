@@ -104,6 +104,7 @@ function themeVars(colors) {
     `--art1:${colors.art1 ?? colors.accent}`,
     `--art2:${colors.art2 ?? colors.title}`,
     `--art3:${colors.art3 ?? colors.accent}`,
+    `--shade:${colors.shade ?? '#000000'}`,
   ].join(';');
 }
 

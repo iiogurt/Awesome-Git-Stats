@@ -5,53 +5,58 @@
 Pick a theme with `theme=<name>` (or `theme:` in the GitHub Action). Every theme works with
 every layout.
 
+Every design comes in a **light and a dark variant** that share their colours, art and font, so
+they belong together when your card follows GitHub's light and dark mode. In the Action, set
+`dark-theme: match` to use both (see the
+[README](../README.md#match-githubs-light-and-dark-mode)); the link builder does it by default.
+
 ## Artistic themes
 
 Each artistic theme pairs a palette with a background [art style](#art-styles), and some add a
-matching font or a neon glow. The art is generated from your username, so your card's starfield
-or contour map is unique to you. Animations are subtle and switch off for people who prefer
-reduced motion.
+matching font or a neon glow (dark variants only). The art is generated from your username, so
+your card's starfield or contour map is unique to you. Animations are subtle and switch off for
+people who prefer reduced motion.
 
-| Theme                                   | Preview                                                                                          |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `starry_night`<br>art: `starfield`      | <img src="../assets/examples/theme-starry_night.svg" alt="starry_night theme" width="420">       |
-| `constellation`<br>art: `constellation` | <img src="../assets/examples/theme-constellation.svg" alt="constellation theme" width="420">     |
-| `northern_lights`<br>art: `aurora`      | <img src="../assets/examples/theme-northern_lights.svg" alt="northern_lights theme" width="420"> |
-| `synthwave`<br>art: `synthwave`         | <img src="../assets/examples/theme-synthwave.svg" alt="synthwave theme" width="420">             |
-| `cyberpunk`<br>art: `circuit`           | <img src="../assets/examples/theme-cyberpunk.svg" alt="cyberpunk theme" width="420">             |
-| `terminal`<br>art: `scanlines`          | <img src="../assets/examples/theme-terminal.svg" alt="terminal theme" width="420">               |
-| `blueprint`<br>art: `blueprint`         | <img src="../assets/examples/theme-blueprint.svg" alt="blueprint theme" width="420">             |
-| `parchment`<br>art: `grain`             | <img src="../assets/examples/theme-parchment.svg" alt="parchment theme" width="420">             |
-| `topographic`<br>art: `topography`      | <img src="../assets/examples/theme-topographic.svg" alt="topographic theme" width="420">         |
-| `pop_art`<br>art: `halftone`            | <img src="../assets/examples/theme-pop_art.svg" alt="pop_art theme" width="420">                 |
-| `glass`<br>art: `bokeh`                 | <img src="../assets/examples/theme-glass.svg" alt="glass theme" width="420">                     |
-| `sakura`<br>art: `sakura`               | <img src="../assets/examples/theme-sakura.svg" alt="sakura theme" width="420">                   |
-| `deep_sea`<br>art: `waves`              | <img src="../assets/examples/theme-deep_sea.svg" alt="deep_sea theme" width="420">               |
+| Design                                                                                       | Light mode                                                                                                                              | Dark mode                                                                                                                |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Starry night**<br>art: `starfield`<br>Twinkling starfield; a dawn sky in light mode.       | `starry_night_light`<br><img src="../assets/examples/theme-starry_night_light.svg" alt="starry_night_light theme" width="300">          | `starry_night`<br><img src="../assets/examples/theme-starry_night.svg" alt="starry_night theme" width="300">             |
+| **Constellation**<br>art: `constellation`<br>Stars joined into a self-drawing constellation. | `constellation_light`<br><img src="../assets/examples/theme-constellation_light.svg" alt="constellation_light theme" width="300">       | `constellation`<br><img src="../assets/examples/theme-constellation.svg" alt="constellation theme" width="300">          |
+| **Northern lights**<br>art: `aurora`<br>Drifting aurora bands.                               | `northern_lights_light`<br><img src="../assets/examples/theme-northern_lights_light.svg" alt="northern_lights_light theme" width="300"> | `northern_lights`<br><img src="../assets/examples/theme-northern_lights.svg" alt="northern_lights theme" width="300">    |
+| **Synthwave**<br>art: `synthwave`<br>Retro sun over a neon grid.                             | `synthwave_light`<br><img src="../assets/examples/theme-synthwave_light.svg" alt="synthwave_light theme" width="300">                   | `synthwave`<br><img src="../assets/examples/theme-synthwave.svg" alt="synthwave theme" width="300">                      |
+| **Cyberpunk**<br>art: `circuit`<br>Circuit traces, mono font; neon glow when dark.           | `cyberpunk_light`<br><img src="../assets/examples/theme-cyberpunk_light.svg" alt="cyberpunk_light theme" width="300">                   | `cyberpunk`<br><img src="../assets/examples/theme-cyberpunk.svg" alt="cyberpunk theme" width="300">                      |
+| **Terminal**<br>art: `scanlines`<br>Green phosphor CRT, mono font.                           | `terminal_light`<br><img src="../assets/examples/theme-terminal_light.svg" alt="terminal_light theme" width="300">                      | `terminal`<br><img src="../assets/examples/theme-terminal.svg" alt="terminal theme" width="300">                         |
+| **Blueprint**<br>art: `blueprint`<br>Engineering grid paper, mono font.                      | `blueprint_light`<br><img src="../assets/examples/theme-blueprint_light.svg" alt="blueprint_light theme" width="300">                   | `blueprint`<br><img src="../assets/examples/theme-blueprint.svg" alt="blueprint theme" width="300">                      |
+| **Parchment**<br>art: `grain`<br>Old paper grain with a serif font.                          | `parchment`<br><img src="../assets/examples/theme-parchment.svg" alt="parchment theme" width="300">                                     | `parchment_dark`<br><img src="../assets/examples/theme-parchment_dark.svg" alt="parchment_dark theme" width="300">       |
+| **Topographic**<br>art: `topography`<br>Hand-drawn contour lines.                            | `topographic`<br><img src="../assets/examples/theme-topographic.svg" alt="topographic theme" width="300">                               | `topographic_dark`<br><img src="../assets/examples/theme-topographic_dark.svg" alt="topographic_dark theme" width="300"> |
+| **Pop art**<br>art: `halftone`<br>Bold halftone dots and a thick border.                     | `pop_art`<br><img src="../assets/examples/theme-pop_art.svg" alt="pop_art theme" width="300">                                           | `pop_art_dark`<br><img src="../assets/examples/theme-pop_art_dark.svg" alt="pop_art_dark theme" width="300">             |
+| **Glass**<br>art: `bokeh`<br>Frosted glass with floating bokeh.                              | `glass`<br><img src="../assets/examples/theme-glass.svg" alt="glass theme" width="300">                                                 | `glass_dark`<br><img src="../assets/examples/theme-glass_dark.svg" alt="glass_dark theme" width="300">                   |
+| **Sakura**<br>art: `sakura`<br>Cherry blossom petals.                                        | `sakura`<br><img src="../assets/examples/theme-sakura.svg" alt="sakura theme" width="300">                                              | `sakura_dark`<br><img src="../assets/examples/theme-sakura_dark.svg" alt="sakura_dark theme" width="300">                |
+| **Deep sea**<br>art: `waves`<br>Rolling ocean waves.                                         | `deep_sea_light`<br><img src="../assets/examples/theme-deep_sea_light.svg" alt="deep_sea_light theme" width="300">                      | `deep_sea`<br><img src="../assets/examples/theme-deep_sea.svg" alt="deep_sea theme" width="300">                         |
 
 ## Classic themes
 
-| Theme              | Preview                                                                                            |
-| ------------------ | -------------------------------------------------------------------------------------------------- |
-| `default`          | <img src="../assets/examples/theme-default.svg" alt="default theme" width="350">                   |
-| `light`            | <img src="../assets/examples/theme-light.svg" alt="light theme" width="350">                       |
-| `dark`             | <img src="../assets/examples/theme-dark.svg" alt="dark theme" width="350">                         |
-| `auto`             | <img src="../assets/examples/theme-auto.svg" alt="auto theme" width="350">                         |
-| `github_dark`      | <img src="../assets/examples/theme-github_dark.svg" alt="github_dark theme" width="350">           |
-| `tokyonight`       | <img src="../assets/examples/theme-tokyonight.svg" alt="tokyonight theme" width="350">             |
-| `dracula`          | <img src="../assets/examples/theme-dracula.svg" alt="dracula theme" width="350">                   |
-| `nord`             | <img src="../assets/examples/theme-nord.svg" alt="nord theme" width="350">                         |
-| `gruvbox`          | <img src="../assets/examples/theme-gruvbox.svg" alt="gruvbox theme" width="350">                   |
-| `catppuccin`       | <img src="../assets/examples/theme-catppuccin.svg" alt="catppuccin theme" width="350">             |
-| `catppuccin_latte` | <img src="../assets/examples/theme-catppuccin_latte.svg" alt="catppuccin_latte theme" width="350"> |
-| `rose_pine`        | <img src="../assets/examples/theme-rose_pine.svg" alt="rose_pine theme" width="350">               |
-| `solarized_light`  | <img src="../assets/examples/theme-solarized_light.svg" alt="solarized_light theme" width="350">   |
-| `solarized_dark`   | <img src="../assets/examples/theme-solarized_dark.svg" alt="solarized_dark theme" width="350">     |
-| `monokai`          | <img src="../assets/examples/theme-monokai.svg" alt="monokai theme" width="350">                   |
-| `radical`          | <img src="../assets/examples/theme-radical.svg" alt="radical theme" width="350">                   |
-| `sunset`           | <img src="../assets/examples/theme-sunset.svg" alt="sunset theme" width="350">                     |
-| `aurora`           | <img src="../assets/examples/theme-aurora.svg" alt="aurora theme" width="350">                     |
-| `ocean`            | <img src="../assets/examples/theme-ocean.svg" alt="ocean theme" width="350">                       |
-| `candy`            | <img src="../assets/examples/theme-candy.svg" alt="candy theme" width="350">                       |
+| Design                                                                     | Light mode                                                                                                               | Dark mode                                                                                                          |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| **GitHub**<br>GitHub's own neutral colours, gold stars.                    | `default`<br><img src="../assets/examples/theme-default.svg" alt="default theme" width="300">                            | `dark`<br><img src="../assets/examples/theme-dark.svg" alt="dark theme" width="300">                               |
+| **GitHub blue**<br>GitHub colours with a blue title.                       | `github_light`<br><img src="../assets/examples/theme-github_light.svg" alt="github_light theme" width="300">             | `github_dark`<br><img src="../assets/examples/theme-github_dark.svg" alt="github_dark theme" width="300">          |
+| **Tokyo Night**<br>Cool blues and purples (Tokyo Night Day in light mode). | `tokyonight_light`<br><img src="../assets/examples/theme-tokyonight_light.svg" alt="tokyonight_light theme" width="300"> | `tokyonight`<br><img src="../assets/examples/theme-tokyonight.svg" alt="tokyonight theme" width="300">             |
+| **Dracula**<br>Pink and purple on charcoal (Alucard in light mode).        | `dracula_light`<br><img src="../assets/examples/theme-dracula_light.svg" alt="dracula_light theme" width="300">          | `dracula`<br><img src="../assets/examples/theme-dracula.svg" alt="dracula theme" width="300">                      |
+| **Nord**<br>Calm arctic blues.                                             | `nord_light`<br><img src="../assets/examples/theme-nord_light.svg" alt="nord_light theme" width="300">                   | `nord`<br><img src="../assets/examples/theme-nord.svg" alt="nord theme" width="300">                               |
+| **Gruvbox**<br>Warm retro yellows and oranges.                             | `gruvbox_light`<br><img src="../assets/examples/theme-gruvbox_light.svg" alt="gruvbox_light theme" width="300">          | `gruvbox`<br><img src="../assets/examples/theme-gruvbox.svg" alt="gruvbox theme" width="300">                      |
+| **Catppuccin**<br>Soft pastels (Latte and Mocha).                          | `catppuccin_latte`<br><img src="../assets/examples/theme-catppuccin_latte.svg" alt="catppuccin_latte theme" width="300"> | `catppuccin`<br><img src="../assets/examples/theme-catppuccin.svg" alt="catppuccin theme" width="300">             |
+| **Rosé Pine**<br>Muted rose and gold (Dawn in light mode).                 | `rose_pine_light`<br><img src="../assets/examples/theme-rose_pine_light.svg" alt="rose_pine_light theme" width="300">    | `rose_pine`<br><img src="../assets/examples/theme-rose_pine.svg" alt="rose_pine theme" width="300">                |
+| **Solarized**<br>The classic low-contrast palette.                         | `solarized_light`<br><img src="../assets/examples/theme-solarized_light.svg" alt="solarized_light theme" width="300">    | `solarized_dark`<br><img src="../assets/examples/theme-solarized_dark.svg" alt="solarized_dark theme" width="300"> |
+| **Monokai**<br>Hot pink and yellow, the editor classic.                    | `monokai_light`<br><img src="../assets/examples/theme-monokai_light.svg" alt="monokai_light theme" width="300">          | `monokai`<br><img src="../assets/examples/theme-monokai.svg" alt="monokai theme" width="300">                      |
+| **Radical**<br>Neon pink and cyan.                                         | `radical_light`<br><img src="../assets/examples/theme-radical_light.svg" alt="radical_light theme" width="300">          | `radical`<br><img src="../assets/examples/theme-radical.svg" alt="radical theme" width="300">                      |
+| **Sunset**<br>Purple to orange gradient.                                   | `sunset_light`<br><img src="../assets/examples/theme-sunset_light.svg" alt="sunset_light theme" width="300">             | `sunset`<br><img src="../assets/examples/theme-sunset.svg" alt="sunset theme" width="300">                         |
+| **Aurora**<br>Teal and green gradient.                                     | `aurora_light`<br><img src="../assets/examples/theme-aurora_light.svg" alt="aurora_light theme" width="300">             | `aurora`<br><img src="../assets/examples/theme-aurora.svg" alt="aurora theme" width="300">                         |
+| **Ocean**<br>Deep blue gradient.                                           | `ocean_light`<br><img src="../assets/examples/theme-ocean_light.svg" alt="ocean_light theme" width="300">                | `ocean`<br><img src="../assets/examples/theme-ocean.svg" alt="ocean theme" width="300">                            |
+| **Candy**<br>Pastel pink, lilac and sky gradient.                          | `candy`<br><img src="../assets/examples/theme-candy.svg" alt="candy theme" width="300">                                  | `candy_dark`<br><img src="../assets/examples/theme-candy_dark.svg" alt="candy_dark theme" width="300">             |
+
+`light` is the same as `default`. `auto` switches between `default` and `dark` inside a single
+image, following the viewer's operating system rather than their GitHub setting:
+
+<img src="../assets/examples/theme-auto.svg" alt="auto theme" width="300">
 
 ## Art styles
 

@@ -2,6 +2,10 @@
 // element to match the viewer's GitHub appearance setting, so each mode gets
 // its own complete card (theme, art, fonts, colours) instead of a media query
 // inside one SVG, which can only follow the operating system and swap colours.
+import { themePair } from './themes.js';
+
+/** `dark-theme` value that picks the design's own light and dark variant. */
+export const MATCH = 'match';
 
 /** Path of the dark card next to the light one: `assets/stars.svg` → `assets/stars-dark.svg`. */
 export function darkPath(path) {
@@ -12,11 +16,22 @@ export function darkPath(path) {
 /**
  * Queries for the light and dark card. `options` apply to both, `darkOptions`
  * only to the dark one (and win), so the modes can differ in art, colours or
- * anything else. Returns `{ light, dark }`, `dark` being null if not requested.
+ * anything else. `darkTheme: 'match'` uses the premade light and dark variant
+ * of the chosen theme's design. Returns `{ light, dark }`, `dark` being null
+ * if not requested.
  */
 export function variantQueries({ base, options = '', darkTheme = '', darkOptions = '' }) {
   const shared = { ...Object.fromEntries(new URLSearchParams(options)), ...base };
   if (!darkTheme && !darkOptions) return { light: shared, dark: null };
+  if (darkTheme === MATCH) {
+    const pair = themePair(String(shared.theme ?? 'default').toLowerCase());
+    return variantQueries({
+      base: { ...base, theme: pair.light },
+      options,
+      darkTheme: pair.dark,
+      darkOptions,
+    });
+  }
   return {
     light: shared,
     dark: {

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><linearGradient id="ags-bg" gradientTransform="rotate(160 0.5 0.5)"><stop offset="0%" stop-color="#f3efff"/><stop offset="50%" stop-color="#e9e4ff"/><stop offset="100%" stop-color="#ffe9f0"/></linearGradient></defs>
+  <style>
+    svg{--bg:#f3efff;--border:#3a2a7a1f;--title:#3a2a7a;--text:#3b3560;--muted:#6e6794;--accent:#e09b00;--track:#3a2a7a14;--art1:#e09b00;--art2:#6c5ce7;--art3:#e09b00;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:url(#ags-bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    
+    
+    
+    .big{font-size:32px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .stat-value{font-size:15px;font-weight:700;fill:var(--text)}
+    .stat-label{font-size:11px;fill:var(--muted)}
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .top-line{font-size:12px;fill:var(--muted)}
+    .top-name{font-weight:600;fill:var(--text)}
+    .ring-track{stroke:var(--track)}
+    
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><circle cx="385.4" cy="32.2" r="0.6" opacity="0.6" class="art-c2"/><circle cx="36.3" cy="14.8" r="1.1" opacity="0.6" class="art-c2"/><circle cx="317.4" cy="28.5" r="0.7" opacity="0.3" class="art-c2"/><circle cx="436.4" cy="52.9" r="0.7" opacity="0.7" class="art-c2"/><circle cx="52.4" cy="44.1" r="1" opacity="0.4" class="art-c2"/><circle cx="301.8" cy="172.2" r="1.1" opacity="0.5" class="art-c2"/><circle cx="71.3" cy="10.6" r="1" opacity="0.7" class="art-c2"/><circle cx="1.4" cy="61.7" r="1.2" opacity="0.6" class="art-c2"/><circle cx="314.7" cy="135.5" r="0.9" opacity="0.5" class="art-c2 art-tw" style="animation-delay:3.4s;animation-duration:3.8s"/><circle cx="81.5" cy="53.2" r="1.2" opacity="0.3" class="art-c2"/><circle cx="301" cy="128.4" r="0.5" opacity="0.3" class="art-c2"/><circle cx="199.9" cy="0.2" r="1.1" opacity="0.6" class="art-c2"/><circle cx="475" cy="89" r="0.5" opacity="0.4" class="art-c2 art-tw" style="animation-delay:2s;animation-duration:2.6s"/><circle cx="168.5" cy="141.7" r="1" opacity="0.6" class="art-c2"/><circle cx="9.3" cy="67.4" r="0.4" opacity="0.4" class="art-c2"/><circle cx="321.9" cy="191.3" r="1.1" opacity="0.3" class="art-c2"/><circle cx="12.8" cy="56.9" r="0.8" opacity="0.7" class="art-c2"/><circle cx="42.9" cy="79.9" r="1.3" opacity="0.5" class="art-c2"/><circle cx="488.4" cy="173.3" r="0.9" opacity="0.5" class="art-c2"/><circle cx="17.1" cy="32.2" r="1.2" opacity="0.4" class="art-c2"/><circle cx="30.2" cy="56.3" r="1.1" opacity="0.3" class="art-c2"/><circle cx="406.1" cy="103" r="0.5" opacity="0.5" class="art-c2 art-tw" style="animation-delay:3.6s;animation-duration:3s"/><circle cx="230.9" cy="11.7" r="1.2" opacity="0.8" class="art-c2"/><circle cx="42.4" cy="83" r="0.6" opacity="0.8" class="art-c2"/><circle cx="227" cy="91.1" r="1" opacity="0.5" class="art-c2"/><circle cx="324.8" cy="88.1" r="0.6" opacity="0.3" class="art-c2 art-tw" style="animation-delay:1s;animation-duration:3s"/><circle cx="131.7" cy="5.1" r="0.5" opacity="0.7" class="art-c2"/><circle cx="133.5" cy="15.8" r="0.5" opacity="0.5" class="art-c2"/><circle cx="166.9" cy="81.3" r="0.4" opacity="0.3" class="art-c2"/><circle cx="309.7" cy="55.8" r="1.2" opacity="0.8" class="art-c2"/><circle cx="213.3" cy="147.7" r="0.6" opacity="0.4" class="art-c2"/><circle cx="362.3" cy="155.5" r="0.6" opacity="0.8" class="art-c2"/><circle cx="369.9" cy="30.3" r="1" opacity="0.4" class="art-c2"/><circle cx="150.1" cy="95.7" r="0.9" opacity="0.5" class="art-c2"/><circle cx="350.4" cy="23.5" r="0.8" opacity="0.8" class="art-c2"/><circle cx="285.3" cy="68.6" r="0.7" opacity="0.3" class="art-c2 art-tw" style="animation-delay:0.1s;animation-duration:4.3s"/><circle cx="30" cy="181.2" r="0.4" opacity="0.7" class="art-c2 art-tw" style="animation-delay:0.4s;animation-duration:4s"/><circle cx="266.1" cy="20.3" r="1" opacity="0.4" class="art-c2"/><circle cx="105.5" cy="27" r="0.9" opacity="0.7" class="art-c2 art-tw" style="animation-delay:3s;animation-duration:3.7s"/><circle cx="270.7" cy="177.3" r="0.8" opacity="0.6" class="art-c2"/><circle cx="271.6" cy="179.9" r="0.6" opacity="0.8" class="art-c2"/><circle cx="241.2" cy="78.2" r="1" opacity="0.3" class="art-c2"/><circle cx="61" cy="23.9" r="0.5" opacity="0.6" class="art-c2"/><circle cx="302.6" cy="32.1" r="1.1" opacity="0.5" class="art-c2"/><circle cx="127.4" cy="2.1" r="0.5" opacity="0.3" class="art-c2"/><circle cx="327.6" cy="152.2" r="0.5" opacity="0.8" class="art-c2"/><circle cx="255.6" cy="47.9" r="1.1" opacity="0.3" class="art-c2"/><circle cx="470.5" cy="120.6" r="0.7" opacity="0.5" class="art-c2"/><circle cx="13.2" cy="125.4" r="1" opacity="0.3" class="art-c2"/><circle cx="408.8" cy="146" r="0.6" opacity="0.8" class="art-c2"/><circle cx="70.6" cy="9" r="1.1" opacity="0.8" class="art-c2"/><circle cx="222.5" cy="102.2" r="0.7" opacity="0.5" class="art-c2"/><circle cx="304.9" cy="190.8" r="0.8" opacity="0.8" class="art-c2"/><circle cx="19.7" cy="64" r="0.4" opacity="0.8" class="art-c2"/><circle cx="87.7" cy="99.3" r="0.7" opacity="0.6" class="art-c2"/><circle cx="159.1" cy="86.9" r="1.2" opacity="0.6" class="art-c2"/><circle cx="96.7" cy="152.4" r="1.2" opacity="0.4" class="art-c2"/><circle cx="466.9" cy="153.3" r="0.7" opacity="0.5" class="art-c2"/><circle cx="429.4" cy="61.6" r="1" opacity="0.7" class="art-c2"/><circle cx="124.7" cy="161.6" r="0.6" opacity="0.3" class="art-c2"/><circle cx="32.5" cy="53.4" r="1.2" opacity="0.5" class="art-c2"/><circle cx="242.7" cy="8.7" r="1.3" opacity="0.6" class="art-c2"/><circle cx="171.9" cy="57.4" r="0.6" opacity="0.5" class="art-c2"/><circle cx="184.2" cy="161.3" r="1.3" opacity="0.8" class="art-c2"/><circle cx="241.3" cy="132.6" r="1.2" opacity="0.6" class="art-c2"/><circle cx="288.6" cy="25.8" r="0.9" opacity="0.3" class="art-c2"/><circle cx="293.9" cy="144.8" r="1.1" opacity="0.7" class="art-c2 art-tw" style="animation-delay:2.4s;animation-duration:4.6s"/><circle cx="476.2" cy="188.8" r="0.9" opacity="0.4" class="art-c2"/><circle cx="384.3" cy="155.3" r="1.1" opacity="0.4" class="art-c2"/><path d="M347.6 121.3Q348.4 124.2 351.3 125Q348.4 125.8 347.6 128.7Q346.8 125.8 343.9 125Q346.8 124.2 347.6 121.3Z" class="art-c1 art-tw" opacity=".75" style="animation-delay:1.8s"/><path d="M441.2 112.1Q442.3 115.9 446.2 117Q442.3 118.1 441.2 122Q440.2 118.1 436.3 117Q440.2 115.9 441.2 112.1Z" class="art-c1 art-tw" opacity=".75" style="animation-delay:1.7s"/><path d="M209.1 111.6Q210 114.8 213.2 115.7Q210 116.6 209.1 119.8Q208.2 116.6 205 115.7Q208.2 114.8 209.1 111.6Z" class="art-c1 art-tw" opacity=".75" style="animation-delay:2.3s"/></g>
+  <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
+  <g transform="translate(0 0)">
+  <g class="rise">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 60) scale(1.875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="66" y="87" class="big">17,656</text>
+    <text x="25" y="110" class="caption">stars earned across 10 repos</text>
+  </g>
+  <g class="rise">
+    <path class="icon" transform="translate(25 128) scale(0.875)" d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+    <text x="45" y="140" class="stat-value">1.2k</text>
+    <text x="25" y="160" class="stat-label">forks</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(103 128) scale(0.875)" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
+    <text x="123" y="140" class="stat-value">64</text>
+    <text x="103" y="160" class="stat-label">public repos</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(181 128) scale(0.875)" d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/>
+    <text x="201" y="140" class="stat-value">2.5k</text>
+    <text x="181" y="160" class="stat-label">followers</text>
+  </g>
+  <g class="fade">
+          <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
+        </g>
+  <g class="rise">
+        <circle cx="267" cy="66" r="5" fill="#3178c6"/>
+        <text x="279" y="70" class="lang-name">TypeScript</text>
+        <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="88" r="5" fill="#dea584"/>
+        <text x="279" y="92" class="lang-name">Rust</text>
+        <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="110" r="5" fill="#00ADD8"/>
+        <text x="279" y="114" class="lang-name">Go</text>
+        <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="132" r="5" fill="#3572A5"/>
+        <text x="279" y="136" class="lang-name">Python</text>
+        <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="154" r="5" fill="#8b949e"/>
+        <text x="279" y="158" class="lang-name">Other</text>
+        <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="pop">
+    <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
+    <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+  </g></g>
+</svg>

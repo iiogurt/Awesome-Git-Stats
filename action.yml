@@ -25,7 +25,8 @@ inputs:
   dark-theme:
     description: >-
       Theme for GitHub's dark mode. Renders a second card next to the first one (`theme` is then
-      the light mode card); show both with a <picture> element.
+      the light mode card); show both with a <picture> element. "match" uses the premade light
+      and dark variant of `theme`.
     required: false
     default: ''
   dark-options:

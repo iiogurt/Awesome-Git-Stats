@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { parseOptions } from '../src/options.js';
-import { ART_STYLES, createRandom } from '../src/render/art.js';
+import { ART_DESCRIPTIONS, ART_STYLES, createRandom } from '../src/render/art.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
-import { themeNames, themes } from '../src/themes.js';
+import { designs, themeNames, themes } from '../src/themes.js';
 import { sampleAccount } from './fixtures/account.js';
 
 function render(query, username = 'stellar-dev') {
@@ -98,12 +98,17 @@ describe('artistic themes', () => {
 });
 
 describe('link builder', () => {
-  it('offers every theme and art style', async () => {
+  it('offers every design and art style', async () => {
     const { readFile } = await import('node:fs/promises');
     const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
-    for (const name of themeNames.filter((n) => n !== 'light')) {
-      assert.match(html, new RegExp(`<option>${name}</option>`), name);
-    }
-    for (const art of ART_STYLES) assert.match(html, new RegExp(`<option>${art}</option>`), art);
+    // The page's own code, formatted by Prettier, so evaluate rather than JSON.parse it.
+    const source = html.match(/const CATALOG = (\{[\s\S]*?\});\n/)[1];
+    const catalog = new Function(`return ${source}`)();
+    assert.deepEqual(catalog.designs, designs, 'run npm run examples');
+    assert.deepEqual(Object.keys(catalog.art), ART_STYLES);
+  });
+
+  it('describes every art style', () => {
+    for (const art of ART_STYLES) assert.ok(ART_DESCRIPTIONS[art], art);
   });
 });

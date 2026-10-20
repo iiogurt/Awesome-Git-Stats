@@ -2,7 +2,7 @@
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
   <defs></defs>
   <style>
-    svg{--bg:#0a0a12;--border:#fcee0a;--title:#fcee0a;--text:#e6f6ff;--muted:#5ee7ff;--accent:#ff2a6d;--track:#ffffff1a;--art1:#05d9e8;--art2:#fcee0a;--art3:#ff2a6d}
+    svg{--bg:#0a0a12;--border:#fcee0a;--title:#fcee0a;--text:#e6f6ff;--muted:#5ee7ff;--accent:#ff2a6d;--track:#ffffff1a;--art1:#05d9e8;--art2:#fcee0a;--art3:#ff2a6d;--shade:#000000}
     
     text{font-family:'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace;letter-spacing:-.06em}
     .title{font-size:18px;font-weight:600;fill:var(--title)}

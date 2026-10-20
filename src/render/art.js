@@ -8,6 +8,7 @@
  *   --art1  main art colour (defaults to the accent)
  *   --art2  stars and fine detail (defaults to the title colour)
  *   --art3  secondary art colour (defaults to the accent)
+ *   --shade vignette colour (defaults to black)
  */
 
 export const ART_STYLES = [
@@ -25,6 +26,23 @@ export const ART_STYLES = [
   'sakura',
   'circuit',
 ];
+
+/** One-line descriptions, shown in the link builder and the theme gallery. */
+export const ART_DESCRIPTIONS = {
+  starfield: 'A night sky of twinkling stars and sparkles, unique to every username.',
+  constellation: 'Stars joined into a constellation that draws itself in.',
+  aurora: 'Soft, drifting bands of northern lights.',
+  synthwave: 'A striped retro sun over a neon perspective grid.',
+  waves: 'Layered ocean waves rolling along the bottom edge.',
+  topography: 'Hand-drawn contour lines, like a hiking map.',
+  blueprint: 'Engineering grid paper with corner crop marks.',
+  halftone: 'Pop-art halftone dots fading in from a corner.',
+  scanlines: 'CRT scanlines, a vignette and a slow refresh beam.',
+  grain: 'Paper grain and a warm vignette, like an old print.',
+  bokeh: 'Blurred, floating circles of light.',
+  sakura: 'Cherry blossom petals swaying in the breeze.',
+  circuit: 'Circuit traces with data pulsing through them.',
+};
 
 /** Small, fast, deterministic PRNG (mulberry32). */
 export function createRandom(seedText = '') {
@@ -231,7 +249,7 @@ const styles = {
   scanlines(rand, { width, height }) {
     return {
       defs: `<pattern id="ags-scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1.4" class="art-c1" opacity=".09"/></pattern>
-        <radialGradient id="ags-vignette" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+        <radialGradient id="ags-vignette" cx=".5" cy=".5" r=".75"><stop offset=".55" style="stop-color:var(--shade)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--shade)" stop-opacity=".55"/></radialGradient>
         <linearGradient id="ags-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--art1)" stop-opacity="0"/><stop offset=".5" style="stop-color:var(--art1)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--art1)" stop-opacity="0"/></linearGradient>`,
       layer: `<rect width="${width}" height="${height}" fill="url(#ags-scan)"/>
         <rect width="${width}" height="${height}" fill="url(#ags-vignette)"/>

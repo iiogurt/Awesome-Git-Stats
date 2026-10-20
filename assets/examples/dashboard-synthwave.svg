@@ -3,7 +3,7 @@
   <defs><linearGradient id="ags-bg" gradientTransform="rotate(180 0.5 0.5)"><stop offset="0%" stop-color="#1a0b3b"/><stop offset="50%" stop-color="#3b1366"/><stop offset="100%" stop-color="#6b1a6e"/></linearGradient><linearGradient id="ags-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--art2)"/><stop offset="1" style="stop-color:var(--art1)"/></linearGradient>
         <mask id="ags-sun-mask"><rect width="820" height="470" fill="#fff"/><rect x="594" y="295.9" width="124" height="1.5" fill="#000"/><rect x="594" y="307.1" width="124" height="2.8" fill="#000"/><rect x="594" y="318.3" width="124" height="4.1" fill="#000"/><rect x="594" y="329.4" width="124" height="5.4" fill="#000"/><rect x="594" y="340.6" width="124" height="6.7" fill="#000"/><rect y="310.2" width="820" height="470" fill="#000"/></mask></defs>
   <style>
-    svg{--bg:#241046;--border:#ff6ad566;--title:#ff6ad5;--text:#f5e9ff;--muted:#c7a6ff;--accent:#00f0ff;--track:#ffffff22;--art1:#ff6ad5;--art2:#ffcc00;--art3:#00f0ff}
+    svg{--bg:#241046;--border:#ff6ad566;--title:#ff6ad5;--text:#f5e9ff;--muted:#c7a6ff;--accent:#00f0ff;--track:#ffffff22;--art1:#ff6ad5;--art2:#ffcc00;--art3:#00f0ff;--shade:#000000}
     
     text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
     .title{font-size:18px;font-weight:600;fill:var(--title)}
