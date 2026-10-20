@@ -7,3 +7,16 @@ coverage/
 *.log
 .DS_Store
 stars.svg
+
+# Secrets: GitHub App private keys, certificates, local npm credentials
+*.pem
+*.key
+.npmrc
+
+# Local renders (CLI and Action defaults, CI smoke test output)
+awesome-git-stats*.svg
+out/
+
+# Editors
+.idea/
+.vscode/
