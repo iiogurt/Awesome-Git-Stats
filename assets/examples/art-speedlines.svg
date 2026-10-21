@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><pattern id="ags-tone" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="2.5" cy="2.5" r="1.1" class="art-c2"/></pattern>
+        <radialGradient id="ags-tone-fade" cx="313.9" cy="115.8" r="140" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+        <mask id="ags-tone-mask"><rect width="350" height="128" fill="url(#ags-tone-fade)"/></mask></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-frame{0%{opacity:.22}50%{opacity:0}}
+        .art-frame{animation:ags-frame .5s steps(1) infinite}.art-frame-b{animation-delay:-.25s}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><rect width="350" height="128" fill="url(#ags-tone)" mask="url(#ags-tone-mask)" opacity=".3"/>
+        <path d="M311.3 -0.4L359.4 -25.5L361.2 -21.6ZM270.1 169.4L313.3 215.3L311.2 217.1ZM189.6 172.1L203.5 267L201.6 267.2ZM34.7 118.6L-14.7 141.6L-17.3 135ZM141.9 -65.2L121.2 -133.8L127.2 -135.3ZM138.2 -35.2L102.6 -127.7L105 -128.6ZM103.5 156.6L52.2 228.1L47.3 224.4ZM66.8 157.8L22.4 200.8L17.9 195.7ZM253 -47.8L291.3 -104.8L293.2 -103.4ZM254.9 187.2L288.5 234.6L284.5 237.3ZM126.2 163L86 248.6L82.6 247ZM117.5 -27.7L65.2 -109L67 -110.2ZM201.9 -77L212.3 -137.6L214.6 -137.1ZM264.8 90.8L372 120.5L370.7 124.8ZM46.8 134.2L-3.5 164.7L-6 160.1ZM257.3 168.6L303.6 223.6L300 226.4ZM266 90.2L372.9 117.4L371 123.9ZM77.7 173.3L40 218.2L37.4 215.9ZM86.6 183.8L54.7 229.9L51.9 227.9ZM151.8 167.7L132 264.4L128.6 263.6ZM48.1 100.3L-21.8 121.3L-22.3 119.6ZM135.4 170.6L107.1 257.4L100.2 254.8ZM101.1 -64L69.4 -111.7L75.7 -115.3ZM168.8 -86.9L163.8 -140.7L169.3 -140.9ZM99.1 -65.7L68.7 -111.2L74.4 -114.6ZM76.6 32.2L-21.1 4.4L-18.9 -2.6ZM162.3 -74.1L152.8 -139.8L159.6 -140.4ZM256.4 -30.7L307.6 -92.3L309.5 -90.7ZM304 119.6L363.9 143.5L362.6 146.6ZM86.8 -12.7L19.5 -69.5L21.3 -71.6ZM263.9 -50.2L299.3 -98.9L302.5 -96.5ZM152.2 -45.3L130 -136L136.3 -137.3ZM51.1 47.6L-28.4 38.7L-28 35.3ZM242.6 -48.1L277.7 -113.4L283.9 -109.7ZM272.4 19.2L360.5 -23.2L361.9 -20.2ZM200.9 -62.5L215 -137L217.2 -136.6ZM221.8 181.2L252.2 253.9L249.9 254.8ZM263 -26.5L317.2 -83.6L318.6 -82.2ZM88.4 176.6L51.2 227.4L48.8 225.5ZM83.7 41.5L-24.8 18.5L-23.1 11.5Z" class="art-c1 art-frame" opacity=".2"/>
+        <path d="M269 182.1L305.4 222.1L299.8 226.6ZM58.4 107.6L-16.2 138L-17.8 133.6ZM137.3 -81.8L120.4 -133.6L126.9 -135.3ZM279.8 138L344.3 179.5L340.5 184.9ZM195 -72.7L201.9 -139.2L207.3 -138.4ZM158.8 -46.6L141.8 -138.3L148.9 -139.3ZM274 160.7L322.3 206.6L320.9 207.9ZM77.4 49.1L-28.1 36.2L-27.1 30.1ZM265.2 -11.2L331.1 -68.8L333.8 -65.6ZM72.3 -28L21.2 -71.5L23.4 -74ZM69.8 126.1L0.4 171.3L-3.3 165.1ZM281.2 67.7L379.9 67.9L379.7 74.3ZM61.7 27.6L-20.8 3.5L-19.5 -0.8ZM258.6 133.7L333.7 193.7L331 196.9ZM278.9 145.7L338.1 188.1L334.1 193.2ZM146.9 195L135.3 265.1L128.6 263.6ZM240.8 -11.7L308.1 -91.9L310.8 -89.5ZM293.7 65.8L380 64.5L379.9 69.6ZM292.5 89.9L375.5 106.4L374.8 109.8ZM173.8 161.2L175.5 269L169.4 268.9ZM58.5 145.5L9.1 184.4L5 178.5ZM49.1 11L-15.2 -12.5L-12.6 -18.6ZM217.4 -50.3L245.4 -128.5L247.2 -127.8ZM174.6 -86.7L171.7 -140.9L177.2 -141ZM149.7 170.6L129.5 263.9L125.8 263ZM111.4 133.1L36.9 215.5L35.5 214.2ZM51.2 76L-28.8 86.2L-29.2 81.3ZM320 16.9L369.2 -1.4L370.6 2.7ZM46.3 144.2L2.9 175.4L-0.7 169.5ZM246.7 1.4L327.4 -73L331.2 -68.7ZM294 -18L341.7 -55.2L345.8 -49.4ZM48.7 7.1L-12.7 -18.4L-11.1 -21.9ZM182.9 163.6L192.9 268.2L189.5 268.5ZM76.7 -1.8L3.1 -47.6L6.3 -52.4ZM57.6 -6.3L-1.4 -40.3L-0.3 -42.1ZM271.5 -13.3L332.9 -66.7L337.1 -61.4ZM65.1 87.7L-25.1 108.4L-25.6 106.1ZM28.1 99.5L-23.4 115.5L-25 108.9ZM143.6 -80.6L130.5 -136.1L132.5 -136.5ZM222 -29.2L266.4 -119.4L268.2 -118.6Z" class="art-c1 art-frame art-frame-b" opacity=".2"/></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

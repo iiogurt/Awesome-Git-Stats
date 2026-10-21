@@ -12,11 +12,13 @@ earned, for embedding in profile READMEs with one Markdown image link:
 - Layouts: `overview` (default), `repos`, `compact`, `badge`, `dashboard`. The dashboard also
   fetches contribution activity (a second GraphQL query, users only, token required) and
   derives streaks, heatmap levels and weekday/monthly totals in `src/activity.js`.
-- 58 themes in `src/themes.js`, grouped into 28 `designs`: each design is a light + dark theme
-  pair sharing colours, art and font (15 classic palettes, 13 artistic with background art,
-  fonts and glow). `light` and `auto` are extras. `*_color` overrides work on all. A new theme
-  needs its partner and a `designs` entry; tests check the pairing and text contrast.
-- 13 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
+- 108 themes in `src/themes.js`, grouped into 53 `designs`: each design is a light + dark theme
+  pair sharing colours, art and font (15 classic palettes, 38 artistic with background art,
+  fonts and glow). Every design has a `category` from `categories` (nature, holidays, anime,
+  horror, 3D, …), which groups the gallery and the link builder. `light` and `auto` are extras.
+  `*_color` overrides work on all. A new theme needs its partner and a `designs` entry; tests
+  check the pairing, the category and text contrast.
+- 38 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
   disable), generated from a PRNG seeded with the username, so each account's art is unique
   but stable.
 - Light and dark mode: two separate cards shown through a `<picture>` element, which GitHub
@@ -82,6 +84,9 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
 - Text cannot be measured in an `<img>`; layout uses the `measureText`/`truncate` heuristics.
 - Art must use the seeded `rand()` (never `Math.random()`), colour via `--art1..3` classes, stay
   subtle behind text, and put animations in `motion` (dropped for reduced motion).
+- Art cost: an animated SVG in an `<img>` is re-rasterised whole on every frame, filters
+  included. Prefer gradients (`radialGlow`) and patterns over `feGaussianBlur`/`feTurbulence`,
+  keep heavy text counts down, and check several cards on one page still animate smoothly.
 - Animations are CSS only (no JS in SVGs), must end in a visible state (`forwards`), and are
   disabled under `prefers-reduced-motion` and with `disable_animations`.
 - Errors render as an on-theme error card, never a broken image or a thrown exception.

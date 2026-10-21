@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><radialGradient id="ags-eyeglow1"><stop offset="0" style="stop-color:var(--art1)" stop-opacity="0.45"/><stop offset="1" style="stop-color:var(--art1)" stop-opacity="0"/></radialGradient><radialGradient id="ags-eyeglow3"><stop offset="0" style="stop-color:var(--art3)" stop-opacity="0.45"/><stop offset="1" style="stop-color:var(--art3)" stop-opacity="0"/></radialGradient><radialGradient id="ags-fogpuff"><stop offset="0" style="stop-color:var(--art2)" stop-opacity="0.5"/><stop offset="1" style="stop-color:var(--art2)" stop-opacity="0"/></radialGradient>
+        <radialGradient id="ags-dark" cx=".5" cy=".5" r=".75"><stop offset=".5" style="stop-color:var(--shade)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--shade)" stop-opacity=".6"/></radialGradient></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-blink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.05)}}
+        .art-blink{animation:ags-blink 6s ease-in-out infinite}
+        @keyframes ags-lurk{0%,100%{opacity:0}20%,75%{opacity:1}}
+        .art-lurk{animation:ags-lurk 14s ease-in-out infinite}
+        @keyframes ags-fog{0%,100%{transform:translateX(-40px)}50%{transform:translateX(40px)}}
+        .art-fog{animation:ags-fog 24s ease-in-out infinite}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><rect width="350" height="128" fill="url(#ags-dark)"/>
+        <g transform="translate(33.9 95.9) rotate(-9)"><g class="art-lurk" style="animation-delay:-11.8s;animation-duration:15.7s"><ellipse rx="9" ry="5.3" fill="url(#ags-eyeglow3)"/><g class="art-blink" style="animation-delay:-2.2s;animation-duration:4.9s"><path d="M-5.6 0Q-3.2 -1.9 -0.8 0Q-3.2 1.9 -5.6 0Z" class="art-c3"/><ellipse cx="-3.2" rx="0.4" ry="1.2" class="art-bg"/><path d="M0.8 0Q3.2 -1.9 5.6 0Q3.2 1.9 0.8 0Z" class="art-c3"/><ellipse cx="3.2" rx="0.4" ry="1.2" class="art-bg"/></g></g></g><g transform="translate(233.7 115.3) rotate(1)"><g class="art-lurk" style="animation-delay:-15.3s;animation-duration:17.5s"><ellipse rx="11.6" ry="6.8" fill="url(#ags-eyeglow3)"/><g class="art-blink" style="animation-delay:-4.3s;animation-duration:8.5s"><path d="M-7.2 0Q-4.2 -2.5 -1.1 0Q-4.2 2.5 -7.2 0Z" class="art-c3"/><ellipse cx="-4.2" rx="0.5" ry="1.5" class="art-bg"/><path d="M1.1 0Q4.2 -2.5 7.2 0Q4.2 2.5 1.1 0Z" class="art-c3"/><ellipse cx="4.2" rx="0.5" ry="1.5" class="art-bg"/></g></g></g><g transform="translate(39.7 36.5) rotate(11)"><g class="art-lurk" style="animation-delay:-14s;animation-duration:12.1s"><ellipse rx="11.6" ry="6.8" fill="url(#ags-eyeglow3)"/><g class="art-blink" style="animation-delay:-2.4s;animation-duration:6.4s"><path d="M-7.2 0Q-4.1 -2.5 -1.1 0Q-4.1 2.5 -7.2 0Z" class="art-c3"/><ellipse cx="-4.1" rx="0.5" ry="1.5" class="art-bg"/><path d="M1.1 0Q4.1 -2.5 7.2 0Q4.1 2.5 1.1 0Z" class="art-c3"/><ellipse cx="4.1" rx="0.5" ry="1.5" class="art-bg"/></g></g></g><g transform="translate(308.9 12.9) rotate(-9)"><g class="art-lurk" style="animation-delay:-13s;animation-duration:13.1s"><ellipse rx="12.8" ry="7.4" fill="url(#ags-eyeglow1)"/><g class="art-blink" style="animation-delay:-3.1s;animation-duration:4.5s"><path d="M-8 0Q-4.6 -2.7 -1.2 0Q-4.6 2.7 -8 0Z" class="art-c1"/><ellipse cx="-4.6" rx="0.5" ry="1.7" class="art-bg"/><path d="M1.2 0Q4.6 -2.7 8 0Q4.6 2.7 1.2 0Z" class="art-c1"/><ellipse cx="4.6" rx="0.5" ry="1.7" class="art-bg"/></g></g></g><g transform="translate(335.4 79.7) rotate(-3)"><g class="art-lurk" style="animation-delay:-9.7s;animation-duration:16.8s"><ellipse rx="11.1" ry="6.5" fill="url(#ags-eyeglow1)"/><g class="art-blink" style="animation-delay:-5.3s;animation-duration:5.5s"><path d="M-6.9 0Q-4 -2.4 -1 0Q-4 2.4 -6.9 0Z" class="art-c1"/><ellipse cx="-4" rx="0.5" ry="1.5" class="art-bg"/><path d="M1 0Q4 -2.4 6.9 0Q4 2.4 1 0Z" class="art-c1"/><ellipse cx="4" rx="0.5" ry="1.5" class="art-bg"/></g></g></g><g opacity=".45"><ellipse cx="230.1" cy="125.3" rx="86.9" ry="10.2" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-21.4s;animation-duration:19.8s"/><ellipse cx="166.1" cy="127.8" rx="77.3" ry="8.3" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-14s;animation-duration:27.3s"/><ellipse cx="244.6" cy="123.1" rx="110.6" ry="9.2" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-3.7s;animation-duration:22.9s"/><ellipse cx="109.6" cy="123.8" rx="82.6" ry="10.2" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-16.7s;animation-duration:27.8s"/><ellipse cx="176.2" cy="123.7" rx="116.1" ry="10.2" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-3.5s;animation-duration:27.5s"/><ellipse cx="188" cy="-4.4" rx="85.2" ry="8.4" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-13.8s;animation-duration:29.8s"/><ellipse cx="164.8" cy="7.8" rx="116.5" ry="12.1" fill="url(#ags-fogpuff)" class="art-fog" style="animation-delay:-20.9s;animation-duration:20.8s"/></g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

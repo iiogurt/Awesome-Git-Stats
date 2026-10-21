@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { designs, themeNames, themePair, themes } from '../src/themes.js';
+import { categories, designs, themeNames, themePair, themes } from '../src/themes.js';
 
 // WCAG relative luminance of a #rrggbb colour.
 function luminance(hex) {
@@ -26,6 +26,20 @@ describe('designs', () => {
       assert.ok(members.includes(name), `${name} has no design`);
     }
     for (const name of members) assert.ok(themes[name], `unknown theme ${name}`);
+  });
+
+  it('sort every design into a category, with art unless it is classic', () => {
+    for (const { id, category, artistic, light } of designs) {
+      assert.ok(category in categories, `${id} category`);
+      assert.equal(category === 'classic', !artistic, `${id} artistic`);
+      assert.equal(Boolean(themes[light].art), Boolean(artistic), `${id} art`);
+    }
+    for (const category of Object.keys(categories)) {
+      assert.ok(
+        designs.some((d) => d.category === category),
+        `${category} is empty`,
+      );
+    }
   });
 
   it('put a light theme in light mode and a dark theme in dark mode', () => {

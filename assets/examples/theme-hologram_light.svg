@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><clipPath id="ags-globe-clip"><circle r="70.2"/></clipPath>
+        <pattern id="ags-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r=".8" class="art-c1"/></pattern>
+        <linearGradient id="ags-cone" x1="0" y1="1" x2="0" y2="0"><stop offset="0" style="stop-color:var(--art1)" stop-opacity=".35"/><stop offset="1" style="stop-color:var(--art1)" stop-opacity="0"/></linearGradient></defs>
+  <style>
+    svg{--bg:#effbfd;--border:#007a8a44;--title:#006b7a;--text:#173a40;--muted:#4f7178;--accent:#008fa3;--track:#006b7a14;--art1:#00a3b8;--art2:#006b7a;--art3:#c2189b;--shade:#000000}
+    
+    text{font-family:'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace;letter-spacing:-.06em}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    
+    
+    .big{font-size:32px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .stat-value{font-size:15px;font-weight:700;fill:var(--text)}
+    .stat-label{font-size:11px;fill:var(--muted)}
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .top-line{font-size:12px;fill:var(--muted)}
+    .top-name{font-weight:600;fill:var(--text)}
+    .ring-track{stroke:var(--track)}
+    
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><rect width="495" height="195" fill="url(#ags-dots)" opacity=".18"/>
+        <g transform="translate(394.8 93.6)">
+          <path d="M-38.6 87.8L-70.2 0H70.2L38.6 87.8Z" fill="url(#ags-cone)" opacity=".5"/>
+          <circle r="70.2" class="art-c1" opacity=".06"/>
+          <g class="art-s1" stroke-width=".9" opacity=".5"><circle r="70.2"/><ellipse cy="-60.8" rx="35.1" ry="5.6"/><ellipse cy="-35.1" rx="60.8" ry="9.7"/><ellipse cy="0" rx="70.2" ry="11.2"/><ellipse cy="35.1" rx="60.8" ry="9.7"/><ellipse cy="60.8" rx="35.1" ry="5.6"/><ellipse rx="70.2" ry="70.2" transform="scale(1 1)" class="art-spin3d" style="animation-delay:-0s"/><ellipse rx="70.2" ry="70.2" transform="scale(0.866 1)" class="art-spin3d" style="animation-delay:-1.3s"/><ellipse rx="70.2" ry="70.2" transform="scale(0.5 1)" class="art-spin3d" style="animation-delay:-2.7s"/><ellipse rx="70.2" ry="70.2" transform="scale(0 1)" class="art-spin3d" style="animation-delay:-4s"/><ellipse rx="70.2" ry="70.2" transform="scale(-0.5 1)" class="art-spin3d" style="animation-delay:-5.3s"/><ellipse rx="70.2" ry="70.2" transform="scale(-0.866 1)" class="art-spin3d" style="animation-delay:-6.7s"/></g>
+          <g class="art-c2" opacity=".8"><circle cx="23.9" cy="-13" r="1.3" class="art-tw" style="animation-delay:0.4s"/><circle cx="-6.4" cy="-10.4" r="1.3" class="art-tw" style="animation-delay:0.6s"/><circle cx="58.1" cy="-22.8" r="1.3" class="art-tw" style="animation-delay:0s"/><circle cx="3.6" cy="-39.5" r="1.3" class="art-tw" style="animation-delay:1.8s"/><circle cx="15.3" cy="-23.8" r="1.3" class="art-tw" style="animation-delay:2s"/><circle cx="-2.8" cy="-11.4" r="1.3" class="art-tw" style="animation-delay:0.3s"/><circle cx="25.6" cy="-34.7" r="1.3" class="art-tw" style="animation-delay:1.6s"/><circle cx="1.3" cy="-15.1" r="1.3" class="art-tw" style="animation-delay:1.3s"/><circle cx="-10.8" cy="-30.6" r="1.3" class="art-tw" style="animation-delay:2.8s"/><circle cx="16.4" cy="38.2" r="1.3" class="art-tw" style="animation-delay:1.7s"/><circle cx="22.1" cy="-5.7" r="1.3" class="art-tw" style="animation-delay:0.3s"/><circle cx="-34.1" cy="-15.9" r="1.3" class="art-tw" style="animation-delay:1.6s"/></g>
+          <g clip-path="url(#ags-globe-clip)"><rect x="-70.2" y="-70.2" width="140.4" height="3" class="art-c1 art-scan" opacity=".35"/></g>
+          <ellipse cy="91.3" rx="42.1" ry="7" class="art-s1" stroke-width="1.2" opacity=".5"/>
+          <g transform="rotate(-18) scale(1 .3)"><circle r="94.8" class="art-s3" stroke-width="2" stroke-dasharray="3 6" opacity=".5"/><g class="art-orbit"><circle cx="94.8" r="5" class="art-c3"/></g></g>
+        </g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
+  <g transform="translate(0 0)">
+  <g class="rise">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 60) scale(1.875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="66" y="87" class="big">17,656</text>
+    <text x="25" y="110" class="caption">stars earned across 10 repos</text>
+  </g>
+  <g class="rise">
+    <path class="icon" transform="translate(25 128) scale(0.875)" d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+    <text x="45" y="140" class="stat-value">1.2k</text>
+    <text x="25" y="160" class="stat-label">forks</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(103 128) scale(0.875)" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
+    <text x="123" y="140" class="stat-value">64</text>
+    <text x="103" y="160" class="stat-label">public repos</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(181 128) scale(0.875)" d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/>
+    <text x="201" y="140" class="stat-value">2.5k</text>
+    <text x="181" y="160" class="stat-label">followers</text>
+  </g>
+  <g class="fade">
+          <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
+        </g>
+  <g class="rise">
+        <circle cx="267" cy="66" r="5" fill="#3178c6"/>
+        <text x="279" y="70" class="lang-name">TypeScript</text>
+        <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="88" r="5" fill="#dea584"/>
+        <text x="279" y="92" class="lang-name">Rust</text>
+        <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="110" r="5" fill="#00ADD8"/>
+        <text x="279" y="114" class="lang-name">Go</text>
+        <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="132" r="5" fill="#3572A5"/>
+        <text x="279" y="136" class="lang-name">Python</text>
+        <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="154" r="5" fill="#8b949e"/>
+        <text x="279" y="158" class="lang-name">Other</text>
+        <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="pop">
+    <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
+    <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+  </g></g>
+</svg>

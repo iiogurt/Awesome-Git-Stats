@@ -4,7 +4,7 @@ import { parseOptions } from '../src/options.js';
 import { ART_DESCRIPTIONS, ART_STYLES, createRandom } from '../src/render/art.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
-import { designs, themeNames, themes } from '../src/themes.js';
+import { categories, designs, themeNames, themes } from '../src/themes.js';
 import { sampleAccount } from './fixtures/account.js';
 
 function render(query, username = 'stellar-dev') {
@@ -18,6 +18,9 @@ function assertWellFormed(svg) {
   const opened = (svg.match(/<g[\s>]/g) ?? []).length;
   const closed = (svg.match(/<\/g>/g) ?? []).length;
   assert.equal(opened, closed, 'unbalanced <g> tags');
+  // Raw "<" or "&" in text (say, a glyph used as art) would make the whole image invalid.
+  assert.doesNotMatch(svg, /<(?![a-zA-Z/!])/, 'unescaped <');
+  assert.doesNotMatch(svg, /&(?!(amp|lt|gt|quot|#\d+);)/, 'unescaped &');
 }
 
 describe('createRandom', () => {
@@ -35,7 +38,7 @@ describe('createRandom', () => {
 describe('art styles', () => {
   for (const art of ART_STYLES) {
     it(`renders ${art} on every layout`, () => {
-      for (const layout of ['overview', 'repos', 'compact']) {
+      for (const layout of ['overview', 'repos', 'compact', 'dashboard']) {
         const svg = render({ layout, theme: 'dark', art });
         assertWellFormed(svg);
         assert.match(svg, /class="art-layer"/);
@@ -105,6 +108,7 @@ describe('link builder', () => {
     const source = html.match(/const CATALOG = (\{[\s\S]*?\});\n/)[1];
     const catalog = new Function(`return ${source}`)();
     assert.deepEqual(catalog.designs, designs, 'run npm run examples');
+    assert.deepEqual(catalog.categories, categories);
     assert.deepEqual(Object.keys(catalog.art), ART_STYLES);
   });
 
