@@ -287,6 +287,15 @@
               <span>Hide title <small class="hint">Drops the "… stars" heading.</small></span>
             </label>
             <label class="check">
+              <input type="checkbox" name="link_back" checked />
+              <span>
+                Link to Awesome Git Stats
+                <small class="hint"
+                  >Clicking the card opens this project, so others can make their own.</small
+                >
+              </span>
+            </label>
+            <label class="check">
               <input type="checkbox" name="disable_animations" />
               <span>
                 No animations
@@ -970,6 +979,20 @@
         ].join('\n');
       }
 
+      const PROJECT_URL = 'https://github.com/iiogurt/Awesome-Git-Stats';
+
+      // README snippet for one card, or a <picture> with both. An SVG inside an <img> cannot
+      // hold links itself, so the link wraps the image.
+      function readme(light, dark) {
+        const linked = new FormData(form).get('link_back');
+        if (!dark)
+          return linked
+            ? `[![GitHub stars](${light})](${PROJECT_URL})`
+            : `![GitHub stars](${light})`;
+        const html = picture(light, dark);
+        return linked ? `<a href="${PROJECT_URL}">\n${html.replace(/^/gm, '  ')}\n</a>` : html;
+      }
+
       function actionStep(selected) {
         const data = new FormData(form);
         const query = params('default');
@@ -1009,13 +1032,12 @@
         const base = `${location.origin}/api/stars?`;
         const lightUrl = base + params(selected.both ?? selected.light);
         const darkUrl = base + params(selected.both ?? selected.dark);
-        $('snippet-link').textContent = selected.both
-          ? `![GitHub stars](${lightUrl})`
-          : picture(lightUrl, darkUrl);
+        $('snippet-link').textContent = readme(lightUrl, selected.both ? null : darkUrl);
         $('snippet-action').textContent = actionStep(selected);
-        $('snippet-action-readme').textContent = selected.both
-          ? '![GitHub stars](assets/stars.svg)'
-          : picture('assets/stars.svg', 'assets/stars-dark.svg');
+        $('snippet-action-readme').textContent = readme(
+          'assets/stars.svg',
+          selected.both ? null : 'assets/stars-dark.svg',
+        );
 
         // The badge is tiny; stretching it would only blur it.
         $('previews').classList.toggle('small', data.get('layout') === 'badge');

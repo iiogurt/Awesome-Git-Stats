@@ -4,7 +4,7 @@
 import { appendFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { createCard } from '../src/handler.js';
-import { darkPath, pictureHtml, variantQueries } from '../src/picture.js';
+import { PROJECT_URL, darkPath, pictureHtml, variantQueries } from '../src/picture.js';
 
 const env = process.env;
 const { light, dark } = variantQueries({
@@ -42,7 +42,7 @@ for (const { path: file, svg } of rendered) {
 const outputs = [`path=${path}`, `dark-path=${dark ? cards[1].path : ''}`];
 if (env.GITHUB_OUTPUT) await appendFile(env.GITHUB_OUTPUT, `${outputs.join('\n')}\n`);
 if (dark && env.GITHUB_STEP_SUMMARY) {
-  const snippet = pictureHtml({ light: path, dark: cards[1].path });
+  const snippet = pictureHtml({ light: path, dark: cards[1].path, href: PROJECT_URL });
   await appendFile(
     env.GITHUB_STEP_SUMMARY,
     `### Light and dark card\n\nPaste this into your README (paths relative to it):\n\n\`\`\`html\n${snippet}\n\`\`\`\n`,

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, it } from 'node:test';
 import { promisify } from 'node:util';
-import { darkPath, pictureHtml, variantQueries } from '../src/picture.js';
+import { PROJECT_URL, darkPath, pictureHtml, variantQueries } from '../src/picture.js';
 
 describe('darkPath', () => {
   it('adds -dark before the extension', () => {
@@ -72,6 +72,16 @@ describe('pictureHtml', () => {
     assert.match(html, /<source media="\(prefers-color-scheme: dark\)" srcset="b\.svg" \/>/);
     assert.match(html, /src="\/a\?x=1&amp;y=2"/);
     assert.match(html, /alt="My &quot;stars&quot;"/);
+    assert.doesNotMatch(html, /<a /);
+  });
+
+  it('wraps the card in a link when given one', () => {
+    const html = pictureHtml({ light: 'a.svg', dark: 'b.svg', href: PROJECT_URL });
+    assert.match(
+      html,
+      /^<a href="https:\/\/github\.com\/iiogurt\/Awesome-Git-Stats">\n {2}<picture>/,
+    );
+    assert.match(html, /<\/picture>\n<\/a>$/);
   });
 });
 
@@ -107,7 +117,9 @@ describe('GitHub Action script', () => {
         await readFile(join(dir, 'output'), 'utf8'),
         'path=assets/stars.svg\ndark-path=assets/stars-dark.svg\n',
       );
-      assert.match(await readFile(summary, 'utf8'), /srcset="assets\/stars-dark\.svg"/);
+      const text = await readFile(summary, 'utf8');
+      assert.match(text, /srcset="assets\/stars-dark\.svg"/);
+      assert.match(text, /<a href="https:\/\/github\.com\/iiogurt\/Awesome-Git-Stats">/);
     } finally {
       await rm(dir, { recursive: true, force: true });
     }
