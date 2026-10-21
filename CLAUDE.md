@@ -12,13 +12,13 @@ earned, for embedding in profile READMEs with one Markdown image link:
 - Layouts: `overview` (default), `repos`, `compact`, `badge`, `dashboard`. The dashboard also
   fetches contribution activity (a second GraphQL query, users only, token required) and
   derives streaks, heatmap levels and weekday/monthly totals in `src/activity.js`.
-- 108 themes in `src/themes.js`, grouped into 53 `designs`: each design is a light + dark theme
-  pair sharing colours, art and font (15 classic palettes, 38 artistic with background art,
+- 122 themes in `src/themes.js`, grouped into 60 `designs`: each design is a light + dark theme
+  pair sharing colours, art and font (15 classic palettes, 45 artistic with background art,
   fonts and glow). Every design has a `category` from `categories` (nature, holidays, anime,
   horror, 3D, …), which groups the gallery and the link builder. `light` and `auto` are extras.
   `*_color` overrides work on all. A new theme needs its partner and a `designs` entry; tests
   check the pairing, the category and text contrast.
-- 38 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
+- 45 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
   disable), generated from a PRNG seeded with the username, so each account's art is unique
   but stable.
 - Light and dark mode: two separate cards shown through a `<picture>` element, which GitHub

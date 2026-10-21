@@ -50,6 +50,13 @@ export const ART_STYLES = [
   'matrix',
   'fire',
   'memphis',
+  'jellyfish',
+  'koi',
+  'silk',
+  'mesh',
+  'bubbles',
+  'orbits',
+  'soundwave',
 ];
 
 /** One-line descriptions, shown in the link builder and the theme gallery. */
@@ -92,6 +99,13 @@ export const ART_DESCRIPTIONS = {
   matrix: 'Digital rain: columns of glowing glyphs falling at different speeds.',
   fire: 'Flickering flames along the bottom edge and rising embers.',
   memphis: 'Bold 80s Memphis shapes: squiggles, triangles, dots and stripes.',
+  jellyfish: 'Glowing jellyfish that pulse, trail their tentacles and drift through plankton.',
+  koi: 'Koi circling a pond with wiggling tails, lily pads and slow ripples.',
+  silk: 'Satin ribbons flowing across the card with a soft sheen.',
+  mesh: 'Huge soft colour fields slowly wandering and blending into each other.',
+  bubbles: 'Soda bubbles with glossy, iridescent rims wobbling upwards.',
+  orbits: 'Planets on tilted 3D orbits around a glowing sun, with a ringed planet and a moon.',
+  soundwave: 'Breathing sine waves that fade out at the edges, over a smooth equalizer.',
 };
 
 /** Small, fast, deterministic PRNG (mulberry32). */
@@ -1354,25 +1368,31 @@ const styles = {
     const size = 11;
     // Glyphs every font has; the film's katakana would need a CJK font on the viewer's side.
     const glyphs = '0123456789ABCDEFHKMTXZ:=+*';
-    const groups = [[], [], []];
-    for (let x = 6; x < width; x += 14) {
-      if (rand() < 0.3) continue;
-      const length = 5 + Math.floor(rand() * 12);
+    // Columns fall at four speeds, slower ones dimmer, which gives the rain some depth.
+    const speeds = [6, 8.5, 11, 15];
+    const groups = speeds.map(() => []);
+    for (let x = 6; x < width; x += 15) {
+      if (rand() < 0.4) continue;
+      const length = 4 + Math.floor(rand() * 9);
       const head = rand() * height;
       const ys = Array.from({ length }, (_, i) => r1(head - (length - i) * size * 1.15));
       const chars = ys.map(() => pick(rand, [...glyphs])).join('');
       const split = Math.floor(length / 2);
       // One x per glyph, otherwise each glyph would advance to the right of the previous one.
       const xs = (n) => Array(n).fill(x).join(' ');
-      groups[Math.floor(rand() * 3)].push(
+      groups[Math.floor(rand() * speeds.length)].push(
         `<text x="${xs(split)}" y="${ys.slice(0, split).join(' ')}" opacity=".2">${chars.slice(0, split)}</text><text x="${xs(length - split)}" y="${ys.slice(split).join(' ')}" opacity=".42">${chars.slice(split)}</text><text x="${x}" y="${r1(head)}" class="art-c2" opacity=".75">${pick(rand, [...glyphs])}</text>`,
       );
     }
     return {
-      layer: `<g class="art-c1 art-glyph">${groups.map((g, i) => loop(g.join(''), 0, height, [7, 10, 14][i])).join('')}</g>`,
+      layer: `<g class="art-c1 art-glyph">${groups
+        .map(
+          (g, i) =>
+            `<g opacity="${r1(1 - i * 0.15)}">${loop(g.join(''), 0, height, speeds[i])}</g>`,
+        )
+        .join('')}</g>`,
       css: `.art-glyph text{font-size:${size}px;font-family:monospace}`,
-      // Step one glyph row at a time, like the film, which also keeps repaints rare.
-      motion: `${loopMotion(0, height)}.art-glyph .art-loop{animation-timing-function:steps(${Math.round(height / (size * 1.15))})}`,
+      motion: loopMotion(0, height),
     };
   },
 
@@ -1452,6 +1472,254 @@ const styles = {
         <g opacity=".5">${out}</g>`,
       motion: `@keyframes ags-wiggle{0%,100%{transform:rotate(-10deg) scale(1)}50%{transform:rotate(10deg) scale(1.1)}}
         .art-wiggle{animation:ags-wiggle 4s ease-in-out infinite}`,
+    };
+  },
+  // Smooth and flowing: slow, eased, transform-only motion.
+
+  jellyfish(rand, { width, height }) {
+    const u = unit(height);
+    let jellies = '';
+    for (let i = 0, n = 3 + Math.round(width / 200); i < n; i += 1) {
+      const s = between(rand, u * 1.3, u * 2.6);
+      const x = r1((width * (i + between(rand, 0.2, 0.8))) / n);
+      const y = r1(between(rand, height * 0.2, height * 0.7));
+      const c = i % 2 ? 3 : 1;
+      let tentacles = '';
+      for (let k = 0; k < 5; k += 1) {
+        const len = s * between(rand, 1.8, 3.2);
+        const wobble = s * 0.25 * (k % 2 ? 1 : -1);
+        tentacles += `M${r1(-s * 0.6 + (s * 1.2 * k) / 4)} ${r1(s * 0.15)}q${r1(wobble)} ${r1(len / 4)} 0 ${r1(len / 2)}t0 ${r1(len / 2)}`;
+      }
+      jellies += `<g transform="translate(${x} ${y})"><g class="art-swim" style="animation-delay:-${r1(rand() * 16)}s;animation-duration:${r1(between(rand, 13, 20))}s">
+        <circle r="${r1(s * 2.6)}" fill="url(#ags-jellyglow${c})"/>
+        <g class="art-trail" style="animation-delay:-${r1(rand() * 3)}s"><path d="${tentacles}" class="art-s${c}" stroke-width="${r1(u * 0.09)}" stroke-linecap="round" opacity=".55"/></g>
+        <g class="art-bell" style="animation-delay:-${r1(rand() * 3)}s"><path d="M${r1(-s)} 0C${r1(-s)} ${r1(-s * 1.3)} ${r1(s)} ${r1(-s * 1.3)} ${r1(s)} 0Q${r1(s * 0.5)} ${r1(s * 0.28)} 0 ${r1(s * 0.12)}Q${r1(-s * 0.5)} ${r1(s * 0.28)} ${r1(-s)} 0Z" fill="url(#ags-bell${c})" class="art-rim${c}" stroke-width=".8"/></g>
+      </g></g>`;
+    }
+    let plankton = '';
+    for (let i = 0, n = Math.round((width * height) / 3000); i < n; i += 1) {
+      plankton += `<circle cx="${r1(rand() * width)}" cy="${r1(rand() * height)}" r="${r1(between(rand, 0.4, 1.1))}" opacity="${r1(between(rand, 0.2, 0.6))}"/>`;
+    }
+    const bell = (n) =>
+      `<radialGradient id="ags-bell${n}" cx=".5" cy=".8" r=".8"><stop offset="0" style="stop-color:var(--art2)" stop-opacity=".7"/><stop offset=".45" style="stop-color:var(--art${n})" stop-opacity=".45"/><stop offset="1" style="stop-color:var(--art${n})" stop-opacity=".12"/></radialGradient>`;
+    return {
+      defs: `${bell(1)}${bell(3)}${radialGlow('ags-jellyglow1', 'art1', 0.28)}${radialGlow('ags-jellyglow3', 'art3', 0.28)}`,
+      layer: `${loop(`<g class="art-c2">${plankton}</g>`, 0, -height, 60)}${jellies}`,
+      css: `.art-rim1{stroke:var(--art1)}.art-rim3{stroke:var(--art3)}`,
+      motion: `${loopMotion(0, -height)}
+        @keyframes ags-swim{0%,100%{transform:translate(0,0)}50%{transform:translate(${r1(u * 1.5)}px,-${r1(u * 3)}px)}}
+        .art-swim{animation:ags-swim 16s ease-in-out infinite}
+        @keyframes ags-bell{0%,100%{transform:scale(1,1)}50%{transform:scale(1.1,.82)}}
+        .art-bell{animation:ags-bell 2.6s ease-in-out infinite}
+        @keyframes ags-trail{0%,100%{transform:skewX(-8deg)}50%{transform:skewX(8deg)}}
+        .art-trail{animation:ags-trail 3.2s ease-in-out infinite}`,
+    };
+  },
+
+  koi(rand, { width, height }) {
+    const u = unit(height);
+    const body = 'M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z';
+    const fish = () => {
+      const orange = rand() < 0.3;
+      const [main, patch] = orange ? [1, 2] : [2, 1];
+      let spots = '';
+      for (let k = 0, n = 2 + Math.floor(rand() * 2); k < n; k += 1) {
+        spots += `<ellipse cx="${r1(between(rand, -4, 8))}" cy="${r1(between(rand, -1.6, 1.6))}" rx="${r1(between(rand, 1.4, 3))}" ry="${r1(between(rand, 1, 2))}"/>`;
+      }
+      const shape = (cls, tail = '') =>
+        `<path d="${body}" class="${cls}"/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class="${cls}${tail}"/></g>`;
+      return `<g transform="translate(2.5 3.5)" class="art-koishade">${shape('')}</g>
+        <ellipse cx="3" cy="-4.2" rx="2.8" ry="1.1" transform="rotate(-30 3 -4.2)" class="art-c${main}" opacity=".8"/>
+        <ellipse cx="3" cy="4.2" rx="2.8" ry="1.1" transform="rotate(30 3 4.2)" class="art-c${main}" opacity=".8"/>
+        ${shape(`art-c${main}`, ' art-tail')}<g class="art-c${patch}">${spots}</g>`;
+    };
+    let swimmers = '';
+    for (let i = 0, n = 3 + Math.round(width / 250); i < n; i += 1) {
+      const R = between(rand, u * 3, Math.min(height * 0.36, u * 9));
+      const cx = r1(between(rand, R * 0.5, width - R * 0.5));
+      const cy = r1(between(rand, R * 0.4, height - R * 0.4));
+      const clockwise = rand() < 0.5;
+      const scale = r1((u / 7) * between(rand, 1.4, 2.1));
+      swimmers += `<g transform="translate(${cx} ${cy}) rotate(${Math.round(rand() * 360)})"><g class="art-orbit" style="animation-duration:${r1(between(rand, 24, 42))}s${clockwise ? '' : ';animation-direction:reverse'}"><g transform="translate(${r1(R)} 0) rotate(${clockwise ? 90 : -90}) scale(${scale})"><g class="art-swish" style="animation-delay:-${r1(rand() * 2)}s">${fish()}</g></g></g></g>`;
+    }
+    let pads = '';
+    for (let i = 0, n = 3 + Math.round(width / 300); i < n; i += 1) {
+      const r = between(rand, u * 0.9, u * 1.8);
+      const a = 0.2;
+      pads += `<g transform="translate(${r1(rand() * width)} ${r1(rand() * height)}) rotate(${Math.round(rand() * 360)})"><g class="art-pad" style="animation-delay:-${r1(rand() * 10)}s"><path d="M0 0L${r1(r * Math.cos(-a))} ${r1(r * Math.sin(-a))}A${r1(r)} ${r1(r)} 0 1 0 ${r1(r * Math.cos(a))} ${r1(r * Math.sin(a))}Z" class="art-c3" opacity=".45"/></g></g>`;
+    }
+    let ripples = '';
+    for (let i = 0; i < 5; i += 1) {
+      ripples += `<g transform="translate(${r1(rand() * width)} ${r1(rand() * height)})"><circle r="${r1(u * 2.5)}" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-${r1(rand() * 7)}s"/></g>`;
+    }
+    return {
+      layer: `${ripples}${swimmers}${pads}`,
+      css: `.art-koishade{fill:var(--shade);opacity:.16}`,
+      motion: `@keyframes ags-orbit{to{transform:rotate(360deg)}}
+        .art-orbit{animation:ags-orbit 30s linear infinite}
+        @keyframes ags-swish{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+        .art-swish{animation:ags-swish 1.6s ease-in-out infinite}
+        @keyframes ags-tail{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+        .art-tail{animation:ags-tail .8s ease-in-out infinite}
+        @keyframes ags-pad{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+        .art-pad{animation:ags-pad 10s ease-in-out infinite}
+        @keyframes ags-ripple{0%{transform:scale(.15);opacity:.45}100%{transform:scale(1.4);opacity:0}}
+        .art-ripple{animation:ags-ripple 7s ease-out infinite}`,
+    };
+  },
+
+  silk(rand, { width, height }) {
+    const u = unit(height);
+    const period = width / 2;
+    const steps = 40;
+    // One ribbon spans three periods, so sliding it by one period loops seamlessly.
+    const ribbon = (base, amp, thick, n, opacity, seconds) => {
+      const phase = rand() * Math.PI * 2;
+      const top = [];
+      const bottom = [];
+      for (let i = 0; i <= steps * 3; i += 1) {
+        const x = (i * period) / steps;
+        const t = (2 * Math.PI * x) / period;
+        const y = base + amp * Math.sin(t + phase);
+        top.push(`${r1(x)} ${r1(y)}`);
+        bottom.push(`${r1(x)} ${r1(y + thick * (1 + 0.6 * Math.sin(t + phase - 1.3)))}`);
+      }
+      return `<g class="art-float" style="animation-delay:-${r1(rand() * 9)}s"><g class="art-silk" style="animation-duration:${seconds}s">
+        <path d="M${top.join('L')}L${bottom.reverse().join('L')}Z" fill="url(#ags-satin${n})" opacity="${opacity}"/>
+        <path d="M${top.join('L')}" class="art-s2" stroke-width="${r1(u * 0.12)}" opacity=".55"/>
+      </g></g>`;
+    };
+    const satin = (n) =>
+      `<linearGradient id="ags-satin${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--art2)"/><stop offset=".35" style="stop-color:var(--art${n})"/><stop offset=".7" style="stop-color:var(--art${n === 1 ? 3 : 1})"/><stop offset="1" style="stop-color:var(--art2)"/></linearGradient>`;
+    return {
+      defs: `${satin(1)}${satin(3)}`,
+      layer: `<g transform="rotate(-9 ${r1(width / 2)} ${r1(height / 2)})">
+        ${ribbon(height * 0.86, u * 1.6, u * 2.2, 1, 0.5, 26)}
+        ${ribbon(height * 0.68, u * 1.2, u * 1.2, 3, 0.35, 34)}
+        ${ribbon(height * 0.08, u * 1.4, u * 1.6, 3, 0.4, 30)}
+      </g>`,
+      motion: `@keyframes ags-silk{to{transform:translateX(-${r1(period)}px)}}
+        .art-silk{animation:ags-silk 30s linear infinite}
+        @keyframes ags-float{0%,100%{transform:translateY(0)}50%{transform:translateY(${r1(u * 1.2)}px)}}
+        .art-float{animation:ags-float 9s ease-in-out infinite}`,
+    };
+  },
+
+  mesh(rand, { width, height }) {
+    const u = unit(height);
+    const colors = ['art1', 'art2', 'art3', 'accent', 'art1'];
+    const fields = colors
+      .map((color, i) => {
+        const r = r1(Math.max(width * 0.32, height * 0.8) * between(rand, 0.9, 1.3));
+        return `<g transform="translate(${r1(rand() * width)} ${r1(rand() * height)})"><circle r="${r}" fill="url(#ags-field-${color})" class="art-wander" style="animation-delay:-${r1(rand() * 30)}s;animation-duration:${r1(between(rand, 22, 34))}s${i % 2 ? ';animation-direction:reverse' : ''}"/></g>`;
+      })
+      .join('');
+    const d = r1(u * 7);
+    return {
+      defs: ['art1', 'art2', 'art3', 'accent']
+        .map((c) => radialGlow(`ags-field-${c}`, c, 0.55))
+        .join(''),
+      layer: fields,
+      motion: `@keyframes ags-wander{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(${d}px,-${r1(d * 0.6)}px) scale(1.12)}50%{transform:translate(${r1(d * 0.3)}px,${d}px) scale(.94)}75%{transform:translate(-${d}px,${r1(d * 0.4)}px) scale(1.06)}}
+        .art-wander{animation:ags-wander 28s ease-in-out infinite}`,
+    };
+  },
+
+  bubbles(rand, { width, height }) {
+    const u = unit(height);
+    const rising = (count, min, max, seconds) => {
+      let out = '';
+      for (let i = 0; i < count; i += 1) {
+        const r = between(rand, min, max) * (u / 10);
+        out += `<g transform="translate(${r1(rand() * width)} ${r1(rand() * height)})"><g class="art-wobble" style="animation-delay:-${r1(rand() * 4)}s;animation-duration:${r1(between(rand, 2.4, 4.2))}s"><circle r="${r1(r)}" fill="url(#ags-bubble)" class="art-rim1" stroke-width="${r1(Math.max(0.6, r * 0.07))}" stroke-opacity=".6"/><ellipse cx="${r1(-r * 0.36)}" cy="${r1(-r * 0.4)}" rx="${r1(r * 0.28)}" ry="${r1(r * 0.15)}" transform="rotate(-35 ${r1(-r * 0.36)} ${r1(-r * 0.4)})" fill="#fff" opacity=".75"/></g></g>`;
+      }
+      return loop(out, 0, -height, seconds);
+    };
+    const area = width * height;
+    return {
+      defs: `<radialGradient id="ags-bubble"><stop offset=".55" style="stop-color:var(--art1)" stop-opacity=".04"/><stop offset=".85" style="stop-color:var(--art3)" stop-opacity=".25"/><stop offset="1" style="stop-color:var(--art1)" stop-opacity=".5"/></radialGradient>`,
+      layer: `${rising(Math.round(area / 4500), 1.5, 4, 14)}${rising(Math.round(area / 16000), 6, 13, 22)}`,
+      css: `.art-rim1{stroke:var(--art1)}`,
+      motion: `${loopMotion(0, -height)}
+        @keyframes ags-wobble{0%,100%{transform:translateX(-${r1(u * 0.6)}px) scale(1,1)}50%{transform:translateX(${r1(u * 0.6)}px) scale(1.05,.95)}}
+        .art-wobble{animation:ags-wobble 3s ease-in-out infinite}`,
+    };
+  },
+
+  orbits(rand, { width, height }) {
+    const u = unit(height);
+    const cx = r1(width * 0.78);
+    const cy = r1(height * 0.5);
+    const tilt = 0.38;
+    const maxR = Math.min(width * 0.5, height * 1.15);
+    let rings = '';
+    let planets = '';
+    for (let k = 0; k < 5; k += 1) {
+      const R = r1(maxR * (0.25 + (0.75 * (k + 1)) / 5));
+      const seconds = r1(7 * (R / (maxR * 0.4)) ** 1.5);
+      const size = r1(u * between(rand, 0.5, 1.2));
+      const c = k % 2 ? 3 : 1;
+      const start = Math.round(rand() * 360);
+      const delay = `animation-delay:-${r1(rand() * seconds)}s;animation-duration:${seconds}s`;
+      const extra =
+        k === 2
+          ? `<ellipse rx="${r1(size * 2)}" ry="${r1(size * 0.5)}" transform="rotate(-20)" class="art-s2" stroke-width="${r1(size * 0.22)}" opacity=".8"/>`
+          : k === 3
+            ? `<g class="art-spin" style="animation-duration:4s"><circle cx="${r1(size * 2.3)}" r="${r1(size * 0.32)}" class="art-c2"/></g>`
+            : '';
+      rings += `<ellipse cx="${cx}" cy="${cy}" rx="${R}" ry="${r1(R * tilt)}"/>`;
+      // Turn the arm, then turn the planet back the same amount and undo the tilt, so the
+      // planet travels a tilted orbit but stays round and upright.
+      planets += `<g transform="translate(${cx} ${cy}) scale(1 ${tilt}) rotate(${start})"><g class="art-spin" style="${delay}"><g transform="translate(${R} 0)"><g class="art-spin art-counter" style="${delay}"><g transform="rotate(${-start}) scale(1 ${r1(1 / tilt)})"><circle r="${size}" fill="url(#ags-planet${c})"/>${extra}</g></g></g></g></g>`;
+    }
+    const planet = (n) =>
+      `<radialGradient id="ags-planet${n}" cx=".35" cy=".35" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".25" style="stop-color:var(--art2)"/><stop offset=".7" style="stop-color:var(--art${n})"/><stop offset="1" style="stop-color:var(--shade)"/></radialGradient>`;
+    return {
+      defs: `${planet(1)}${planet(3)}${radialGlow('ags-corona', 'art2', 0.5)}`,
+      layer: `${stars(rand, { width, height, density: 2600, maxRadius: 1 })}
+        <g class="art-s3" stroke-width=".7" opacity=".4">${rings}</g>
+        <circle cx="${cx}" cy="${cy}" r="${r1(u * 7)}" fill="url(#ags-corona)" class="art-glow"/>
+        <circle cx="${cx}" cy="${cy}" r="${r1(u * 2)}" class="art-c2" opacity=".9"/>
+        <g opacity=".9">${planets}</g>`,
+      motion: `@keyframes ags-spin{to{transform:rotate(360deg)}}
+        .art-spin{animation:ags-spin 20s linear infinite}.art-counter{animation-direction:reverse}
+        @keyframes ags-glow{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+        .art-glow{transform-box:fill-box;transform-origin:center;animation:ags-glow 6s ease-in-out infinite}`,
+    };
+  },
+
+  soundwave(rand, { width, height }) {
+    const u = unit(height);
+    const cy = r1(height * 0.5);
+    const amp = Math.min(height * 0.3, u * 7);
+    let waves = '';
+    let keyframes = '';
+    for (let i = 0; i < 5; i += 1) {
+      const period = width / between(rand, 1.5, 3.5);
+      const a = amp * between(rand, 0.35, 1);
+      const phase = rand() * Math.PI * 2;
+      let d = '';
+      for (let x = 0; x <= width + period; x += period / 32) {
+        d += `${d ? 'L' : 'M'}${r1(x)} ${r1(a * Math.sin((2 * Math.PI * x) / period + phase))}`;
+      }
+      const c = 1 + (i % 3);
+      keyframes += `@keyframes ags-wave${i}{to{transform:translateX(-${r1(period)}px)}}.art-wave${i}{animation:ags-wave${i} ${r1(between(rand, 5, 11))}s linear infinite}`;
+      waves += `<g class="art-breathe" style="animation-delay:-${r1(rand() * 5)}s;animation-duration:${r1(between(rand, 3.5, 6.5))}s"><g class="art-wave${i}"><path d="${d}" class="art-s${c}" stroke-width="${r1(u * 0.6)}" opacity=".12"/><path d="${d}" class="art-s${c}" stroke-width="1.4" opacity=".8"/></g></g>`;
+    }
+    let bars = '';
+    for (let x = 4; x < width; x += 8) {
+      bars += `<g transform="translate(${x} ${height})"><rect x="-1.5" y="-${r1(between(rand, u * 0.5, u * 2.2))}" width="3" height="${r1(u * 2.2)}" rx="1.5" class="art-c${1 + (Math.floor(x / 8) % 3)} art-eq" style="animation-delay:-${r1(rand() * 2)}s;animation-duration:${r1(between(rand, 0.9, 1.8))}s"/></g>`;
+    }
+    return {
+      defs: `<linearGradient id="ags-envelope-fade"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".25" stop-color="#fff"/><stop offset=".75" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <mask id="ags-envelope" maskUnits="userSpaceOnUse" x="0" y="0" width="${width}" height="${height}"><rect width="${width}" height="${height}" fill="url(#ags-envelope-fade)"/></mask>`,
+      layer: `<g mask="url(#ags-envelope)" opacity=".55"><g transform="translate(0 ${cy})">${waves}</g></g>
+        <g opacity=".3">${bars}</g>`,
+      motion: `${keyframes}
+        @keyframes ags-breathe{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+        .art-breathe{animation:ags-breathe 5s ease-in-out infinite}
+        @keyframes ags-eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+        .art-eq{transform-box:fill-box;transform-origin:center bottom;animation:ags-eq 1.2s ease-in-out infinite}`,
     };
   },
 };
