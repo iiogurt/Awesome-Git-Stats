@@ -203,11 +203,16 @@ numbers changed.
 Edit `README.md` in the same repository (pencil icon) and add:
 
 ```html
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stars-dark.svg" />
-  <img alt="My GitHub stats" src="assets/stars.svg" />
-</picture>
+<a href="https://github.com/iiogurt/Awesome-Git-Stats">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/stars-dark.svg" />
+    <img alt="My GitHub stats" src="assets/stars.svg" />
+  </picture>
+</a>
 ```
+
+The link around the card is optional: it lets people who like your card find out how to make
+their own. Remove the `<a>` and `</a>` lines if you'd rather not link it.
 
 Commit, then open your profile at `https://github.com/<your-username>`. Done!
 
@@ -315,19 +320,24 @@ Copy the snippet from the link builder into the `README.md` of your profile repo
 like this:
 
 ```html
-<picture>
-  <source
-    media="(prefers-color-scheme: dark)"
-    srcset="
-      https://YOUR-APP.vercel.app/api/stars?username=YOUR-NAME&layout=dashboard&theme=starry_night
-    "
-  />
-  <img
-    alt="My GitHub stats"
-    src="https://YOUR-APP.vercel.app/api/stars?username=YOUR-NAME&layout=dashboard&theme=starry_night_light"
-  />
-</picture>
+<a href="https://github.com/iiogurt/Awesome-Git-Stats">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="
+        https://YOUR-APP.vercel.app/api/stars?username=YOUR-NAME&layout=dashboard&theme=starry_night
+      "
+    />
+    <img
+      alt="My GitHub stats"
+      src="https://YOUR-APP.vercel.app/api/stars?username=YOUR-NAME&layout=dashboard&theme=starry_night_light"
+    />
+  </picture>
+</a>
 ```
+
+The link builder adds the link to this project for you; untick **Link to Awesome Git Stats** if
+you'd rather not link the card.
 
 ### Step 6: Protect your token
 
@@ -484,10 +494,12 @@ apply to both cards, `dark-options` only to the dark one:
 Then show both with a `<picture>` element (the Action's run summary prints this snippet too):
 
 ```html
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stars-dark.svg" />
-  <img alt="My GitHub stats" src="assets/stars.svg" />
-</picture>
+<a href="https://github.com/iiogurt/Awesome-Git-Stats">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/stars-dark.svg" />
+    <img alt="My GitHub stats" src="assets/stars.svg" />
+  </picture>
+</a>
 ```
 
 **With a live link**, use the same `<picture>` element with two links. The link builder writes it

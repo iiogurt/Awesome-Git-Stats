@@ -4,6 +4,9 @@
 // inside one SVG, which can only follow the operating system and swap colours.
 import { themePair } from './themes.js';
 
+/** Where a card links to, so people who like it can find out how to make their own. */
+export const PROJECT_URL = 'https://github.com/iiogurt/Awesome-Git-Stats';
+
 /** `dark-theme` value that picks the design's own light and dark variant. */
 export const MATCH = 'match';
 
@@ -50,10 +53,15 @@ function escapeAttr(value) {
     .replace(/>/g, '&gt;');
 }
 
-/** README snippet that shows `dark` in GitHub's dark mode and `light` otherwise. */
-export function pictureHtml({ light, dark, alt = 'GitHub stars' }) {
-  return `<picture>
+/**
+ * README snippet that shows `dark` in GitHub's dark mode and `light` otherwise.
+ * With `href`, the card is a link (an SVG inside an <img> cannot hold links itself).
+ */
+export function pictureHtml({ light, dark, alt = 'GitHub stars', href }) {
+  const picture = `<picture>
   <source media="(prefers-color-scheme: dark)" srcset="${escapeAttr(dark)}" />
   <img alt="${escapeAttr(alt)}" src="${escapeAttr(light)}" />
 </picture>`;
+  if (!href) return picture;
+  return `<a href="${escapeAttr(href)}">\n${picture.replace(/^/gm, '  ')}\n</a>`;
 }
