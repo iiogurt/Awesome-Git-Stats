@@ -17,7 +17,7 @@ matching font or a neon glow (dark variants only). The art is generated from you
 your card's starfield or contour map is unique to you. Animations range from calm to bold and
 switch off for people who prefer reduced motion. The previews below are still frames.
 
-Jump to: [Nature](#nature) · [Space and sky](#space-and-sky) · [Holidays](#holidays) · [Anime and manga](#anime-and-manga) · [Horror](#horror) · [3D](#3d) · [Retro and tech](#retro-and-tech) · [Bold and loud](#bold-and-loud) · [Classic](#classic-themes)
+Jump to: [Nature](#nature) · [Smooth and flowing](#smooth-and-flowing) · [Space and sky](#space-and-sky) · [Holidays](#holidays) · [Anime and manga](#anime-and-manga) · [Horror](#horror) · [3D](#3d) · [Retro and tech](#retro-and-tech) · [Bold and loud](#bold-and-loud) · [Classic](#classic-themes)
 
 ### Nature
 
@@ -31,6 +31,19 @@ Jump to: [Nature](#nature) · [Space and sky](#space-and-sky) · [Holidays](#hol
 | **Autumn**<br>art: `leaves`<br>Tumbling maple leaves in warm oranges, serif font.          | `autumn`<br><img src="../assets/examples/theme-autumn.svg" alt="autumn theme" width="300">                         | `autumn_dark`<br><img src="../assets/examples/theme-autumn_dark.svg" alt="autumn_dark theme" width="300">                |
 | **Desert**<br>art: `dunes`<br>Dunes and a cactus under the sun; a moonlit night when dark. | `desert`<br><img src="../assets/examples/theme-desert.svg" alt="desert theme" width="300">                         | `desert_dark`<br><img src="../assets/examples/theme-desert_dark.svg" alt="desert_dark theme" width="300">                |
 | **Tropical**<br>art: `jungle`<br>Monstera leaves swaying in from the corners.              | `tropical`<br><img src="../assets/examples/theme-tropical.svg" alt="tropical theme" width="300">                   | `tropical_dark`<br><img src="../assets/examples/theme-tropical_dark.svg" alt="tropical_dark theme" width="300">          |
+
+### Smooth and flowing
+
+| Design                                                                                  | Light mode                                                                                                            | Dark mode                                                                                                       |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Lava lamp**<br>art: `lava`<br>Gooey blobs that merge and split as they rise and sink. | `lava_lamp_light`<br><img src="../assets/examples/theme-lava_lamp_light.svg" alt="lava_lamp_light theme" width="300"> | `lava_lamp`<br><img src="../assets/examples/theme-lava_lamp.svg" alt="lava_lamp theme" width="300">             |
+| **Abyss**<br>art: `jellyfish`<br>Glowing jellyfish drifting through the deep.           | `abyss_light`<br><img src="../assets/examples/theme-abyss_light.svg" alt="abyss_light theme" width="300">             | `abyss`<br><img src="../assets/examples/theme-abyss.svg" alt="abyss theme" width="300">                         |
+| **Koi pond**<br>art: `koi`<br>Koi circling between lily pads.                           | `koi_pond`<br><img src="../assets/examples/theme-koi_pond.svg" alt="koi_pond theme" width="300">                      | `koi_pond_dark`<br><img src="../assets/examples/theme-koi_pond_dark.svg" alt="koi_pond_dark theme" width="300"> |
+| **Silk**<br>art: `silk`<br>Flowing satin ribbons, serif font.                           | `silk`<br><img src="../assets/examples/theme-silk.svg" alt="silk theme" width="300">                                  | `silk_dark`<br><img src="../assets/examples/theme-silk_dark.svg" alt="silk_dark theme" width="300">             |
+| **Mesh**<br>art: `mesh`<br>Soft colour fields slowly blending.                          | `mesh`<br><img src="../assets/examples/theme-mesh.svg" alt="mesh theme" width="300">                                  | `mesh_dark`<br><img src="../assets/examples/theme-mesh_dark.svg" alt="mesh_dark theme" width="300">             |
+| **Fizz**<br>art: `bubbles`<br>Soda bubbles wobbling upwards.                            | `fizz`<br><img src="../assets/examples/theme-fizz.svg" alt="fizz theme" width="300">                                  | `fizz_dark`<br><img src="../assets/examples/theme-fizz_dark.svg" alt="fizz_dark theme" width="300">             |
+| **Orrery**<br>art: `orbits`<br>Planets orbiting a glowing sun, serif font.              | `orrery_light`<br><img src="../assets/examples/theme-orrery_light.svg" alt="orrery_light theme" width="300">          | `orrery`<br><img src="../assets/examples/theme-orrery.svg" alt="orrery theme" width="300">                      |
+| **Soundwave**<br>art: `soundwave`<br>Breathing neon sine waves and an equalizer.        | `soundwave_light`<br><img src="../assets/examples/theme-soundwave_light.svg" alt="soundwave_light theme" width="300"> | `soundwave`<br><img src="../assets/examples/theme-soundwave.svg" alt="soundwave theme" width="300">             |
 
 ### Space and sky
 
@@ -90,12 +103,11 @@ Jump to: [Nature](#nature) · [Space and sky](#space-and-sky) · [Holidays](#hol
 
 ### Bold and loud
 
-| Design                                                                                  | Light mode                                                                                                            | Dark mode                                                                                                    |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Pop art**<br>art: `halftone`<br>Bold halftone dots and a thick border.                | `pop_art`<br><img src="../assets/examples/theme-pop_art.svg" alt="pop_art theme" width="300">                         | `pop_art_dark`<br><img src="../assets/examples/theme-pop_art_dark.svg" alt="pop_art_dark theme" width="300"> |
-| **Lava lamp**<br>art: `lava`<br>Gooey blobs that merge and split as they rise and sink. | `lava_lamp_light`<br><img src="../assets/examples/theme-lava_lamp_light.svg" alt="lava_lamp_light theme" width="300"> | `lava_lamp`<br><img src="../assets/examples/theme-lava_lamp.svg" alt="lava_lamp theme" width="300">          |
-| **Inferno**<br>art: `fire`<br>Flickering flames and rising embers.                      | `inferno_light`<br><img src="../assets/examples/theme-inferno_light.svg" alt="inferno_light theme" width="300">       | `inferno`<br><img src="../assets/examples/theme-inferno.svg" alt="inferno theme" width="300">                |
-| **Memphis**<br>art: `memphis`<br>Wiggling 80s shapes and a thick border.                | `memphis`<br><img src="../assets/examples/theme-memphis.svg" alt="memphis theme" width="300">                         | `memphis_dark`<br><img src="../assets/examples/theme-memphis_dark.svg" alt="memphis_dark theme" width="300"> |
+| Design                                                                   | Light mode                                                                                                      | Dark mode                                                                                                    |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Pop art**<br>art: `halftone`<br>Bold halftone dots and a thick border. | `pop_art`<br><img src="../assets/examples/theme-pop_art.svg" alt="pop_art theme" width="300">                   | `pop_art_dark`<br><img src="../assets/examples/theme-pop_art_dark.svg" alt="pop_art_dark theme" width="300"> |
+| **Inferno**<br>art: `fire`<br>Flickering flames and rising embers.       | `inferno_light`<br><img src="../assets/examples/theme-inferno_light.svg" alt="inferno_light theme" width="300"> | `inferno`<br><img src="../assets/examples/theme-inferno.svg" alt="inferno theme" width="300">                |
+| **Memphis**<br>art: `memphis`<br>Wiggling 80s shapes and a thick border. | `memphis`<br><img src="../assets/examples/theme-memphis.svg" alt="memphis theme" width="300">                   | `memphis_dark`<br><img src="../assets/examples/theme-memphis_dark.svg" alt="memphis_dark theme" width="300"> |
 
 ## Classic themes
 
@@ -169,6 +181,13 @@ The art takes its colours from the theme's accent and title colours, so it also 
 | `matrix`        | Digital rain: columns of glowing glyphs falling at different speeds.               | <img src="../assets/examples/art-matrix.svg" alt="matrix art" width="300">               |
 | `fire`          | Flickering flames along the bottom edge and rising embers.                         | <img src="../assets/examples/art-fire.svg" alt="fire art" width="300">                   |
 | `memphis`       | Bold 80s Memphis shapes: squiggles, triangles, dots and stripes.                   | <img src="../assets/examples/art-memphis.svg" alt="memphis art" width="300">             |
+| `jellyfish`     | Glowing jellyfish that pulse, trail their tentacles and drift through plankton.    | <img src="../assets/examples/art-jellyfish.svg" alt="jellyfish art" width="300">         |
+| `koi`           | Koi circling a pond with wiggling tails, lily pads and slow ripples.               | <img src="../assets/examples/art-koi.svg" alt="koi art" width="300">                     |
+| `silk`          | Satin ribbons flowing across the card with a soft sheen.                           | <img src="../assets/examples/art-silk.svg" alt="silk art" width="300">                   |
+| `mesh`          | Huge soft colour fields slowly wandering and blending into each other.             | <img src="../assets/examples/art-mesh.svg" alt="mesh art" width="300">                   |
+| `bubbles`       | Soda bubbles with glossy, iridescent rims wobbling upwards.                        | <img src="../assets/examples/art-bubbles.svg" alt="bubbles art" width="300">             |
+| `orbits`        | Planets on tilted 3D orbits around a glowing sun, with a ringed planet and a moon. | <img src="../assets/examples/art-orbits.svg" alt="orbits art" width="300">               |
+| `soundwave`     | Breathing sine waves that fade out at the edges, over a smooth equalizer.          | <img src="../assets/examples/art-soundwave.svg" alt="soundwave art" width="300">         |
 
 ## Make it your own
 

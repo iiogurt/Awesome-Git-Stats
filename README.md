@@ -8,7 +8,7 @@
 # Awesome Git Stats
 
 **Beautiful, animated stat cards for your GitHub profile README: stars, streaks, a contribution
-heatmap and more, in 108 themes that follow GitHub's light and dark mode.**
+heatmap and more, in 122 themes that follow GitHub's light and dark mode.**
 
 [![CI](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml/badge.svg)](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/iiogurt/Awesome-Git-Stats?sort=semver)](https://github.com/iiogurt/Awesome-Git-Stats/releases)
@@ -44,15 +44,15 @@ heatmap and more, in 108 themes that follow GitHub's light and dark mode.**
 
 ## Features
 
-| Feature                        | What you get                                                                                                                                                                       |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Five layouts**               | A rich overview, a top repos chart, a compact card, a tiny badge and a full **dashboard** with streaks, a contribution heatmap and activity charts.                                |
-| **53 designs, 108 themes**     | Every design comes in a matching light and dark variant. 38 artistic designs with generated background art: nature, holidays, anime, horror, 3D and bold, heavily animated styles. |
-| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                              |
-| **Unique art**                 | 38 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                  |
-| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                   |
-| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.               |
-| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                               |
+| Feature                        | What you get                                                                                                                                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Five layouts**               | A rich overview, a top repos chart, a compact card, a tiny badge and a full **dashboard** with streaks, a contribution heatmap and activity charts.                                                    |
+| **60 designs, 122 themes**     | Every design comes in a matching light and dark variant. 45 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D and bold, heavily animated styles. |
+| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                  |
+| **Unique art**                 | 45 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                      |
+| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                       |
+| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                   |
+| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                   |
 
 <table>
   <tr>
@@ -439,17 +439,18 @@ Every design comes as a pair: a light theme and a dark theme that share colours,
 for example `tokyonight_light` + `tokyonight` or `sakura` + `sakura_dark`. See all of them side
 by side in the **[theme gallery](docs/themes.md)**.
 
-| Kind                | Designs (light / dark variant in the gallery)                                                                                                                                                                |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nature**          | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
-| **Space and sky**   | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
-| **Holidays**        | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
-| **Anime and manga** | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
-| **Horror**          | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
-| **3D**              | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
-| **Retro and tech**  | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
-| **Bold and loud**   | `pop_art` · `lava_lamp` · `inferno` · `memphis`                                                                                                                                                              |
-| **Classic**         | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
+| Kind                   | Designs (light / dark variant in the gallery)                                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nature**             | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
+| **Smooth and flowing** | `lava_lamp` · `abyss` · `koi_pond` · `silk` · `mesh` · `fizz` · `orrery` · `soundwave`                                                                                                                       |
+| **Space and sky**      | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
+| **Holidays**           | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
+| **Anime and manga**    | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
+| **Horror**             | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
+| **3D**                 | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
+| **Retro and tech**     | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
+| **Bold and loud**      | `pop_art` · `inferno` · `memphis`                                                                                                                                                                            |
+| **Classic**            | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
 
 ### Art styles
 
@@ -460,7 +461,8 @@ Combine any theme with any art style using `art=`, for example `theme=dracula&ar
 `halftone` · `scanlines` · `grain` · `bokeh` · `sakura` · `circuit` · `forest` · `rain` · `leaves` ·
 `dunes` · `jungle` · `haunted` · `festive` · `fireworks` · `hearts` · `lanterns` · `speedlines` ·
 `clouds` · `hud` · `blood` · `glitch` · `eyes` · `isometric` · `ridgeline` · `warp` · `spheres` ·
-`globe` · `lava` · `matrix` · `fire` · `memphis`
+`globe` · `lava` · `matrix` · `fire` · `memphis` · `jellyfish` · `koi` · `silk` · `mesh` ·
+`bubbles` · `orbits` · `soundwave`
 
 ### Match GitHub's light and dark mode
 
