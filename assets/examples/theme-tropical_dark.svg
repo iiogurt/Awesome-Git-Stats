@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><linearGradient id="ags-bg" gradientTransform="rotate(135 0.5 0.5)"><stop offset="0%" stop-color="#052019"/><stop offset="50%" stop-color="#0b2a22"/><stop offset="100%" stop-color="#16242a"/></linearGradient><radialGradient id="ags-dapple"><stop offset="0" style="stop-color:var(--art2)" stop-opacity="0.5"/><stop offset="1" style="stop-color:var(--art2)" stop-opacity="0"/></radialGradient></defs>
+  <style>
+    svg{--bg:#06201a;--border:#3ddc9733;--title:#9dffcf;--text:#dcf5ea;--muted:#8bb8a5;--accent:#ff8a5c;--track:#ffffff14;--art1:#0f5c3f;--art2:#ffd166;--art3:#1b7a52;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:url(#ags-bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    .art-vein{stroke:var(--bg);fill:none}
+    
+    
+    .big{font-size:32px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .stat-value{font-size:15px;font-weight:700;fill:var(--text)}
+    .stat-label{font-size:11px;fill:var(--muted)}
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .top-line{font-size:12px;fill:var(--muted)}
+    .top-name{font-weight:600;fill:var(--text)}
+    .ring-track{stroke:var(--track)}
+    
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><circle cx="104.8" cy="82.3" r="28.4" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-2.7s"/><circle cx="367.5" cy="189.6" r="37.6" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-4.4s"/><circle cx="464.6" cy="94.7" r="32.8" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-4s"/><circle cx="409.8" cy="2.4" r="25.5" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-7.6s"/><circle cx="47.9" cy="33.2" r="30.3" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-3.5s"/><circle cx="183.4" cy="155.7" r="45.9" fill="url(#ags-dapple)" class="art-dapple" style="animation-delay:-6.5s"/><g transform="translate(499 -4) rotate(197)"><g class="art-frond" style="animation-delay:-3.9s;animation-duration:7.4s"><path d="M0 0C43.9 -21.9 36.9 -93.2 0 -109.7C-36.9 -93.2 -43.9 -21.9 0 0Z" class="art-c1" opacity="0.6"/>
+        <path d="M6.5 -31.8Q17.3 -35.1 34.6 -46.1M-6.5 -31.8Q-17.3 -35.1 -34.6 -46.1M6.5 -50.4Q17.3 -53.7 34.6 -64.7M-6.5 -50.4Q-17.3 -53.7 -34.6 -64.7M6.5 -69.1Q17.3 -72.4 34.6 -83.3M-6.5 -69.1Q-17.3 -72.4 -34.6 -83.3M6.5 -87.7Q17.3 -91 34.6 -102M-6.5 -87.7Q-17.3 -91 -34.6 -102" class="art-vein" stroke-width="3.1" stroke-linecap="round"/>
+        <path d="M0 0V-100.9" class="art-vein" stroke-width="1.3" opacity=".6"/></g></g><g transform="translate(499 -4) rotate(210)"><g class="art-frond" style="animation-delay:-4.1s;animation-duration:8.9s"><path d="M0 0C51.3 -22.7 43.2 -96.4 0 -113.4C-43.2 -96.4 -51.3 -22.7 0 0Z" class="art-c3" opacity="0.6"/>
+        <path d="M7.6 -32.9Q20.2 -36.3 40.5 -47.6M-7.6 -32.9Q-20.2 -36.3 -40.5 -47.6M7.6 -52.2Q20.2 -55.6 40.5 -66.9M-7.6 -52.2Q-20.2 -55.6 -40.5 -66.9M7.6 -71.4Q20.2 -74.8 40.5 -86.2M-7.6 -71.4Q-20.2 -74.8 -40.5 -86.2M7.6 -90.7Q20.2 -94.1 40.5 -105.5M-7.6 -90.7Q-20.2 -94.1 -40.5 -105.5" class="art-vein" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M0 0V-104.3" class="art-vein" stroke-width="1.4" opacity=".6"/></g></g><g transform="translate(499 -4) rotate(223)"><g class="art-frond" style="animation-delay:-5.7s;animation-duration:6.6s"><path d="M0 0C40.3 -17.3 34 -73.5 0 -86.5C-34 -73.5 -40.3 -17.3 0 0Z" class="art-c1" opacity="0.8"/>
+        <path d="M5.9 -25.1Q15.9 -27.7 31.8 -36.3M-5.9 -25.1Q-15.9 -27.7 -31.8 -36.3M5.9 -39.8Q15.9 -42.4 31.8 -51M-5.9 -39.8Q-15.9 -42.4 -31.8 -51M5.9 -54.5Q15.9 -57.1 31.8 -65.7M-5.9 -54.5Q-15.9 -57.1 -31.8 -65.7M5.9 -69.2Q15.9 -71.8 31.8 -80.4M-5.9 -69.2Q-15.9 -71.8 -31.8 -80.4" class="art-vein" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M0 0V-79.6" class="art-vein" stroke-width="1" opacity=".6"/></g></g><g transform="translate(499 -4) rotate(237)"><g class="art-frond" style="animation-delay:-1.6s;animation-duration:6.2s"><path d="M0 0C38.9 -18.9 32.8 -80.4 0 -94.5C-32.8 -80.4 -38.9 -18.9 0 0Z" class="art-c3" opacity="0.6"/>
+        <path d="M5.7 -27.4Q15.4 -30.2 30.7 -39.7M-5.7 -27.4Q-15.4 -30.2 -30.7 -39.7M5.7 -43.5Q15.4 -46.3 30.7 -55.8M-5.7 -43.5Q-15.4 -46.3 -30.7 -55.8M5.7 -59.6Q15.4 -62.4 30.7 -71.8M-5.7 -59.6Q-15.4 -62.4 -30.7 -71.8M5.7 -75.6Q15.4 -78.5 30.7 -87.9M-5.7 -75.6Q-15.4 -78.5 -30.7 -87.9" class="art-vein" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M0 0V-87" class="art-vein" stroke-width="1.1" opacity=".6"/></g></g><g transform="translate(499 -4) rotate(251)"><g class="art-frond" style="animation-delay:-2.7s;animation-duration:6.2s"><path d="M0 0C36.6 -19.1 30.8 -81.3 0 -95.7C-30.8 -81.3 -36.6 -19.1 0 0Z" class="art-c1" opacity="0.7"/>
+        <path d="M5.4 -27.7Q14.4 -30.6 28.9 -40.2M-5.4 -27.7Q-14.4 -30.6 -28.9 -40.2M5.4 -44Q14.4 -46.9 28.9 -56.5M-5.4 -44Q-14.4 -46.9 -28.9 -56.5M5.4 -60.3Q14.4 -63.2 28.9 -72.7M-5.4 -60.3Q-14.4 -63.2 -28.9 -72.7M5.4 -76.6Q14.4 -79.4 28.9 -89M-5.4 -76.6Q-14.4 -79.4 -28.9 -89" class="art-vein" stroke-width="2.7" stroke-linecap="round"/>
+        <path d="M0 0V-88" class="art-vein" stroke-width="1.1" opacity=".6"/></g></g><g transform="translate(-4 199) rotate(20)"><g class="art-frond" style="animation-delay:-5.2s;animation-duration:5.6s"><path d="M0 0C45.5 -22.2 38.3 -94.2 0 -110.8C-38.3 -94.2 -45.5 -22.2 0 0Z" class="art-c1" opacity="0.6"/>
+        <path d="M6.7 -32.1Q18 -35.4 35.9 -46.5M-6.7 -32.1Q-18 -35.4 -35.9 -46.5M6.7 -51Q18 -54.3 35.9 -65.4M-6.7 -51Q-18 -54.3 -35.9 -65.4M6.7 -69.8Q18 -73.1 35.9 -84.2M-6.7 -69.8Q-18 -73.1 -35.9 -84.2M6.7 -88.6Q18 -91.9 35.9 -103M-6.7 -88.6Q-18 -91.9 -35.9 -103" class="art-vein" stroke-width="3.1" stroke-linecap="round"/>
+        <path d="M0 0V-101.9" class="art-vein" stroke-width="1.3" opacity=".6"/></g></g><g transform="translate(-4 199) rotate(31)"><g class="art-frond" style="animation-delay:-0.5s;animation-duration:8s"><path d="M0 0C41.6 -19.5 35 -82.7 0 -97.3C-35 -82.7 -41.6 -19.5 0 0Z" class="art-c3" opacity="0.6"/>
+        <path d="M6.1 -28.2Q16.4 -31.1 32.8 -40.8M-6.1 -28.2Q-16.4 -31.1 -32.8 -40.8M6.1 -44.7Q16.4 -47.7 32.8 -57.4M-6.1 -44.7Q-16.4 -47.7 -32.8 -57.4M6.1 -61.3Q16.4 -64.2 32.8 -73.9M-6.1 -61.3Q-16.4 -64.2 -32.8 -73.9M6.1 -77.8Q16.4 -80.7 32.8 -90.4M-6.1 -77.8Q-16.4 -80.7 -32.8 -90.4" class="art-vein" stroke-width="2.7" stroke-linecap="round"/>
+        <path d="M0 0V-89.5" class="art-vein" stroke-width="1.2" opacity=".6"/></g></g><g transform="translate(-4 199) rotate(46)"><g class="art-frond" style="animation-delay:-5.5s;animation-duration:5.7s"><path d="M0 0C44.2 -24.1 37.2 -102.4 0 -120.5C-37.2 -102.4 -44.2 -24.1 0 0Z" class="art-c1" opacity="0.6"/>
+        <path d="M6.5 -34.9Q17.4 -38.6 34.9 -50.6M-6.5 -34.9Q-17.4 -38.6 -34.9 -50.6M6.5 -55.4Q17.4 -59.1 34.9 -71.1M-6.5 -55.4Q-17.4 -59.1 -34.9 -71.1M6.5 -75.9Q17.4 -79.5 34.9 -91.6M-6.5 -75.9Q-17.4 -79.5 -34.9 -91.6M6.5 -96.4Q17.4 -100 34.9 -112.1M-6.5 -96.4Q-17.4 -100 -34.9 -112.1" class="art-vein" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M0 0V-110.9" class="art-vein" stroke-width="1.4" opacity=".6"/></g></g><g transform="translate(-4 199) rotate(58)"><g class="art-frond" style="animation-delay:-0.3s;animation-duration:5.2s"><path d="M0 0C47.2 -22.9 39.8 -97.3 0 -114.4C-39.8 -97.3 -47.2 -22.9 0 0Z" class="art-c3" opacity="0.6"/>
+        <path d="M7 -33.2Q18.6 -36.6 37.3 -48.1M-7 -33.2Q-18.6 -36.6 -37.3 -48.1M7 -52.6Q18.6 -56.1 37.3 -67.5M-7 -52.6Q-18.6 -56.1 -37.3 -67.5M7 -72.1Q18.6 -75.5 37.3 -87M-7 -72.1Q-18.6 -75.5 -37.3 -87M7 -91.5Q18.6 -95 37.3 -106.4M-7 -91.5Q-18.6 -95 -37.3 -106.4" class="art-vein" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M0 0V-105.3" class="art-vein" stroke-width="1.4" opacity=".6"/></g></g><g transform="translate(-4 199) rotate(70)"><g class="art-frond" style="animation-delay:-2.2s;animation-duration:7.4s"><path d="M0 0C44.3 -18.9 37.3 -80.2 0 -94.4C-37.3 -80.2 -44.3 -18.9 0 0Z" class="art-c1" opacity="0.7"/>
+        <path d="M6.5 -27.4Q17.5 -30.2 35 -39.6M-6.5 -27.4Q-17.5 -30.2 -35 -39.6M6.5 -43.4Q17.5 -46.2 35 -55.7M-6.5 -43.4Q-17.5 -46.2 -35 -55.7M6.5 -59.5Q17.5 -62.3 35 -71.7M-6.5 -59.5Q-17.5 -62.3 -35 -71.7M6.5 -75.5Q17.5 -78.3 35 -87.8M-6.5 -75.5Q-17.5 -78.3 -35 -87.8" class="art-vein" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M0 0V-86.8" class="art-vein" stroke-width="1.1" opacity=".6"/></g></g><g transform="translate(499 199) rotate(-70)"><g class="art-frond" style="animation-delay:-0.5s;animation-duration:5.6s"><path d="M0 0C54.1 -23.7 45.6 -100.9 0 -118.7C-45.6 -100.9 -54.1 -23.7 0 0Z" class="art-c1" opacity="0.6"/>
+        <path d="M8 -34.4Q21.4 -38 42.7 -49.9M-8 -34.4Q-21.4 -38 -42.7 -49.9M8 -54.6Q21.4 -58.2 42.7 -70M-8 -54.6Q-21.4 -58.2 -42.7 -70M8 -74.8Q21.4 -78.3 42.7 -90.2M-8 -74.8Q-21.4 -78.3 -42.7 -90.2M8 -95Q21.4 -98.5 42.7 -110.4M-8 -95Q-21.4 -98.5 -42.7 -110.4" class="art-vein" stroke-width="3.3" stroke-linecap="round"/>
+        <path d="M0 0V-109.2" class="art-vein" stroke-width="1.4" opacity=".6"/></g></g><g transform="translate(499 199) rotate(-55)"><g class="art-frond" style="animation-delay:-0.1s;animation-duration:5.7s"><path d="M0 0C48.3 -24.1 40.7 -102.3 0 -120.3C-40.7 -102.3 -48.3 -24.1 0 0Z" class="art-c3" opacity="0.7"/>
+        <path d="M7.1 -34.9Q19.1 -38.5 38.1 -50.5M-7.1 -34.9Q-19.1 -38.5 -38.1 -50.5M7.1 -55.3Q19.1 -58.9 38.1 -71M-7.1 -55.3Q-19.1 -58.9 -38.1 -71M7.1 -75.8Q19.1 -79.4 38.1 -91.4M-7.1 -75.8Q-19.1 -79.4 -38.1 -91.4M7.1 -96.2Q19.1 -99.8 38.1 -111.9M-7.1 -96.2Q-19.1 -99.8 -38.1 -111.9" class="art-vein" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M0 0V-110.7" class="art-vein" stroke-width="1.4" opacity=".6"/></g></g><g transform="translate(499 199) rotate(-35)"><g class="art-frond" style="animation-delay:-3.9s;animation-duration:5.4s"><path d="M0 0C36.2 -15.3 30.5 -65.2 0 -76.7C-30.5 -65.2 -36.2 -15.3 0 0Z" class="art-c1" opacity="0.6"/>
+        <path d="M5.3 -22.2Q14.3 -24.5 28.6 -32.2M-5.3 -22.2Q-14.3 -24.5 -28.6 -32.2M5.3 -35.3Q14.3 -37.6 28.6 -45.2M-5.3 -35.3Q-14.3 -37.6 -28.6 -45.2M5.3 -48.3Q14.3 -50.6 28.6 -58.3M-5.3 -48.3Q-14.3 -50.6 -28.6 -58.3M5.3 -61.3Q14.3 -63.6 28.6 -71.3M-5.3 -61.3Q-14.3 -63.6 -28.6 -71.3" class="art-vein" stroke-width="2.1" stroke-linecap="round"/>
+        <path d="M0 0V-70.5" class="art-vein" stroke-width="0.9" opacity=".6"/></g></g><g transform="translate(499 199) rotate(-23)"><g class="art-frond" style="animation-delay:-3.1s;animation-duration:7.9s"><path d="M0 0C26.6 -13.4 22.4 -56.9 0 -67C-22.4 -56.9 -26.6 -13.4 0 0Z" class="art-c3" opacity="0.7"/>
+        <path d="M3.9 -19.4Q10.5 -21.4 21 -28.1M-3.9 -19.4Q-10.5 -21.4 -21 -28.1M3.9 -30.8Q10.5 -32.8 21 -39.5M-3.9 -30.8Q-10.5 -32.8 -21 -39.5M3.9 -42.2Q10.5 -44.2 21 -50.9M-3.9 -42.2Q-10.5 -44.2 -21 -50.9M3.9 -53.6Q10.5 -55.6 21 -62.3M-3.9 -53.6Q-10.5 -55.6 -21 -62.3" class="art-vein" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M0 0V-61.6" class="art-vein" stroke-width="0.8" opacity=".6"/></g></g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
+  <g transform="translate(0 0)">
+  <g class="rise">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 60) scale(1.875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="66" y="87" class="big">17,656</text>
+    <text x="25" y="110" class="caption">stars earned across 10 repos</text>
+  </g>
+  <g class="rise">
+    <path class="icon" transform="translate(25 128) scale(0.875)" d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+    <text x="45" y="140" class="stat-value">1.2k</text>
+    <text x="25" y="160" class="stat-label">forks</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(103 128) scale(0.875)" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
+    <text x="123" y="140" class="stat-value">64</text>
+    <text x="103" y="160" class="stat-label">public repos</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(181 128) scale(0.875)" d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/>
+    <text x="201" y="140" class="stat-value">2.5k</text>
+    <text x="181" y="160" class="stat-label">followers</text>
+  </g>
+  <g class="fade">
+          <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
+        </g>
+  <g class="rise">
+        <circle cx="267" cy="66" r="5" fill="#3178c6"/>
+        <text x="279" y="70" class="lang-name">TypeScript</text>
+        <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="88" r="5" fill="#dea584"/>
+        <text x="279" y="92" class="lang-name">Rust</text>
+        <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="110" r="5" fill="#00ADD8"/>
+        <text x="279" y="114" class="lang-name">Go</text>
+        <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="132" r="5" fill="#3572A5"/>
+        <text x="279" y="136" class="lang-name">Python</text>
+        <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="154" r="5" fill="#8b949e"/>
+        <text x="279" y="158" class="lang-name">Other</text>
+        <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="pop">
+    <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
+    <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+  </g></g>
+</svg>

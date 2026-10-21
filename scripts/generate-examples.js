@@ -9,7 +9,7 @@ import { ART_DESCRIPTIONS, ART_STYLES } from '../src/render/art.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { format, resolveConfig } from 'prettier';
-import { designs, themeNames, themes } from '../src/themes.js';
+import { categories, designs, themeNames, themes } from '../src/themes.js';
 import { sampleAccount } from '../test/fixtures/account.js';
 
 const outDir = fileURLToPath(new URL('../assets/examples/', import.meta.url));
@@ -43,6 +43,12 @@ for (const art of ART_STYLES) {
   files[`art-${art}.svg`] = render({ layout: 'compact', theme: 'dark', art });
 }
 
+// GitHub's heading anchors: lowercase, punctuation dropped, spaces to dashes.
+const slug = (text) =>
+  text
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/ /g, '-');
 const img = (file, alt, width) =>
   `<img src="../assets/examples/${file}" alt="${alt}" width="${width}">`;
 const designRows = (list) =>
@@ -70,18 +76,31 @@ they belong together when your card follows GitHub's light and dark mode. In the
 
 Each artistic theme pairs a palette with a background [art style](#art-styles), and some add a
 matching font or a neon glow (dark variants only). The art is generated from your username, so
-your card's starfield or contour map is unique to you. Animations are subtle and switch off for
-people who prefer reduced motion.
+your card's starfield or contour map is unique to you. Animations range from calm to bold and
+switch off for people who prefer reduced motion. The previews below are still frames.
+
+Jump to: ${Object.entries(categories)
+  .map(([id, label]) =>
+    id === 'classic' ? '[Classic](#classic-themes)' : `[${label}](#${slug(label)})`,
+  )
+  .join(' · ')}
+
+${Object.entries(categories)
+  .filter(([id]) => id !== 'classic')
+  .map(
+    ([id, label]) => `### ${label}
 
 | Design | Light mode | Dark mode |
 | --- | --- | --- |
-${designRows(designs.filter((d) => d.artistic))}
+${designRows(designs.filter((d) => d.category === id))}`,
+  )
+  .join('\n\n')}
 
 ## Classic themes
 
 | Design | Light mode | Dark mode |
 | --- | --- | --- |
-${designRows(designs.filter((d) => !d.artistic))}
+${designRows(designs.filter((d) => d.category === 'classic'))}
 
 \`light\` is the same as \`default\`. \`auto\` switches between \`default\` and \`dark\` inside a single
 image, following the viewer's operating system rather than their GitHub setting:
@@ -121,7 +140,7 @@ Want a theme or art style added? Open a [theme request](https://github.com/iiogu
 `;
 
 // The link builder gets its design and art lists from the same source.
-const catalog = JSON.stringify({ designs, art: ART_DESCRIPTIONS });
+const catalog = JSON.stringify({ designs, categories, art: ART_DESCRIPTIONS });
 const page = (await readFile(pageFile, 'utf8')).replace(
   /(\/\/ catalog:start\n)[\s\S]*?(\n\s*\/\/ catalog:end)/,
   `$1const CATALOG = ${catalog};$2`,

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><radialGradient id="ags-halo"><stop offset="0" style="stop-color:var(--art2)" stop-opacity="0.35"/><stop offset="1" style="stop-color:var(--art2)" stop-opacity="0"/></radialGradient></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    .art-ghost{opacity:.3}
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-flap{to{transform:scaleY(.3)}}
+        .art-flap{animation:ags-flap .3s ease-in-out infinite alternate}
+        @keyframes ags-flit{0%,100%{transform:translate(0,0)}25%{transform:translate(14px,-8px)}50%{transform:translate(4px,6px)}75%{transform:translate(-12px,-4px)}}
+        .art-flit{animation:ags-flit 7s ease-in-out infinite}
+        @keyframes ags-dangle{0%,100%{transform:translateY(0)}50%{transform:translateY(-11.8px)}}
+        .art-dangle{animation:ags-dangle 6s ease-in-out infinite}
+        @keyframes ags-ghost{0%,100%{transform:translate(0,0);opacity:.12}50%{transform:translate(30px,-12px);opacity:.4}}
+        .art-ghost{animation:ags-ghost 12s ease-in-out infinite}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><circle cx="320.5" cy="24.6" r="42.5" fill="url(#ags-halo)"/>
+        <circle cx="320.5" cy="24.6" r="17.7" class="art-c2" opacity=".75"/>
+        <g class="art-c3" opacity=".1"><circle cx="312.7" cy="25.9" r="3.8"/><circle cx="320.3" cy="25.6" r="3.2"/><circle cx="316.1" cy="34.7" r="3.4"/><circle cx="319.8" cy="32.4" r="4"/><circle cx="319.1" cy="24.1" r="2.6"/></g>
+        <path d="M0 0L70.4 0M0 0L67 21.8M0 0L57 41.4M0 0L41.4 57M0 0L21.8 67M0 0L0 70.4M12.8 0Q10.4 1.6 12.2 4Q9.4 4.8 10.4 7.5Q7.4 7.4 7.5 10.4Q4.8 9.4 4 12.2Q1.6 10.4 0 12.8M25.6 0Q20.7 3.3 24.3 7.9Q18.7 9.5 20.7 15Q14.8 14.8 15 20.7Q9.5 18.7 7.9 24.3Q3.3 20.7 0 25.6M38.4 0Q31.1 4.9 36.5 11.9Q28.1 14.3 31.1 22.6Q22.3 22.3 22.6 31.1Q14.3 28.1 11.9 36.5Q4.9 31.1 0 38.4M51.2 0Q41.5 6.6 48.7 15.8Q37.4 19.1 41.4 30.1Q29.7 29.7 30.1 41.4Q19.1 37.4 15.8 48.7Q6.6 41.5 0 51.2M64 0Q51.8 8.2 60.9 19.8Q46.8 23.8 51.8 37.6Q37.1 37.1 37.6 51.8Q23.8 46.8 19.8 60.9Q8.2 51.8 0 64" class="art-s2" stroke-width=".6" opacity=".3"/>
+        <g class="art-dangle"><path d="M200.3 -26.2V26.2" class="art-s2" stroke-width=".6" opacity=".5"/>
+      <g transform="translate(200.3 26.2) scale(0.7)" opacity=".7"><path d="M-5 -3L-2 -1M-6 0H-2M-5 3L-2 1M5 -3L2 -1M6 0H2M5 3L2 1" class="art-s3" stroke-width=".9"/><circle r="2.6" class="art-c3"/><circle cy="-2.6" r="1.6" class="art-c3"/></g></g><g transform="translate(147 92.2) scale(0.6)"><g class="art-ghost"><path d="M-9 8V-1A9 9 0 0 1 9 -1V8L6 5.5L3 8L0 5.5L-3 8L-6 5.5Z" class="art-c2"/><ellipse cx="-3" cy="-1" rx="1.4" ry="2" class="art-bg"/><ellipse cx="3" cy="-1" rx="1.4" ry="2" class="art-bg"/></g></g><g transform="translate(243 69.2) scale(0.8)"><g class="art-flit" style="animation-delay:-0.8s;animation-duration:5.1s"><path d="M0 -2C1 -4 2 -4 2.5 -5.5L3 -3C5 -5 8 -6 12 -5C10 -3 10 -1 10.5 1C8.5 0 6.5 .5 5.5 2.5C4.5 1 3 1 2 2.5C1.5 1.5 .5 1 0 2C-.5 1 -1.5 1.5 -2 2.5C-3 1 -4.5 1 -5.5 2.5C-6.5 .5 -8.5 0 -10.5 1C-10 -1 -10 -3 -12 -5C-8 -6 -5 -5 -3 -3L-2.5 -5.5C-2 -4 -1 -4 0 -2Z" class="art-c3 art-flap" style="animation-delay:-0.8s"/></g></g><g transform="translate(150.6 29.4) scale(0.6)"><g class="art-flit" style="animation-delay:-4.9s;animation-duration:6.7s"><path d="M0 -2C1 -4 2 -4 2.5 -5.5L3 -3C5 -5 8 -6 12 -5C10 -3 10 -1 10.5 1C8.5 0 6.5 .5 5.5 2.5C4.5 1 3 1 2 2.5C1.5 1.5 .5 1 0 2C-.5 1 -1.5 1.5 -2 2.5C-3 1 -4.5 1 -5.5 2.5C-6.5 .5 -8.5 0 -10.5 1C-10 -1 -10 -3 -12 -5C-8 -6 -5 -5 -3 -3L-2.5 -5.5C-2 -4 -1 -4 0 -2Z" class="art-c3 art-flap" style="animation-delay:-0.5s"/></g></g><g transform="translate(161.5 57.4) scale(0.7)"><g class="art-flit" style="animation-delay:-5.3s;animation-duration:8.7s"><path d="M0 -2C1 -4 2 -4 2.5 -5.5L3 -3C5 -5 8 -6 12 -5C10 -3 10 -1 10.5 1C8.5 0 6.5 .5 5.5 2.5C4.5 1 3 1 2 2.5C1.5 1.5 .5 1 0 2C-.5 1 -1.5 1.5 -2 2.5C-3 1 -4.5 1 -5.5 2.5C-6.5 .5 -8.5 0 -10.5 1C-10 -1 -10 -3 -12 -5C-8 -6 -5 -5 -3 -3L-2.5 -5.5C-2 -4 -1 -4 0 -2Z" class="art-c3 art-flap" style="animation-delay:-0.2s"/></g></g><g transform="translate(201.8 27) scale(0.5)"><g class="art-flit" style="animation-delay:-5.5s;animation-duration:5.2s"><path d="M0 -2C1 -4 2 -4 2.5 -5.5L3 -3C5 -5 8 -6 12 -5C10 -3 10 -1 10.5 1C8.5 0 6.5 .5 5.5 2.5C4.5 1 3 1 2 2.5C1.5 1.5 .5 1 0 2C-.5 1 -1.5 1.5 -2 2.5C-3 1 -4.5 1 -5.5 2.5C-6.5 .5 -8.5 0 -10.5 1C-10 -1 -10 -3 -12 -5C-8 -6 -5 -5 -3 -3L-2.5 -5.5C-2 -4 -1 -4 0 -2Z" class="art-c3 art-flap" style="animation-delay:-0.6s"/></g></g><g transform="translate(338.2 29.7) scale(0.4)"><g class="art-flit" style="animation-delay:-2.9s;animation-duration:8.3s"><path d="M0 -2C1 -4 2 -4 2.5 -5.5L3 -3C5 -5 8 -6 12 -5C10 -3 10 -1 10.5 1C8.5 0 6.5 .5 5.5 2.5C4.5 1 3 1 2 2.5C1.5 1.5 .5 1 0 2C-.5 1 -1.5 1.5 -2 2.5C-3 1 -4.5 1 -5.5 2.5C-6.5 .5 -8.5 0 -10.5 1C-10 -1 -10 -3 -12 -5C-8 -6 -5 -5 -3 -3L-2.5 -5.5C-2 -4 -1 -4 0 -2Z" class="art-c3 art-flap" style="animation-delay:-0s"/></g></g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>
