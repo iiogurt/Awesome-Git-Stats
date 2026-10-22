@@ -36,6 +36,7 @@
         @keyframes ags-flutter{0%{transform:rotate(0) scaleX(1)}25%{transform:rotate(60deg) scaleX(.3)}50%{transform:rotate(130deg) scaleX(-1)}75%{transform:rotate(240deg) scaleX(-.3)}100%{transform:rotate(360deg) scaleX(1)}}
         .art-flutter{animation:ags-flutter 4s linear infinite}
     @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .big{font-size:28px;font-weight:800;fill:var(--title)}
     .caption{font-size:12.5px;fill:var(--muted)}
@@ -55,16 +56,16 @@
   <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
     <rect x="25" y="86" width="300" height="8" rx="4" fill="url(#ags-inset)"/>
   <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/><rect x="25" y="86" width="300" height="8" fill="url(#ags-sheen)"/></g></g><g class="fade" style="animation-delay:500ms">
-      <circle cx="29" cy="110" r="4" fill="#3178c6"/><circle cx="29" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <circle cx="29.6" cy="111" r="4" fill="#000" class="cast"/><circle cx="29" cy="110" r="4" fill="#3178c6"/><circle cx="29" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="37" y="114" class="legend">TypeScript 51%</text>
     </g><g class="fade" style="animation-delay:580ms">
-      <circle cx="131.6" cy="110" r="4" fill="#dea584"/><circle cx="131.6" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <circle cx="132.2" cy="111" r="4" fill="#000" class="cast"/><circle cx="131.6" cy="110" r="4" fill="#dea584"/><circle cx="131.6" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
     </g><g class="fade" style="animation-delay:660ms">
-      <circle cx="202.1" cy="110" r="4" fill="#00ADD8"/><circle cx="202.1" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <circle cx="202.7" cy="111" r="4" fill="#000" class="cast"/><circle cx="202.1" cy="110" r="4" fill="#00ADD8"/><circle cx="202.1" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
     </g><g class="fade" style="animation-delay:740ms">
-      <circle cx="261.4" cy="110" r="4" fill="#3572A5"/><circle cx="261.4" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <circle cx="262" cy="111" r="4" fill="#000" class="cast"/><circle cx="261.4" cy="110" r="4" fill="#3572A5"/><circle cx="261.4" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="269.402" y="114" class="legend">Python 7%</text>
     </g></g>
 </svg>

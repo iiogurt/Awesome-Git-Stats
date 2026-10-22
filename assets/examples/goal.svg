@@ -26,6 +26,7 @@
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
     
+    
     .percent{font-size:44px;font-weight:800;fill:var(--title)}
     .detail{font-size:13px;font-weight:600;fill:var(--text)}
     .status{font-size:12px;font-weight:700;fill:var(--accent)}

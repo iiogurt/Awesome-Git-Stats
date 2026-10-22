@@ -17,7 +17,7 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
-import { glassPanel, glossBar, gridGloss, gridSheen, orb, track } from './materials.js';
+import { glassPanel, glossBar, gridCast, gridGloss, gridSheen, orb, track } from './materials.js';
 
 const WIDTH = 820;
 const HEIGHT = 470;
@@ -129,17 +129,17 @@ function heatmap(activity, options) {
   });
 
   const width = columns.size * step - (step - cell);
-  // Each column carries its own strip of gloss, so it fades in with its cells.
+  // Each column carries its own strip of gloss and shadow, so they fade in with its cells.
   const cols = [...columns.entries()]
     .map(([col, { first, last, cells }]) => {
-      const gloss = gridGloss({
+      const area = {
         id: 'ags-hm-sheen',
         x: LEFT + col * step,
         y: top + first * step,
         width: cell,
         height: (last - first) * step + cell,
-      });
-      return `<g class="fade"${delay(options, 250 + col * 12)}>${cells.join('')}${gloss}</g>`;
+      };
+      return `<g class="fade"${delay(options, 250 + col * 12)}>${gridCast(area)}${cells.join('')}${gridGloss(area)}</g>`;
     })
     .join('');
   const legendX = LEFT + width;

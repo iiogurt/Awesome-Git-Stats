@@ -3,6 +3,7 @@ import {
   dropShadow,
   glassDisc,
   glossBar,
+  gridCast,
   gridGloss,
   gridSheen,
   orb,
@@ -102,7 +103,10 @@ function waffle(items, options, { x, y, size, gap }) {
     .join('');
   const step = size + gap;
   const span = 10 * step - gap;
-  return `${cells}<g class="fade"${delay(options, 700)}>${gridSheen({ id: 'ags-waffle-sheen', x, y, cell: size, step, rx: 2.5 })}${gridGloss({ id: 'ags-waffle-sheen', x, y, width: span, height: span })}</g>`;
+  const area = { id: 'ags-waffle-sheen', x, y, width: span, height: span };
+  return `${gridSheen({ id: area.id, x, y, cell: size, step, rx: 2.5 })}
+    <g class="fade"${delay(options, 400)}>${gridCast(area)}</g>${cells}
+    <g class="fade"${delay(options, 700)}>${gridGloss(area)}</g>`;
 }
 
 /** Most used languages by code size, as bars, a donut, a pie or a waffle chart. */
@@ -122,7 +126,7 @@ export function renderLanguages(stats, options) {
     chart = bars(items, options, width);
   } else if (style === 'waffle') {
     width = 420;
-    height = Math.max(210, 70 + items.length * 22);
+    height = Math.max(228, 70 + items.length * 22);
     chart = `${waffle(items, options, { x: 25, y: 52, size: 13, gap: 2.5 })}${legend(items, options, { x: 200, y: 66, width: 195 })}`;
   } else {
     width = 400;

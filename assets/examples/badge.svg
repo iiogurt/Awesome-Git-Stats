@@ -18,6 +18,7 @@
     
     
     
+    
     .badge-left{fill:var(--accent)}
     .badge-ink{fill:#1b1f24}
     .badge-label{font-size:12px;font-weight:600;fill:#1b1f24}

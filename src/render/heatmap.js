@@ -6,7 +6,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
-import { gridGloss, gridSheen } from './materials.js';
+import { gridCast, gridGloss, gridSheen } from './materials.js';
 
 const MONTHS = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
 const CELL = 11;
@@ -37,17 +37,17 @@ export function renderHeatmap(stats, options) {
     );
     columns.set(col, column);
   });
-  // Each column carries its own strip of gloss, so it fades in with its cells.
+  // Each column carries its own strip of gloss and shadow, so they fade in with its cells.
   const grid = [...columns.entries()]
     .map(([col, { first, last, cells }]) => {
-      const gloss = gridGloss({
+      const area = {
         id: 'ags-hm-sheen',
         x: LEFT + col * STEP,
         y: TOP + first * STEP,
         width: CELL,
         height: (last - first) * STEP + CELL,
-      });
-      return `<g class="fade"${delay(options, 150 + col * 14)}>${cells.join('')}${gloss}</g>`;
+      };
+      return `<g class="fade"${delay(options, 150 + col * 14)}>${gridCast(area)}${cells.join('')}${gridGloss(area)}</g>`;
     })
     .join('');
 

@@ -46,6 +46,13 @@ describe('card options', () => {
     assert.equal(parse({ lang_style: 'PIE' }).langStyle, 'pie');
     assert.equal(parse({ lang_style: 'sunburst' }).langStyle, 'bars');
   });
+
+  it('defaults to the glossy finish and accepts the others', () => {
+    assert.equal(parse({}).finish, 'gloss');
+    assert.equal(parse({ finish: 'Paper' }).finish, 'paper');
+    assert.equal(parse({ finish: 'soft' }).finish, 'soft');
+    assert.equal(parse({ finish: 'chrome' }).finish, 'gloss');
+  });
 });
 
 describe('card data', () => {
@@ -103,7 +110,14 @@ describe('new cards', () => {
     }
     // A waffle always has exactly 100 squares.
     const waffle = render({ layout: 'languages', lang_style: 'waffle' });
-    assert.equal((waffle.match(/<rect x="\d[^"]*" y="\d[^"]*" width="13"/g) ?? []).length, 100);
+    assert.equal(
+      (
+        waffle.match(
+          /<rect x="\d[^"]*" y="\d[^"]*" width="13" height="13" rx="2.5" fill="#[^"]+" class="fade"/g,
+        ) ?? []
+      ).length,
+      100,
+    );
   });
 
   it('pin a repository and a gist with their badges and numbers', () => {

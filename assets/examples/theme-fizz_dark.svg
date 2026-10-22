@@ -22,6 +22,7 @@
     .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
     .art-rim1{stroke:var(--art1)}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .big{font-size:32px;font-weight:800;fill:var(--title)}
     .caption{font-size:12.5px;fill:var(--muted)}
@@ -61,23 +62,23 @@
           <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
         </g>
   <g class="rise">
-        <circle cx="267" cy="66" r="5" fill="#3178c6"/><circle cx="267" cy="66" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267.6" cy="67" r="5" fill="#000" class="cast"/><circle cx="267" cy="66" r="5" fill="#3178c6"/><circle cx="267" cy="66" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="70" class="lang-name">TypeScript</text>
         <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
       </g><g class="rise">
-        <circle cx="267" cy="88" r="5" fill="#dea584"/><circle cx="267" cy="88" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267.6" cy="89" r="5" fill="#000" class="cast"/><circle cx="267" cy="88" r="5" fill="#dea584"/><circle cx="267" cy="88" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="92" class="lang-name">Rust</text>
         <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
       </g><g class="rise">
-        <circle cx="267" cy="110" r="5" fill="#00ADD8"/><circle cx="267" cy="110" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267.6" cy="111" r="5" fill="#000" class="cast"/><circle cx="267" cy="110" r="5" fill="#00ADD8"/><circle cx="267" cy="110" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="114" class="lang-name">Go</text>
         <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
       </g><g class="rise">
-        <circle cx="267" cy="132" r="5" fill="#3572A5"/><circle cx="267" cy="132" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267.6" cy="133" r="5" fill="#000" class="cast"/><circle cx="267" cy="132" r="5" fill="#3572A5"/><circle cx="267" cy="132" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="136" class="lang-name">Python</text>
         <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="rise">
-        <circle cx="267" cy="154" r="5" fill="#8b949e"/><circle cx="267" cy="154" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267.6" cy="155" r="5" fill="#000" class="cast"/><circle cx="267" cy="154" r="5" fill="#8b949e"/><circle cx="267" cy="154" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="158" class="lang-name">Other</text>
         <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="pop">

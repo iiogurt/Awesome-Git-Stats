@@ -25,6 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .big{font-size:28px;font-weight:800;fill:var(--title)}
     .streak-big{font-size:28px;font-weight:800;fill:var(--accent)}

@@ -499,6 +499,16 @@ Combine any theme with any art style using `art=`, for example `theme=dracula&ar
 `globe` · `lava` · `matrix` · `fire` · `memphis` · `jellyfish` · `koi` · `silk` · `mesh` ·
 `bubbles` · `orbits` · `soundwave`
 
+### Finishes
+
+Bars, rings, charts and tiles come in four surface finishes, chosen with `finish=` (or
+`options: finish=paper` in the Action). They work with every theme and layout.
+
+| `gloss` (default)                                                            | `soft`                                                                           | `paper`                                                                         | `flat`                                                                    |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| <img src="assets/examples/finish-gloss.svg" alt="glossy finish" width="220"> | <img src="assets/examples/finish-soft.svg" alt="soft pastel finish" width="220"> | <img src="assets/examples/finish-paper.svg" alt="paper-cut finish" width="220"> | <img src="assets/examples/finish-flat.svg" alt="flat finish" width="220"> |
+| Glossy plastic and glass: highlights, deep shade, frosted centres            | Soft-touch pastel plastic: washed colours, matte, gentle light                   | Paper cut-outs: bevelled edges, crisp shadows, tracks cut into the card         | Plain colours, no light or shadow                                         |
+
 ### Match GitHub's light and dark mode
 
 Render one card for each mode, and GitHub shows each viewer the one matching their GitHub
@@ -568,6 +578,7 @@ defaults, so a typo never breaks your README.
 | `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |            |
 | `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |            |
 | `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`     |
+| `finish`             | Surface of bars, rings and charts: `gloss`, `soft` (pastel matte), `paper` (paper-cut) or `flat`                                                             | `gloss`    |
 | `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`     |
 | `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`        |
 | `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |            |

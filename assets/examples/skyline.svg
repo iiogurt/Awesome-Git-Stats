@@ -26,6 +26,7 @@
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
     
+    
     .sk0{fill:var(--track)}
     .skt1{fill:var(--accent);fill:color-mix(in srgb,var(--accent) 45%,var(--bg))}.skl1{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 45%,var(--bg)) 80%,#000)}.skr1{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 45%,var(--bg)) 62%,#000)}.skt2{fill:var(--accent);fill:color-mix(in srgb,var(--accent) 65%,var(--bg))}.skl2{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 65%,var(--bg)) 80%,#000)}.skr2{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 65%,var(--bg)) 62%,#000)}.skt3{fill:var(--accent);fill:color-mix(in srgb,var(--accent) 85%,var(--bg))}.skl3{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 85%,var(--bg)) 80%,#000)}.skr3{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 85%,var(--bg)) 62%,#000)}.skt4{fill:var(--accent);fill:color-mix(in srgb,var(--accent) 100%,var(--bg))}.skl4{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 100%,var(--bg)) 80%,#000)}.skr4{fill:var(--accent);fill:color-mix(in srgb,color-mix(in srgb,var(--accent) 100%,var(--bg)) 62%,#000)}
     .footer{font-size:12px;font-weight:600;fill:var(--text)}

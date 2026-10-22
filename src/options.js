@@ -1,4 +1,5 @@
 import { ART_STYLES } from './render/art.js';
+import { FINISH_NAMES } from './render/materials.js';
 import { themes, resolveTheme } from './themes.js';
 
 export const LAYOUTS = [
@@ -138,6 +139,7 @@ export function parseOptions(query = {}) {
     if (!GIST_ID.test(gist)) throw new OptionsError('Invalid gist id');
   }
   const langStyleParam = String(first(query.lang_style) ?? '').toLowerCase();
+  const finishParam = String(first(query.finish) ?? '').toLowerCase();
 
   const customTitle = first(query.custom_title);
   const label = first(query.label);
@@ -157,6 +159,7 @@ export function parseOptions(query = {}) {
     count: int(query.count, { fallback: 5, min: 1, max: 10 }),
     langsCount: int(query.langs_count, { fallback: 5, min: 1, max: 8 }),
     langStyle: LANGUAGE_STYLES.includes(langStyleParam) ? langStyleParam : 'bars',
+    finish: FINISH_NAMES.includes(finishParam) ? finishParam : 'gloss',
     repo,
     gist,
     goal: int(query.goal, { fallback: 1000, min: 1, max: 1000000 }),

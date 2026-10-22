@@ -294,6 +294,16 @@
             <p class="hint">Shown to people who use GitHub in dark mode.</p>
           </div>
           <div class="field">
+            <label for="finish">Finish</label>
+            <select id="finish" name="finish">
+              <option value="gloss">Gloss: glossy plastic and glass</option>
+              <option value="soft">Soft: pastel, matte plastic</option>
+              <option value="paper">Paper: paper cut-outs</option>
+              <option value="flat">Flat: plain colours</option>
+            </select>
+            <p class="hint">The surface of bars, rings and charts.</p>
+          </div>
+          <div class="field">
             <label for="art">Background art</label>
             <select id="art" name="art"></select>
             <p class="hint" id="art-hint"></p>
@@ -1065,6 +1075,7 @@
         if (data.get('layout') !== 'overview') query.set('layout', data.get('layout'));
         if (theme !== 'default') query.set('theme', theme);
         if (data.get('art')) query.set('art', data.get('art'));
+        if (data.get('finish') !== 'gloss') query.set('finish', data.get('finish'));
         const field = LAYOUT_FIELDS[data.get('layout')];
         if (field && String(data.get(field[1])).trim()) {
           query.set(field[1], String(data.get(field[1])).trim());

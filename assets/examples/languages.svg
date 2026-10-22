@@ -25,6 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .lang-name{font-size:12px;fill:var(--text)}
     .lang-pct{font-size:11px;fill:var(--muted)}
@@ -45,36 +46,36 @@
         <text x="325" y="62" class="lang-pct" text-anchor="end">31%</text>
         <rect x="25" y="69" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="69" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:300ms"><rect x="23" y="67" width="98.3" height="14" rx="7" fill="#dea584" opacity=".16"/><rect x="25" y="69" width="94.3" height="10" rx="5" fill="#dea584"/><rect x="25" y="69" width="94.3" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:300ms"><rect x="23" y="67" width="98.3" height="14" rx="7" fill="#dea584" class="halo"/><rect x="26" y="70.5" width="94.3" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="69" width="94.3" height="10" rx="5" fill="#dea584"/><rect x="25" y="69" width="94.3" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g><g class="rise" style="animation-delay:240ms">
         <text x="25" y="100" class="lang-name">TypeScript</text>
         <text x="325" y="100" class="lang-pct" text-anchor="end">26%</text>
         <rect x="25" y="107" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="107" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:390ms"><rect x="23" y="105" width="80.8" height="14" rx="7" fill="#3178c6" opacity=".16"/><rect x="25" y="107" width="76.8" height="10" rx="5" fill="#3178c6"/><rect x="25" y="107" width="76.8" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:390ms"><rect x="23" y="105" width="80.8" height="14" rx="7" fill="#3178c6" class="halo"/><rect x="26" y="108.5" width="76.8" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="107" width="76.8" height="10" rx="5" fill="#3178c6"/><rect x="25" y="107" width="76.8" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g><g class="rise" style="animation-delay:330ms">
         <text x="25" y="138" class="lang-name">Go</text>
         <text x="325" y="138" class="lang-pct" text-anchor="end">12%</text>
         <rect x="25" y="145" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="145" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:480ms"><rect x="23" y="143" width="41" height="14" rx="7" fill="#00ADD8" opacity=".16"/><rect x="25" y="145" width="37" height="10" rx="5" fill="#00ADD8"/><rect x="25" y="145" width="37" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:480ms"><rect x="23" y="143" width="41" height="14" rx="7" fill="#00ADD8" class="halo"/><rect x="26" y="146.5" width="37" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="145" width="37" height="10" rx="5" fill="#00ADD8"/><rect x="25" y="145" width="37" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g><g class="rise" style="animation-delay:420ms">
         <text x="25" y="176" class="lang-name">Python</text>
         <text x="325" y="176" class="lang-pct" text-anchor="end">9.8%</text>
         <rect x="25" y="183" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="183" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:570ms"><rect x="23" y="181" width="33.5" height="14" rx="7" fill="#3572A5" opacity=".16"/><rect x="25" y="183" width="29.5" height="10" rx="5" fill="#3572A5"/><rect x="25" y="183" width="29.5" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:570ms"><rect x="23" y="181" width="33.5" height="14" rx="7" fill="#3572A5" class="halo"/><rect x="26" y="184.5" width="29.5" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="183" width="29.5" height="10" rx="5" fill="#3572A5"/><rect x="25" y="183" width="29.5" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g><g class="rise" style="animation-delay:510ms">
         <text x="25" y="214" class="lang-name">Jupyter Notebook</text>
         <text x="325" y="214" class="lang-pct" text-anchor="end">5.3%</text>
         <rect x="25" y="221" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="221" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:660ms"><rect x="23" y="219" width="20" height="14" rx="7" fill="#DA5B0B" opacity=".16"/><rect x="25" y="221" width="16" height="10" rx="5" fill="#DA5B0B"/><rect x="25" y="221" width="16" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:660ms"><rect x="23" y="219" width="20" height="14" rx="7" fill="#DA5B0B" class="halo"/><rect x="26" y="222.5" width="16" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="221" width="16" height="10" rx="5" fill="#DA5B0B"/><rect x="25" y="221" width="16" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g><g class="rise" style="animation-delay:600ms">
         <text x="25" y="252" class="lang-name">Other</text>
         <text x="325" y="252" class="lang-pct" text-anchor="end">15%</text>
         <rect x="25" y="259" width="300" height="10" rx="5" class="track"/>
     <rect x="25" y="259" width="300" height="10" rx="5" fill="url(#ags-inset)"/>
-        <g class="grow" style="animation-delay:750ms"><rect x="23" y="257" width="50.5" height="14" rx="7" fill="#8b949e" opacity=".16"/><rect x="25" y="259" width="46.5" height="10" rx="5" fill="#8b949e"/><rect x="25" y="259" width="46.5" height="10" rx="5" fill="url(#ags-sheen)"/></g>
+        <g class="grow" style="animation-delay:750ms"><rect x="23" y="257" width="50.5" height="14" rx="7" fill="#8b949e" class="halo"/><rect x="26" y="260.5" width="46.5" height="10" rx="5" fill="#000" class="cast"/><rect x="25" y="259" width="46.5" height="10" rx="5" fill="#8b949e"/><rect x="25" y="259" width="46.5" height="10" rx="5" fill="url(#ags-sheen)"/></g>
       </g></g>
 </svg>
