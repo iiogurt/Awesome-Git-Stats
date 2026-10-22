@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { GitHubError, fetchAccount, tokensFromEnv } from '../src/github.js';
+import { GitHubError, fetchAccount, fetchGist, fetchRepo, tokensFromEnv } from '../src/github.js';
 import { graphqlPage, graphqlRepo, mockFetch } from './helpers.js';
 
 describe('fetchAccount (GraphQL)', () => {
@@ -240,5 +240,112 @@ describe('fetchAccount activity', () => {
     });
     assert.equal(org.calls.length, 1);
     assert.equal(account.activity, null);
+  });
+});
+
+describe('languages by code size', () => {
+  it('asks for language sizes and keeps paging past repositories without stars', async () => {
+    const withLanguages = (name, stars) => ({
+      ...graphqlRepo(name, stars),
+      languages: { edges: [{ size: 1200, node: { name: 'Go', color: '#00ADD8' } }] },
+    });
+    const { fetchImpl, calls } = mockFetch((_call, index) => ({
+      json: graphqlPage([withLanguages(`r${index}`, 0)], {
+        hasNextPage: index === 0,
+        endCursor: 'c1',
+      }),
+    }));
+    const account = await fetchAccount('octocat', { token: 't', codeLanguages: true, fetchImpl });
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0].body.variables.languages, true);
+    assert.deepEqual(account.repos[0].codeLanguages, [
+      { name: 'Go', color: '#00ADD8', size: 1200 },
+    ]);
+  });
+
+  it('leaves them out otherwise', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ json: graphqlPage([graphqlRepo('a', 1)]) }));
+    const account = await fetchAccount('octocat', { token: 't', fetchImpl });
+    assert.equal(calls[0].body.variables.languages, false);
+    assert.equal('codeLanguages' in account.repos[0], false);
+  });
+});
+
+describe('fetchRepo', () => {
+  const repository = {
+    ...graphqlRepo('hello', 120, 'Rust', '#dea584'),
+    nameWithOwner: 'octo/hello',
+    description: 'Says hi',
+    isTemplate: true,
+  };
+
+  it('reads one repository through GraphQL', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ json: { data: { repository } } }));
+    const repo = await fetchRepo('octo', 'hello', { token: 't', fetchImpl });
+    assert.deepEqual(calls[0].body.variables, { owner: 'octo', name: 'hello' });
+    assert.equal(repo.fullName, 'octo/hello');
+    assert.equal(repo.stars, 120);
+    assert.equal(repo.description, 'Says hi');
+    assert.equal(repo.isTemplate, true);
+    assert.equal(repo.languageColor, '#dea584');
+  });
+
+  it('falls back to REST and reports a missing repository', async () => {
+    const rest = mockFetch(() => ({
+      json: {
+        name: 'hello',
+        full_name: 'octo/hello',
+        stargazers_count: 3,
+        forks_count: 1,
+        language: 'Go',
+      },
+    }));
+    const repo = await fetchRepo('octo', 'hello', { token: '', fetchImpl: rest.fetchImpl });
+    assert.match(rest.calls[0].url, /\/repos\/octo\/hello$/);
+    assert.equal(repo.stars, 3);
+    assert.equal(repo.languageColor, '#00ADD8');
+    const missing = mockFetch(() => ({ json: { data: { repository: null } } }));
+    await assert.rejects(fetchRepo('octo', 'nope', { token: 't', fetchImpl: missing.fetchImpl }), {
+      code: 'NOT_FOUND',
+      message: 'Repository not found',
+    });
+  });
+});
+
+describe('fetchGist', () => {
+  it('reads a gist with stars through GraphQL', async () => {
+    const gist = {
+      name: 'abc123',
+      description: 'Countries',
+      stargazerCount: 41,
+      isFork: false,
+      forks: { totalCount: 13 },
+      files: [{ name: 'countries.json', language: { name: 'JSON', color: '#292929' } }],
+    };
+    const { fetchImpl, calls } = mockFetch(() => ({ json: { data: { user: { gist } } } }));
+    const result = await fetchGist('octo', 'abc123', { token: 't', fetchImpl });
+    assert.deepEqual(calls[0].body.variables, { login: 'octo', id: 'abc123' });
+    assert.equal(result.name, 'countries.json');
+    assert.equal(result.stars, 41);
+    assert.equal(result.forks, 13);
+    assert.equal(result.language, 'JSON');
+  });
+
+  it('only shows gists of the given user, and has no stars over REST', async () => {
+    const gist = {
+      id: 'abc123',
+      description: 'x',
+      owner: { login: 'Octo' },
+      files: { 'a.py': { filename: 'a.py', language: 'Python' } },
+      forks: [{}, {}],
+    };
+    const rest = mockFetch(() => ({ json: gist }));
+    const result = await fetchGist('octo', 'abc123', { token: '', fetchImpl: rest.fetchImpl });
+    assert.equal(result.stars, null);
+    assert.equal(result.forks, 2);
+    assert.equal(result.name, 'a.py');
+    await assert.rejects(fetchGist('someone', 'abc123', { token: '', fetchImpl: rest.fetchImpl }), {
+      message: 'Gist not found',
+    });
   });
 });

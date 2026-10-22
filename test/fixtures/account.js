@@ -1,5 +1,24 @@
 import { sampleActivity } from './activity.js';
 
+// Bytes of code per language in some of the sample repositories.
+const lang = (name, color, size) => ({ name, color, size });
+const CODE = {
+  'nebula-ui': [
+    lang('TypeScript', '#3178c6', 912000),
+    lang('CSS', '#663399', 141000),
+    lang('HTML', '#e34c26', 38000),
+  ],
+  'quasar-db': [lang('Rust', '#dea584', 1240000), lang('Shell', '#89e051', 12000)],
+  'orbit-cli': [lang('Go', '#00ADD8', 486000), lang('Makefile', '#427819', 4000)],
+  'pulsar-ml': [lang('Python', '#3572A5', 388000), lang('Jupyter Notebook', '#DA5B0B', 210000)],
+  'comet.vim': [lang('Vim Script', '#199f4b', 64000)],
+  'gravity-hooks': [lang('TypeScript', '#3178c6', 98000)],
+  'eclipse-theme': [lang('CSS', '#663399', 52000), lang('JavaScript', '#f1e05a', 21000)],
+  'meteor-shower': [lang('JavaScript', '#f1e05a', 74000)],
+  dotfiles: [lang('Shell', '#89e051', 31000), lang('Lua', '#000080', 18000)],
+  blackhole: [lang('C', '#555555', 156000)],
+};
+
 /** A fictional account used by tests and to generate README examples. */
 export const sampleAccount = {
   login: 'stellar-dev',
@@ -38,5 +57,39 @@ export const sampleAccount = {
     { name: 'dotfiles', stars: 88, forks: 9, language: 'Shell', languageColor: '#89e051' },
     { name: 'blackhole', stars: 21, forks: 2, language: 'C', languageColor: '#555555' },
     { name: 'notes', stars: 0, forks: 0, language: null, languageColor: null },
-  ].map((repo) => ({ description: '', isFork: false, isArchived: false, ...repo })),
+  ].map((repo) => ({
+    description: '',
+    isFork: false,
+    isArchived: false,
+    codeLanguages: CODE[repo.name] ?? [],
+    ...repo,
+  })),
+};
+
+/** A pinned repository, as fetchRepo() returns it. */
+export const sampleRepo = {
+  name: 'nebula-ui',
+  fullName: 'stellar-dev/nebula-ui',
+  description:
+    'A themeable component library for space-age dashboards, with charts, cards and a dark mode that follows the stars.',
+  stars: 8421,
+  forks: 612,
+  isFork: false,
+  isArchived: false,
+  isTemplate: false,
+  language: 'TypeScript',
+  languageColor: '#3178c6',
+};
+
+/** A pinned gist, as fetchGist() returns it. */
+export const sampleGist = {
+  id: 'aa5a315d61ae9438b18d',
+  name: 'constellations.json',
+  description:
+    'All 88 IAU constellations with their abbreviations, brightest stars and area in square degrees.',
+  stars: 41,
+  forks: 13,
+  isFork: false,
+  language: 'JSON',
+  languageColor: '#292929',
 };

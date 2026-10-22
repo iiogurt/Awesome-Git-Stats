@@ -9,6 +9,11 @@ const STRING_OPTIONS = [
   'username',
   'layout',
   'theme',
+  'art',
+  'repo',
+  'gist',
+  'goal',
+  'lang_style',
   'custom_title',
   'label',
   'count',
@@ -39,7 +44,7 @@ if (values.help || !values.username) {
   console.log(`Usage: awesome-git-stats --username <name> [options] [--out stars.svg]
 
 Options mirror the URL parameters documented in the README, e.g.
-  --layout overview|repos|compact|badge   --theme tokyonight
+  --layout overview|stats|languages|streak|heatmap|dashboard|…   --theme tokyonight
   --count 5   --exclude repo-a,repo-b     --hide_border   --disable_animations
 
 Set GITHUB_TOKEN to use the GraphQL API (recommended).`);

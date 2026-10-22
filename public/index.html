@@ -115,6 +115,7 @@
         display: grid;
       }
       input[type='text'],
+      input[type='number'],
       select {
         font: inherit;
         color: var(--text);
@@ -238,6 +239,30 @@
             <label for="layout">Layout</label>
             <select id="layout" name="layout"></select>
             <p class="hint" id="layout-hint"></p>
+          </div>
+          <div class="field" id="field-repo" hidden>
+            <label for="repo">Repository</label>
+            <input type="text" id="repo" name="repo" value="Hello-World" autocomplete="off" />
+            <p class="hint">One of your repositories, or any public one as owner/name.</p>
+          </div>
+          <div class="field" id="field-gist" hidden>
+            <label for="gist">Gist id</label>
+            <input type="text" id="gist" name="gist" autocomplete="off" />
+            <p class="hint">The long id at the end of the gist's address. It must be yours.</p>
+          </div>
+          <div class="field" id="field-goal" hidden>
+            <label for="goal">Contribution goal</label>
+            <input type="number" id="goal" name="goal" value="1000" min="1" />
+            <p class="hint">Contributions to aim for in twelve months.</p>
+          </div>
+          <div class="field" id="field-lang-style" hidden>
+            <label for="lang-style">Chart</label>
+            <select id="lang-style" name="lang_style">
+              <option value="bars">Bars</option>
+              <option value="donut">Donut</option>
+              <option value="pie">Pie</option>
+              <option value="waffle">Waffle (100 squares)</option>
+            </select>
           </div>
         </fieldset>
 
@@ -955,6 +980,27 @@
         compact: ['Compact', 'A slim card with the main numbers.'],
         badge: ['Badge', 'A tiny star count, like a shields.io badge.'],
         dashboard: ['Dashboard', 'Everything: stars, streaks, a contribution heatmap and charts.'],
+        stats: [
+          'Stats',
+          'Stars, commits, pull requests, issues and reviews, with a rank from S to C.',
+        ],
+        languages: ['Languages', 'Your most used languages by code size.'],
+        pin: ['Pinned repo', 'Any repository as a card, like GitHub pins.'],
+        gist: ['Pinned gist', 'One of your gists as a card.'],
+        streak: ['Streak', 'Current and longest contribution streak and the year total.'],
+        heatmap: ['Heatmap', 'Your contribution calendar, large.'],
+        skyline: ['Skyline', 'Your year of contributions as a 3D city, one tower per day.'],
+        radar: ['Radar', 'Your contribution profile on six axes, with your rank.'],
+        treemap: ['Treemap', 'Your repositories as tiles sized by stars, coloured by language.'],
+        timeline: ['Timeline', 'Contributions per month as a bar chart.'],
+        goal: ['Goal', 'The card fills up like a tank as you near a contribution goal.'],
+      };
+      // Inputs that only matter for one layout, and the query parameter they set.
+      const LAYOUT_FIELDS = {
+        pin: ['field-repo', 'repo'],
+        gist: ['field-gist', 'gist'],
+        goal: ['field-goal', 'goal'],
+        languages: ['field-lang-style', 'lang_style'],
       };
       const MODES = {
         match:
@@ -1019,6 +1065,10 @@
         if (data.get('layout') !== 'overview') query.set('layout', data.get('layout'));
         if (theme !== 'default') query.set('theme', theme);
         if (data.get('art')) query.set('art', data.get('art'));
+        const field = LAYOUT_FIELDS[data.get('layout')];
+        if (field && String(data.get(field[1])).trim()) {
+          query.set(field[1], String(data.get(field[1])).trim());
+        }
         for (const name of ['hide_border', 'hide_title', 'disable_animations']) {
           if (data.get(name)) query.set(name, 'true');
         }
@@ -1094,6 +1144,9 @@
         $('custom-light').hidden = !custom;
         $('custom-dark').hidden = !custom;
         $('layout-hint').textContent = LAYOUTS[data.get('layout')][1];
+        for (const [layout, [id]] of Object.entries(LAYOUT_FIELDS)) {
+          $(id).hidden = data.get('layout') !== layout;
+        }
         $('design-hint').textContent =
           `${design.description} Themes: ${design.light} (light) and ${design.dark} (dark).`;
         $('mode-hint').textContent = MODES[data.get('mode')];

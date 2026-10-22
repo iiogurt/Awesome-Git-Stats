@@ -8,7 +8,7 @@
 # Awesome Git Stats
 
 **Beautiful, animated stat cards for your GitHub profile README: stars, streaks, a contribution
-heatmap and more, in 122 themes that follow GitHub's light and dark mode.**
+heatmap, a 3D skyline, rank, languages and more: 16 layouts in 122 themes that follow GitHub's light and dark mode.**
 
 [![CI](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml/badge.svg)](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/iiogurt/Awesome-Git-Stats?sort=semver)](https://github.com/iiogurt/Awesome-Git-Stats/releases)
@@ -44,15 +44,15 @@ heatmap and more, in 122 themes that follow GitHub's light and dark mode.**
 
 ## Features
 
-| Feature                        | What you get                                                                                                                                                                                           |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Five layouts**               | A rich overview, a top repos chart, a compact card, a tiny badge and a full **dashboard** with streaks, a contribution heatmap and activity charts.                                                    |
-| **60 designs, 122 themes**     | Every design comes in a matching light and dark variant. 45 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D and bold, heavily animated styles. |
-| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                  |
-| **Unique art**                 | 45 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                      |
-| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                       |
-| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                   |
-| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                   |
+| Feature                        | What you get                                                                                                                                                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **16 layouts**                 | Overview, stats with a rank, languages (bars, donut, pie, waffle), pinned repos and gists, streak, heatmap, a **3D skyline**, radar, treemap, timeline, a goal that fills up, a full **dashboard** and more. |
+| **60 designs, 122 themes**     | Every design comes in a matching light and dark variant. 45 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D and bold, heavily animated styles.       |
+| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                        |
+| **Unique art**                 | 45 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                            |
+| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                             |
+| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                         |
+| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                         |
 
 <table>
   <tr>
@@ -405,13 +405,48 @@ Node 22+ host; see `scripts/dev.js` for a minimal server.
 
 Choose a layout with `layout:` in the Action or `&layout=` in a live link.
 
-| Layout               | Best for                                | Preview                                                               |
-| -------------------- | --------------------------------------- | --------------------------------------------------------------------- |
-| `overview` (default) | Stars, forks, top repository, languages | <img src="assets/examples/overview.svg" alt="overview" width="400">   |
-| `repos`              | Your most starred repositories as bars  | <img src="assets/examples/repos.svg" alt="repos" width="400">         |
-| `compact`            | A slim card next to other cards         | <img src="assets/examples/compact.svg" alt="compact" width="300">     |
-| `badge`              | A tiny star count in a line of badges   | <img src="assets/examples/badge.svg" alt="badge">                     |
-| `dashboard`          | Everything at once, as a profile banner | <img src="assets/examples/dashboard.svg" alt="dashboard" width="400"> |
+### Stars and repositories
+
+| Layout               | Best for                                                                               | Preview                                                             |
+| -------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `overview` (default) | Stars, forks, top repository, languages                                                | <img src="assets/examples/overview.svg" alt="overview" width="400"> |
+| `repos`              | Your most starred repositories as bars                                                 | <img src="assets/examples/repos.svg" alt="repos" width="400">       |
+| `treemap`            | Repositories as tiles: area by stars, colour by language                               | <img src="assets/examples/treemap.svg" alt="treemap" width="400">   |
+| `compact`            | A slim card next to other cards                                                        | <img src="assets/examples/compact.svg" alt="compact" width="300">   |
+| `badge`              | A tiny star count in a line of badges                                                  | <img src="assets/examples/badge.svg" alt="badge">                   |
+| `pin`                | Any repository as a card, like GitHub's pins: `repo=name` (yours) or `repo=owner/name` | <img src="assets/examples/pin.svg" alt="pin" width="400">           |
+| `gist`               | One of your gists as a card: `gist=<id>`                                               | <img src="assets/examples/gist.svg" alt="gist" width="400">         |
+
+### Activity and profile
+
+These show contribution data, which needs a token (the Action's built-in one is enough) and is
+only available for user accounts.
+
+| Layout      | Best for                                                                                         | Preview                                                               |
+| ----------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `stats`     | Stars, commits, pull requests, issues, reviews and repos contributed to, with a rank from S to C | <img src="assets/examples/stats.svg" alt="stats" width="400">         |
+| `streak`    | Current and longest streak and the year's total                                                  | <img src="assets/examples/streak.svg" alt="streak" width="400">       |
+| `heatmap`   | Your contribution calendar, large                                                                | <img src="assets/examples/heatmap.svg" alt="heatmap" width="400">     |
+| `skyline`   | Your year as a 3D isometric city, one tower per day                                              | <img src="assets/examples/skyline.svg" alt="skyline" width="400">     |
+| `timeline`  | Contributions per month as a bar chart                                                           | <img src="assets/examples/timeline.svg" alt="timeline" width="400">   |
+| `radar`     | Your profile on six axes; the dashed ring is a typical GitHub user                               | <img src="assets/examples/radar.svg" alt="radar" width="400">         |
+| `goal`      | The card fills up like a tank as you near `goal=` contributions (default 1000)                   | <img src="assets/examples/goal.svg" alt="goal" width="300">           |
+| `dashboard` | Everything at once, as a profile banner                                                          | <img src="assets/examples/dashboard.svg" alt="dashboard" width="400"> |
+
+### Languages
+
+`layout=languages` shows your most used languages **by code size** across your repositories
+(without a token: by the number of repositories in each language). Pick the chart with
+`lang_style=`:
+
+| `bars` (default)                                                              | `donut`                                                                                | `pie`                                                                              | `waffle`                                                                                       |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| <img src="assets/examples/languages.svg" alt="languages as bars" width="200"> | <img src="assets/examples/languages-donut.svg" alt="languages as a donut" width="220"> | <img src="assets/examples/languages-pie.svg" alt="languages as a pie" width="220"> | <img src="assets/examples/languages-waffle.svg" alt="languages as a waffle chart" width="230"> |
+
+The rank on the `stats` and `radar` cards compares commits (last year), pull requests, issues,
+reviews, stars and followers with typical values, the way
+[github-readme-stats](https://github.com/anuraghazra/github-readme-stats) does: `S` is the top
+1%, then `A+`, `A`, `A-`, `B+`, `B`, `B-`, `C+` and `C`.
 
 ### The dashboard
 
@@ -518,25 +553,29 @@ The same options work in both ways of using the project: as `options:` in the Ac
 (`count=8&hide_border=true`) or as URL parameters in a live link. Unknown values fall back to
 defaults, so a typo never breaks your README.
 
-| Parameter            | Description                                                                       | Default    |
-| -------------------- | --------------------------------------------------------------------------------- | ---------- |
-| `username`           | GitHub user or organization (**required**)                                        |            |
-| `layout`             | `overview`, `repos`, `compact`, `badge` or `dashboard`                            | `overview` |
-| `theme`              | Any [theme](docs/themes.md)                                                       | `default`  |
-| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                      | theme's    |
-| `custom_title`       | Replace the card title (max 60 characters)                                        |            |
-| `hide_title`         | Hide the title                                                                    | `false`    |
-| `hide_border`        | Hide the border                                                                   | `false`    |
-| `border_radius`      | Corner radius, `0`–`30`                                                           | `10`       |
-| `disable_animations` | Turn animations off                                                               | `false`    |
-| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                | `5`        |
-| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)       | `5`        |
-| `hide`               | Comma separated stats to hide in `overview`: `forks`, `repos`, `followers`, `top` |            |
-| `exclude`            | Comma separated repository names to leave out                                     |            |
-| `include_forks`      | Count stars on forked repositories                                                | `false`    |
-| `label`              | Label text of the `badge` layout (max 24 characters)                              | `stars`    |
-| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                     | `14400`    |
-| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`     |            |
+| Parameter            | Description                                                                                                                                                  | Default    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| `username`           | GitHub user or organization (**required**)                                                                                                                   |            |
+| `layout`             | One of the [layouts](#layouts)                                                                                                                               | `overview` |
+| `theme`              | Any [theme](docs/themes.md)                                                                                                                                  | `default`  |
+| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                                                                                                 | theme's    |
+| `custom_title`       | Replace the card title (max 60 characters)                                                                                                                   |            |
+| `hide_title`         | Hide the title                                                                                                                                               | `false`    |
+| `hide_border`        | Hide the border                                                                                                                                              | `false`    |
+| `border_radius`      | Corner radius, `0`–`30`                                                                                                                                      | `10`       |
+| `disable_animations` | Turn animations off                                                                                                                                          | `false`    |
+| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                                                                                           | `5`        |
+| `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |            |
+| `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |            |
+| `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`     |
+| `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`     |
+| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`        |
+| `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |            |
+| `exclude`            | Comma separated repository names to leave out                                                                                                                |            |
+| `include_forks`      | Count stars on forked repositories                                                                                                                           | `false`    |
+| `label`              | Label text of the `badge` layout (max 24 characters)                                                                                                         | `stars`    |
+| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                                                                                                | `14400`    |
+| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`                                                                                |            |
 
 Example with a few options combined:
 
@@ -546,7 +585,7 @@ Example with a few options combined:
 
 **What is counted?** Stars on the account's **public, owned, non-fork repositories** (add
 `include_forks=true` to include forks). Stars per language use each repository's primary
-language.
+language; the `languages` layout counts bytes of code in every language of every repository.
 
 ## Troubleshooting and FAQ
 
