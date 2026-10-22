@@ -17,6 +17,7 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
+import { glassPanel, glossBar, gridGloss, gridSheen, orb, track } from './materials.js';
 
 const WIDTH = 820;
 const HEIGHT = 470;
@@ -85,7 +86,7 @@ function tiles(stats, options) {
     .map((item, i) => {
       const x = r1(LEFT + i * (width + gap));
       return `<g class="rise"${delay(options, 80 + i * 70)}>
-      <rect x="${x}" y="52" width="${r1(width)}" height="60" rx="9" class="tile"/>
+      ${glassPanel({ x, y: 52, width, height: 60, rx: 9, base: 'tile' })}
       ${icon(item.path, { x: r1(x + width - 26), y: 62, size: 14, className: 'icon-accent' })}
       <text x="${r1(x + 12)}" y="70" class="tile-label">${escapeXml(item.label)}</text>
       <text x="${r1(x + 12)}" y="95" class="tile-value">${escapeXml(truncate(item.value, width - 20, 19, 700))}</text>
@@ -106,12 +107,12 @@ function heatmap(activity, options) {
     const index = i + offset;
     const col = Math.floor(index / 7);
     const row = index % 7;
-    if (!columns.has(col)) columns.set(col, []);
-    columns
-      .get(col)
-      .push(
-        `<rect x="${LEFT + col * step}" y="${top + row * step}" width="${cell}" height="${cell}" rx="2" class="hm${levels[i]}"/>`,
-      );
+    if (!columns.has(col)) columns.set(col, { first: row, last: row, cells: [] });
+    const column = columns.get(col);
+    column.last = row;
+    column.cells.push(
+      `<rect x="${LEFT + col * step}" y="${top + row * step}" width="${cell}" height="${cell}" rx="2" class="hm${levels[i]}"/>`,
+    );
   });
 
   let lastLabel = -3;
@@ -128,8 +129,18 @@ function heatmap(activity, options) {
   });
 
   const width = columns.size * step - (step - cell);
+  // Each column carries its own strip of gloss, so it fades in with its cells.
   const cols = [...columns.entries()]
-    .map(([col, cells]) => `<g class="fade"${delay(options, 250 + col * 12)}>${cells.join('')}</g>`)
+    .map(([col, { first, last, cells }]) => {
+      const gloss = gridGloss({
+        id: 'ags-hm-sheen',
+        x: LEFT + col * step,
+        y: top + first * step,
+        width: cell,
+        height: (last - first) * step + cell,
+      });
+      return `<g class="fade"${delay(options, 250 + col * 12)}>${cells.join('')}${gloss}</g>`;
+    })
     .join('');
   const legendX = LEFT + width;
   const legend = [4, 3, 2, 1, 0]
@@ -145,7 +156,7 @@ function heatmap(activity, options) {
     width,
     svg: `<text x="${LEFT}" y="138" class="section">Contributions in the last year</text>
     <text x="${legendX}" y="138" class="axis" text-anchor="end">${escapeXml(best)}</text>
-    ${months}${cols}
+    ${gridSheen({ id: 'ags-hm-sheen', x: LEFT, y: top, cell, step })}${months}${cols}
     <text x="${legendX - 30 - 5 * step - 6}" y="${top + 7 * step + 14}" class="axis" text-anchor="end">Less</text>
     ${legend}
     <text x="${legendX}" y="${top + 7 * step + 14}" class="axis" text-anchor="end">More</text>`,
@@ -163,12 +174,12 @@ function weekdays(activity, options, x0) {
     .map((total, i) => {
       const h = Math.max(3, (total / max) * 62);
       const x = r1(x0 + i * slot + (slot - 14) / 2);
-      return `<rect x="${x}" y="${r1(base - h)}" width="14" height="${r1(h)}" rx="3" class="bar${i === peak ? ' bar-peak' : ''} growy"${delay(options, 400 + i * 60)}/>
+      return `${glossBar({ x, y: base - h, width: 14, height: h, rx: 3, upright: true, glow: i === peak, fill: `bar${i === peak ? ' bar-peak' : ''}`, attrs: ` class="growy"${delay(options, 400 + i * 60)}` })}
       <text x="${r1(x + 7)}" y="${base + 14}" class="axis" text-anchor="middle">${WEEKDAYS[i]}</text>`;
     })
     .join('');
   return `<text x="${x0}" y="138" class="section">Weekly rhythm</text>
-    <rect x="${x0}" y="${base - 66}" width="${r1(width)}" height="66" class="ghost" rx="4"/>
+    ${glassPanel({ x: x0, y: base - 66, width, height: 66, rx: 4, base: 'ghost' })}
     ${bars}`;
 }
 
@@ -219,8 +230,8 @@ function mix(activity, options) {
       const y = 302 + i * 24;
       return `<text x="${x0}" y="${y}" class="row-label">${label}</text>
       <text x="${x0 + width}" y="${y}" class="row-value" text-anchor="end">${formatExact(n)}</text>
-      <rect x="${x0}" y="${y + 5}" width="${width}" height="5" rx="2.5" class="track"/>
-      <rect x="${x0}" y="${y + 5}" width="${r1(Math.max(3, (n / max) * width))}" height="5" rx="2.5" class="mix${i} grow"${delay(options, 500 + i * 90)}/>`;
+      ${track({ x: x0, y: y + 5, width, height: 6 })}
+      ${glossBar({ x: x0, y: y + 5, width: Math.max(6, (n / max) * width), height: 6, fill: `mix${i}`, attrs: ` class="grow"${delay(options, 500 + i * 90)}` })}`;
     })
     .join('');
   const footer = [
@@ -245,13 +256,11 @@ function topRepos(stats, options, x0 = 575) {
           const y = 302 + i * 24;
           const count = formatCount(repo.stars);
           const nameWidth = width - measureText(count, 12, 700) - 24;
-          const fillAttr = repo.languageColor ? ` fill="${repo.languageColor}"` : '';
-          const fillClass = repo.languageColor ? '' : ' accent';
           return `<text x="${x0}" y="${y}" class="row-label">${escapeXml(truncate(repo.name, nameWidth, 12, 600))}</text>
         ${icon(STAR_PATH, { x: r1(x0 + width - measureText(count, 12, 700) - 15), y: y - 10, size: 11, className: 'icon-accent' })}
         <text x="${RIGHT}" y="${y}" class="row-value" text-anchor="end">${count}</text>
-        <rect x="${x0}" y="${y + 5}" width="${r1(width)}" height="5" rx="2.5" class="track"/>
-        <rect x="${x0}" y="${y + 5}" width="${r1(Math.max(3, (repo.stars / max) * width))}" height="5" rx="2.5" class="grow${fillClass}"${fillAttr}${delay(options, 600 + i * 90)}/>`;
+        ${track({ x: x0, y: y + 5, width, height: 6 })}
+        ${glossBar({ x: x0, y: y + 5, width: Math.max(6, (repo.stars / max) * width), height: 6, fill: repo.languageColor ?? 'accent', attrs: ` class="grow"${delay(options, 600 + i * 90)}` })}`;
         })
         .join('')
     : `<text x="${x0}" y="310" class="axis">No starred repositories yet ✨</text>`;
@@ -275,7 +284,7 @@ function languages(stats, options) {
   const legend = stats.languages
     .map((lang) => {
       const text = `${lang.name} ${Math.round(lang.share * 100)}%`;
-      const item = `<circle cx="${r1(lx + 4)}" cy="${top + 22}" r="4" fill="${lang.color}"/>
+      const item = `${orb({ cx: lx + 4, cy: top + 22, r: 4, fill: lang.color })}
         <text x="${r1(lx + 12)}" y="${top + 26}" class="axis-strong">${escapeXml(text)}</text>`;
       lx += measureText(text, 11) * 0.92 + 28;
       return lx < RIGHT + 20 ? item : '';
@@ -283,8 +292,8 @@ function languages(stats, options) {
     .join('');
   return `<text x="${LEFT}" y="${top - 8}" class="section">Stars by language</text>
     <clipPath id="ags-langs"><rect x="${LEFT}" y="${top}" width="${width}" height="8" rx="4"/></clipPath>
-    <rect x="${LEFT}" y="${top}" width="${width}" height="8" rx="4" class="track"/>
-    ${stats.languages.length ? `<g clip-path="url(#ags-langs)"><g class="grow"${delay(options, 700)}>${segments}</g></g>${legend}` : ''}`;
+    ${track({ x: LEFT, y: top, width, height: 8 })}
+    ${stats.languages.length ? `<g clip-path="url(#ags-langs)"><g class="grow"${delay(options, 700)}>${segments}<rect x="${LEFT}" y="${top}" width="${width}" height="8" fill="url(#ags-sheen)"/></g></g>${legend}` : ''}`;
 }
 
 function emptyState(stats) {
@@ -292,7 +301,7 @@ function emptyState(stats) {
     stats.type === 'Organization'
       ? 'Contribution activity is only available for user accounts.'
       : 'Contribution activity needs a GitHub token. The Action provides one automatically.';
-  return `<rect x="${LEFT}" y="128" width="${RIGHT - LEFT}" height="122" rx="10" class="ghost"/>
+  return `${glassPanel({ x: LEFT, y: 128, width: RIGHT - LEFT, height: 122, rx: 10, base: 'ghost' })}
     <text x="${WIDTH / 2}" y="194" class="row-label" text-anchor="middle">${escapeXml(why)}</text>`;
 }
 

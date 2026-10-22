@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
-  <defs><linearGradient id="ags-bg" gradientTransform="rotate(30 0.5 0.5)"><stop offset="0%" stop-color="#ecfbf5"/><stop offset="50%" stop-color="#e3f4f7"/><stop offset="100%" stop-color="#e8f7ee"/></linearGradient></defs>
+  <defs><linearGradient id="ags-bg" gradientTransform="rotate(30 0.5 0.5)"><stop offset="0%" stop-color="#ecfbf5"/><stop offset="50%" stop-color="#e3f4f7"/><stop offset="100%" stop-color="#e8f7ee"/></linearGradient><linearGradient id="ags-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient><linearGradient id="ags-inset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.34"/><stop offset="0.45" stop-color="#000" stop-opacity="0.06"/><stop offset="1" stop-color="#fff" stop-opacity="0.08"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient></defs>
   <style>
     svg{--bg:#ecfbf5;--border:#c7e5dc;--title:#0b7a5a;--text:#1b3a3a;--muted:#5a7a76;--accent:#d99a00;--track:#0b7a5a14;--art1:#d99a00;--art2:#0b7a5a;--art3:#d99a00;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:url(#ags-bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     
@@ -32,17 +33,18 @@
   </g>
   <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
   <rect x="25" y="86" width="300" height="8" rx="4" class="track"/>
-  <g clip-path="url(#ags-bar)"><g class="grow"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/></g></g><g class="fade">
-      <circle cx="29" cy="110" r="4" fill="#3178c6"/>
+    <rect x="25" y="86" width="300" height="8" rx="4" fill="url(#ags-inset)"/>
+  <g clip-path="url(#ags-bar)"><g class="grow"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/><rect x="25" y="86" width="300" height="8" fill="url(#ags-sheen)"/></g></g><g class="fade">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/><circle cx="29" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="37" y="114" class="legend">TypeScript 51%</text>
     </g><g class="fade">
-      <circle cx="131.63240000000002" cy="110" r="4" fill="#dea584"/>
+      <circle cx="131.6" cy="110" r="4" fill="#dea584"/><circle cx="131.6" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
     </g><g class="fade">
-      <circle cx="202.08319999999998" cy="110" r="4" fill="#00ADD8"/>
+      <circle cx="202.1" cy="110" r="4" fill="#00ADD8"/><circle cx="202.1" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
     </g><g class="fade">
-      <circle cx="261.402" cy="110" r="4" fill="#3572A5"/>
+      <circle cx="261.4" cy="110" r="4" fill="#3572A5"/><circle cx="261.4" cy="110" r="4" fill="url(#ags-sphere)"/>
       <text x="269.402" y="114" class="legend">Python 7%</text>
     </g></g>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="260" viewBox="0 0 495 260" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev&#39;s most starred repositories</title>
-  <defs></defs>
+  <defs><linearGradient id="ags-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient><linearGradient id="ags-inset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.34"/><stop offset="0.45" stop-color="#000" stop-opacity="0.06"/><stop offset="1" stop-color="#fff" stop-opacity="0.08"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient></defs>
   <style>
     svg{--bg:#1a1b27;--border:#2a2e45;--title:#70a5fd;--text:#c0caf5;--muted:#737aa2;--accent:#bf91f3;--track:#24283b;--art1:#bf91f3;--art2:#70a5fd;--art3:#bf91f3;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
@@ -34,43 +35,48 @@
   <text x="25" y="35" class="title fade">Stellar Dev&#39;s Most Starred Repos</text>
   <g transform="translate(0 0)"><g class="rise" style="animation-delay:150ms">
     <text x="25" y="66" class="repo-name">nebula-ui</text>
-    <circle cx="340.66999999999996" cy="62" r="4" class="dot" fill="#3178c6"/>
+    <circle cx="340.7" cy="62" r="4" fill="#3178c6"/><circle cx="340.7" cy="62" r="4" fill="url(#ags-sphere)"/>
        <text x="349.66999999999996" y="66" class="repo-lang">TypeScript</text>
     <path class="icon-accent" transform="translate(425.28 55) scale(0.8125)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
     <text x="470" y="66" class="repo-stars" text-anchor="end">8.4k</text>
-    <rect x="25" y="74" width="445" height="6" rx="3" class="track"/>
+    <rect x="25" y="73" width="445" height="8" rx="4" class="track"/>
+    <rect x="25" y="73" width="445" height="8" rx="4" fill="url(#ags-inset)"/>
   </g>
-  <rect x="25" y="74" width="445.0" height="6" rx="3" class="grow" fill="#3178c6" style="animation-delay:300ms"/><g class="rise" style="animation-delay:260ms">
+  <g class="grow" style="animation-delay:300ms"><rect x="23" y="71" width="449" height="12" rx="6" fill="#3178c6" opacity=".16"/><rect x="25" y="73" width="445" height="8" rx="4" fill="#3178c6"/><rect x="25" y="73" width="445" height="8" rx="4" fill="url(#ags-sheen)"/></g><g class="rise" style="animation-delay:260ms">
     <text x="25" y="106" class="repo-name">quasar-db</text>
-    <circle cx="386.21" cy="102" r="4" class="dot" fill="#dea584"/>
+    <circle cx="386.2" cy="102" r="4" fill="#dea584"/><circle cx="386.2" cy="102" r="4" fill="url(#ags-sphere)"/>
        <text x="395.21" y="106" class="repo-lang">Rust</text>
     <path class="icon-accent" transform="translate(435.84 95) scale(0.8125)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
     <text x="470" y="106" class="repo-stars" text-anchor="end">4k</text>
-    <rect x="25" y="114" width="445" height="6" rx="3" class="track"/>
+    <rect x="25" y="113" width="445" height="8" rx="4" class="track"/>
+    <rect x="25" y="113" width="445" height="8" rx="4" fill="url(#ags-inset)"/>
   </g>
-  <rect x="25" y="114" width="208.9" height="6" rx="3" class="grow" fill="#dea584" style="animation-delay:410ms"/><g class="rise" style="animation-delay:370ms">
+  <g class="grow" style="animation-delay:410ms"><rect x="23" y="111" width="212.9" height="12" rx="6" fill="#dea584" opacity=".16"/><rect x="25" y="113" width="208.9" height="8" rx="4" fill="#dea584"/><rect x="25" y="113" width="208.9" height="8" rx="4" fill="url(#ags-sheen)"/></g><g class="rise" style="animation-delay:370ms">
     <text x="25" y="146" class="repo-name">orbit-cli</text>
-    <circle cx="387.75" cy="142" r="4" class="dot" fill="#00ADD8"/>
+    <circle cx="387.8" cy="142" r="4" fill="#00ADD8"/><circle cx="387.8" cy="142" r="4" fill="url(#ags-sphere)"/>
        <text x="396.75" y="146" class="repo-lang">Go</text>
     <path class="icon-accent" transform="translate(425.28 135) scale(0.8125)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
     <text x="470" y="146" class="repo-stars" text-anchor="end">2.2k</text>
-    <rect x="25" y="154" width="445" height="6" rx="3" class="track"/>
+    <rect x="25" y="153" width="445" height="8" rx="4" class="track"/>
+    <rect x="25" y="153" width="445" height="8" rx="4" fill="url(#ags-inset)"/>
   </g>
-  <rect x="25" y="154" width="116.8" height="6" rx="3" class="grow" fill="#00ADD8" style="animation-delay:520ms"/><g class="rise" style="animation-delay:480ms">
+  <g class="grow" style="animation-delay:520ms"><rect x="23" y="151" width="120.8" height="12" rx="6" fill="#00ADD8" opacity=".16"/><rect x="25" y="153" width="116.8" height="8" rx="4" fill="#00ADD8"/><rect x="25" y="153" width="116.8" height="8" rx="4" fill="url(#ags-sheen)"/></g><g class="rise" style="animation-delay:480ms">
     <text x="25" y="186" class="repo-name">pulsar-ml</text>
-    <circle cx="363.54999999999995" cy="182" r="4" class="dot" fill="#3572A5"/>
+    <circle cx="363.5" cy="182" r="4" fill="#3572A5"/><circle cx="363.5" cy="182" r="4" fill="url(#ags-sphere)"/>
        <text x="372.54999999999995" y="186" class="repo-lang">Python</text>
     <path class="icon-accent" transform="translate(425.28 175) scale(0.8125)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
     <text x="470" y="186" class="repo-stars" text-anchor="end">1.3k</text>
-    <rect x="25" y="194" width="445" height="6" rx="3" class="track"/>
+    <rect x="25" y="193" width="445" height="8" rx="4" class="track"/>
+    <rect x="25" y="193" width="445" height="8" rx="4" fill="url(#ags-inset)"/>
   </g>
-  <rect x="25" y="194" width="68.1" height="6" rx="3" class="grow" fill="#3572A5" style="animation-delay:630ms"/><g class="rise" style="animation-delay:590ms">
+  <g class="grow" style="animation-delay:630ms"><rect x="23" y="191" width="72.1" height="12" rx="6" fill="#3572A5" opacity=".16"/><rect x="25" y="193" width="68.1" height="8" rx="4" fill="#3572A5"/><rect x="25" y="193" width="68.1" height="8" rx="4" fill="url(#ags-sheen)"/></g><g class="rise" style="animation-delay:590ms">
     <text x="25" y="226" class="repo-name">comet.vim</text>
-    <circle cx="343.41" cy="222" r="4" class="dot" fill="#199f4b"/>
+    <circle cx="343.4" cy="222" r="4" fill="#199f4b"/><circle cx="343.4" cy="222" r="4" fill="url(#ags-sphere)"/>
        <text x="352.41" y="226" class="repo-lang">Vim Script</text>
     <path class="icon-accent" transform="translate(429.12 215) scale(0.8125)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
     <text x="470" y="226" class="repo-stars" text-anchor="end">640</text>
-    <rect x="25" y="234" width="445" height="6" rx="3" class="track"/>
+    <rect x="25" y="233" width="445" height="8" rx="4" class="track"/>
+    <rect x="25" y="233" width="445" height="8" rx="4" fill="url(#ags-inset)"/>
   </g>
-  <rect x="25" y="234" width="33.8" height="6" rx="3" class="grow" fill="#199f4b" style="animation-delay:740ms"/></g>
+  <g class="grow" style="animation-delay:740ms"><rect x="23" y="231" width="37.8" height="12" rx="6" fill="#199f4b" opacity=".16"/><rect x="25" y="233" width="33.8" height="8" rx="4" fill="#199f4b"/><rect x="25" y="233" width="33.8" height="8" rx="4" fill="url(#ags-sheen)"/></g></g>
 </svg>

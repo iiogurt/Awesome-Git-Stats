@@ -6,6 +6,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
+import { gridGloss, gridSheen } from './materials.js';
 
 const MONTHS = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
 const CELL = 11;
@@ -29,14 +30,25 @@ export function renderHeatmap(stats, options) {
   days.forEach((day, i) => {
     const col = Math.floor((i + offset) / 7);
     const row = (i + offset) % 7;
-    const cells = columns.get(col) ?? [];
-    cells.push(
+    const column = columns.get(col) ?? { first: row, cells: [] };
+    column.last = row;
+    column.cells.push(
       `<rect x="${LEFT + col * STEP}" y="${TOP + row * STEP}" width="${CELL}" height="${CELL}" rx="2.5" class="hm${a.levels[i]}"><title>${escapeXml(`${day.date}: ${day.count}`)}</title></rect>`,
     );
-    columns.set(col, cells);
+    columns.set(col, column);
   });
+  // Each column carries its own strip of gloss, so it fades in with its cells.
   const grid = [...columns.entries()]
-    .map(([col, cells]) => `<g class="fade"${delay(options, 150 + col * 14)}>${cells.join('')}</g>`)
+    .map(([col, { first, last, cells }]) => {
+      const gloss = gridGloss({
+        id: 'ags-hm-sheen',
+        x: LEFT + col * STEP,
+        y: TOP + first * STEP,
+        width: CELL,
+        height: (last - first) * STEP + CELL,
+      });
+      return `<g class="fade"${delay(options, 150 + col * 14)}>${cells.join('')}${gloss}</g>`;
+    })
     .join('');
 
   let months = '';
@@ -64,7 +76,7 @@ export function renderHeatmap(stats, options) {
   const legend = [0, 1, 2, 3, 4]
     .map(
       (level, i) =>
-        `<rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="2.5" class="hm${level}"/>`,
+        `<rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="2.5" class="hm${level}"/><rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="2.5" fill="url(#ags-sheen)"/>`,
     )
     .join('');
   const summary = `${formatExact(a.total)} contributions in the last year`;
@@ -74,7 +86,7 @@ export function renderHeatmap(stats, options) {
 
   const body = `
     <text x="${right}" y="35" class="axis fade" text-anchor="end">${escapeXml(best)}</text>
-    ${months}${weekdays}${grid}
+    ${gridSheen({ id: 'ags-hm-sheen', x: LEFT, y: TOP, cell: CELL, step: STEP, rx: 2.5 })}${months}${weekdays}${grid}
     <text x="25" y="${legendY}" class="summary fade"${delay(options, 600)}>${escapeXml(summary)}</text>
     <text x="${right - 36 - 5 * STEP}" y="${legendY}" class="axis" text-anchor="end">Less</text>
     ${legend}

@@ -7,6 +7,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
+import { orb } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 270;
@@ -69,7 +70,7 @@ export function renderRadar(stats, options) {
   const dots = axes
     .map(([key], i) => {
       const [x, y] = at(i, R * Math.max(0.04, scores[key]));
-      return `<circle cx="${r1(x)}" cy="${r1(y)}" r="3" class="dot"/>`;
+      return orb({ cx: x, cy: y, r: 3.5, fill: 'accent' });
     })
     .join('');
   const labels = axes
@@ -94,7 +95,7 @@ export function renderRadar(stats, options) {
   const body = `
     <g transform="translate(${CX} ${CY})">
       <g class="fade">${grid}${spokes}</g>
-      <g class="grow-out"${delay(options, 250)}><path d="M${shape}Z" class="shape"/>${dots}</g>
+      <g class="grow-out"${delay(options, 250)}><path d="M${shape}Z" class="shape"/><path d="M${shape}Z" fill="url(#ags-dome)" opacity=".6"/>${dots}</g>
       <g class="fade"${delay(options, 400)}>${labels}</g>
     </g>
     <g class="fade"${delay(options, 300)}>
@@ -106,8 +107,7 @@ export function renderRadar(stats, options) {
   const css = `
     .grid{fill:none;stroke:var(--track);stroke-width:1}
     .grid-mid{stroke-dasharray:3 3;stroke:var(--muted);stroke-opacity:.5}
-    .shape{fill:var(--accent);fill-opacity:.28;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
-    .dot{fill:var(--accent)}
+    .shape{fill:var(--accent);fill-opacity:.32;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
     .axis{font-size:11px;fill:var(--muted)}
     .rank{font-size:30px;font-weight:800;fill:var(--title)}
     .rank-note{font-size:11px;fill:var(--muted)}

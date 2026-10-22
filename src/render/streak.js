@@ -8,6 +8,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
+import { glassDisc, ringLight } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 195;
@@ -56,7 +57,9 @@ export function renderStreak(stats, options) {
   const currentDates = currentRange(a.days, current);
   const cx = WIDTH / 2;
   const ring = `<g class="fade"${delay(options, 100)}>
+      ${glassDisc({ cx, cy: 98, r: 33 })}
       <circle cx="${cx}" cy="98" r="38" class="ring"/>
+      ${ringLight({ cx, cy: 98, r: 38, stroke: 6 })}
       <circle cx="${cx}" cy="60" r="11" class="flame-gap"/>
       <g class="flame">${icon(FLAME_PATH, { x: cx - 9, y: 50, size: 18, className: 'icon-accent' })}</g>
     </g>`;
@@ -75,7 +78,7 @@ export function renderStreak(stats, options) {
     .label-accent{font-size:13px;font-weight:700;fill:var(--accent)}
     .dates{font-size:11px;fill:var(--muted)}
     .divider{stroke:var(--track);stroke-width:1}
-    .ring{fill:none;stroke:var(--accent);stroke-width:5}
+    .ring{fill:none;stroke:var(--accent);stroke-width:6}
     .flame-gap{fill:var(--bg)}
     ${
       options.animate

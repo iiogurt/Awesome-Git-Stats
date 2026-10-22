@@ -1,4 +1,5 @@
 import { renderArt } from './art.js';
+import { materialDefs } from './materials.js';
 
 const FONTS = {
   sans: "'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -195,7 +196,7 @@ export function renderFrame({
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${finalHeight}" viewBox="0 0 ${width} ${finalHeight}" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">${escapeXml(label || title || 'GitHub stars')}</title>
-  <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}</defs>
+  <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}${materialDefs(body)}</defs>
   <style>
     svg{${themeVars(theme)}}
     ${darkBlock}
@@ -207,6 +208,7 @@ export function renderFrame({
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:${bgFill};stroke:var(--border);stroke-width:${strokeWidth};stroke-opacity:${borderOpacity}}
     ${glow}
     ${motion}

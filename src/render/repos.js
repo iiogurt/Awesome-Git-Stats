@@ -9,6 +9,7 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
+import { glossBar, orb, track } from './materials.js';
 
 const WIDTH = 495;
 const ROW = 40;
@@ -25,15 +26,11 @@ function row(repo, index, maxStars, options) {
   const langWidth = langText ? measureText(langText, 11) + 16 : 0;
   const langX = starX - 12 - langWidth;
   const nameWidth = Math.max(langX - BAR_X - 10, 80);
-  // CSS variables are not allowed in presentation attributes, so repos
-  // without a language colour use the theme accent through a class.
-  const fillAttr = repo.languageColor ? ` fill="${repo.languageColor}"` : '';
-  const fillClass = repo.languageColor ? '' : ' accent';
-  const fill = maxStars ? Math.max((repo.stars / maxStars) * BAR_WIDTH, 6) : 6;
+  const fill = maxStars ? Math.max((repo.stars / maxStars) * BAR_WIDTH, 8) : 8;
   const wait = 150 + index * 110;
 
   const language = langText
-    ? `<circle cx="${langX + 4}" cy="${y + 10}" r="4" class="dot${fillClass}"${fillAttr}/>
+    ? `${orb({ cx: langX + 4, cy: y + 10, r: 4, fill: repo.languageColor ?? 'accent' })}
        <text x="${langX + 13}" y="${y + 14}" class="repo-lang">${escapeXml(langText)}</text>`
     : '';
 
@@ -42,9 +39,9 @@ function row(repo, index, maxStars, options) {
     ${language}
     ${icon(STAR_PATH, { x: starX, y: y + 3, size: 13, className: 'icon-accent' })}
     <text x="${WIDTH - 25}" y="${y + 14}" class="repo-stars" text-anchor="end">${count}</text>
-    <rect x="${BAR_X}" y="${y + 22}" width="${BAR_WIDTH}" height="6" rx="3" class="track"/>
+    ${track({ x: BAR_X, y: y + 21, width: BAR_WIDTH, height: 8 })}
   </g>
-  <rect x="${BAR_X}" y="${y + 22}" width="${fill.toFixed(1)}" height="6" rx="3" class="grow${fillClass}"${fillAttr}${delay(options, wait + 150)}/>`;
+  ${glossBar({ x: BAR_X, y: y + 21, width: fill, height: 8, fill: repo.languageColor ?? 'accent', attrs: ` class="grow"${delay(options, wait + 150)}` })}`;
 }
 
 export function renderRepos(stats, options) {

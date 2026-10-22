@@ -8,6 +8,7 @@ import {
   measureText,
   renderFrame,
 } from './common.js';
+import { orb, track } from './materials.js';
 
 const WIDTH = 350;
 const HEIGHT = 128;
@@ -25,8 +26,8 @@ function stackedBar(languages, options) {
     })
     .join('');
   return `<clipPath id="ags-bar"><rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" rx="4"/></clipPath>
-  <rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" rx="4" class="track"/>
-  <g clip-path="url(#ags-bar)"><g class="grow"${delay(options, 300)}>${segments}</g></g>`;
+  ${track({ x: BAR_X, y: 86, width: BAR_WIDTH, height: 8 })}
+  <g clip-path="url(#ags-bar)"><g class="grow"${delay(options, 300)}>${segments}<rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" fill="url(#ags-sheen)"/></g></g>`;
 }
 
 function inlineLegend(languages, options) {
@@ -37,7 +38,7 @@ function inlineLegend(languages, options) {
     const width = measureText(text, 11) * 0.92 + 24;
     if (x + width > WIDTH - 15) break;
     items.push(`<g class="fade"${delay(options, 500 + i * 80)}>
-      <circle cx="${x + 4}" cy="110" r="4" fill="${lang.color}"/>
+      ${orb({ cx: x + 4, cy: 110, r: 4, fill: lang.color })}
       <text x="${x + 12}" y="114" class="legend">${escapeXml(text)}</text>
     </g>`);
     x += width;
@@ -53,7 +54,7 @@ export function renderCompact(stats, options) {
 
   const languages = stats.languages.length
     ? `${stackedBar(stats.languages, options)}${inlineLegend(stats.languages, options)}`
-    : `<rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" rx="4" class="track"/>`;
+    : track({ x: BAR_X, y: 86, width: BAR_WIDTH, height: 8 });
 
   const body = `
   <g class="rise"${delay(options, 100)}>
