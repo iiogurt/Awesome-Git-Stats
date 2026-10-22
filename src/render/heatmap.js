@@ -6,7 +6,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
-import { gridCast, gridGloss, gridSheen } from './materials.js';
+import { cellRx, cover, gridCast, gridGloss, gridSheen } from './materials.js';
 
 const MONTHS = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
 const CELL = 11;
@@ -33,7 +33,7 @@ export function renderHeatmap(stats, options) {
     const column = columns.get(col) ?? { first: row, cells: [] };
     column.last = row;
     column.cells.push(
-      `<rect x="${LEFT + col * STEP}" y="${TOP + row * STEP}" width="${CELL}" height="${CELL}" rx="2.5" class="hm${a.levels[i]}"><title>${escapeXml(`${day.date}: ${day.count}`)}</title></rect>`,
+      `<rect x="${LEFT + col * STEP}" y="${TOP + row * STEP}" width="${CELL}" height="${CELL}" rx="${cellRx(2.5)}" class="hm${a.levels[i]}"><title>${escapeXml(`${day.date}: ${day.count}`)}</title></rect>`,
     );
     columns.set(col, column);
   });
@@ -76,7 +76,7 @@ export function renderHeatmap(stats, options) {
   const legend = [0, 1, 2, 3, 4]
     .map(
       (level, i) =>
-        `<rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="2.5" class="hm${level}"/><rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="2.5" fill="url(#ags-sheen)"/>`,
+        `<rect x="${right - 30 - (5 - i) * STEP}" y="${legendY - 9}" width="${CELL}" height="${CELL}" rx="${cellRx(2.5)}" class="hm${level}"/>${cover({ x: right - 30 - (5 - i) * STEP, y: legendY - 9, width: CELL, height: CELL, rx: cellRx(2.5) }, 'cell')}`,
     )
     .join('');
   const summary = `${formatExact(a.total)} contributions in the last year`;

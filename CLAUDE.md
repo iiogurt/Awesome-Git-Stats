@@ -25,10 +25,12 @@ earned, for embedding in profile READMEs with one Markdown image link:
 - 45 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
   disable), generated from a PRNG seeded with the username, so each account's art is unique
   but stable.
-- 4 surface **finishes** in `src/render/materials.js` (`finish=gloss|soft|paper|flat`): shared
-  helpers (`track`, `glossBar`, `orb`, `glassPanel`, `ringLight`, grid patterns) draw shapes
-  with white/black gradient overlays; a finish only swaps the gradient stops and the CSS for
-  `.halo`/`.cast`/`.backing`. Use the helpers for new bars, dots and panels.
+- 10 surface **finishes** in `src/render/materials.js` (`finish=gloss|soft|paper|chrome|holo|
+neon|pixel|sketch|block|flat`). Renderers draw shapes through the helpers (`track`,
+  `glossBar`, `orb`, `glassPanel`, `glassDisc`, `ringLight`, `discBase`, grid patterns, plus
+  `cover`/`underlay` for their own shapes and `cellRx` for corners); the finish chosen by
+  `renderCard` (`useFinish`) adds the layers under and over each shape. Use the helpers for new
+  bars, dots and panels, and check new shapes in every finish (labels must stay readable).
 - Light and dark mode: two separate cards shown through a `<picture>` element, which GitHub
   switches by the viewer's GitHub appearance setting (Action input `dark-theme`, where `match`
   uses the design's pair, plus `dark-options`; link builder "Light and dark mode").

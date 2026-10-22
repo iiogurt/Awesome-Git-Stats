@@ -17,7 +17,17 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
-import { glassPanel, glossBar, gridCast, gridGloss, gridSheen, orb, track } from './materials.js';
+import {
+  cellRx,
+  cover,
+  glassPanel,
+  glossBar,
+  gridCast,
+  gridGloss,
+  gridSheen,
+  orb,
+  track,
+} from './materials.js';
 
 const WIDTH = 820;
 const HEIGHT = 470;
@@ -111,7 +121,7 @@ function heatmap(activity, options) {
     const column = columns.get(col);
     column.last = row;
     column.cells.push(
-      `<rect x="${LEFT + col * step}" y="${top + row * step}" width="${cell}" height="${cell}" rx="2" class="hm${levels[i]}"/>`,
+      `<rect x="${LEFT + col * step}" y="${top + row * step}" width="${cell}" height="${cell}" rx="${cellRx(2)}" class="hm${levels[i]}"/>`,
     );
   });
 
@@ -146,7 +156,7 @@ function heatmap(activity, options) {
   const legend = [4, 3, 2, 1, 0]
     .map(
       (level, i) =>
-        `<rect x="${legendX - 30 - (i + 1) * step}" y="${top + 7 * step + 6}" width="${cell}" height="${cell}" rx="2" class="hm${level}"/>`,
+        `<rect x="${legendX - 30 - (i + 1) * step}" y="${top + 7 * step + 6}" width="${cell}" height="${cell}" rx="${cellRx(2)}" class="hm${level}"/>`,
     )
     .join('');
   const best = activity.best
@@ -293,7 +303,7 @@ function languages(stats, options) {
   return `<text x="${LEFT}" y="${top - 8}" class="section">Stars by language</text>
     <clipPath id="ags-langs"><rect x="${LEFT}" y="${top}" width="${width}" height="8" rx="4"/></clipPath>
     ${track({ x: LEFT, y: top, width, height: 8 })}
-    ${stats.languages.length ? `<g clip-path="url(#ags-langs)"><g class="grow"${delay(options, 700)}>${segments}<rect x="${LEFT}" y="${top}" width="${width}" height="8" fill="url(#ags-sheen)"/></g></g>${legend}` : ''}`;
+    ${stats.languages.length ? `<g clip-path="url(#ags-langs)"><g class="grow"${delay(options, 700)}>${segments}${cover({ x: LEFT, y: top, width, height: 8 }, 'bar')}</g></g>${legend}` : ''}`;
 }
 
 function emptyState(stats) {

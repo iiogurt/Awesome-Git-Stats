@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { LAYOUTS, parseOptions } from '../src/options.js';
+import { FINISH_NAMES } from '../src/render/materials.js';
 import { renderCard, renderError } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { themeNames } from '../src/themes.js';
@@ -137,32 +138,72 @@ describe('finishes', () => {
 
   it('render every layout well formed in every finish', () => {
     for (const layout of LAYOUTS) {
-      for (const finish of ['gloss', 'soft', 'paper', 'flat']) {
-        assertWellFormed(render({ layout, finish, theme: 'tokyonight' }));
+      for (const finish of FINISH_NAMES) {
+        for (const theme of ['tokyonight', 'light']) {
+          assertWellFormed(render({ layout, finish, theme }));
+          assertWellFormed(render({ layout, finish, theme, disable_animations: 'true' }));
+        }
       }
     }
   });
 
-  it('change the light, not the shapes', () => {
-    const gloss = render({ layout: 'repos' });
-    const paper = render({ layout: 'repos', finish: 'paper' });
-    assert.equal(
-      gloss.replace(/<defs>.*<\/defs>|<style>[^]*<\/style>/g, ''),
-      paper.replace(/<defs>.*<\/defs>|<style>[^]*<\/style>/g, ''),
-    );
-    assert.notEqual(stopsOf(gloss, 'ags-sheen'), stopsOf(paper, 'ags-sheen'));
+  it('look different from each other', () => {
+    const cards = FINISH_NAMES.map((finish) => render({ layout: 'dashboard', finish }));
+    assert.equal(new Set(cards).size, FINISH_NAMES.length);
   });
 
-  it('show shadows on paper and soft plastic, a glow on gloss', () => {
-    assert.match(render({ layout: 'repos', finish: 'paper' }), /\.cast\{opacity:[.\d]+\}/);
-    assert.match(render({ layout: 'repos', finish: 'soft' }), /\.cast\{opacity:[.\d]+\}/);
-    assert.match(render({ layout: 'repos' }), /\.cast,\.backing\{display:none\}/);
+  it('keep the gloss as the default', () => {
+    assert.equal(render({ layout: 'repos' }), render({ layout: 'repos', finish: 'gloss' }));
+    assert.equal(render({ layout: 'repos', finish: 'velvet' }), render({ layout: 'repos' }));
+  });
+
+  it('cut pixel shapes into a mosaic with square corners', () => {
+    const svg = render({ layout: 'repos', finish: 'pixel' });
+    assert.match(svg, /fill="url\(#ags-pix\)"/);
+    assert.match(svg, /id="ags-pix"/);
+    // Only the card itself keeps its rounded corners.
+    assert.doesNotMatch(svg.replace(/<rect[^>]*class="card"\/>/, ''), /rx="[1-9]/);
+    assert.doesNotMatch(svg, /<circle/);
+  });
+
+  it('hollow neon shapes into outlines', () => {
+    const svg = render({ layout: 'languages', finish: 'neon' });
+    assert.match(svg, /class="hollow"/);
+    assert.match(svg, /\.hollow\{fill:var\(--bg\)/);
+  });
+
+  it('hatch and outline sketches by hand, the same way every time', () => {
+    const svg = render({ layout: 'repos', finish: 'sketch' });
+    assert.match(svg, /fill="url\(#ags-hatch\)"/);
+    assert.match(svg, /class="pencil"/);
+    assert.equal(svg, render({ layout: 'repos', finish: 'sketch' }));
+  });
+
+  it('extrude blocks with a side under every bar', () => {
+    const gloss = render({ layout: 'repos' });
+    const block = render({ layout: 'repos', finish: 'block' });
+    const rects = (svg) => (svg.match(/<rect/g) ?? []).length;
+    assert.ok(rects(block) > rects(gloss) + 20);
+  });
+
+  it('animate the holographic foil only when animations are on', () => {
+    assert.match(render({ layout: 'repos', finish: 'holo' }), /@keyframes ags-holo/);
+    assert.doesNotMatch(
+      render({ layout: 'repos', finish: 'holo', disable_animations: 'true' }),
+      /@keyframes ags-holo/,
+    );
+  });
+
+  it('turn chrome colours to metal and keep soft and paper', () => {
+    assert.match(render({ layout: 'repos', finish: 'chrome' }), /fill="#9aa3ad"/);
+    const soft = render({ layout: 'repos', finish: 'soft' });
+    const paper = render({ layout: 'repos', finish: 'paper' });
+    assert.notEqual(stopsOf(soft, 'ags-sheen'), stopsOf(paper, 'ags-sheen'));
   });
 
   it('paint nothing extra when flat', () => {
-    const flat = render({ layout: 'languages', finish: 'flat' });
-    assert.equal(stopsOf(flat, 'ags-sheen'), '');
-    assert.match(flat, /\.halo,\.cast,\.backing\{display:none\}/);
+    const flat = render({ layout: 'languages', lang_style: 'donut', finish: 'flat' });
+    assert.doesNotMatch(flat, /url\(#ags-(sheen|sphere|inset|ring-light|hole)\)/);
   });
 });
 

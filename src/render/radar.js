@@ -7,7 +7,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
-import { orb } from './materials.js';
+import { cover, orb } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 270;
@@ -95,7 +95,7 @@ export function renderRadar(stats, options) {
   const body = `
     <g transform="translate(${CX} ${CY})">
       <g class="fade">${grid}${spokes}</g>
-      <g class="grow-out"${delay(options, 250)}><path d="M${shape}Z" class="shape"/><path d="M${shape}Z" fill="url(#ags-dome)" opacity=".6"/>${dots}</g>
+      <g class="grow-out"${delay(options, 250)}><path d="M${shape}Z" class="shape"/>${cover({ d: `M${shape}Z` }, 'shape')}${dots}</g>
       <g class="fade"${delay(options, 400)}>${labels}</g>
     </g>
     <g class="fade"${delay(options, 300)}>

@@ -25,7 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
-    .cast,.backing{display:none}.halo{opacity:.16}
+    .halo{opacity:.16}
     
     .lang-name{font-size:12px;fill:var(--text)}
     .lang-pct{font-size:11px;fill:var(--muted)}
@@ -41,35 +41,35 @@
   <rect x="0.5" y="0.5" rx="10" width="399" height="201" class="card"/>
   
   <text x="25" y="35" class="title fade">Most Used Languages</text>
-  <g transform="translate(0 0)"><text x="375" y="35" class="lang-note fade" text-anchor="end">by code size</text><ellipse cx="90" cy="181" rx="46.8" ry="6" fill="url(#ags-drop)"/>
+  <g transform="translate(0 0)"><text x="375" y="35" class="lang-note fade" text-anchor="end">by code size</text><ellipse cx="90" cy="182" rx="57" ry="6.5" fill="url(#ags-drop)"/>
     <g class="spin-in" style="animation-delay:150ms"><circle cx="90" cy="117" r="52" stroke-width="20" fill="none" class="ring-track"/><circle cx="90" cy="117" r="52" stroke="#dea584" stroke-width="20" fill="none" stroke-dasharray="100.7 326.7" stroke-dashoffset="0" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#3178c6" stroke-width="20" fill="none" stroke-dasharray="81.6 326.7" stroke-dashoffset="-102.7" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#00ADD8" stroke-width="20" fill="none" stroke-dasharray="38.3 326.7" stroke-dashoffset="-186.3" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#3572A5" stroke-width="20" fill="none" stroke-dasharray="30.1 326.7" stroke-dashoffset="-226.6" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#DA5B0B" stroke-width="20" fill="none" stroke-dasharray="15.4 326.7" stroke-dashoffset="-258.7" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#8b949e" stroke-width="20" fill="none" stroke-dasharray="48.6 326.7" stroke-dashoffset="-276.1" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" fill="none" stroke="url(#ags-ring-light)" stroke-width="20"/>
     <circle cx="90" cy="117" r="42" fill="url(#ags-hole)"/></g>
     <g class="fade" style="animation-delay:700ms">
-      <circle cx="90" cy="117" r="37" class="glass"/><circle cx="90" cy="117" r="37" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
+      <circle cx="90" cy="117" r="37" class="glass"/><circle cx="90" cy="117" r="37" fill="url(#ags-glass)"/><circle cx="90" cy="117" r="37" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
       <text x="90" y="120" class="core-pct" text-anchor="middle">31%</text>
       <text x="90" y="134" class="core-name" text-anchor="middle">Rust</text>
     </g><g class="rise" style="animation-delay:300ms">
-        <circle cx="195.6" cy="63" r="5" fill="#000" class="cast"/><circle cx="195" cy="62" r="5" fill="#dea584"/><circle cx="195" cy="62" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="62" r="5" fill="#dea584"/><circle cx="195" cy="62" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="66" class="lang-name">Rust</text>
         <text x="375" y="66" class="lang-pct" text-anchor="end">31%</text>
       </g><g class="rise" style="animation-delay:380ms">
-        <circle cx="195.6" cy="85" r="5" fill="#000" class="cast"/><circle cx="195" cy="84" r="5" fill="#3178c6"/><circle cx="195" cy="84" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="84" r="5" fill="#3178c6"/><circle cx="195" cy="84" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="88" class="lang-name">TypeScript</text>
         <text x="375" y="88" class="lang-pct" text-anchor="end">26%</text>
       </g><g class="rise" style="animation-delay:460ms">
-        <circle cx="195.6" cy="107" r="5" fill="#000" class="cast"/><circle cx="195" cy="106" r="5" fill="#00ADD8"/><circle cx="195" cy="106" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="106" r="5" fill="#00ADD8"/><circle cx="195" cy="106" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="110" class="lang-name">Go</text>
         <text x="375" y="110" class="lang-pct" text-anchor="end">12%</text>
       </g><g class="rise" style="animation-delay:540ms">
-        <circle cx="195.6" cy="129" r="5" fill="#000" class="cast"/><circle cx="195" cy="128" r="5" fill="#3572A5"/><circle cx="195" cy="128" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="128" r="5" fill="#3572A5"/><circle cx="195" cy="128" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="132" class="lang-name">Python</text>
         <text x="375" y="132" class="lang-pct" text-anchor="end">9.8%</text>
       </g><g class="rise" style="animation-delay:620ms">
-        <circle cx="195.6" cy="151" r="5" fill="#000" class="cast"/><circle cx="195" cy="150" r="5" fill="#DA5B0B"/><circle cx="195" cy="150" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="150" r="5" fill="#DA5B0B"/><circle cx="195" cy="150" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="154" class="lang-name">Jupyter Notebook</text>
         <text x="375" y="154" class="lang-pct" text-anchor="end">5.3%</text>
       </g><g class="rise" style="animation-delay:700ms">
-        <circle cx="195.6" cy="173" r="5" fill="#000" class="cast"/><circle cx="195" cy="172" r="5" fill="#8b949e"/><circle cx="195" cy="172" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="195" cy="172" r="5" fill="#8b949e"/><circle cx="195" cy="172" r="5" fill="url(#ags-sphere)"/>
         <text x="207" y="176" class="lang-name">Other</text>
         <text x="375" y="176" class="lang-pct" text-anchor="end">15%</text>
       </g></g>

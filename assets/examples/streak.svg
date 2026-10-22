@@ -25,7 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
-    .cast,.backing{display:none}.halo{opacity:.16}
+    .halo{opacity:.16}
     
     .big{font-size:28px;font-weight:800;fill:var(--title)}
     .streak-big{font-size:28px;font-weight:800;fill:var(--accent)}
@@ -51,7 +51,7 @@
     <text x="82" y="155" class="dates" text-anchor="middle">Oct 12, 2025 – Present</text>
   </g>
     <g class="fade" style="animation-delay:100ms">
-      <circle cx="247.5" cy="98" r="33" class="glass"/><circle cx="247.5" cy="98" r="33" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
+      <circle cx="247.5" cy="98" r="33" class="glass"/><circle cx="247.5" cy="98" r="33" fill="url(#ags-glass)"/><circle cx="247.5" cy="98" r="33" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
       <circle cx="247.5" cy="98" r="38" class="ring"/>
       <circle cx="247.5" cy="98" r="38" fill="none" stroke="url(#ags-ring-light)" stroke-width="6"/>
     <circle cx="247.5" cy="98" r="35" fill="url(#ags-hole)"/>

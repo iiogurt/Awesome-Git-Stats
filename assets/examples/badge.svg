@@ -17,7 +17,7 @@
     
     
     
-    
+    .halo{opacity:.16}
     
     .badge-left{fill:var(--accent)}
     .badge-ink{fill:#1b1f24}

@@ -25,7 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
-    .cast,.backing{display:none}.halo{opacity:.16}
+    .halo{opacity:.16}
     
     .cell{fill-opacity:.9}
     .cell-name{font-size:12px;font-weight:700}
@@ -40,64 +40,54 @@
   
   <text x="25" y="35" class="title fade">Stellar Dev&#39;s Repositories</text>
   <g transform="translate(0 0)"><g class="pop" style="animation-delay:100ms">
-        <rect x="27.5" y="55" width="209.2" height="193" rx="5" fill="#000" class="cast"/>
+        
         <rect x="26.5" y="53.5" width="209.2" height="193" rx="5" fill="#3178c6" class="cell"><title>nebula-ui: 8,421 stars</title></rect>
-        <rect x="26.5" y="53.5" width="209.2" height="193" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="26.5" y="53.5" width="209.2" height="193" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="26.5" y="53.5" width="209.2" height="193" rx="5" fill="url(#ags-sheen-soft)"/><rect x="26.5" y="53.5" width="209.2" height="193" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="33" y="70" class="cell-name" fill="#ffffff">nebula-ui</text><g opacity=".85"><path fill="#ffffff" class="cell-icon" transform="translate(33 78) scale(0.6875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="48" y="88" class="cell-stars" fill="#ffffff">8.4k</text></g>
       </g><g class="pop" style="animation-delay:170ms">
-        <rect x="239.7" y="55" width="96.7" height="193" rx="5" fill="#000" class="cast"/>
+        
         <rect x="238.7" y="53.5" width="96.7" height="193" rx="5" fill="#dea584" class="cell"><title>quasar-db: 3,954 stars</title></rect>
-        <rect x="238.7" y="53.5" width="96.7" height="193" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="238.7" y="53.5" width="96.7" height="193" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="238.7" y="53.5" width="96.7" height="193" rx="5" fill="url(#ags-sheen-soft)"/><rect x="238.7" y="53.5" width="96.7" height="193" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="245.2" y="70" class="cell-name" fill="#1f2328">quasar-db</text><g opacity=".85"><path fill="#1f2328" class="cell-icon" transform="translate(245.2 78) scale(0.6875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="260.2" y="88" class="cell-stars" fill="#1f2328">4k</text></g>
       </g><g class="pop" style="animation-delay:240ms">
-        <rect x="339.4" y="55" width="130.1" height="79" rx="5" fill="#000" class="cast"/>
+        
         <rect x="338.4" y="53.5" width="130.1" height="79" rx="5" fill="#00ADD8" class="cell"><title>orbit-cli: 2,210 stars</title></rect>
-        <rect x="338.4" y="53.5" width="130.1" height="79" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="338.4" y="53.5" width="130.1" height="79" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="338.4" y="53.5" width="130.1" height="79" rx="5" fill="url(#ags-sheen-soft)"/><rect x="338.4" y="53.5" width="130.1" height="79" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="344.9" y="70" class="cell-name" fill="#ffffff">orbit-cli</text><g opacity=".85"><path fill="#ffffff" class="cell-icon" transform="translate(344.9 78) scale(0.6875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="359.9" y="88" class="cell-stars" fill="#ffffff">2.2k</text></g>
       </g><g class="pop" style="animation-delay:310ms">
-        <rect x="339.4" y="137" width="52.8" height="111" rx="5" fill="#000" class="cast"/>
+        
         <rect x="338.4" y="135.5" width="52.8" height="111" rx="5" fill="#3572A5" class="cell"><title>pulsar-ml: 1,288 stars</title></rect>
-        <rect x="338.4" y="135.5" width="52.8" height="111" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="338.4" y="135.5" width="52.8" height="111" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="338.4" y="135.5" width="52.8" height="111" rx="5" fill="url(#ags-sheen-soft)"/><rect x="338.4" y="135.5" width="52.8" height="111" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="344.9" y="152" class="cell-name" fill="#ffffff">pulsa…</text>
       </g><g class="pop" style="animation-delay:380ms">
-        <rect x="395.2" y="137" width="74.3" height="37.9" rx="5" fill="#000" class="cast"/>
+        
         <rect x="394.2" y="135.5" width="74.3" height="37.9" rx="5" fill="#199f4b" class="cell"><title>comet.vim: 640 stars</title></rect>
-        <rect x="394.2" y="135.5" width="74.3" height="37.9" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="394.2" y="135.5" width="74.3" height="37.9" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="394.2" y="135.5" width="74.3" height="37.9" rx="5" fill="url(#ags-sheen-soft)"/><rect x="394.2" y="135.5" width="74.3" height="37.9" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="400.7" y="152" class="cell-name" fill="#ffffff">comet.vi…</text>
       </g><g class="pop" style="animation-delay:450ms">
-        <rect x="395.2" y="177.9" width="57.1" height="39.1" rx="5" fill="#000" class="cast"/>
+        
         <rect x="394.2" y="176.4" width="57.1" height="39.1" rx="5" fill="#3178c6" class="cell"><title>gravity-hooks: 512 stars</title></rect>
-        <rect x="394.2" y="176.4" width="57.1" height="39.1" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="394.2" y="176.4" width="57.1" height="39.1" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="394.2" y="176.4" width="57.1" height="39.1" rx="5" fill="url(#ags-sheen-soft)"/><rect x="394.2" y="176.4" width="57.1" height="39.1" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="400.7" y="192.9" class="cell-name" fill="#ffffff">gravi…</text>
       </g><g class="pop" style="animation-delay:520ms">
-        <rect x="395.2" y="220" width="57.1" height="28" rx="5" fill="#000" class="cast"/>
+        
         <rect x="394.2" y="218.5" width="57.1" height="28" rx="5" fill="#663399" class="cell"><title>eclipse-theme: 377 stars</title></rect>
-        <rect x="394.2" y="218.5" width="57.1" height="28" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="394.2" y="218.5" width="57.1" height="28" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="394.2" y="218.5" width="57.1" height="28" rx="5" fill="url(#ags-sheen-soft)"/><rect x="394.2" y="218.5" width="57.1" height="28" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         <text x="400.7" y="235" class="cell-name" fill="#ffffff">eclips…</text>
       </g><g class="pop" style="animation-delay:590ms">
-        <rect x="455.3" y="177.9" width="14.2" height="38.7" rx="5" fill="#000" class="cast"/>
+        
         <rect x="454.3" y="176.4" width="14.2" height="38.7" rx="5" fill="#f1e05a" class="cell"><title>meteor-shower: 145 stars</title></rect>
-        <rect x="454.3" y="176.4" width="14.2" height="38.7" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="454.3" y="176.4" width="14.2" height="38.7" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="454.3" y="176.4" width="14.2" height="38.7" rx="5" fill="url(#ags-sheen-soft)"/><rect x="454.3" y="176.4" width="14.2" height="38.7" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         
       </g><g class="pop" style="animation-delay:660ms">
-        <rect x="455.3" y="219.6" width="14.2" height="22.3" rx="5" fill="#000" class="cast"/>
+        
         <rect x="454.3" y="218.1" width="14.2" height="22.3" rx="5" fill="#89e051" class="cell"><title>dotfiles: 88 stars</title></rect>
-        <rect x="454.3" y="218.1" width="14.2" height="22.3" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="454.3" y="218.1" width="14.2" height="22.3" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="454.3" y="218.1" width="14.2" height="22.3" rx="5" fill="url(#ags-sheen-soft)"/><rect x="454.3" y="218.1" width="14.2" height="22.3" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         
       </g><g class="pop" style="animation-delay:730ms">
-        <rect x="455.3" y="245" width="14.2" height="3" rx="5" fill="#000" class="cast"/>
+        
         <rect x="454.3" y="243.5" width="14.2" height="3" rx="5" fill="#555555" class="cell"><title>blackhole: 21 stars</title></rect>
-        <rect x="454.3" y="243.5" width="14.2" height="3" rx="5" fill="url(#ags-sheen-soft)"/>
-        <rect x="454.3" y="243.5" width="14.2" height="3" rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
+        <rect x="454.3" y="243.5" width="14.2" height="3" rx="5" fill="url(#ags-sheen-soft)"/><rect x="454.3" y="243.5" width="14.2" height="3" rx="5" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
         
       </g><text x="25" y="261" class="note fade" style="animation-delay:900ms">17,656 stars across 10 repositories · area by stars, colour by language</text></g>
 </svg>

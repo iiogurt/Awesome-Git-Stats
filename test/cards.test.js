@@ -51,7 +51,8 @@ describe('card options', () => {
     assert.equal(parse({}).finish, 'gloss');
     assert.equal(parse({ finish: 'Paper' }).finish, 'paper');
     assert.equal(parse({ finish: 'soft' }).finish, 'soft');
-    assert.equal(parse({ finish: 'chrome' }).finish, 'gloss');
+    assert.equal(parse({ finish: 'NEON' }).finish, 'neon');
+    assert.equal(parse({ finish: 'velvet' }).finish, 'gloss');
   });
 });
 
