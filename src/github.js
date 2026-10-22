@@ -16,7 +16,7 @@ export class GitHubError extends Error {
 }
 
 const QUERY = `
-query ($login: String!, $after: String, $isFork: Boolean) {
+query ($login: String!, $after: String, $isFork: Boolean, $languages: Boolean = false) {
   repositoryOwner(login: $login) {
     __typename
     login
@@ -40,7 +40,39 @@ query ($login: String!, $after: String, $isFork: Boolean) {
         isFork
         isArchived
         primaryLanguage { name color }
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) @include(if: $languages) {
+          edges { size node { name color } }
+        }
       }
+    }
+  }
+}`;
+
+const REPO_QUERY = `
+query ($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
+    name
+    nameWithOwner
+    description
+    stargazerCount
+    forkCount
+    isFork
+    isArchived
+    isTemplate
+    primaryLanguage { name color }
+  }
+}`;
+
+const GIST_QUERY = `
+query ($login: String!, $id: String!) {
+  user(login: $login) {
+    gist(name: $id) {
+      name
+      description
+      stargazerCount
+      isFork
+      forks { totalCount }
+      files(limit: 10) { name language { name color } }
     }
   }
 }`;
@@ -92,8 +124,15 @@ function normaliseActivity(user) {
   };
 }
 
+const colorOf = (name, color) => parseColor(color ?? (name ? languageColors[name] : null));
+
 function normaliseRepo(node) {
   const language = node.primaryLanguage?.name ?? node.language ?? null;
+  const code = node.languages?.edges?.map((edge) => ({
+    name: edge.node.name,
+    color: colorOf(edge.node.name, edge.node.color),
+    size: edge.size,
+  }));
   return {
     name: node.name,
     description: node.description ?? '',
@@ -102,9 +141,9 @@ function normaliseRepo(node) {
     isFork: Boolean(node.isFork ?? node.fork),
     isArchived: Boolean(node.isArchived ?? node.archived),
     language,
-    languageColor: parseColor(
-      node.primaryLanguage?.color ?? (language ? languageColors[language] : null),
-    ),
+    languageColor: colorOf(language, node.primaryLanguage?.color),
+    // Bytes of code per language, only when asked for (GraphQL only).
+    ...(code ? { codeLanguages: code } : {}),
   };
 }
 
@@ -171,7 +210,10 @@ async function graphqlWithFailover(fetchImpl, tokens, variables, state, query) {
   throw lastError;
 }
 
-async function fetchWithGraphQL(username, { tokens, includeForks, activity, fetchImpl }) {
+async function fetchWithGraphQL(
+  username,
+  { tokens, includeForks, activity, codeLanguages, fetchImpl },
+) {
   const repos = [];
   const state = { index: rotation++ % tokens.length };
   let owner = null;
@@ -180,7 +222,7 @@ async function fetchWithGraphQL(username, { tokens, includeForks, activity, fetc
     const data = await graphqlWithFailover(
       fetchImpl,
       tokens,
-      { login: username, after, isFork: includeForks ? null : false },
+      { login: username, after, isFork: includeForks ? null : false, languages: codeLanguages },
       state,
     );
     const node = data?.repositoryOwner;
@@ -194,9 +236,10 @@ async function fetchWithGraphQL(username, { tokens, includeForks, activity, fetc
     };
     const nodes = node.repositories.nodes.map(normaliseRepo);
     repos.push(...nodes);
-    // Repositories are sorted by stars, so once we reach zero we can stop.
+    // Repositories are sorted by stars, so once we reach zero we can stop,
+    // unless every repository counts (languages by code size).
     const lastStars = nodes.at(-1)?.stars ?? 0;
-    if (!node.repositories.pageInfo.hasNextPage || lastStars === 0) break;
+    if (!node.repositories.pageInfo.hasNextPage || (lastStars === 0 && !codeLanguages)) break;
     after = node.repositories.pageInfo.endCursor;
   }
   let activityData = null;
@@ -286,12 +329,117 @@ export async function fetchAccount(
     tokens = tokensFromEnv(),
     includeForks = false,
     activity = false,
+    codeLanguages = false,
     fetchImpl = globalThis.fetch,
   } = {},
 ) {
-  const usable = token !== undefined ? [token].filter(Boolean) : tokens.filter(Boolean);
+  const usable = usableTokens(token, tokens);
   if (usable.length) {
-    return fetchWithGraphQL(username, { tokens: usable, includeForks, activity, fetchImpl });
+    return fetchWithGraphQL(username, {
+      tokens: usable,
+      includeForks,
+      activity,
+      codeLanguages,
+      fetchImpl,
+    });
   }
   return fetchWithRest(username, { includeForks, fetchImpl });
+}
+
+function usableTokens(token, tokens) {
+  return token !== undefined ? [token].filter(Boolean) : tokens.filter(Boolean);
+}
+
+// The GraphQL errors say "User not found"; a repository or gist deserves its own message.
+async function renamedNotFound(promise, message) {
+  try {
+    return await promise;
+  } catch (error) {
+    if (error.code === 'NOT_FOUND')
+      throw new GitHubError(message, { status: 404, code: 'NOT_FOUND' });
+    throw error;
+  }
+}
+
+/**
+ * Fetch one repository for the pin card, owned by anyone.
+ *
+ * @returns {Promise<object>} name, fullName, description, stars, forks, flags and language
+ */
+export async function fetchRepo(
+  owner,
+  name,
+  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch } = {},
+) {
+  const usable = usableTokens(token, tokens);
+  let node;
+  if (usable.length) {
+    const state = { index: rotation++ % usable.length };
+    const data = await renamedNotFound(
+      graphqlWithFailover(fetchImpl, usable, { owner, name }, state, REPO_QUERY),
+      'Repository not found',
+    );
+    node = data?.repository;
+  } else {
+    node = await renamedNotFound(
+      rest(fetchImpl, `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`),
+      'Repository not found',
+    );
+  }
+  if (!node) throw new GitHubError('Repository not found', { status: 404, code: 'NOT_FOUND' });
+  return {
+    ...normaliseRepo(node),
+    fullName: node.nameWithOwner ?? node.full_name ?? `${owner}/${name}`,
+    isTemplate: Boolean(node.isTemplate ?? node.is_template),
+  };
+}
+
+/**
+ * Fetch one of `username`'s gists for the gist card. Stars are only available
+ * through GraphQL, so they are null without a token.
+ */
+export async function fetchGist(
+  username,
+  id,
+  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch } = {},
+) {
+  const usable = usableTokens(token, tokens);
+  if (usable.length) {
+    const state = { index: rotation++ % usable.length };
+    const data = await renamedNotFound(
+      graphqlWithFailover(fetchImpl, usable, { login: username, id }, state, GIST_QUERY),
+      'Gist not found',
+    );
+    const gist = data?.user?.gist;
+    if (!gist) throw new GitHubError('Gist not found', { status: 404, code: 'NOT_FOUND' });
+    const file = gist.files?.[0];
+    return {
+      id: gist.name,
+      name: file?.name ?? gist.name,
+      description: gist.description ?? '',
+      stars: gist.stargazerCount ?? 0,
+      forks: gist.forks?.totalCount ?? 0,
+      isFork: Boolean(gist.isFork),
+      language: file?.language?.name ?? null,
+      languageColor: colorOf(file?.language?.name, file?.language?.color),
+    };
+  }
+  const gist = await renamedNotFound(
+    rest(fetchImpl, `/gists/${encodeURIComponent(id)}`),
+    'Gist not found',
+  );
+  if (gist.owner?.login?.toLowerCase() !== username.toLowerCase()) {
+    throw new GitHubError('Gist not found', { status: 404, code: 'NOT_FOUND' });
+  }
+  const file = Object.values(gist.files ?? {})[0];
+  return {
+    id: gist.id,
+    name: file?.filename ?? gist.id,
+    description: gist.description ?? '',
+    stars: null,
+    forks: Array.isArray(gist.forks) ? gist.forks.length : 0,
+    isFork: Boolean(gist.fork_of),
+    language: file?.language ?? null,
+    languageColor: colorOf(file?.language),
+  };
 }

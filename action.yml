@@ -11,7 +11,10 @@ inputs:
     required: false
     default: ${{ github.repository_owner }}
   layout:
-    description: 'Card layout: overview, repos, compact, badge or dashboard.'
+    description: >-
+      Card layout: overview, repos, compact, badge, dashboard, stats, languages, pin, gist,
+      streak, heatmap, skyline, radar, treemap, timeline or goal. Pass `repo=`, `gist=`,
+      `goal=` or `lang_style=` through `options` where a layout needs them.
     required: false
     default: overview
   theme:

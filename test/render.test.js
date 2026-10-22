@@ -4,10 +4,18 @@ import { LAYOUTS, parseOptions } from '../src/options.js';
 import { renderCard, renderError } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { themeNames } from '../src/themes.js';
-import { sampleAccount } from './fixtures/account.js';
+import { sampleAccount, sampleGist, sampleRepo } from './fixtures/account.js';
 
 function render(query, account = sampleAccount) {
-  const options = parseOptions({ username: 'stellar-dev', ...query });
+  const options = parseOptions({
+    username: 'stellar-dev',
+    repo: 'nebula-ui',
+    gist: sampleGist.id,
+    ...query,
+  });
+  // Pinned repositories and gists are rendered from their own data.
+  if (options.layout === 'pin') return renderCard(sampleRepo, options);
+  if (options.layout === 'gist') return renderCard(sampleGist, options);
   return renderCard(computeStats(account), options);
 }
 

@@ -9,9 +9,13 @@ A service that renders SVG cards of the GitHub stars an account (user or organiz
 earned, for embedding in profile READMEs with one Markdown image link:
 `https://<deployment>/api/stars?username=octocat&layout=repos&theme=tokyonight`.
 
-- Layouts: `overview` (default), `repos`, `compact`, `badge`, `dashboard`. The dashboard also
-  fetches contribution activity (a second GraphQL query, users only, token required) and
-  derives streaks, heatmap levels and weekday/monthly totals in `src/activity.js`.
+- 16 layouts (`LAYOUTS` in `src/options.js`), one renderer each in `src/render/`. The
+  `ACTIVITY_LAYOUTS` (dashboard, stats, streak, heatmap, skyline, radar, timeline, goal) also
+  fetch contribution activity (a second GraphQL query, users only, token required); streaks,
+  heatmap levels and monthly totals come from `src/activity.js`, the S–C rank from
+  `src/rank.js`. `languages` fetches bytes per language for every repo; `pin` (`repo=`) and
+  `gist` (`gist=`) fetch one repository or gist instead of the account (`fetchRepo`,
+  `fetchGist`). Without activity those layouts render `renderNoActivity` rather than fail.
 - 122 themes in `src/themes.js`, grouped into 60 `designs`: each design is a light + dark theme
   pair sharing colours, art and font (15 classic palettes, 45 artistic with background art,
   fonts and glow). Every design has a `category` from `categories` (nature, holidays, anime,
@@ -41,7 +45,8 @@ earned, for embedding in profile READMEs with one Markdown image link:
 | `src/handler.js`               | `createCard(query)` → `{ status, svg, cacheSeconds }`; never throws     |
 | `src/options.js`               | Query parsing/validation; unknown values fall back to defaults          |
 | `src/github.js`                | GraphQL (with token) or REST fallback; normalises repos; `GitHubError`  |
-| `src/stats.js`                 | Totals, top repos, stars per language (rest grouped into "Other")       |
+| `src/stats.js`                 | Totals, top repos, stars per language, code languages ("Other" groups)  |
+| `src/rank.js`                  | S–C rank and per-axis scores for the `stats` and `radar` layouts        |
 | `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar       |
 | `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`)  |
 | `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers          |

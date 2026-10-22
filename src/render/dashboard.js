@@ -1,8 +1,12 @@
 import {
+  CALENDAR_PATH,
+  FLAME_PATH,
   FORK_PATH,
   PEOPLE_PATH,
+  PR_PATH,
   REPO_PATH,
   STAR_PATH,
+  TROPHY_PATH,
   delay,
   escapeXml,
   formatCount,
@@ -18,15 +22,6 @@ const WIDTH = 820;
 const HEIGHT = 470;
 const LEFT = 25;
 const RIGHT = WIDTH - 25;
-
-const FLAME_PATH =
-  'M8 .5c.6 2.4 2.1 3.6 3.3 4.9C12.5 6.7 13.5 8 13.5 10a5.5 5.5 0 0 1-11 0c0-1.9.9-3.3 2.1-4.4.2 1.4.9 2.4 2 2.9C6.2 5.6 6.9 2.9 8 .5Zm0 9c-.9.8-1.5 1.6-1.5 2.6a1.5 1.5 0 0 0 3 0c0-1-.6-1.8-1.5-2.6Z';
-const TROPHY_PATH =
-  'M4 1.5h8V3h2.5v1.8A3.2 3.2 0 0 1 11.7 8a4 4 0 0 1-2.9 2.4V12.5H11V14H5v-1.5h2.2v-2.1A4 4 0 0 1 4.3 8 3.2 3.2 0 0 1 1.5 4.8V3H4V1.5Zm0 3H3v.3c0 .7.4 1.3 1 1.6V4.5Zm8 0v1.9c.6-.3 1-.9 1-1.6v-.3h-1Z';
-const PR_PATH =
-  'M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354Z';
-const CALENDAR_PATH =
-  'M4.5 0a.75.75 0 0 1 .75.75V1.5h5.5V.75a.75.75 0 0 1 1.5 0v.75h1.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.75 15H2.25A1.75 1.75 0 0 1 .5 13.75V3.25c0-.966.784-1.75 1.75-1.75h1.5V.75A.75.75 0 0 1 4.5 0ZM2 6v7.75c0 .138.112.25.25.25h11.5a.25.25 0 0 0 .25-.25V6Z';
 
 const MONTHS = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
 const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];

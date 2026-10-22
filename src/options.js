@@ -1,7 +1,41 @@
 import { ART_STYLES } from './render/art.js';
 import { themes, resolveTheme } from './themes.js';
 
-export const LAYOUTS = ['overview', 'repos', 'compact', 'badge', 'dashboard'];
+export const LAYOUTS = [
+  'overview',
+  'repos',
+  'compact',
+  'badge',
+  'dashboard',
+  'stats',
+  'languages',
+  'pin',
+  'gist',
+  'streak',
+  'heatmap',
+  'skyline',
+  'radar',
+  'treemap',
+  'timeline',
+  'goal',
+];
+
+/** Layouts that need the contribution data of a user (GraphQL with a token). */
+export const ACTIVITY_LAYOUTS = [
+  'dashboard',
+  'stats',
+  'streak',
+  'heatmap',
+  'skyline',
+  'radar',
+  'timeline',
+  'goal',
+];
+
+export const LANGUAGE_STYLES = ['bars', 'donut', 'pie', 'waffle'];
+
+const REPO_NAME = /^[\w.-]{1,100}$/;
+const GIST_ID = /^[\da-f]{1,64}$/i;
 
 export const CACHE = {
   default: 4 * 60 * 60,
@@ -84,6 +118,27 @@ export function parseOptions(query = {}) {
   const artParam = String(first(query.art) ?? '').toLowerCase();
   const art = artParam === 'none' || ART_STYLES.includes(artParam) ? artParam : undefined;
 
+  // The repository to pin: "name" (owned by the user) or "owner/name".
+  let repo = null;
+  if (layout === 'pin') {
+    const parts = String(first(query.repo) ?? '')
+      .trim()
+      .split('/');
+    const [repoOwner, repoName] = parts.length === 2 ? parts : [username, parts[0]];
+    if (!repoName) throw new OptionsError('Missing "repo" parameter');
+    if (parts.length > 2 || !isValidUsername(repoOwner) || !REPO_NAME.test(repoName)) {
+      throw new OptionsError('Invalid repository name');
+    }
+    repo = { owner: repoOwner, name: repoName };
+  }
+  let gist = null;
+  if (layout === 'gist') {
+    gist = String(first(query.gist) ?? '').trim();
+    if (!gist) throw new OptionsError('Missing "gist" parameter');
+    if (!GIST_ID.test(gist)) throw new OptionsError('Invalid gist id');
+  }
+  const langStyleParam = String(first(query.lang_style) ?? '').toLowerCase();
+
   const customTitle = first(query.custom_title);
   const label = first(query.label);
 
@@ -101,6 +156,10 @@ export function parseOptions(query = {}) {
     label: label ? String(label).slice(0, 24) : 'stars',
     count: int(query.count, { fallback: 5, min: 1, max: 10 }),
     langsCount: int(query.langs_count, { fallback: 5, min: 1, max: 8 }),
+    langStyle: LANGUAGE_STYLES.includes(langStyleParam) ? langStyleParam : 'bars',
+    repo,
+    gist,
+    goal: int(query.goal, { fallback: 1000, min: 1, max: 1000000 }),
     exclude: list(query.exclude),
     hide: list(query.hide).map((item) => item.toLowerCase()),
     includeForks: bool(query.include_forks),

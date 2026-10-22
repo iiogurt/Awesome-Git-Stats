@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="298" viewBox="0 0 350 298" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev&#39;s most used languages by code size: Rust 31%, TypeScript 26%, Go 12%, Python 9.8%, Jupyter Notebook 5.3%, Other 15%</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
+    
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .lang-note{font-size:11px;fill:var(--muted)}
+    .ring-track{stroke:var(--track)}
+    .slice{stroke:var(--bg);stroke-width:1.5}
+    @keyframes ags-spin-in{from{opacity:0;transform:rotate(-90deg) scale(.7)}to{opacity:1;transform:none}}
+    .spin-in{opacity:0;transform-box:fill-box;transform-origin:center;animation:ags-spin-in 1s cubic-bezier(.22,1,.36,1) forwards}
+    @media (prefers-reduced-motion: reduce){.spin-in{animation:none;opacity:1;transform:none}}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="297" class="card"/>
+  
+  <text x="25" y="35" class="title fade">Most Used Languages</text>
+  <g transform="translate(0 0)"><text x="325" y="35" class="lang-note fade" text-anchor="end">by code size</text><g class="rise" style="animation-delay:150ms">
+        <text x="25" y="62" class="lang-name">Rust</text>
+        <text x="325" y="62" class="lang-pct" text-anchor="end">31%</text>
+        <rect x="25" y="70" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="70" width="94.3" height="8" rx="4" fill="#dea584" class="grow" style="animation-delay:300ms"/>
+      </g><g class="rise" style="animation-delay:240ms">
+        <text x="25" y="100" class="lang-name">TypeScript</text>
+        <text x="325" y="100" class="lang-pct" text-anchor="end">26%</text>
+        <rect x="25" y="108" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="108" width="76.8" height="8" rx="4" fill="#3178c6" class="grow" style="animation-delay:390ms"/>
+      </g><g class="rise" style="animation-delay:330ms">
+        <text x="25" y="138" class="lang-name">Go</text>
+        <text x="325" y="138" class="lang-pct" text-anchor="end">12%</text>
+        <rect x="25" y="146" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="146" width="37" height="8" rx="4" fill="#00ADD8" class="grow" style="animation-delay:480ms"/>
+      </g><g class="rise" style="animation-delay:420ms">
+        <text x="25" y="176" class="lang-name">Python</text>
+        <text x="325" y="176" class="lang-pct" text-anchor="end">9.8%</text>
+        <rect x="25" y="184" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="184" width="29.5" height="8" rx="4" fill="#3572A5" class="grow" style="animation-delay:570ms"/>
+      </g><g class="rise" style="animation-delay:510ms">
+        <text x="25" y="214" class="lang-name">Jupyter Notebook</text>
+        <text x="325" y="214" class="lang-pct" text-anchor="end">5.3%</text>
+        <rect x="25" y="222" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="222" width="16" height="8" rx="4" fill="#DA5B0B" class="grow" style="animation-delay:660ms"/>
+      </g><g class="rise" style="animation-delay:600ms">
+        <text x="25" y="252" class="lang-name">Other</text>
+        <text x="325" y="252" class="lang-pct" text-anchor="end">15%</text>
+        <rect x="25" y="260" width="300" height="8" rx="4" class="track"/>
+        <rect x="25" y="260" width="46.5" height="8" rx="4" fill="#8b949e" class="grow" style="animation-delay:750ms"/>
+      </g></g>
+</svg>

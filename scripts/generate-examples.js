@@ -10,14 +10,21 @@ import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { format, resolveConfig } from 'prettier';
 import { categories, designs, themeNames, themes } from '../src/themes.js';
-import { sampleAccount } from '../test/fixtures/account.js';
+import { sampleAccount, sampleGist, sampleRepo } from '../test/fixtures/account.js';
 
 const outDir = fileURLToPath(new URL('../assets/examples/', import.meta.url));
 const docsFile = fileURLToPath(new URL('../docs/themes.md', import.meta.url));
 const pageFile = fileURLToPath(new URL('../public/index.html', import.meta.url));
 
 function render(query) {
-  const options = parseOptions({ username: sampleAccount.login, ...query });
+  const options = parseOptions({
+    username: sampleAccount.login,
+    repo: sampleRepo.name,
+    gist: sampleGist.id,
+    ...query,
+  });
+  if (options.layout === 'pin') return renderCard(sampleRepo, options);
+  if (options.layout === 'gist') return renderCard(sampleGist, options);
   const languages =
     options.layout === 'overview' ? Math.min(options.langsCount, 4) : options.langsCount;
   return renderCard(computeStats(sampleAccount, { languages }), options);
@@ -31,6 +38,20 @@ const files = {
   'auto.svg': render({ theme: 'auto' }),
   'dashboard.svg': render({ layout: 'dashboard', theme: 'tokyonight' }),
   'dashboard-synthwave.svg': render({ layout: 'dashboard', theme: 'synthwave' }),
+  'stats.svg': render({ layout: 'stats', theme: 'tokyonight' }),
+  'languages.svg': render({ layout: 'languages', theme: 'dark' }),
+  'languages-donut.svg': render({ layout: 'languages', theme: 'catppuccin', lang_style: 'donut' }),
+  'languages-pie.svg': render({ layout: 'languages', theme: 'nord', lang_style: 'pie' }),
+  'languages-waffle.svg': render({ layout: 'languages', theme: 'gruvbox', lang_style: 'waffle' }),
+  'pin.svg': render({ layout: 'pin', theme: 'github_dark' }),
+  'gist.svg': render({ layout: 'gist', theme: 'dracula' }),
+  'streak.svg': render({ layout: 'streak', theme: 'radical' }),
+  'heatmap.svg': render({ layout: 'heatmap', theme: 'dark' }),
+  'skyline.svg': render({ layout: 'skyline', theme: 'tokyonight' }),
+  'radar.svg': render({ layout: 'radar', theme: 'catppuccin' }),
+  'treemap.svg': render({ layout: 'treemap', theme: 'dark' }),
+  'timeline.svg': render({ layout: 'timeline', theme: 'rose_pine' }),
+  'goal.svg': render({ layout: 'goal', theme: 'ocean', goal: '1500' }),
   // README header: the starry_night design in GitHub's dark and light mode.
   'hero-dark.svg': render({ layout: 'dashboard', theme: 'starry_night' }),
   'hero-light.svg': render({ layout: 'dashboard', theme: 'starry_night_light' }),

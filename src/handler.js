@@ -1,6 +1,6 @@
 import { TtlCache } from './cache.js';
-import { GitHubError, fetchAccount, tokensFromEnv } from './github.js';
-import { OptionsError, fallbackOptions, parseOptions } from './options.js';
+import { GitHubError, fetchAccount, fetchGist, fetchRepo, tokensFromEnv } from './github.js';
+import { ACTIVITY_LAYOUTS, OptionsError, fallbackOptions, parseOptions } from './options.js';
 import { renderCard, renderError } from './render/index.js';
 import { computeStats } from './stats.js';
 
@@ -18,17 +18,36 @@ function allowedUsernames(env) {
   );
 }
 
-async function loadAccount(options, { tokens, fetchImpl }) {
-  const activity = options.layout === 'dashboard';
-  const key = `${options.username.toLowerCase()}:${options.includeForks}:${activity}`;
-  const cached = accountCache.get(key);
-  if (cached) return cached;
-  const pending = fetchAccount(options.username, {
-    tokens,
-    includeForks: options.includeForks,
-    activity,
-    fetchImpl,
-  });
+// Fetch what a layout needs: one repository, one gist, or the account's repositories
+// (with contribution activity or language sizes for the layouts that show them).
+function loadData(options, { tokens, fetchImpl }) {
+  const { layout, username, repo, gist } = options;
+  if (layout === 'pin') {
+    const key = `repo:${repo.owner}/${repo.name}`.toLowerCase();
+    return cached(key, () => fetchRepo(repo.owner, repo.name, { tokens, fetchImpl }));
+  }
+  if (layout === 'gist') {
+    const key = `gist:${username}:${gist}`.toLowerCase();
+    return cached(key, () => fetchGist(username, gist, { tokens, fetchImpl }));
+  }
+  const activity = ACTIVITY_LAYOUTS.includes(layout);
+  const codeLanguages = layout === 'languages';
+  const key = `${username.toLowerCase()}:${options.includeForks}:${activity}:${codeLanguages}`;
+  return cached(key, () =>
+    fetchAccount(username, {
+      tokens,
+      includeForks: options.includeForks,
+      activity,
+      codeLanguages,
+      fetchImpl,
+    }),
+  );
+}
+
+async function cached(key, load) {
+  const hit = accountCache.get(key);
+  if (hit) return hit;
+  const pending = load();
   // Cache the promise so concurrent requests share one GitHub round trip.
   accountCache.set(key, pending);
   try {
@@ -62,7 +81,8 @@ export async function createCard(
   }
 
   const allowed = allowedUsernames(env);
-  if (allowed && !allowed.has(options.username.toLowerCase())) {
+  const owners = [options.username, options.repo?.owner].filter(Boolean);
+  if (allowed && owners.some((owner) => !allowed.has(owner.toLowerCase()))) {
     return {
       status: 403,
       svg: renderError(
@@ -75,10 +95,13 @@ export async function createCard(
 
   try {
     const tokens = token !== undefined ? [token].filter(Boolean) : tokensFromEnv(env);
-    const account = await loadAccount(options, { tokens, fetchImpl });
+    const data = await loadData(options, { tokens, fetchImpl });
     const languages =
       options.layout === 'overview' ? Math.min(options.langsCount, 4) : options.langsCount;
-    const stats = computeStats(account, { exclude: options.exclude, languages });
+    // A pinned repository or gist is rendered as fetched.
+    const stats = ['pin', 'gist'].includes(options.layout)
+      ? data
+      : computeStats(data, { exclude: options.exclude, languages });
     return { status: 200, svg: renderCard(stats, options), cacheSeconds: options.cacheSeconds };
   } catch (error) {
     const known = error instanceof GitHubError;
