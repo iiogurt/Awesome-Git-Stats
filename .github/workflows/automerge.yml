@@ -1,12 +1,16 @@
 name: Auto-merge
 
 # Turns on squash auto-merge for trusted pull requests, so they merge by
-# themselves once every required check is green, and deletes the branch
-# afterwards. No code from the pull request is checked out or run here.
+# themselves once every required check is green. GitHub deletes the branch
+# afterwards (Automatically delete head branches). No code from the pull
+# request is checked out or run here.
+#
+# Dependabot pull requests auto-merge only for patch and minor updates;
+# major updates wait for a review.
 
 on:
   pull_request_target:
-    types: [opened, reopened, ready_for_review, synchronize, closed]
+    types: [opened, reopened, ready_for_review, synchronize]
 
 permissions:
   contents: write
@@ -16,7 +20,6 @@ jobs:
   enable:
     name: Enable auto-merge
     if: >-
-      github.event.action != 'closed' &&
       !github.event.pull_request.draft &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.pull_request.user.login == github.repository_owner ||
@@ -24,35 +27,26 @@ jobs:
        startsWith(github.event.pull_request.head.ref, 'release-please--'))
     runs-on: ubuntu-latest
     steps:
+      - id: dependabot
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        uses: dependabot/fetch-metadata@v2
+      - name: Leave major updates for review
+        if: steps.dependabot.outputs.update-type == 'version-update:semver-major'
+        run: echo "::notice::Major update, so auto-merge stays off. Review and merge it by hand."
       # Merges made with the built-in token don't trigger other workflows, so
-      # the Release workflow wouldn't run after them. A GitHub App token (or a
-      # personal access token in RELEASE_TOKEN) avoids that; see CONTRIBUTING.md.
+      # the Release workflow wouldn't run after them; the release bot's token
+      # avoids that. Runs started by Dependabot get no Actions secrets, so
+      # Dependabot pull requests use the built-in token; release-please picks
+      # their commits up with the next merge.
       - id: app-token
-        if: vars.RELEASE_APP_ID != ''
+        if: github.event.pull_request.user.login != 'dependabot[bot]'
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - name: Enable squash auto-merge
+        if: steps.dependabot.outputs.update-type != 'version-update:semver-major'
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.RELEASE_TOKEN || github.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: gh pr merge --auto --squash "$PR_URL"
-
-  cleanup:
-    name: Delete merged branch
-    if: >-
-      github.event.action == 'closed' &&
-      github.event.pull_request.merged &&
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.event.pull_request.head.ref != github.event.repository.default_branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete branch
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ github.event.pull_request.head.ref }}
-        run: |
-          # The branch may already be gone if GitHub's own auto-delete ran first.
-          gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$BRANCH" \
-            && echo "Deleted $BRANCH" || echo "Branch $BRANCH was already deleted"

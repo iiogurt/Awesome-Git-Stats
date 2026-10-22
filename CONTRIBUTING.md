@@ -79,13 +79,15 @@ Nobody needs to merge, squash or clean up by hand:
 
 - The **Auto-merge** workflow turns on squash auto-merge for pull requests from the repository
   owner, Dependabot and release-please. Each one merges by itself once every required check is
-  green, and its branch is deleted afterwards. Pull requests from anyone else wait for a review.
+  green, and its branch is deleted afterwards. Dependabot's major-version updates and pull
+  requests from anyone else wait for a review.
 - The **Release** workflow keeps a release pull request open on `main`. It is auto-merged like
   any other pull request, which tags the version, publishes the GitHub release and moves the
   major tag (`v1`).
 - Vercel deploys `main` to production after every merge.
-- As a safety net the Release workflow also runs every hour, so a merged release pull request
-  is always published even if its merge didn't start the workflow.
+- Dependabot merges use the built-in token, so they don't start the Release workflow;
+  release-please picks them up with the next merge. Run _Actions → Release → Run workflow_ to
+  pick them up sooner.
 
 To stop a pull request from merging automatically, mark it as a draft or disable auto-merge on
 it.
@@ -99,25 +101,20 @@ it.
   passing checks and linear history on `main`, and make `vX.Y.Z` tags immutable.
 - **Pull requests:** allow squash merging only, use the PR title as the commit message, enable
   _Allow auto-merge_ and _Automatically delete head branches_.
-- **Actions:** allow GitHub Actions to create and approve pull requests.
+- **Actions:** leave _Allow GitHub Actions to create and approve pull requests_ off. Release
+  pull requests are opened with the release bot's token, which doesn't need it.
 - **Release bot:** GitHub doesn't run workflows for pull requests or merges made with the
   built-in `GITHUB_TOKEN`, so release pull requests would never get CI and merges wouldn't
-  start the Release workflow. Give the workflows their own identity, either:
-  - **a GitHub App (recommended, never expires):** create one under _Settings → Developer
-    settings → GitHub Apps → New GitHub App_ with no webhook and the repository permissions
-    _Contents_, _Pull requests_ and _Workflows_, all _Read and write_. Install it on this
-    repository, then add its App ID as the Actions **variable** `RELEASE_APP_ID` and a
-    generated private key as the Actions **secret** `RELEASE_APP_PRIVATE_KEY`; or
-  - **a fine-grained personal access token:** limited to this repository with the same three
-    permissions, saved as the Actions secret `RELEASE_TOKEN`. Renew it before it expires.
+  start the Release workflow. The workflows therefore use a GitHub App as their own identity
+  (required). Create one under _Settings → Developer settings → GitHub Apps → New GitHub App_
+  with no webhook and the repository permissions _Contents_, _Pull requests_ and _Workflows_,
+  all _Read and write_. Install it on this repository, then add its App ID as the Actions
+  **variable** `RELEASE_APP_ID` and a generated private key as the Actions **secret**
+  `RELEASE_APP_PRIVATE_KEY`.
 
   _Workflows_ is needed because GitHub only lets a token with that permission tag a commit
   whose workflow files differ from `main`, which happens when a workflow change lands between
   a release PR's merge and its release.
-
-- **First release:** run the _Release_ workflow manually on `main` (_Actions → Release → Run
-  workflow_). It publishes `v1.0.0` from `CHANGELOG.md` and creates the `v1` tag; release-please
-  takes over from there.
 
 ## Commit messages and releases
 

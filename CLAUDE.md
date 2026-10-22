@@ -111,7 +111,7 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
 - `main` is the default and only long-lived branch. It is **protected**: no direct pushes,
   changes land through pull requests that are **squash-merged** with green CI.
 - Merging is **automatic**: the Auto-merge workflow enables squash auto-merge for PRs from the
-  owner, Dependabot and release-please, and deletes the branch after merge. So a PR opened
+  owner, Dependabot (patch and minor updates only) and release-please; GitHub deletes the branch after merge. So a PR opened
   here merges as soon as CI is green; open it as a draft if it should wait for review.
 - Work branches: `<type>/<short-description>` (e.g. `feat/heatmap-layout`), short-lived,
   deleted after merge. (Claude sessions may be assigned a `claude/…` branch; use that one.)
@@ -129,16 +129,15 @@ npm run dev        # local server; GITHUB_TOKEN switches to GraphQL
   publishes the GitHub release and moves the major tag (`v1`) used by Action users.
 - **Never** bump the version, edit released `CHANGELOG.md` sections or create tags by hand.
 - Release PRs are opened with the release bot's token (`RELEASE_APP_ID` +
-  `RELEASE_APP_PRIVATE_KEY`, or `RELEASE_TOKEN`), so they get CI and auto-merge like any PR.
-  Without that secret they fall back to `GITHUB_TOKEN`, get no CI and stay blocked.
-- The Release workflow also runs hourly and on demand, so merges that didn't trigger it (made
-  with `GITHUB_TOKEN`) are still released within the hour.
+  `RELEASE_APP_PRIVATE_KEY`, required), so they get CI and auto-merge like any PR.
+- Dependabot merges use `GITHUB_TOKEN` and don't trigger the Release workflow; release-please
+  picks them up with the next merge (or run the workflow by hand).
 - `vX.Y.Z` tags are immutable (ruleset); only major tags like `v1` move.
 
 ## Repository setup (already done)
 
 Rulesets from `.github/rulesets/` are imported, squash-only merging with auto-merge and
-auto-delete of head branches is on, Actions may create PRs, Dependabot groups GitHub Actions updates into one PR,
+auto-delete of head branches is on, squash commits take the PR title and body, Actions may not create or approve PRs, Dependabot groups GitHub Actions updates into one PR,
 CodeQL runs weekly and on PRs. `CODEOWNERS` assigns `@iiogurt`.
 
 ## Environment notes

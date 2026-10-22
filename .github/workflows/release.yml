@@ -3,15 +3,12 @@ name: Release
 on:
   push:
     branches: [main]
-  # Releases published by hand (e.g. the first v1.0.0) also move the major tag.
+  # Releases published by hand also move the major tag.
   release:
     types: [published]
-  # Run on demand, and hourly as a safety net: merges made with the built-in
-  # GITHUB_TOKEN (auto-merge without a release bot) don't trigger the push
-  # event, so a merged release PR is still published within the hour.
+  # On demand, e.g. after Dependabot merges: they use the built-in token, so
+  # they don't trigger the push event.
   workflow_dispatch:
-  schedule:
-    - cron: '17 * * * *'
 
 permissions:
   contents: write
@@ -25,60 +22,21 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      # Until the first release is published (see publish-current-version),
-      # release-please has no baseline and would propose a wrong version.
-      - name: Check for a previous release
-        id: baseline
-        run: |
-          if [ -n "$(git ls-remote --tags "https://github.com/$GITHUB_REPOSITORY" 'v*.*.*')" ]; then
-            echo "found=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "::notice::No release yet. Run this workflow manually to publish the first one."
-          fi
       # With the built-in token, GitHub runs no CI on the release PR, so its
-      # required checks never report and it can't auto-merge. A GitHub App
-      # token (or RELEASE_TOKEN) makes it a normal PR; see CONTRIBUTING.md.
+      # required checks never report and it can't auto-merge. The release
+      # bot's token makes it a normal PR; see CONTRIBUTING.md.
       - id: app-token
-        if: steps.baseline.outputs.found == 'true' && vars.RELEASE_APP_ID != ''
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
-        if: steps.baseline.outputs.found == 'true'
         id: release
         with:
-          token: ${{ steps.app-token.outputs.token || secrets.RELEASE_TOKEN || github.token }}
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           target-branch: main
-
-  # Publishes the very first release (v1.0.0) from package.json and the
-  # changelog, when the workflow is run by hand on a repository without any
-  # release yet. From then on release-please handles everything.
-  publish-current-version:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - name: Create release and major tag
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          if [ -n "$(git tag --list 'v*.*.*')" ]; then
-            echo "A release already exists; release-please takes care of new ones."
-            exit 0
-          fi
-          VERSION="$(node -p "require('./package.json').version")"
-          TAG="v$VERSION"
-          awk -v v="$VERSION" '/^## /{p = index($0, "## " v " ") == 1; next} p' CHANGELOG.md > notes.md
-          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md --latest
-          git fetch --tags
-          MAJOR="${TAG%%.*}"
-          git tag -f "$MAJOR" "$GITHUB_SHA"
-          git push -f origin "refs/tags/$MAJOR"
 
   # Keep a moving major tag (v1, v2, ...) so Action users can pin
   # `iiogurt/Awesome-Git-Stats@v1` and receive compatible updates.
@@ -93,7 +51,6 @@ jobs:
       # The release bot's token can also move the tag to a commit whose
       # workflow files differ from main, which GITHUB_TOKEN may not.
       - id: app-token
-        if: vars.RELEASE_APP_ID != ''
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}
@@ -101,7 +58,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          token: ${{ steps.app-token.outputs.token || secrets.RELEASE_TOKEN || github.token }}
+          token: ${{ steps.app-token.outputs.token }}
       - name: Move major tag
         env:
           TAG: ${{ needs.release-please.outputs.tag_name || github.event.release.tag_name }}
