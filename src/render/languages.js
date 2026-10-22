@@ -1,6 +1,8 @@
 import { delay, escapeXml, renderFrame, truncate } from './common.js';
 import {
-  dropShadow,
+  cellRx,
+  cover,
+  discBase,
   glassDisc,
   glossBar,
   gridCast,
@@ -56,7 +58,7 @@ function donut(items, options, { cx, cy, r, stroke }) {
     .join('');
   const inner = r - stroke / 2;
   const top = items[0];
-  return `${dropShadow({ cx, cy: cy + r + stroke / 2 + 2, rx: r * 0.9, ry: 6 })}
+  return `${discBase({ cx, cy, r: r + stroke / 2, hole: r - stroke / 2 })}
     <g class="spin-in"${delay(options, 150)}><circle cx="${cx}" cy="${cy}" r="${r}" stroke-width="${stroke}" fill="none" class="ring-track"/>${arcs}${ringLight({ cx, cy, r, stroke })}</g>
     <g class="fade"${delay(options, 700)}>
       ${glassDisc({ cx, cy, r: inner - 5 })}
@@ -79,10 +81,9 @@ function pie(items, options, { cx, cy, r }) {
       return slice;
     })
     .join('');
-  return `${dropShadow({ cx, cy: cy + r + 4, rx: r * 0.95, ry: 7 })}
+  return `${discBase({ cx, cy, r })}
     <g class="spin-in"${delay(options, 150)}>${slices}
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#ags-dome)"/>
-      <circle cx="${cx}" cy="${cy}" r="${r - 0.5}" stroke="url(#ags-edge-v)" stroke-width="1"/>
+      ${cover({ cx, cy, r }, 'disc')}
     </g>`;
 }
 
@@ -98,7 +99,7 @@ function waffle(items, options, { x, y, size, gap }) {
     .map((color, i) => {
       const col = i % 10;
       const row = Math.floor(i / 10);
-      return `<rect x="${x + col * (size + gap)}" y="${y + row * (size + gap)}" width="${size}" height="${size}" rx="2.5" fill="${color}" class="fade"${delay(options, 150 + (row + col) * 30)}/>`;
+      return `<rect x="${x + col * (size + gap)}" y="${y + row * (size + gap)}" width="${size}" height="${size}" rx="${cellRx(2.5)}" fill="${color}" class="fade"${delay(options, 150 + (row + col) * 30)}/>`;
     })
     .join('');
   const step = size + gap;

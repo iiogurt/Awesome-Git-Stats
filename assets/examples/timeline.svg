@@ -25,7 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
-    .cast,.backing{display:none}.halo{opacity:.16}
+    .halo{opacity:.16}
     
     .axis{font-size:10.5px;fill:var(--muted)}
     .total{font-size:12px;font-weight:600;fill:var(--muted)}
@@ -46,29 +46,29 @@
     <text x="470" y="35" class="total fade" text-anchor="end">1,264 contributions</text>
     <text x="470" y="52" class="avg-label fade" text-anchor="end">- - avg 98 a month</text>
     <line x1="25" y1="178" x2="470" y2="178" class="baseline"/>
-    <g class="growy" style="animation-delay:150ms"><rect x="33" y="104.8" width="23" height="74.7" rx="4" fill="#000" class="cast"/><rect x="32" y="103.3" width="23" height="74.7" rx="4" class="bar"/><rect x="32" y="103.3" width="23" height="74.7" rx="4" fill="url(#ags-sheen-x)"/></g>
+    <g class="growy" style="animation-delay:150ms"><rect x="32" y="103.3" width="23" height="74.7" rx="4" class="bar"/><rect x="32" y="103.3" width="23" height="74.7" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="43.5" y="194" class="axis" text-anchor="middle">Nov</text><g class="growy" style="animation-delay:210ms"><rect x="70.1" y="95.4" width="23" height="84.1" rx="4" fill="#000" class="cast"/><rect x="69.1" y="93.9" width="23" height="84.1" rx="4" class="bar"/><rect x="69.1" y="93.9" width="23" height="84.1" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="43.5" y="194" class="axis" text-anchor="middle">Nov</text><g class="growy" style="animation-delay:210ms"><rect x="69.1" y="93.9" width="23" height="84.1" rx="4" class="bar"/><rect x="69.1" y="93.9" width="23" height="84.1" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="80.6" y="194" class="axis" text-anchor="middle">Dec</text><g class="growy" style="animation-delay:270ms"><rect x="107.2" y="78" width="23" height="101.5" rx="4" fill="#000" class="cast"/><rect x="106.2" y="76.5" width="23" height="101.5" rx="4" class="bar"/><rect x="106.2" y="76.5" width="23" height="101.5" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="80.6" y="194" class="axis" text-anchor="middle">Dec</text><g class="growy" style="animation-delay:270ms"><rect x="106.2" y="76.5" width="23" height="101.5" rx="4" class="bar"/><rect x="106.2" y="76.5" width="23" height="101.5" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="117.7" y="194" class="axis" text-anchor="middle">Jan</text><g class="growy" style="animation-delay:330ms"><rect x="144.3" y="81.6" width="23" height="97.9" rx="4" fill="#000" class="cast"/><rect x="143.3" y="80.1" width="23" height="97.9" rx="4" class="bar"/><rect x="143.3" y="80.1" width="23" height="97.9" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="117.7" y="194" class="axis" text-anchor="middle">Jan</text><g class="growy" style="animation-delay:330ms"><rect x="143.3" y="80.1" width="23" height="97.9" rx="4" class="bar"/><rect x="143.3" y="80.1" width="23" height="97.9" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="154.8" y="194" class="axis" text-anchor="middle">Feb</text><g class="growy" style="animation-delay:390ms"><rect x="181.4" y="72.9" width="23" height="106.6" rx="4" fill="#000" class="cast"/><rect x="180.4" y="71.4" width="23" height="106.6" rx="4" class="bar"/><rect x="180.4" y="71.4" width="23" height="106.6" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="154.8" y="194" class="axis" text-anchor="middle">Feb</text><g class="growy" style="animation-delay:390ms"><rect x="180.4" y="71.4" width="23" height="106.6" rx="4" class="bar"/><rect x="180.4" y="71.4" width="23" height="106.6" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="191.9" y="194" class="axis" text-anchor="middle">Mar</text><g class="growy" style="animation-delay:450ms"><rect x="215.5" y="68" width="27" height="112" rx="6" class="bar bar-peak halo"/><rect x="218.5" y="71.5" width="23" height="108" rx="4" fill="#000" class="cast"/><rect x="217.5" y="70" width="23" height="108" rx="4" class="bar bar-peak"/><rect x="217.5" y="70" width="23" height="108" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="191.9" y="194" class="axis" text-anchor="middle">Mar</text><g class="growy" style="animation-delay:450ms"><rect x="215.5" y="68" width="27" height="112" rx="6" class="bar bar-peak halo"/><rect x="217.5" y="70" width="23" height="108" rx="4" class="bar bar-peak"/><rect x="217.5" y="70" width="23" height="108" rx="4" fill="url(#ags-sheen-x)"/></g>
         <text x="229" y="64" class="value fade" style="animation-delay:1000ms" text-anchor="middle">149</text>
-        <text x="229" y="194" class="axis" text-anchor="middle">Apr</text><g class="growy" style="animation-delay:510ms"><rect x="255.5" y="109.2" width="23" height="70.3" rx="4" fill="#000" class="cast"/><rect x="254.5" y="107.7" width="23" height="70.3" rx="4" class="bar"/><rect x="254.5" y="107.7" width="23" height="70.3" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="229" y="194" class="axis" text-anchor="middle">Apr</text><g class="growy" style="animation-delay:510ms"><rect x="254.5" y="107.7" width="23" height="70.3" rx="4" class="bar"/><rect x="254.5" y="107.7" width="23" height="70.3" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="266" y="194" class="axis" text-anchor="middle">May</text><g class="growy" style="animation-delay:570ms"><rect x="292.6" y="144.7" width="23" height="34.8" rx="4" fill="#000" class="cast"/><rect x="291.6" y="143.2" width="23" height="34.8" rx="4" class="bar"/><rect x="291.6" y="143.2" width="23" height="34.8" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="266" y="194" class="axis" text-anchor="middle">May</text><g class="growy" style="animation-delay:570ms"><rect x="291.6" y="143.2" width="23" height="34.8" rx="4" class="bar"/><rect x="291.6" y="143.2" width="23" height="34.8" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="303.1" y="194" class="axis" text-anchor="middle">Jun</text><g class="growy" style="animation-delay:630ms"><rect x="329.7" y="149.1" width="23" height="30.4" rx="4" fill="#000" class="cast"/><rect x="328.7" y="147.6" width="23" height="30.4" rx="4" class="bar"/><rect x="328.7" y="147.6" width="23" height="30.4" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="303.1" y="194" class="axis" text-anchor="middle">Jun</text><g class="growy" style="animation-delay:630ms"><rect x="328.7" y="147.6" width="23" height="30.4" rx="4" class="bar"/><rect x="328.7" y="147.6" width="23" height="30.4" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="340.2" y="194" class="axis" text-anchor="middle">Jul</text><g class="growy" style="animation-delay:690ms"><rect x="366.8" y="139.6" width="23" height="39.9" rx="4" fill="#000" class="cast"/><rect x="365.8" y="138.1" width="23" height="39.9" rx="4" class="bar"/><rect x="365.8" y="138.1" width="23" height="39.9" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="340.2" y="194" class="axis" text-anchor="middle">Jul</text><g class="growy" style="animation-delay:690ms"><rect x="365.8" y="138.1" width="23" height="39.9" rx="4" class="bar"/><rect x="365.8" y="138.1" width="23" height="39.9" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="377.3" y="194" class="axis" text-anchor="middle">Aug</text><g class="growy" style="animation-delay:750ms"><rect x="403.9" y="125.1" width="23" height="54.4" rx="4" fill="#000" class="cast"/><rect x="402.9" y="123.6" width="23" height="54.4" rx="4" class="bar"/><rect x="402.9" y="123.6" width="23" height="54.4" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="377.3" y="194" class="axis" text-anchor="middle">Aug</text><g class="growy" style="animation-delay:750ms"><rect x="402.9" y="123.6" width="23" height="54.4" rx="4" class="bar"/><rect x="402.9" y="123.6" width="23" height="54.4" rx="4" fill="url(#ags-sheen-x)"/></g>
         
-        <text x="414.4" y="194" class="axis" text-anchor="middle">Sep</text><g class="growy" style="animation-delay:810ms"><rect x="441" y="127.3" width="23" height="52.2" rx="4" fill="#000" class="cast"/><rect x="440" y="125.8" width="23" height="52.2" rx="4" class="bar"/><rect x="440" y="125.8" width="23" height="52.2" rx="4" fill="url(#ags-sheen-x)"/></g>
+        <text x="414.4" y="194" class="axis" text-anchor="middle">Sep</text><g class="growy" style="animation-delay:810ms"><rect x="440" y="125.8" width="23" height="52.2" rx="4" class="bar"/><rect x="440" y="125.8" width="23" height="52.2" rx="4" fill="url(#ags-sheen-x)"/></g>
         <text x="451.5" y="119.8" class="value fade" style="animation-delay:1360ms" text-anchor="middle">72</text>
         <text x="451.5" y="194" class="axis" text-anchor="middle">Oct</text>
     <line x1="25" y1="106.8" x2="470" y2="106.8" class="average fade" style="animation-delay:1000ms"/></g>

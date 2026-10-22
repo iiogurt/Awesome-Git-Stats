@@ -8,7 +8,7 @@ import {
   measureText,
   renderFrame,
 } from './common.js';
-import { orb, track } from './materials.js';
+import { cover, orb, track } from './materials.js';
 
 const WIDTH = 350;
 const HEIGHT = 128;
@@ -27,7 +27,7 @@ function stackedBar(languages, options) {
     .join('');
   return `<clipPath id="ags-bar"><rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" rx="4"/></clipPath>
   ${track({ x: BAR_X, y: 86, width: BAR_WIDTH, height: 8 })}
-  <g clip-path="url(#ags-bar)"><g class="grow"${delay(options, 300)}>${segments}<rect x="${BAR_X}" y="86" width="${BAR_WIDTH}" height="8" fill="url(#ags-sheen)"/></g></g>`;
+  <g clip-path="url(#ags-bar)"><g class="grow"${delay(options, 300)}>${segments}${cover({ x: BAR_X, y: 86, width: BAR_WIDTH, height: 8 }, 'bar')}</g></g>`;
 }
 
 function inlineLegend(languages, options) {

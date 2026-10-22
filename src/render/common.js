@@ -184,7 +184,7 @@ export function renderFrame({
   const glow = theme.glow
     ? '.title,.big{filter:drop-shadow(0 0 6px var(--accent))}.icon-accent{filter:drop-shadow(0 0 4px var(--accent))}'
     : '';
-  const finish = materials(body, options.finish);
+  const finish = materials(body, options.finish, { animate });
   const artName = options.art ?? theme.art;
   const art =
     withArt && artName && artName !== 'none'

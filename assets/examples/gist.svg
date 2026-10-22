@@ -25,7 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
-    
+    .halo{opacity:.16}
     
     .pin-title{font-size:16px;font-weight:700;fill:var(--title)}
     .desc{font-size:12px;fill:var(--text)}

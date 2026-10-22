@@ -14,6 +14,8 @@ import { renderStreak } from './streak.js';
 import { renderTimeline } from './timeline.js';
 import { renderTreemap } from './treemap.js';
 
+import { useFinish } from './materials.js';
+
 export { renderError } from './error.js';
 
 const renderers = {
@@ -41,5 +43,6 @@ const renderers = {
  */
 export function renderCard(data, options) {
   const render = renderers[options.layout] ?? renderOverview;
+  useFinish(options.finish);
   return render(data, options);
 }

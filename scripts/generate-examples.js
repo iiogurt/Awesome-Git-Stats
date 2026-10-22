@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { parseOptions } from '../src/options.js';
 import { ART_DESCRIPTIONS, ART_STYLES } from '../src/render/art.js';
 import { renderCard } from '../src/render/index.js';
+import { FINISH_NAMES } from '../src/render/materials.js';
 import { computeStats } from '../src/stats.js';
 import { format, resolveConfig } from 'prettier';
 import { categories, designs, themeNames, themes } from '../src/themes.js';
@@ -43,25 +44,12 @@ const files = {
   'languages-donut.svg': render({ layout: 'languages', theme: 'catppuccin', lang_style: 'donut' }),
   'languages-pie.svg': render({ layout: 'languages', theme: 'nord', lang_style: 'pie' }),
   'languages-waffle.svg': render({ layout: 'languages', theme: 'gruvbox', lang_style: 'waffle' }),
-  'finish-gloss.svg': render({ layout: 'languages', theme: 'light', lang_style: 'donut' }),
-  'finish-soft.svg': render({
-    layout: 'languages',
-    theme: 'light',
-    lang_style: 'donut',
-    finish: 'soft',
-  }),
-  'finish-paper.svg': render({
-    layout: 'languages',
-    theme: 'light',
-    lang_style: 'donut',
-    finish: 'paper',
-  }),
-  'finish-flat.svg': render({
-    layout: 'languages',
-    theme: 'light',
-    lang_style: 'donut',
-    finish: 'flat',
-  }),
+  ...Object.fromEntries(
+    FINISH_NAMES.map((finish) => [
+      `finish-${finish}.svg`,
+      render({ layout: 'languages', theme: 'tokyonight', lang_style: 'donut', finish }),
+    ]),
+  ),
   'pin.svg': render({ layout: 'pin', theme: 'github_dark' }),
   'gist.svg': render({ layout: 'gist', theme: 'dracula' }),
   'streak.svg': render({ layout: 'streak', theme: 'radical' }),
