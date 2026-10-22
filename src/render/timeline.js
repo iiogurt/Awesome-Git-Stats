@@ -7,6 +7,7 @@ import {
   renderFrame,
   renderNoActivity,
 } from './common.js';
+import { glossBar } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 220;
@@ -40,7 +41,7 @@ export function renderTimeline(stats, options) {
         i === peak || i === months.length - 1
           ? `<text x="${r1(x + barWidth / 2)}" y="${r1(BASE - h - 6)}" class="value fade"${delay(options, 700 + i * 60)} text-anchor="middle">${formatCount(m.total)}</text>`
           : '';
-      return `<rect x="${x}" y="${r1(BASE - h)}" width="${r1(barWidth)}" height="${r1(h)}" rx="4" class="bar${i === peak ? ' bar-peak' : ''} growy"${delay(options, 150 + i * 60)}/>
+      return `${glossBar({ x, y: BASE - h, width: barWidth, height: h, rx: 4, upright: true, glow: i === peak, fill: `bar${i === peak ? ' bar-peak' : ''}`, attrs: ` class="growy"${delay(options, 150 + i * 60)}` })}
         ${value}
         <text x="${r1(x + barWidth / 2)}" y="${BASE + 16}" class="axis" text-anchor="middle">${label}</text>`;
     })

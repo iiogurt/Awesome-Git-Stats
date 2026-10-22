@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev: GitHub rank S, 17,656 stars, 1,184 commits in the last year</title>
-  <defs></defs>
+  <defs><linearGradient id="ags-ring-light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></linearGradient><radialGradient id="ags-hole"><stop offset="0.72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient><linearGradient id="ags-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.13"/><stop offset="0.4" stop-color="#fff" stop-opacity="0.04"/><stop offset="1" stop-color="#fff" stop-opacity="0.02"/></linearGradient><linearGradient id="ags-edge-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
   <style>
     svg{--bg:#1a1b27;--border:#2a2e45;--title:#70a5fd;--text:#c0caf5;--muted:#737aa2;--accent:#bf91f3;--track:#24283b;--art1:#bf91f3;--art2:#70a5fd;--art3:#bf91f3;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
@@ -24,11 +25,12 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .stat-label{font-size:13px;font-weight:600;fill:var(--text)}
     .stat-value{font-size:13px;font-weight:700;fill:var(--title)}
-    .rank-track{fill:none;stroke:var(--track);stroke-width:8}
-    .rank-ring{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round}
+    .rank-track{fill:none;stroke:var(--track);stroke-width:9}
+    .rank-ring{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round}
     .rank-level{font-size:26px;font-weight:800;fill:var(--title)}
     .rank-note{font-size:11px;fill:var(--muted)}
     @keyframes ags-rank{from{stroke-dashoffset:100}}
@@ -65,6 +67,9 @@
       </g><g class="fade" style="animation-delay:200ms">
     <circle cx="410" cy="108" r="46" class="rank-track"/>
     <circle cx="410" cy="108" r="46" class="rank-ring" pathLength="100" stroke-dasharray="100" style="stroke-dashoffset:0.8" transform="rotate(-90 410 108)"/>
+    <circle cx="410" cy="108" r="46" fill="none" stroke="url(#ags-ring-light)" stroke-width="9"/>
+    <circle cx="410" cy="108" r="41.5" fill="url(#ags-hole)"/>
+    <circle cx="410" cy="108" r="37" class="glass"/><circle cx="410" cy="108" r="37" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
     <text x="410" y="117" class="rank-level" text-anchor="middle">S</text>
     <text x="410" y="176" class="rank-note" text-anchor="middle">top &lt;1%</text>
   </g></g>

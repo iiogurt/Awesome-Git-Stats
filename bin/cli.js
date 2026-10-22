@@ -14,6 +14,7 @@ const STRING_OPTIONS = [
   'gist',
   'goal',
   'lang_style',
+  'finish',
   'custom_title',
   'label',
   'count',

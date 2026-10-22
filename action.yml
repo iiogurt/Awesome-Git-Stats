@@ -22,7 +22,7 @@ inputs:
     required: false
     default: default
   options:
-    description: 'Extra card options as a query string, e.g. "hide_border=true&count=8".'
+    description: 'Extra card options as a query string, e.g. "hide_border=true&count=8&finish=paper".'
     required: false
     default: ''
   dark-theme:

@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
@@ -23,6 +24,7 @@
     .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
     
     
     .sk0{fill:var(--track)}

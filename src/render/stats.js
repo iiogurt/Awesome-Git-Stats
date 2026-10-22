@@ -16,6 +16,7 @@ import {
   possessive,
   renderFrame,
 } from './common.js';
+import { glassDisc, ringLight } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 195;
@@ -52,6 +53,8 @@ function rankRing(rank, options) {
   return `<g class="fade"${delay(options, 200)}>
     <circle cx="${cx}" cy="${cy}" r="${r}" class="rank-track"/>
     <circle cx="${cx}" cy="${cy}" r="${r}" class="rank-ring" pathLength="100" stroke-dasharray="100" style="stroke-dashoffset:${(100 - progress * 100).toFixed(1)}" transform="rotate(-90 ${cx} ${cy})"/>
+    ${ringLight({ cx, cy, r, stroke: 9 })}
+    ${glassDisc({ cx, cy, r: r - 9 })}
     <text x="${cx}" y="${cy + 9}" class="rank-level" text-anchor="middle">${escapeXml(rank.level)}</text>
     <text x="${cx}" y="${cy + r + 22}" class="rank-note" text-anchor="middle">${escapeXml(`top ${top}%`)}</text>
   </g>`;
@@ -92,8 +95,8 @@ export function renderStats(stats, options) {
   const css = `
     .stat-label{font-size:13px;font-weight:600;fill:var(--text)}
     .stat-value{font-size:13px;font-weight:700;fill:var(--title)}
-    .rank-track{fill:none;stroke:var(--track);stroke-width:8}
-    .rank-ring{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round}
+    .rank-track{fill:none;stroke:var(--track);stroke-width:9}
+    .rank-ring{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round}
     .rank-level{font-size:26px;font-weight:800;fill:var(--title)}
     .rank-note{font-size:11px;fill:var(--muted)}
     ${

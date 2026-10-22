@@ -10,6 +10,7 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
+import { castShadow } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 270;
@@ -95,8 +96,12 @@ export function renderTreemap(stats, options) {
       const stars = showStars
         ? `<g opacity=".85">${icon(STAR_PATH, { x: r1(x + 8), y: r1(y + 26), size: 11, className: `cell-icon${inkClass}` }).replace('<path', `<path${inkAttr}`)}<text x="${r1(x + 23)}" y="${r1(y + 36)}" class="cell-stars${inkClass}"${inkAttr}>${count}</text></g>`
         : '';
+      const box = `x="${r1(x + 1.5)}" y="${r1(y + 1.5)}" width="${r1(Math.max(0, w - 3))}" height="${r1(Math.max(0, h - 3))}"`;
       return `<g class="pop"${delay(options, 100 + i * 70)}>
-        <rect x="${r1(x + 1.5)}" y="${r1(y + 1.5)}" width="${r1(Math.max(0, w - 3))}" height="${r1(Math.max(0, h - 3))}" rx="5"${fill} class="cell${item.languageColor ? '' : ' accent'}"><title>${escapeXml(`${item.name}: ${formatExact(item.stars)} stars`)}</title></rect>
+        ${castShadow({ x: x + 1.5, y: y + 1.5, width: Math.max(0, w - 3), height: Math.max(0, h - 3), rx: 5 })}
+        <rect ${box} rx="5"${fill} class="cell${item.languageColor ? '' : ' accent'}"><title>${escapeXml(`${item.name}: ${formatExact(item.stars)} stars`)}</title></rect>
+        <rect ${box} rx="5" fill="url(#ags-sheen-soft)"/>
+        <rect ${box} rx="5" stroke="url(#ags-edge-v)" stroke-width="1"/>
         ${label}${stars}
       </g>`;
     })

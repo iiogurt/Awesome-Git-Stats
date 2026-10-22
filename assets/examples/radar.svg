@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="270" viewBox="0 0 495 270" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev&#39;s contribution profile, rank S</title>
-  <defs></defs>
+  <defs><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient><radialGradient id="ags-dome" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#fff" stop-opacity="0.36"/><stop offset="0.35" stop-color="#fff" stop-opacity="0.08"/><stop offset="0.7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></radialGradient></defs>
   <style>
     svg{--bg:#1e1e2e;--border:#313244;--title:#cba6f7;--text:#cdd6f4;--muted:#a6adc8;--accent:#f9e2af;--track:#313244;--art1:#f9e2af;--art2:#cba6f7;--art3:#f9e2af;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
@@ -24,11 +25,11 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .grid{fill:none;stroke:var(--track);stroke-width:1}
     .grid-mid{stroke-dasharray:3 3;stroke:var(--muted);stroke-opacity:.5}
-    .shape{fill:var(--accent);fill-opacity:.28;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
-    .dot{fill:var(--accent)}
+    .shape{fill:var(--accent);fill-opacity:.32;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
     .axis{font-size:11px;fill:var(--muted)}
     .rank{font-size:30px;font-weight:800;fill:var(--title)}
     .rank-note{font-size:11px;fill:var(--muted)}
@@ -44,7 +45,7 @@
   <g transform="translate(0 0)">
     <g transform="translate(160 155)">
       <g class="fade"><path d="M0 -19.5L16.9 -9.7L16.9 9.7L0 19.5L-16.9 9.8L-16.9 -9.8Z" class="grid"/><path d="M0 -39L33.8 -19.5L33.8 19.5L0 39L-33.8 19.5L-33.8 -19.5Z" class="grid grid-mid"/><path d="M0 -58.5L50.7 -29.2L50.7 29.2L0 58.5L-50.7 29.3L-50.7 -29.3Z" class="grid"/><path d="M0 -78L67.5 -39L67.5 39L0 78L-67.5 39L-67.5 -39Z" class="grid"/><path d="M0 0L0 -78" class="grid"/><path d="M0 0L67.5 -39" class="grid"/><path d="M0 0L67.5 39" class="grid"/><path d="M0 0L0 78" class="grid"/><path d="M0 0L-67.5 39" class="grid"/><path d="M0 0L-67.5 -39" class="grid"/></g>
-      <g class="grow-out" style="animation-delay:250ms"><path d="M0 -75.1L67.5 -39L67.5 39L0 78L-67.4 38.9L-67.3 -38.8Z" class="shape"/><circle cx="0" cy="-75.1" r="3" class="dot"/><circle cx="67.5" cy="-39" r="3" class="dot"/><circle cx="67.5" cy="39" r="3" class="dot"/><circle cx="0" cy="78" r="3" class="dot"/><circle cx="-67.4" cy="38.9" r="3" class="dot"/><circle cx="-67.3" cy="-38.8" r="3" class="dot"/></g>
+      <g class="grow-out" style="animation-delay:250ms"><path d="M0 -75.1L67.5 -39L67.5 39L0 78L-67.4 38.9L-67.3 -38.8Z" class="shape"/><path d="M0 -75.1L67.5 -39L67.5 39L0 78L-67.4 38.9L-67.3 -38.8Z" fill="url(#ags-dome)" opacity=".6"/><circle cx="0.6" cy="-74.1" r="3.5" fill="#000" class="cast"/><circle cx="0" cy="-75.1" r="3.5" class="accent"/><circle cx="0" cy="-75.1" r="3.5" fill="url(#ags-sphere)"/><circle cx="68.1" cy="-38" r="3.5" fill="#000" class="cast"/><circle cx="67.5" cy="-39" r="3.5" class="accent"/><circle cx="67.5" cy="-39" r="3.5" fill="url(#ags-sphere)"/><circle cx="68.1" cy="40" r="3.5" fill="#000" class="cast"/><circle cx="67.5" cy="39" r="3.5" class="accent"/><circle cx="67.5" cy="39" r="3.5" fill="url(#ags-sphere)"/><circle cx="0.6" cy="79" r="3.5" fill="#000" class="cast"/><circle cx="0" cy="78" r="3.5" class="accent"/><circle cx="0" cy="78" r="3.5" fill="url(#ags-sphere)"/><circle cx="-66.8" cy="39.9" r="3.5" fill="#000" class="cast"/><circle cx="-67.4" cy="38.9" r="3.5" class="accent"/><circle cx="-67.4" cy="38.9" r="3.5" fill="url(#ags-sphere)"/><circle cx="-66.7" cy="-37.8" r="3.5" fill="#000" class="cast"/><circle cx="-67.3" cy="-38.8" r="3.5" class="accent"/><circle cx="-67.3" cy="-38.8" r="3.5" fill="url(#ags-sphere)"/></g>
       <g class="fade" style="animation-delay:400ms"><text x="0" y="-90" class="axis" text-anchor="middle">Commits</text><text x="81.4" y="-43" class="axis" text-anchor="start">Pull requests</text><text x="81.4" y="51" class="axis" text-anchor="start">Reviews</text><text x="0" y="98" class="axis" text-anchor="middle">Issues</text><text x="-81.4" y="51" class="axis" text-anchor="end">Stars</text><text x="-81.4" y="-43" class="axis" text-anchor="end">Followers</text></g>
     </g>
     <g class="fade" style="animation-delay:300ms">

@@ -1,4 +1,15 @@
 import { delay, escapeXml, renderFrame, truncate } from './common.js';
+import {
+  dropShadow,
+  glassDisc,
+  glossBar,
+  gridCast,
+  gridGloss,
+  gridSheen,
+  orb,
+  ringLight,
+  track,
+} from './materials.js';
 
 const r1 = (n) => Math.round(n * 10) / 10;
 const pct = (share) => `${(share * 100).toFixed(share < 0.1 ? 1 : 0)}%`;
@@ -8,7 +19,7 @@ function legend(items, options, { x, y, step = 22, width = 150 }) {
     .map((lang, i) => {
       const ly = y + i * step;
       return `<g class="rise"${delay(options, 300 + i * 80)}>
-        <circle cx="${x + 5}" cy="${ly - 4}" r="5" fill="${lang.color}"/>
+        ${orb({ cx: x + 5, cy: ly - 4, r: 5, fill: lang.color })}
         <text x="${x + 17}" y="${ly}" class="lang-name">${escapeXml(truncate(lang.name, width - 60, 12))}</text>
         <text x="${x + width}" y="${ly}" class="lang-pct" text-anchor="end">${pct(lang.share)}</text>
       </g>`;
@@ -24,8 +35,8 @@ function bars(items, options, width) {
       return `<g class="rise"${delay(options, 150 + i * 90)}>
         <text x="25" y="${y}" class="lang-name">${escapeXml(truncate(lang.name, barWidth - 50, 12))}</text>
         <text x="${width - 25}" y="${y}" class="lang-pct" text-anchor="end">${pct(lang.share)}</text>
-        <rect x="25" y="${y + 8}" width="${barWidth}" height="8" rx="4" class="track"/>
-        <rect x="25" y="${y + 8}" width="${r1(Math.max(4, lang.share * barWidth))}" height="8" rx="4" fill="${lang.color}" class="grow"${delay(options, 300 + i * 90)}/>
+        ${track({ x: 25, y: y + 7, width: barWidth, height: 10 })}
+        ${glossBar({ x: 25, y: y + 7, width: Math.max(10, lang.share * barWidth), height: 10, fill: lang.color, attrs: ` class="grow"${delay(options, 300 + i * 90)}` })}
       </g>`;
     })
     .join('');
@@ -43,7 +54,15 @@ function donut(items, options, { cx, cy, r, stroke }) {
       return arc;
     })
     .join('');
-  return `<g class="spin-in"${delay(options, 150)}><circle cx="${cx}" cy="${cy}" r="${r}" stroke-width="${stroke}" fill="none" class="ring-track"/>${arcs}</g>`;
+  const inner = r - stroke / 2;
+  const top = items[0];
+  return `${dropShadow({ cx, cy: cy + r + stroke / 2 + 2, rx: r * 0.9, ry: 6 })}
+    <g class="spin-in"${delay(options, 150)}><circle cx="${cx}" cy="${cy}" r="${r}" stroke-width="${stroke}" fill="none" class="ring-track"/>${arcs}${ringLight({ cx, cy, r, stroke })}</g>
+    <g class="fade"${delay(options, 700)}>
+      ${glassDisc({ cx, cy, r: inner - 5 })}
+      <text x="${cx}" y="${cy + 3}" class="core-pct" text-anchor="middle">${pct(top.share)}</text>
+      <text x="${cx}" y="${cy + 17}" class="core-name" text-anchor="middle">${escapeXml(truncate(top.name, (inner - 9) * 2, 9.5))}</text>
+    </g>`;
 }
 
 function pie(items, options, { cx, cy, r }) {
@@ -60,7 +79,11 @@ function pie(items, options, { cx, cy, r }) {
       return slice;
     })
     .join('');
-  return `<g class="spin-in"${delay(options, 150)}>${slices}</g>`;
+  return `${dropShadow({ cx, cy: cy + r + 4, rx: r * 0.95, ry: 7 })}
+    <g class="spin-in"${delay(options, 150)}>${slices}
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#ags-dome)"/>
+      <circle cx="${cx}" cy="${cy}" r="${r - 0.5}" stroke="url(#ags-edge-v)" stroke-width="1"/>
+    </g>`;
 }
 
 // 100 squares, shared out by the largest remainder method so they add up exactly.
@@ -71,13 +94,19 @@ function waffle(items, options, { x, y, size, gap }) {
   const missing = 100 - counts.reduce((a, b) => a + b, 0);
   for (let k = 0; k < missing; k += 1) counts[order[k][1]] += 1;
   const colors = counts.flatMap((n, i) => Array(n).fill(items[i].color));
-  return colors
+  const cells = colors
     .map((color, i) => {
       const col = i % 10;
       const row = Math.floor(i / 10);
-      return `<rect x="${x + col * (size + gap)}" y="${y + row * (size + gap)}" width="${size}" height="${size}" rx="2" fill="${color}" class="fade"${delay(options, 150 + (row + col) * 30)}/>`;
+      return `<rect x="${x + col * (size + gap)}" y="${y + row * (size + gap)}" width="${size}" height="${size}" rx="2.5" fill="${color}" class="fade"${delay(options, 150 + (row + col) * 30)}/>`;
     })
     .join('');
+  const step = size + gap;
+  const span = 10 * step - gap;
+  const area = { id: 'ags-waffle-sheen', x, y, width: span, height: span };
+  return `${gridSheen({ id: area.id, x, y, cell: size, step, rx: 2.5 })}
+    <g class="fade"${delay(options, 400)}>${gridCast(area)}</g>${cells}
+    <g class="fade"${delay(options, 700)}>${gridGloss(area)}</g>`;
 }
 
 /** Most used languages by code size, as bars, a donut, a pie or a waffle chart. */
@@ -97,7 +126,7 @@ export function renderLanguages(stats, options) {
     chart = bars(items, options, width);
   } else if (style === 'waffle') {
     width = 420;
-    height = Math.max(210, 70 + items.length * 22);
+    height = Math.max(228, 70 + items.length * 22);
     chart = `${waffle(items, options, { x: 25, y: 52, size: 13, gap: 2.5 })}${legend(items, options, { x: 200, y: 66, width: 195 })}`;
   } else {
     width = 400;
@@ -116,7 +145,9 @@ export function renderLanguages(stats, options) {
     .lang-pct{font-size:11px;fill:var(--muted)}
     .lang-note{font-size:11px;fill:var(--muted)}
     .ring-track{stroke:var(--track)}
-    .slice{stroke:var(--bg);stroke-width:1.5}
+    .slice{stroke:var(--bg);stroke-width:1.5;stroke-opacity:.7}
+    .core-pct{font-size:15px;font-weight:700;fill:var(--title)}
+    .core-name{font-size:9.5px;fill:var(--muted)}
     ${
       options.animate
         ? `@keyframes ags-spin-in{from{opacity:0;transform:rotate(-90deg) scale(.7)}to{opacity:1;transform:none}}

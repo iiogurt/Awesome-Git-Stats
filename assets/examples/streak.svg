@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev: 1,264 contributions in the last year, current streak 19 days, longest streak 39 days</title>
-  <defs></defs>
+  <defs><linearGradient id="ags-ring-light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></linearGradient><radialGradient id="ags-hole"><stop offset="0.72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient><linearGradient id="ags-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.13"/><stop offset="0.4" stop-color="#fff" stop-opacity="0.04"/><stop offset="1" stop-color="#fff" stop-opacity="0.02"/></linearGradient><linearGradient id="ags-edge-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
   <style>
     svg{--bg:#141321;--border:#2a2843;--title:#fe428e;--text:#a9fef7;--muted:#8e8ba8;--accent:#f8d847;--track:#2a2843;--art1:#f8d847;--art2:#fe428e;--art3:#f8d847;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     @keyframes ags-fade{from{opacity:0}to{opacity:1}}
@@ -24,6 +25,7 @@
     .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
     @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .big{font-size:28px;font-weight:800;fill:var(--title)}
     .streak-big{font-size:28px;font-weight:800;fill:var(--accent)}
@@ -31,7 +33,7 @@
     .label-accent{font-size:13px;font-weight:700;fill:var(--accent)}
     .dates{font-size:11px;fill:var(--muted)}
     .divider{stroke:var(--track);stroke-width:1}
-    .ring{fill:none;stroke:var(--accent);stroke-width:5}
+    .ring{fill:none;stroke:var(--accent);stroke-width:6}
     .flame-gap{fill:var(--bg)}
     @keyframes ags-flicker{0%,100%{transform:scale(1)}50%{transform:scale(1.15,1.08)}}
     .flame{transform-box:fill-box;transform-origin:center bottom;animation:ags-flicker 1.6s ease-in-out 1s infinite}
@@ -49,7 +51,10 @@
     <text x="82" y="155" class="dates" text-anchor="middle">Oct 12, 2025 – Present</text>
   </g>
     <g class="fade" style="animation-delay:100ms">
+      <circle cx="247.5" cy="98" r="33" class="glass"/><circle cx="247.5" cy="98" r="33" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
       <circle cx="247.5" cy="98" r="38" class="ring"/>
+      <circle cx="247.5" cy="98" r="38" fill="none" stroke="url(#ags-ring-light)" stroke-width="6"/>
+    <circle cx="247.5" cy="98" r="35" fill="url(#ags-hole)"/>
       <circle cx="247.5" cy="60" r="11" class="flame-gap"/>
       <g class="flame"><path class="icon-accent" transform="translate(238.5 50) scale(1.125)" d="M8 .5c.6 2.4 2.1 3.6 3.3 4.9C12.5 6.7 13.5 8 13.5 10a5.5 5.5 0 0 1-11 0c0-1.9.9-3.3 2.1-4.4.2 1.4.9 2.4 2 2.9C6.2 5.6 6.9 2.9 8 .5Zm0 9c-.9.8-1.5 1.6-1.5 2.6a1.5 1.5 0 0 0 3 0c0-1-.6-1.8-1.5-2.6Z"/></g>
     </g>

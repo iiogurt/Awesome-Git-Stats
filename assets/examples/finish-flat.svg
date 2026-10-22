@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="202" viewBox="0 0 400 202" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev&#39;s most used languages by code size: Rust 31%, TypeScript 26%, Go 12%, Python 9.8%, Jupyter Notebook 5.3%, Other 15%</title>
+  <defs><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"></radialGradient><linearGradient id="ags-ring-light" x1="0" y1="0" x2="0" y2="1"></linearGradient><radialGradient id="ags-hole"></radialGradient><linearGradient id="ags-glass" x1="0" y1="0" x2="0" y2="1"></linearGradient><radialGradient id="ags-drop"></radialGradient><linearGradient id="ags-edge-v" x1="0" y1="0" x2="0" y2="1"></linearGradient></defs>
+  <style>
+    svg{--bg:#ffffff;--border:#e4e2e2;--title:#1f2328;--text:#424a53;--muted:#6e7781;--accent:#e3b341;--track:#eaeef2;--art1:#e3b341;--art2:#1f2328;--art3:#e3b341;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
+    .halo,.cast,.backing{display:none}
+    
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .lang-note{font-size:11px;fill:var(--muted)}
+    .ring-track{stroke:var(--track)}
+    .slice{stroke:var(--bg);stroke-width:1.5;stroke-opacity:.7}
+    .core-pct{font-size:15px;font-weight:700;fill:var(--title)}
+    .core-name{font-size:9.5px;fill:var(--muted)}
+    @keyframes ags-spin-in{from{opacity:0;transform:rotate(-90deg) scale(.7)}to{opacity:1;transform:none}}
+    .spin-in{opacity:0;transform-box:fill-box;transform-origin:center;animation:ags-spin-in 1s cubic-bezier(.22,1,.36,1) forwards}
+    @media (prefers-reduced-motion: reduce){.spin-in{animation:none;opacity:1;transform:none}}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="399" height="201" class="card"/>
+  
+  <text x="25" y="35" class="title fade">Most Used Languages</text>
+  <g transform="translate(0 0)"><text x="375" y="35" class="lang-note fade" text-anchor="end">by code size</text><ellipse cx="90" cy="181" rx="46.8" ry="6" fill="url(#ags-drop)"/>
+    <g class="spin-in" style="animation-delay:150ms"><circle cx="90" cy="117" r="52" stroke-width="20" fill="none" class="ring-track"/><circle cx="90" cy="117" r="52" stroke="#dea584" stroke-width="20" fill="none" stroke-dasharray="100.7 326.7" stroke-dashoffset="0" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#3178c6" stroke-width="20" fill="none" stroke-dasharray="81.6 326.7" stroke-dashoffset="-102.7" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#00ADD8" stroke-width="20" fill="none" stroke-dasharray="38.3 326.7" stroke-dashoffset="-186.3" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#3572A5" stroke-width="20" fill="none" stroke-dasharray="30.1 326.7" stroke-dashoffset="-226.6" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#DA5B0B" stroke-width="20" fill="none" stroke-dasharray="15.4 326.7" stroke-dashoffset="-258.7" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" stroke="#8b949e" stroke-width="20" fill="none" stroke-dasharray="48.6 326.7" stroke-dashoffset="-276.1" transform="rotate(-90 90 117)"/><circle cx="90" cy="117" r="52" fill="none" stroke="url(#ags-ring-light)" stroke-width="20"/>
+    <circle cx="90" cy="117" r="42" fill="url(#ags-hole)"/></g>
+    <g class="fade" style="animation-delay:700ms">
+      <circle cx="90" cy="117" r="37" class="glass"/><circle cx="90" cy="117" r="37" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
+      <text x="90" y="120" class="core-pct" text-anchor="middle">31%</text>
+      <text x="90" y="134" class="core-name" text-anchor="middle">Rust</text>
+    </g><g class="rise" style="animation-delay:300ms">
+        <circle cx="195.6" cy="63" r="5" fill="#000" class="cast"/><circle cx="195" cy="62" r="5" fill="#dea584"/><circle cx="195" cy="62" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="66" class="lang-name">Rust</text>
+        <text x="375" y="66" class="lang-pct" text-anchor="end">31%</text>
+      </g><g class="rise" style="animation-delay:380ms">
+        <circle cx="195.6" cy="85" r="5" fill="#000" class="cast"/><circle cx="195" cy="84" r="5" fill="#3178c6"/><circle cx="195" cy="84" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="88" class="lang-name">TypeScript</text>
+        <text x="375" y="88" class="lang-pct" text-anchor="end">26%</text>
+      </g><g class="rise" style="animation-delay:460ms">
+        <circle cx="195.6" cy="107" r="5" fill="#000" class="cast"/><circle cx="195" cy="106" r="5" fill="#00ADD8"/><circle cx="195" cy="106" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="110" class="lang-name">Go</text>
+        <text x="375" y="110" class="lang-pct" text-anchor="end">12%</text>
+      </g><g class="rise" style="animation-delay:540ms">
+        <circle cx="195.6" cy="129" r="5" fill="#000" class="cast"/><circle cx="195" cy="128" r="5" fill="#3572A5"/><circle cx="195" cy="128" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="132" class="lang-name">Python</text>
+        <text x="375" y="132" class="lang-pct" text-anchor="end">9.8%</text>
+      </g><g class="rise" style="animation-delay:620ms">
+        <circle cx="195.6" cy="151" r="5" fill="#000" class="cast"/><circle cx="195" cy="150" r="5" fill="#DA5B0B"/><circle cx="195" cy="150" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="154" class="lang-name">Jupyter Notebook</text>
+        <text x="375" y="154" class="lang-pct" text-anchor="end">5.3%</text>
+      </g><g class="rise" style="animation-delay:700ms">
+        <circle cx="195.6" cy="173" r="5" fill="#000" class="cast"/><circle cx="195" cy="172" r="5" fill="#8b949e"/><circle cx="195" cy="172" r="5" fill="url(#ags-sphere)"/>
+        <text x="207" y="176" class="lang-name">Other</text>
+        <text x="375" y="176" class="lang-pct" text-anchor="end">15%</text>
+      </g></g>
+</svg>

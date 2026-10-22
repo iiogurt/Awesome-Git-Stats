@@ -12,6 +12,7 @@ import {
   renderFrame,
   truncate,
 } from './common.js';
+import { glassDisc, orb, ringLight } from './materials.js';
 
 const WIDTH = 495;
 const HEIGHT = 195;
@@ -39,6 +40,8 @@ function donut(languages, options, { cx, cy, r, stroke }) {
   return `<g class="pop"${delay(options, 250)}>
     <circle cx="${cx}" cy="${cy}" r="${r}" stroke-width="${stroke}" fill="none" class="ring-track"/>
     ${segments}
+    ${ringLight({ cx, cy, r, stroke })}
+    ${glassDisc({ cx, cy, r: r - stroke / 2 - 4 })}
     <g class="twinkle">${icon(STAR_PATH, { x: cx - 10, y: cy - 10, size: 20, className: 'icon-accent' })}</g>
   </g>`;
 }
@@ -49,7 +52,7 @@ function legend(languages, options) {
       const y = 70 + i * 22;
       const pct = `${Math.round(lang.share * 100)}%`;
       return `<g class="rise"${delay(options, 350 + i * 90)}>
-        <circle cx="267" cy="${y - 4}" r="5" fill="${lang.color}"/>
+        ${orb({ cx: 267, cy: y - 4, r: 5, fill: lang.color })}
         <text x="279" y="${y}" class="lang-name">${escapeXml(truncate(lang.name, 70, 12))}</text>
         <text x="375" y="${y}" class="lang-pct" text-anchor="end">${pct}</text>
       </g>`;

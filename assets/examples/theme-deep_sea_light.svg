@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
-  <defs><linearGradient id="ags-bg" gradientTransform="rotate(180 0.5 0.5)"><stop offset="0%" stop-color="#e9f8ff"/><stop offset="100%" stop-color="#cdeefa"/></linearGradient></defs>
+  <defs><linearGradient id="ags-bg" gradientTransform="rotate(180 0.5 0.5)"><stop offset="0%" stop-color="#e9f8ff"/><stop offset="100%" stop-color="#cdeefa"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient><linearGradient id="ags-ring-light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></linearGradient><radialGradient id="ags-hole"><stop offset="0.72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient><linearGradient id="ags-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.13"/><stop offset="0.4" stop-color="#fff" stop-opacity="0.04"/><stop offset="1" stop-color="#fff" stop-opacity="0.02"/></linearGradient><linearGradient id="ags-edge-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
   <style>
     svg{--bg:#e9f8ff;--border:#00507a33;--title:#00507a;--text:#0e3a52;--muted:#4a7286;--accent:#e0a100;--track:#00507a14;--art1:#39a0d6;--art2:#39cccc;--art3:#7fdbff;--shade:#000000}
     
@@ -12,6 +12,7 @@
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:url(#ags-bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
     
     
@@ -21,6 +22,7 @@
     .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
     
     
+    .cast,.backing{display:none}.halo{opacity:.16}
     
     .big{font-size:32px;font-weight:800;fill:var(--title)}
     .caption{font-size:12.5px;fill:var(--muted)}
@@ -60,28 +62,31 @@
           <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
         </g>
   <g class="rise">
-        <circle cx="267" cy="66" r="5" fill="#3178c6"/>
+        <circle cx="267.6" cy="67" r="5" fill="#000" class="cast"/><circle cx="267" cy="66" r="5" fill="#3178c6"/><circle cx="267" cy="66" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="70" class="lang-name">TypeScript</text>
         <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
       </g><g class="rise">
-        <circle cx="267" cy="88" r="5" fill="#dea584"/>
+        <circle cx="267.6" cy="89" r="5" fill="#000" class="cast"/><circle cx="267" cy="88" r="5" fill="#dea584"/><circle cx="267" cy="88" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="92" class="lang-name">Rust</text>
         <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
       </g><g class="rise">
-        <circle cx="267" cy="110" r="5" fill="#00ADD8"/>
+        <circle cx="267.6" cy="111" r="5" fill="#000" class="cast"/><circle cx="267" cy="110" r="5" fill="#00ADD8"/><circle cx="267" cy="110" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="114" class="lang-name">Go</text>
         <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
       </g><g class="rise">
-        <circle cx="267" cy="132" r="5" fill="#3572A5"/>
+        <circle cx="267.6" cy="133" r="5" fill="#000" class="cast"/><circle cx="267" cy="132" r="5" fill="#3572A5"/><circle cx="267" cy="132" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="136" class="lang-name">Python</text>
         <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="rise">
-        <circle cx="267" cy="154" r="5" fill="#8b949e"/>
+        <circle cx="267.6" cy="155" r="5" fill="#000" class="cast"/><circle cx="267" cy="154" r="5" fill="#8b949e"/><circle cx="267" cy="154" r="5" fill="url(#ags-sphere)"/>
         <text x="279" y="158" class="lang-name">Other</text>
         <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="pop">
     <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
     <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <circle cx="432" cy="112" r="36" fill="none" stroke="url(#ags-ring-light)" stroke-width="12"/>
+    <circle cx="432" cy="112" r="30" fill="url(#ags-hole)"/>
+    <circle cx="432" cy="112" r="26" class="glass"/><circle cx="432" cy="112" r="26" fill="url(#ags-glass)" stroke="url(#ags-edge-v)" stroke-width="1"/>
     <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
   </g></g>
 </svg>

@@ -1,4 +1,5 @@
 import { renderArt } from './art.js';
+import { materials } from './materials.js';
 
 const FONTS = {
   sans: "'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -183,6 +184,7 @@ export function renderFrame({
   const glow = theme.glow
     ? '.title,.big{filter:drop-shadow(0 0 6px var(--accent))}.icon-accent{filter:drop-shadow(0 0 4px var(--accent))}'
     : '';
+  const finish = materials(body, options.finish);
   const artName = options.art ?? theme.art;
   const art =
     withArt && artName && artName !== 'none'
@@ -195,7 +197,7 @@ export function renderFrame({
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${finalHeight}" viewBox="0 0 ${width} ${finalHeight}" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">${escapeXml(label || title || 'GitHub stars')}</title>
-  <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}</defs>
+  <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}${finish.defs}</defs>
   <style>
     svg{${themeVars(theme)}}
     ${darkBlock}
@@ -207,10 +209,12 @@ export function renderFrame({
     .icon{fill:var(--muted)}
     .icon-accent{fill:var(--accent)}
     .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
     .card{fill:${bgFill};stroke:var(--border);stroke-width:${strokeWidth};stroke-opacity:${borderOpacity}}
     ${glow}
     ${motion}
     ${art?.css ?? ''}
+    ${finish.css}
     ${css}
   </style>
   <rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}" class="card"/>
