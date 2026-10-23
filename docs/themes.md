@@ -17,7 +17,7 @@ matching font or a neon glow (dark variants only). The art is generated from you
 your card's starfield or contour map is unique to you. Animations range from calm to bold and
 switch off for people who prefer reduced motion. The previews below are still frames.
 
-Jump to: [Nature](#nature) · [Smooth and flowing](#smooth-and-flowing) · [Space and sky](#space-and-sky) · [Holidays](#holidays) · [Anime and manga](#anime-and-manga) · [Horror](#horror) · [3D](#3d) · [Retro and tech](#retro-and-tech) · [Bold and loud](#bold-and-loud) · [Classic](#classic-themes)
+Jump to: [Nature](#nature) · [Smooth and flowing](#smooth-and-flowing) · [Space and sky](#space-and-sky) · [Holidays](#holidays) · [Anime and manga](#anime-and-manga) · [Horror](#horror) · [3D](#3d) · [Retro and tech](#retro-and-tech) · [Bold and loud](#bold-and-loud) · [Minimal and line art](#minimal-and-line-art) · [Classic](#classic-themes)
 
 ### Nature
 
@@ -109,6 +109,15 @@ Jump to: [Nature](#nature) · [Smooth and flowing](#smooth-and-flowing) · [Spac
 | **Inferno**<br>art: `fire`<br>Flickering flames and rising embers.       | `inferno_light`<br><img src="../assets/examples/theme-inferno_light.svg" alt="inferno_light theme" width="300"> | `inferno`<br><img src="../assets/examples/theme-inferno.svg" alt="inferno theme" width="300">                |
 | **Memphis**<br>art: `memphis`<br>Wiggling 80s shapes and a thick border. | `memphis`<br><img src="../assets/examples/theme-memphis.svg" alt="memphis theme" width="300">                   | `memphis_dark`<br><img src="../assets/examples/theme-memphis_dark.svg" alt="memphis_dark theme" width="300"> |
 
+### Minimal and line art
+
+| Design                                                                                         | Light mode                                                                                       | Dark mode                                                                                                       |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Doodle**<br>art: `doodle`<br>Hand-drawn doodles on notebook paper, or chalk on a blackboard. | `doodle`<br><img src="../assets/examples/theme-doodle.svg" alt="doodle theme" width="300">       | `doodle_dark`<br><img src="../assets/examples/theme-doodle_dark.svg" alt="doodle_dark theme" width="300">       |
+| **Line art**<br>art: `lines`<br>Fine geometric lines, circles and one red accent.              | `line_art`<br><img src="../assets/examples/theme-line_art.svg" alt="line_art theme" width="300"> | `line_art_dark`<br><img src="../assets/examples/theme-line_art_dark.svg" alt="line_art_dark theme" width="300"> |
+| **Stencil**<br>art: `stencil`<br>Spray-painted stencil shapes and crop marks on kraft paper.   | `stencil`<br><img src="../assets/examples/theme-stencil.svg" alt="stencil theme" width="300">    | `stencil_dark`<br><img src="../assets/examples/theme-stencil_dark.svg" alt="stencil_dark theme" width="300">    |
+| **Ink**<br>art: `ink`<br>A fountain-pen drawing with cross-hatched shading.                    | `ink`<br><img src="../assets/examples/theme-ink.svg" alt="ink theme" width="300">                | `ink_dark`<br><img src="../assets/examples/theme-ink_dark.svg" alt="ink_dark theme" width="300">                |
+
 ## Classic themes
 
 | Design                                                                     | Light mode                                                                                                               | Dark mode                                                                                                          |
@@ -188,6 +197,10 @@ The art takes its colours from the theme's accent and title colours, so it also 
 | `bubbles`       | Soda bubbles with glossy, iridescent rims wobbling upwards.                        | <img src="../assets/examples/art-bubbles.svg" alt="bubbles art" width="300">             |
 | `orbits`        | Planets on tilted 3D orbits around a glowing sun, with a ringed planet and a moon. | <img src="../assets/examples/art-orbits.svg" alt="orbits art" width="300">               |
 | `soundwave`     | Breathing sine waves that fade out at the edges, over a smooth equalizer.          | <img src="../assets/examples/art-soundwave.svg" alt="soundwave art" width="300">         |
+| `doodle`        | Hand-drawn doodles that draw themselves along the edges of a ruled notebook page.  | <img src="../assets/examples/art-doodle.svg" alt="doodle art" width="300">               |
+| `lines`         | Minimal geometric line art: concentric circles, fine hatching and one red dot.     | <img src="../assets/examples/art-lines.svg" alt="lines art" width="300">                 |
+| `stencil`       | A spray-painted stencil ring and chevrons, with overspray and registration marks.  | <img src="../assets/examples/art-stencil.svg" alt="stencil art" width="300">             |
+| `ink`           | A fountain-pen sketch of a sphere, shaded with hatching and cross-hatching.        | <img src="../assets/examples/art-ink.svg" alt="ink art" width="300">                     |
 
 ## Make it your own
 

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><pattern id="ags-ruled" width="495" height="22" patternUnits="userSpaceOnUse"><path d="M0 21.5H495" class="art-s1" stroke-width=".7"/></pattern><pattern id="ags-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="1.7" height="4" class="gap"/></pattern></defs>
+  <style>
+    svg{--bg:#fffdf6;--border:#e8e2cf;--title:#22223b;--text:#33334d;--muted:#66667a;--accent:#e63e62;--track:#22223b14;--art1:#3a6ee8;--art2:#22223b;--art3:#e63e62;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    
+    .gap{fill:var(--bg)}.pencil{fill:none;stroke:var(--text);stroke-width:.8;stroke-opacity:.6;stroke-linecap:round;stroke-linejoin:round}
+    
+    .big{font-size:32px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .stat-value{font-size:15px;font-weight:700;fill:var(--text)}
+    .stat-label{font-size:11px;fill:var(--muted)}
+    .lang-name{font-size:12px;fill:var(--text)}
+    .lang-pct{font-size:11px;fill:var(--muted)}
+    .top-line{font-size:12px;fill:var(--muted)}
+    .top-name{font-weight:600;fill:var(--text)}
+    .ring-track{stroke:var(--track)}
+    
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><rect width="495" height="195" fill="url(#ags-ruled)" opacity=".1"/>
+        <path d="M14 0V195" class="art-s3" stroke-width=".9" opacity=".25"/>
+        <g opacity=".5"><g transform="translate(479 16) rotate(-19.4)"><path d="M-0.2 -7.7Q4.3 5.8 -1.4 1.9Q-7.1 -2.1 0 -2.1Q7 -2.1 1.2 1.9Q-4.6 6 -2.3 -0.7Q0 -7.4 2.1 -0.6Q4.1 6.1 -1.4 1.8Q-7 -2.6 0 -2.6Q7.1 -2.5 1.3 1.7Q-4.5 6 -2.1 -0.9L0.2 -7.8" class="art-s1 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:400ms"/></g><g transform="translate(477 178) rotate(-8.7)"><path d="M-13.1 -0.1Q-11.9 1 -11.4 1.5Q-11 2 -10.6 2.1Q-10.2 2.3 -9.7 2.4Q-9.2 2.4 -9 1.9Q-8.8 1.4 -8.1 0.5Q-7.3 -0.5 -6.9 -1Q-6.4 -1.4 -6.1 -1.8Q-5.7 -2.2 -5.3 -2.4Q-4.9 -2.6 -4.4 -2.2Q-4 -1.9 -3.5 -1.4Q-3 -0.9 -2.7 -0.3Q-2.4 0.4 -2 1.2Q-1.5 2 -1.1 2.2Q-0.6 2.4 0 2.5Q0.5 2.7 0.8 2.2Q1.2 1.7 1.8 1.2Q2.5 0.7 2.6 0.1Q2.8 -0.6 3.4 -1.3Q4.1 -2.1 4.4 -2.2Q4.7 -2.4 5.4 -2.5Q6.1 -2.7 6.2 -2Q6.4 -1.3 6.9 -0.9Q7.3 -0.5 7.8 0.3Q8.2 1.1 8.6 1.8Q9 2.4 9.7 2.6Q10.4 2.8 10.7 2.6Q11 2.3 11.7 1.9Q12.4 1.5 12.5 0.6L12.6 -0.3" class="art-s2 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:750ms"/></g><g transform="translate(17 179) rotate(10.3)"><path d="M0 -2.2Q0 -2.8 0.3 -3.6Q0.6 -4.4 1.5 -4.9Q2.5 -5.4 3.3 -5.6Q4.2 -5.8 4.9 -5.1Q5.6 -4.3 6.2 -3.5Q6.8 -2.7 6.7 -1.4Q6.6 -0.2 5.7 0.8Q4.8 1.8 4.1 2.8Q3.3 3.8 2.2 4.8Q1.1 5.8 0.6 6.5Q0.1 7.2 0 7.4Q0 7.6 0 7.7Q0.1 7.8 -0.1 7.4Q-0.3 7 -0.8 6.2Q-1.3 5.4 -2.2 4.7Q-3.1 4 -4.2 3.1Q-5.2 2.1 -6 1.1Q-6.7 0 -6.8 -1.2Q-6.9 -2.3 -6.5 -3.4Q-6.1 -4.4 -5 -5Q-3.9 -5.7 -3.1 -5.4Q-2.2 -5.2 -1.4 -4.7Q-0.6 -4.2 -0.5 -3.7Q-0.3 -3.1 -0.1 -2.8L0.2 -2.4" class="art-s3 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:1100ms"/></g><g transform="translate(181.6 187) rotate(-6.6)"><path d="M0 -0.1Q0 0.2 0.1 0.1Q0.2 0.1 0.3 0.1Q0.3 0.2 0.1 0.3Q-0.1 0.4 -0.1 0.5Q-0.1 0.7 -0.3 0.7Q-0.6 0.7 -0.7 0.6Q-0.8 0.4 -0.9 0.1Q-1 -0.1 -1.1 -0.3Q-1.2 -0.5 -1 -0.7Q-0.8 -1 -0.6 -1.3Q-0.3 -1.6 -0.1 -1.6Q0.2 -1.6 0.6 -1.4Q1 -1.2 1.3 -1.1Q1.5 -1 1.7 -0.6Q1.8 -0.2 1.9 0.2Q2 0.7 1.9 1.1Q1.8 1.5 1.5 1.8Q1.2 2.1 0.8 2.4Q0.3 2.7 -0.3 2.5Q-1 2.3 -1.5 2.1Q-2 2 -2.3 1.5Q-2.7 0.9 -2.8 0.5Q-2.9 0.1 -3 -0.7Q-3 -1.4 -2.7 -2Q-2.4 -2.6 -1.7 -3Q-1.1 -3.4 -0.5 -3.5Q0.1 -3.6 0.9 -3.5Q1.7 -3.5 2.5 -3Q3.2 -2.6 3.5 -1.9Q3.8 -1.2 4 -0.3Q4.2 0.7 3.8 1.4Q3.4 2.2 2.9 2.9Q2.4 3.6 1.7 4Q1.1 4.4 0.1 4.5Q-0.9 4.6 -1.8 4.2Q-2.7 3.9 -3.4 3.3Q-4.1 2.7 -4.7 1.6Q-5.2 0.6 -5.1 -0.5L-4.9 -1.7" class="art-s1 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:1450ms"/></g></g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
+  <g transform="translate(0 0)">
+  <g class="rise">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 60) scale(1.875)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="66" y="87" class="big">17,656</text>
+    <text x="25" y="110" class="caption">stars earned across 10 repos</text>
+  </g>
+  <g class="rise">
+    <path class="icon" transform="translate(25 128) scale(0.875)" d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+    <text x="45" y="140" class="stat-value">1.2k</text>
+    <text x="25" y="160" class="stat-label">forks</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(103 128) scale(0.875)" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
+    <text x="123" y="140" class="stat-value">64</text>
+    <text x="103" y="160" class="stat-label">public repos</text>
+  </g><g class="rise">
+    <path class="icon" transform="translate(181 128) scale(0.875)" d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/>
+    <text x="201" y="140" class="stat-value">2.5k</text>
+    <text x="181" y="160" class="stat-label">followers</text>
+  </g>
+  <g class="fade">
+          <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
+        </g>
+  <g class="rise">
+        <circle cx="267" cy="66" r="5" fill="#3178c6"/><circle cx="267" cy="66" r="5" fill="url(#ags-hatch)"/><ellipse cx="267.3" cy="65.8" rx="5.5" ry="4.6" transform="rotate(16 267 66)" class="pencil"/><ellipse cx="266.6" cy="66.3" rx="4.5" ry="5.5" transform="rotate(-18 267 66)" class="pencil"/>
+        <text x="279" y="70" class="lang-name">TypeScript</text>
+        <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="88" r="5" fill="#dea584"/><circle cx="267" cy="88" r="5" fill="url(#ags-hatch)"/><ellipse cx="267.3" cy="87.8" rx="5.5" ry="4.6" transform="rotate(16 267 88)" class="pencil"/><ellipse cx="266.6" cy="88.3" rx="4.5" ry="5.5" transform="rotate(-18 267 88)" class="pencil"/>
+        <text x="279" y="92" class="lang-name">Rust</text>
+        <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="110" r="5" fill="#00ADD8"/><circle cx="267" cy="110" r="5" fill="url(#ags-hatch)"/><ellipse cx="267.3" cy="109.8" rx="5.5" ry="4.6" transform="rotate(16 267 110)" class="pencil"/><ellipse cx="266.6" cy="110.3" rx="4.5" ry="5.5" transform="rotate(-18 267 110)" class="pencil"/>
+        <text x="279" y="114" class="lang-name">Go</text>
+        <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="132" r="5" fill="#3572A5"/><circle cx="267" cy="132" r="5" fill="url(#ags-hatch)"/><ellipse cx="267.3" cy="131.8" rx="5.5" ry="4.6" transform="rotate(16 267 132)" class="pencil"/><ellipse cx="266.6" cy="132.3" rx="4.5" ry="5.5" transform="rotate(-18 267 132)" class="pencil"/>
+        <text x="279" y="136" class="lang-name">Python</text>
+        <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="rise">
+        <circle cx="267" cy="154" r="5" fill="#8b949e"/><circle cx="267" cy="154" r="5" fill="url(#ags-hatch)"/><ellipse cx="267.3" cy="153.8" rx="5.5" ry="4.6" transform="rotate(16 267 154)" class="pencil"/><ellipse cx="266.6" cy="154.3" rx="4.5" ry="5.5" transform="rotate(-18 267 154)" class="pencil"/>
+        <text x="279" y="158" class="lang-name">Other</text>
+        <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
+      </g><g class="pop">
+    <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
+    <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <circle cx="432" cy="112" r="36" fill="none" stroke="url(#ags-hatch)" stroke-width="12"/>
+    <ellipse cx="431.9" cy="112.1" rx="41.8" ry="42.2" transform="rotate(-6 432 112)" class="pencil"/><ellipse cx="432.2" cy="111.8" rx="42.4" ry="41.7" transform="rotate(12 432 112)" class="pencil"/><ellipse cx="432.3" cy="111.8" rx="30.4" ry="29.7" transform="rotate(14 432 112)" class="pencil"/><ellipse cx="431.8" cy="112.2" rx="29.7" ry="30.3" transform="rotate(-10 432 112)" class="pencil"/>
+    <circle cx="432" cy="112" r="26" class="glass"/><ellipse cx="431.7" cy="112.2" rx="25.6" ry="26.4" transform="rotate(-14 432 112)" class="pencil"/><ellipse cx="432.3" cy="111.8" rx="26.5" ry="25.6" transform="rotate(16 432 112)" class="pencil"/>
+    <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+  </g></g>
+</svg>

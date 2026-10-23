@@ -18,6 +18,16 @@ function contrast(a, b) {
 const backgrounds = (theme) => [theme.bg, ...(theme.gradient?.slice(1) ?? [])];
 const stops = (theme) => theme.gradient?.slice(1) ?? [];
 
+describe('design finishes', () => {
+  it('are valid and shared by both themes of a design', async () => {
+    const { FINISH_NAMES } = await import('../src/render/materials.js');
+    for (const { id, light, dark } of designs) {
+      assert.equal(themes[light].finish, themes[dark].finish, `${id} finish`);
+      if (themes[light].finish) assert.ok(FINISH_NAMES.includes(themes[light].finish), id);
+    }
+  });
+});
+
 describe('designs', () => {
   it('give every theme exactly one light and dark pair', () => {
     const members = designs.flatMap((d) => [d.light, d.dark]);

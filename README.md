@@ -8,7 +8,7 @@
 # Awesome Git Stats
 
 **Beautiful, animated stat cards for your GitHub profile README: stars, streaks, a contribution
-heatmap, a 3D skyline, rank, languages and more: 16 layouts in 122 themes that follow GitHub's light and dark mode.**
+heatmap, a 3D skyline, rank, languages and more: 16 layouts in 130 themes that follow GitHub's light and dark mode.**
 
 [![CI](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml/badge.svg)](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/iiogurt/Awesome-Git-Stats?sort=semver)](https://github.com/iiogurt/Awesome-Git-Stats/releases)
@@ -44,15 +44,15 @@ heatmap, a 3D skyline, rank, languages and more: 16 layouts in 122 themes that f
 
 ## Features
 
-| Feature                        | What you get                                                                                                                                                                                                 |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **16 layouts**                 | Overview, stats with a rank, languages (bars, donut, pie, waffle), pinned repos and gists, streak, heatmap, a **3D skyline**, radar, treemap, timeline, a goal that fills up, a full **dashboard** and more. |
-| **60 designs, 122 themes**     | Every design comes in a matching light and dark variant. 45 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D and bold, heavily animated styles.       |
-| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                        |
-| **Unique art**                 | 45 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                            |
-| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                             |
-| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                         |
-| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                         |
+| Feature                        | What you get                                                                                                                                                                                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **16 layouts**                 | Overview, stats with a rank, languages (bars, donut, pie, waffle), pinned repos and gists, streak, heatmap, a **3D skyline**, radar, treemap, timeline, a goal that fills up, a full **dashboard** and more.         |
+| **64 designs, 130 themes**     | Every design comes in a matching light and dark variant. 49 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D, bold and heavily animated, or minimal line art. |
+| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                                |
+| **Unique art**                 | 49 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                                    |
+| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                                     |
+| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                                 |
+| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                                 |
 
 <table>
   <tr>
@@ -482,18 +482,19 @@ Every design comes as a pair: a light theme and a dark theme that share colours,
 for example `tokyonight_light` + `tokyonight` or `sakura` + `sakura_dark`. See all of them side
 by side in the **[theme gallery](docs/themes.md)**.
 
-| Kind                   | Designs (light / dark variant in the gallery)                                                                                                                                                                |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nature**             | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
-| **Smooth and flowing** | `lava_lamp` · `abyss` · `koi_pond` · `silk` · `mesh` · `fizz` · `orrery` · `soundwave`                                                                                                                       |
-| **Space and sky**      | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
-| **Holidays**           | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
-| **Anime and manga**    | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
-| **Horror**             | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
-| **3D**                 | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
-| **Retro and tech**     | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
-| **Bold and loud**      | `pop_art` · `inferno` · `memphis`                                                                                                                                                                            |
-| **Classic**            | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
+| Kind                     | Designs (light / dark variant in the gallery)                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nature**               | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
+| **Smooth and flowing**   | `lava_lamp` · `abyss` · `koi_pond` · `silk` · `mesh` · `fizz` · `orrery` · `soundwave`                                                                                                                       |
+| **Space and sky**        | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
+| **Holidays**             | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
+| **Anime and manga**      | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
+| **Horror**               | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
+| **3D**                   | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
+| **Retro and tech**       | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
+| **Minimal and line art** | `doodle` · `line_art` · `stencil` · `ink`                                                                                                                                                                    |
+| **Bold and loud**        | `pop_art` · `inferno` · `memphis`                                                                                                                                                                            |
+| **Classic**              | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
 
 ### Art styles
 
@@ -505,13 +506,15 @@ Combine any theme with any art style using `art=`, for example `theme=dracula&ar
 `dunes` · `jungle` · `haunted` · `festive` · `fireworks` · `hearts` · `lanterns` · `speedlines` ·
 `clouds` · `hud` · `blood` · `glitch` · `eyes` · `isometric` · `ridgeline` · `warp` · `spheres` ·
 `globe` · `lava` · `matrix` · `fire` · `memphis` · `jellyfish` · `koi` · `silk` · `mesh` ·
-`bubbles` · `orbits` · `soundwave`
+`bubbles` · `orbits` · `soundwave` · `doodle` · `lines` · `stencil` · `ink`
 
 ### Finishes
 
 Bars, rings, charts, dots and tiles come in ten surface finishes, chosen with `finish=` (or
 `options: finish=neon` in the Action). Every finish works with every theme and layout, so
 `theme=synthwave&finish=neon` or `theme=github_light&finish=sketch` are one parameter away.
+Most designs use `gloss`; the minimal ones bring their own (`doodle` and `ink` are sketched,
+`line_art` is flat, `stencil` is cut from paper), and `finish=` overrides it.
 
 | `gloss` (default)                                                           | `soft`                                                                    | `paper`                                                                     | `chrome`                                                                      | `holo`                                                                    |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -577,30 +580,30 @@ The same options work in both ways of using the project: as `options:` in the Ac
 (`count=8&hide_border=true`) or as URL parameters in a live link. Unknown values fall back to
 defaults, so a typo never breaks your README.
 
-| Parameter            | Description                                                                                                                                                  | Default    |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
-| `username`           | GitHub user or organization (**required**)                                                                                                                   |            |
-| `layout`             | One of the [layouts](#layouts)                                                                                                                               | `overview` |
-| `theme`              | Any [theme](docs/themes.md)                                                                                                                                  | `default`  |
-| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                                                                                                 | theme's    |
-| `custom_title`       | Replace the card title (max 60 characters)                                                                                                                   |            |
-| `hide_title`         | Hide the title                                                                                                                                               | `false`    |
-| `hide_border`        | Hide the border                                                                                                                                              | `false`    |
-| `border_radius`      | Corner radius, `0`–`30`                                                                                                                                      | `10`       |
-| `disable_animations` | Turn animations off                                                                                                                                          | `false`    |
-| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                                                                                           | `5`        |
-| `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |            |
-| `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |            |
-| `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`     |
-| `finish`             | Surface of bars, rings and charts: `gloss`, `soft`, `paper`, `chrome`, `holo`, `neon`, `pixel`, `sketch`, `block` or `flat` ([Finishes](#finishes))          | `gloss`    |
-| `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`     |
-| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`        |
-| `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |            |
-| `exclude`            | Comma separated repository names to leave out                                                                                                                |            |
-| `include_forks`      | Count stars on forked repositories                                                                                                                           | `false`    |
-| `label`              | Label text of the `badge` layout (max 24 characters)                                                                                                         | `stars`    |
-| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                                                                                                | `14400`    |
-| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`                                                                                |            |
+| Parameter            | Description                                                                                                                                                  | Default                  |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| `username`           | GitHub user or organization (**required**)                                                                                                                   |                          |
+| `layout`             | One of the [layouts](#layouts)                                                                                                                               | `overview`               |
+| `theme`              | Any [theme](docs/themes.md)                                                                                                                                  | `default`                |
+| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                                                                                                 | theme's                  |
+| `custom_title`       | Replace the card title (max 60 characters)                                                                                                                   |                          |
+| `hide_title`         | Hide the title                                                                                                                                               | `false`                  |
+| `hide_border`        | Hide the border                                                                                                                                              | `false`                  |
+| `border_radius`      | Corner radius, `0`–`30`                                                                                                                                      | `10`                     |
+| `disable_animations` | Turn animations off                                                                                                                                          | `false`                  |
+| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                                                                                           | `5`                      |
+| `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |                          |
+| `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |                          |
+| `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`                   |
+| `finish`             | Surface of bars, rings and charts: `gloss`, `soft`, `paper`, `chrome`, `holo`, `neon`, `pixel`, `sketch`, `block` or `flat` ([Finishes](#finishes))          | design's, mostly `gloss` |
+| `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`                   |
+| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`                      |
+| `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |                          |
+| `exclude`            | Comma separated repository names to leave out                                                                                                                |                          |
+| `include_forks`      | Count stars on forked repositories                                                                                                                           | `false`                  |
+| `label`              | Label text of the `badge` layout (max 24 characters)                                                                                                         | `stars`                  |
+| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                                                                                                | `14400`                  |
+| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`                                                                                |                          |
 
 Example with a few options combined:
 

@@ -53,6 +53,10 @@ describe('card options', () => {
     assert.equal(parse({ finish: 'soft' }).finish, 'soft');
     assert.equal(parse({ finish: 'NEON' }).finish, 'neon');
     assert.equal(parse({ finish: 'velvet' }).finish, 'gloss');
+    // Minimal designs bring their own finish, which finish= still overrides.
+    assert.equal(parse({ theme: 'ink' }).finish, 'sketch');
+    assert.equal(parse({ theme: 'line_art_dark' }).finish, 'flat');
+    assert.equal(parse({ theme: 'stencil', finish: 'neon' }).finish, 'neon');
   });
 });
 
