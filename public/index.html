@@ -296,6 +296,7 @@
           <div class="field">
             <label for="finish">Finish</label>
             <select id="finish" name="finish">
+              <option value="">The design's own (gloss for most)</option>
               <option value="gloss">Gloss: glossy plastic and glass</option>
               <option value="soft">Soft: pastel, matte plastic</option>
               <option value="paper">Paper: paper cut-outs</option>
@@ -925,6 +926,42 @@
             artistic: true,
             category: 'flow',
           },
+          {
+            id: 'doodle',
+            label: 'Doodle',
+            description: 'Hand-drawn doodles on notebook paper, or chalk on a blackboard.',
+            light: 'doodle',
+            dark: 'doodle_dark',
+            artistic: true,
+            category: 'minimal',
+          },
+          {
+            id: 'line_art',
+            label: 'Line art',
+            description: 'Fine geometric lines, circles and one red accent.',
+            light: 'line_art',
+            dark: 'line_art_dark',
+            artistic: true,
+            category: 'minimal',
+          },
+          {
+            id: 'stencil',
+            label: 'Stencil',
+            description: 'Spray-painted stencil shapes and crop marks on kraft paper.',
+            light: 'stencil',
+            dark: 'stencil_dark',
+            artistic: true,
+            category: 'minimal',
+          },
+          {
+            id: 'ink',
+            label: 'Ink',
+            description: 'A fountain-pen drawing with cross-hatched shading.',
+            light: 'ink',
+            dark: 'ink_dark',
+            artistic: true,
+            category: 'minimal',
+          },
         ],
         categories: {
           nature: 'Nature',
@@ -936,6 +973,7 @@
           '3d': '3D',
           retro: 'Retro and tech',
           bold: 'Bold and loud',
+          minimal: 'Minimal and line art',
           classic: 'Classic: colours only',
         },
         art: {
@@ -986,6 +1024,12 @@
           orbits:
             'Planets on tilted 3D orbits around a glowing sun, with a ringed planet and a moon.',
           soundwave: 'Breathing sine waves that fade out at the edges, over a smooth equalizer.',
+          doodle:
+            'Hand-drawn doodles that draw themselves along the edges of a ruled notebook page.',
+          lines: 'Minimal geometric line art: concentric circles, fine hatching and one red dot.',
+          stencil:
+            'A spray-painted stencil ring and chevrons, with overspray and registration marks.',
+          ink: 'A fountain-pen sketch of a sphere, shaded with hatching and cross-hatching.',
         },
       };
       // catalog:end
@@ -1081,7 +1125,7 @@
         if (data.get('layout') !== 'overview') query.set('layout', data.get('layout'));
         if (theme !== 'default') query.set('theme', theme);
         if (data.get('art')) query.set('art', data.get('art'));
-        if (data.get('finish') !== 'gloss') query.set('finish', data.get('finish'));
+        if (data.get('finish')) query.set('finish', data.get('finish'));
         const field = LAYOUT_FIELDS[data.get('layout')];
         if (field && String(data.get(field[1])).trim()) {
           query.set(field[1], String(data.get(field[1])).trim());

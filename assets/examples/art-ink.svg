@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><linearGradient id="ags-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient><linearGradient id="ags-inset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.34"/><stop offset="0.45" stop-color="#000" stop-opacity="0.06"/><stop offset="1" stop-color="#fff" stop-opacity="0.08"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  .art-draw{stroke-dasharray:1;animation:ags-draw 1.4s ease-out both}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    .halo{opacity:.16}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><g class="art-s1" stroke-width=".7" stroke-linecap="round" opacity=".38">
+          <circle cx="340.1" cy="120.3" r="22.1" stroke-width="1" pathLength="1" class="art-draw"/>
+          <path d="M321.6 132.4L335.1 119.5" pathLength="1" class="art-draw" style="animation-delay:300ms"/><path d="M323.5 134.9L352.4 105.9" pathLength="1" class="art-draw" style="animation-delay:325ms"/><path d="M325.8 137.2L356.7 106.5" pathLength="1" class="art-draw" style="animation-delay:350ms"/><path d="M328.4 139.1L357.1 110.6" pathLength="1" class="art-draw" style="animation-delay:375ms"/><path d="M331.4 140.6L360.1 111.5" pathLength="1" class="art-draw" style="animation-delay:400ms"/><path d="M334.8 141.7L361.8 115.3" pathLength="1" class="art-draw" style="animation-delay:425ms"/><path d="M338.8 142.3L361.9 118.9" pathLength="1" class="art-draw" style="animation-delay:450ms"/><path d="M343.5 142.1L360.4 125.1" pathLength="1" class="art-draw" style="animation-delay:475ms"/><path d="M350.3 139.8L359.7 130.9" pathLength="1" class="art-draw" style="animation-delay:500ms"/><path d="M359.5 116.1L360.9 117.1" pathLength="1" class="art-draw" style="animation-delay:900ms"/><path d="M357.2 118.9L361.9 123.3" pathLength="1" class="art-draw" style="animation-delay:925ms"/><path d="M353.8 120.6L361.1 127.3" pathLength="1" class="art-draw" style="animation-delay:950ms"/><path d="M351.8 123.6L357.5 129.4" pathLength="1" class="art-draw" style="animation-delay:975ms"/><path d="M347.5 124.5L355.7 132.2" pathLength="1" class="art-draw" style="animation-delay:1000ms"/><path d="M345 127L354.4 136.4" pathLength="1" class="art-draw" style="animation-delay:1025ms"/><path d="M342.3 129.4L352.1 138.6" pathLength="1" class="art-draw" style="animation-delay:1050ms"/><path d="M339.5 131.7L349 140.6" pathLength="1" class="art-draw" style="animation-delay:1075ms"/><path d="M336.4 133.7L344.3 142.3" pathLength="1" class="art-draw" style="animation-delay:1100ms"/><path d="M333.1 135.5L338.6 140.7" pathLength="1" class="art-draw" style="animation-delay:1125ms"/><path d="M330.2 137.7L334.1 142" pathLength="1" class="art-draw" style="animation-delay:1150ms"/><path d="M322.4 144.8H371" pathLength="1" class="art-draw" style="animation-delay:1400ms"/><path d="M325.5 147H367.9" pathLength="1" class="art-draw" style="animation-delay:1440ms"/><path d="M328.6 149.2H364.8" pathLength="1" class="art-draw" style="animation-delay:1480ms"/><path d="M331.7 151.4H361.7" pathLength="1" class="art-draw" style="animation-delay:1520ms"/><path d="M334.7 153.6H358.6" pathLength="1" class="art-draw" style="animation-delay:1560ms"/><path d="M337.8 155.8H355.5" pathLength="1" class="art-draw" style="animation-delay:1600ms"/>
+          <path d="M7.4 123.1C70 120.1 122.5 126 175 123.1" stroke-width=".8" pathLength="1" class="art-draw" style="animation-delay:200ms"/>
+        </g>
+        <circle cx="332.3" cy="111.4" r="1.6" class="art-c3" opacity=".6"/></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/><rect x="25" y="86" width="300" height="8" rx="4" fill="url(#ags-inset)"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/><rect x="25" y="86" width="300" height="8" rx="0" fill="url(#ags-sheen)"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/><circle cx="29" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.6" cy="110" r="4" fill="#dea584"/><circle cx="131.6" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.1" cy="110" r="4" fill="#00ADD8"/><circle cx="202.1" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.4" cy="110" r="4" fill="#3572A5"/><circle cx="261.4" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

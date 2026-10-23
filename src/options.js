@@ -159,7 +159,10 @@ export function parseOptions(query = {}) {
     count: int(query.count, { fallback: 5, min: 1, max: 10 }),
     langsCount: int(query.langs_count, { fallback: 5, min: 1, max: 8 }),
     langStyle: LANGUAGE_STYLES.includes(langStyleParam) ? langStyleParam : 'bars',
-    finish: FINISH_NAMES.includes(finishParam) ? finishParam : 'gloss',
+    // Some designs come with their own finish (line art is flat, ink is sketched).
+    finish: FINISH_NAMES.includes(finishParam)
+      ? finishParam
+      : (themes[themeName]?.finish ?? 'gloss'),
     repo,
     gist,
     goal: int(query.goal, { fallback: 1000, min: 1, max: 1000000 }),

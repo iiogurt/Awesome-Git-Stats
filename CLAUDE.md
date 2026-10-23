@@ -16,13 +16,14 @@ earned, for embedding in profile READMEs with one Markdown image link:
   `src/rank.js`. `languages` fetches bytes per language for every repo; `pin` (`repo=`) and
   `gist` (`gist=`) fetch one repository or gist instead of the account (`fetchRepo`,
   `fetchGist`). Without activity those layouts render `renderNoActivity` rather than fail.
-- 122 themes in `src/themes.js`, grouped into 60 `designs`: each design is a light + dark theme
-  pair sharing colours, art and font (15 classic palettes, 45 artistic with background art,
-  fonts and glow). Every design has a `category` from `categories` (nature, holidays, anime,
-  horror, 3D, …), which groups the gallery and the link builder. `light` and `auto` are extras.
+- 130 themes in `src/themes.js`, grouped into 64 `designs`: each design is a light + dark theme
+  pair sharing colours, art, font and sometimes a default `finish` (15 classic palettes, 49
+  artistic with background art, fonts and glow). Every design has a `category` from
+  `categories` (nature, holidays, anime, horror, 3D, minimal, …), which groups the gallery and
+  the link builder. `light` and `auto` are extras.
   `*_color` overrides work on all. A new theme needs its partner and a `designs` entry; tests
   check the pairing, the category and text contrast.
-- 45 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
+- 49 background **art styles** in `src/render/art.js` (`art=` on any theme, `art=none` to
   disable), generated from a PRNG seeded with the username, so each account's art is unique
   but stable.
 - 10 surface **finishes** in `src/render/materials.js` (`finish=gloss|soft|paper|chrome|holo|

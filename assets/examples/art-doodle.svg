@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="128" viewBox="0 0 350 128" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
+  <defs><pattern id="ags-ruled" width="350" height="22" patternUnits="userSpaceOnUse"><path d="M0 21.5H350" class="art-s1" stroke-width=".7"/></pattern><linearGradient id="ags-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient><linearGradient id="ags-inset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.34"/><stop offset="0.45" stop-color="#000" stop-opacity="0.06"/><stop offset="1" stop-color="#fff" stop-opacity="0.08"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient></defs>
+  <style>
+    svg{--bg:#0d1117;--border:#30363d;--title:#e6edf3;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#e6edf3;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    .art-c1{fill:var(--art1)}.art-c2{fill:var(--art2)}.art-c3{fill:var(--art3)}
+    .art-line{stroke:var(--art1);fill:none}.art-grid{stroke:var(--art1)}
+    .art-s1{stroke:var(--art1);fill:none}.art-s2{stroke:var(--art2);fill:none}.art-s3{stroke:var(--art3);fill:none}
+    .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
+    
+    @keyframes ags-twk{50%{opacity:.12}}
+    .art-tw{animation:ags-twk 3.5s ease-in-out infinite}
+    @keyframes ags-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  .art-draw{stroke-dasharray:1;animation:ags-draw 1.4s ease-out both}
+    @media (prefers-reduced-motion: reduce){.art-layer *{animation:none!important}}
+    .halo{opacity:.16}
+    
+    .big{font-size:28px;font-weight:800;fill:var(--title)}
+    .caption{font-size:12.5px;fill:var(--muted)}
+    .legend{font-size:11px;fill:var(--text)}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="349" height="127" class="card"/>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="349" height="127"/></clipPath>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><rect width="350" height="128" fill="url(#ags-ruled)" opacity=".1"/>
+        <path d="M14 0V128" class="art-s3" stroke-width=".9" opacity=".25"/>
+        <g opacity=".5"><g transform="translate(334 16) rotate(-19.4)"><path d="M-0.1 -5.1Q2.8 3.8 -0.9 1.2Q-4.7 -1.4 0 -1.4Q4.6 -1.4 0.8 1.3Q-3 3.9 -1.5 -0.5Q0 -4.9 1.4 -0.4Q2.7 4 -0.9 1.1Q-4.6 -1.7 0 -1.7Q4.6 -1.7 0.8 1.1Q-2.9 3.9 -1.4 -0.6L0.2 -5.1" class="art-s1 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:400ms"/></g><g transform="translate(332 111) rotate(-8.7)"><path d="M-8.6 -0.1Q-7.8 0.7 -7.5 1Q-7.2 1.3 -6.9 1.4Q-6.7 1.5 -6.4 1.5Q-6 1.6 -5.9 1.3Q-5.8 0.9 -5.3 0.3Q-4.8 -0.3 -4.5 -0.6Q-4.2 -0.9 -4 -1.2Q-3.8 -1.5 -3.5 -1.6Q-3.2 -1.7 -2.9 -1.5Q-2.6 -1.2 -2.3 -0.9Q-2 -0.6 -1.8 -0.2Q-1.6 0.2 -1.3 0.8Q-1 1.3 -0.7 1.4Q-0.4 1.6 0 1.7Q0.3 1.8 0.5 1.4Q0.8 1.1 1.2 0.8Q1.6 0.5 1.7 0Q1.8 -0.4 2.3 -0.9Q2.7 -1.4 2.9 -1.5Q3.1 -1.6 3.5 -1.7Q4 -1.8 4.1 -1.3Q4.2 -0.9 4.5 -0.6Q4.8 -0.3 5.1 0.2Q5.4 0.7 5.7 1.2Q5.9 1.6 6.4 1.7Q6.8 1.8 7 1.7Q7.2 1.5 7.7 1.2Q8.1 1 8.2 0.4L8.3 -0.2" class="art-s2 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:750ms"/></g><g transform="translate(17 112) rotate(10.3)"><path d="M0 -1.5Q0 -1.8 0.2 -2.4Q0.4 -2.9 1 -3.2Q1.6 -3.5 2.2 -3.7Q2.8 -3.8 3.2 -3.3Q3.7 -2.8 4.1 -2.3Q4.4 -1.7 4.4 -0.9Q4.3 -0.1 3.8 0.5Q3.2 1.2 2.7 1.8Q2.2 2.5 1.4 3.1Q0.7 3.8 0.4 4.2Q0.1 4.7 0 4.9Q0 5 0 5.1Q0.1 5.1 -0.1 4.9Q-0.2 4.6 -0.5 4.1Q-0.9 3.6 -1.5 3.1Q-2.1 2.6 -2.7 2Q-3.4 1.4 -3.9 0.7Q-4.4 0 -4.5 -0.8Q-4.5 -1.5 -4.3 -2.2Q-4 -2.9 -3.3 -3.3Q-2.6 -3.8 -2 -3.6Q-1.4 -3.4 -0.9 -3.1Q-0.4 -2.7 -0.3 -2.4Q-0.2 -2.1 0 -1.8L0.2 -1.6" class="art-s3 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:1100ms"/></g><g transform="translate(128.4 120) rotate(-6.6)"><path d="M0 -0.1Q0 0.1 0.1 0.1Q0.2 0 0.2 0.1Q0.2 0.2 0.1 0.2Q-0.1 0.3 -0.1 0.3Q-0.1 0.4 -0.2 0.4Q-0.4 0.5 -0.5 0.4Q-0.6 0.3 -0.6 0.1Q-0.6 -0.1 -0.7 -0.2Q-0.8 -0.3 -0.6 -0.5Q-0.5 -0.6 -0.4 -0.8Q-0.2 -1 0 -1Q0.1 -1.1 0.4 -0.9Q0.7 -0.8 0.8 -0.7Q1 -0.6 1.1 -0.4Q1.2 -0.2 1.3 0.1Q1.3 0.4 1.3 0.7Q1.2 1 1 1.2Q0.8 1.4 0.5 1.6Q0.2 1.8 -0.2 1.7Q-0.6 1.5 -1 1.4Q-1.3 1.3 -1.5 1Q-1.8 0.6 -1.8 0.3Q-1.9 0.1 -1.9 -0.4Q-2 -0.9 -1.8 -1.3Q-1.5 -1.7 -1.1 -2Q-0.7 -2.2 -0.3 -2.3Q0.1 -2.4 0.6 -2.3Q1.1 -2.3 1.6 -2Q2.1 -1.7 2.3 -1.2Q2.5 -0.8 2.6 -0.2Q2.7 0.4 2.5 0.9Q2.3 1.4 1.9 1.9Q1.6 2.3 1.1 2.6Q0.7 2.9 0 2.9Q-0.6 3 -1.2 2.8Q-1.8 2.5 -2.3 2.1Q-2.7 1.8 -3.1 1.1Q-3.4 0.4 -3.3 -0.4L-3.2 -1.1" class="art-s1 art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:1450ms"/></g></g></g>
+  <text x="25" y="35" class="title fade">Stellar Dev</text>
+  <g transform="translate(0 0)">
+  <g class="rise" style="animation-delay:100ms">
+    <g class="twinkle"><path class="icon-accent" transform="translate(25 51) scale(1.375)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
+    <text x="55" y="72" class="big">17.7k</text>
+    <text x="136.92000000000002" y="72" class="caption">stars across 10 repos</text>
+  </g>
+  <clipPath id="ags-bar"><rect x="25" y="86" width="300" height="8" rx="4"/></clipPath>
+  <rect x="25" y="86" width="300" height="8" rx="4" class="track"/><rect x="25" y="86" width="300" height="8" rx="4" fill="url(#ags-inset)"/>
+  <g clip-path="url(#ags-bar)"><g class="grow" style="animation-delay:300ms"><rect x="25.00" y="86" width="151.78" height="8" fill="#3178c6"/><rect x="176.78" y="86" width="67.18" height="8" fill="#dea584"/><rect x="243.97" y="86" width="37.55" height="8" fill="#00ADD8"/><rect x="281.52" y="86" width="21.88" height="8" fill="#3572A5"/><rect x="303.40" y="86" width="10.87" height="8" fill="#199f4b"/><rect x="314.28" y="86" width="10.72" height="8" fill="#8b949e"/><rect x="25" y="86" width="300" height="8" rx="0" fill="url(#ags-sheen)"/></g></g><g class="fade" style="animation-delay:500ms">
+      <circle cx="29" cy="110" r="4" fill="#3178c6"/><circle cx="29" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="37" y="114" class="legend">TypeScript 51%</text>
+    </g><g class="fade" style="animation-delay:580ms">
+      <circle cx="131.6" cy="110" r="4" fill="#dea584"/><circle cx="131.6" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="139.63240000000002" y="114" class="legend">Rust 22%</text>
+    </g><g class="fade" style="animation-delay:660ms">
+      <circle cx="202.1" cy="110" r="4" fill="#00ADD8"/><circle cx="202.1" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="210.08319999999998" y="114" class="legend">Go 13%</text>
+    </g><g class="fade" style="animation-delay:740ms">
+      <circle cx="261.4" cy="110" r="4" fill="#3572A5"/><circle cx="261.4" cy="110" r="4" fill="url(#ags-sphere)"/>
+      <text x="269.402" y="114" class="legend">Python 7%</text>
+    </g></g>
+</svg>

@@ -57,6 +57,10 @@ export const ART_STYLES = [
   'bubbles',
   'orbits',
   'soundwave',
+  'doodle',
+  'lines',
+  'stencil',
+  'ink',
 ];
 
 /** One-line descriptions, shown in the link builder and the theme gallery. */
@@ -106,6 +110,10 @@ export const ART_DESCRIPTIONS = {
   bubbles: 'Soda bubbles with glossy, iridescent rims wobbling upwards.',
   orbits: 'Planets on tilted 3D orbits around a glowing sun, with a ringed planet and a moon.',
   soundwave: 'Breathing sine waves that fade out at the edges, over a smooth equalizer.',
+  doodle: 'Hand-drawn doodles that draw themselves along the edges of a ruled notebook page.',
+  lines: 'Minimal geometric line art: concentric circles, fine hatching and one red dot.',
+  stencil: 'A spray-painted stencil ring and chevrons, with overspray and registration marks.',
+  ink: 'A fountain-pen sketch of a sphere, shaded with hatching and cross-hatching.',
 };
 
 /** Small, fast, deterministic PRNG (mulberry32). */
@@ -127,6 +135,10 @@ const between = (rand, min, max) => min + rand() * (max - min);
 const pick = (rand, list) => list[Math.floor(rand() * list.length)];
 // Size unit for art that scales with the card, capped so tall cards stay calm.
 const unit = (height) => Math.min(height, 260) / 26;
+
+// Lines with `art-draw` and pathLength="1" are drawn in by a pen, once, and stay drawn.
+const DRAW_ON = `@keyframes ags-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  .art-draw{stroke-dasharray:1;animation:ags-draw 1.4s ease-out both}`;
 
 /** Content that moves by (dx, dy) forever; a copy one period behind makes the loop seamless. */
 function loop(content, dx, dy, seconds) {
@@ -1720,6 +1732,230 @@ const styles = {
         .art-breathe{animation:ags-breathe 5s ease-in-out infinite}
         @keyframes ags-eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
         .art-eq{transform-box:fill-box;transform-origin:center bottom;animation:ags-eq 1.2s ease-in-out infinite}`,
+    };
+  },
+
+  doodle(rand, { width, height }) {
+    const u = unit(height);
+    // A line through `points` the way a hand draws it: smoothed, a little shaky.
+    const hand = (points, size) => {
+      const shaky = points.map(([x, y]) => [
+        x + between(rand, -0.04, 0.04) * size,
+        y + between(rand, -0.04, 0.04) * size,
+      ]);
+      let d = `M${shaky[0].map(r1).join(' ')}`;
+      for (let i = 1; i < shaky.length - 1; i += 1) {
+        const [x, y] = shaky[i];
+        const [nx, ny] = shaky[i + 1];
+        d += `Q${r1(x)} ${r1(y)} ${r1((x + nx) / 2)} ${r1((y + ny) / 2)}`;
+      }
+      return `${d}L${shaky.at(-1).map(r1).join(' ')}`;
+    };
+    const range = (n, f) => Array.from({ length: n }, (_, i) => f(i / (n - 1), i));
+    const doodles = [
+      // A spiral.
+      (s) =>
+        hand(
+          range(40, (t) => [Math.cos(t * 16) * s * t, Math.sin(t * 16) * s * t]),
+          s,
+        ),
+      // A five-pointed star, drawn in one go.
+      (s) =>
+        hand(
+          range(11, (t, i) => {
+            const a = -Math.PI / 2 + (i * 4 * Math.PI) / 5;
+            return [Math.cos(a) * s, Math.sin(a) * s];
+          }),
+          s,
+        ),
+      // A loopy underline.
+      (s) =>
+        hand(
+          range(48, (t) => {
+            const a = t * Math.PI * 8;
+            return [(t - 0.5) * s * 3 - Math.sin(a) * s * 0.25, -Math.cos(a) * s * 0.3];
+          }),
+          s,
+        ),
+      // A wavy squiggle.
+      (s) =>
+        hand(
+          range(30, (t) => [(t - 0.5) * s * 3, Math.sin(t * Math.PI * 5) * s * 0.3]),
+          s,
+        ),
+      // A curved arrow.
+      (s) =>
+        `${hand(
+          range(14, (t) => [(t - 0.5) * s * 2.4, -Math.sin(t * Math.PI) * s * 0.7]),
+          s,
+        )}M${r1(s * 0.75)} ${r1(-s * 0.25)}L${r1(s * 1.2)} 0L${r1(s * 1.05)} ${r1(-s * 0.45)}`,
+      // A little sun.
+      (s) => {
+        let rays = '';
+        for (let i = 0; i < 8; i += 1) {
+          const a = (i * Math.PI) / 4 + rand() * 0.2;
+          rays += `M${r1(Math.cos(a) * s * 0.65)} ${r1(Math.sin(a) * s * 0.65)}L${r1(Math.cos(a) * s)} ${r1(Math.sin(a) * s)}`;
+        }
+        return `${hand(
+          range(18, (t) => [Math.cos(t * 6.6) * s * 0.42, Math.sin(t * 6.6) * s * 0.42]),
+          s,
+        )}${rays}`;
+      },
+      // A heart.
+      (s) =>
+        hand(
+          range(26, (t) => {
+            const a = t * Math.PI * 2;
+            return [
+              (Math.sin(a) ** 3 * s) / 1.1,
+              (-(13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a)) *
+                s) /
+                16,
+            ];
+          }),
+          s,
+        ),
+    ];
+    // Doodles sit in the corners and along the bottom edge, in the card's padding,
+    // out of the way of the numbers.
+    const spots = [
+      [width - 16, 16, 1],
+      [width - 18, height - 17, 1.15],
+      [17, height - 16, 1],
+      [width * between(rand, 0.35, 0.55), height - 8, 0.7],
+    ];
+    // Shuffle (Fisher-Yates), so each account gets its own doodles.
+    const order = doodles.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(rand() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    let marks = '';
+    spots.forEach(([x, y, size], i) => {
+      const s = Math.min(10, u) * size;
+      const c = 1 + (i % 3);
+      marks += `<g transform="translate(${r1(x)} ${r1(y)}) rotate(${r1(between(rand, -20, 20))})"><path d="${doodles[order[i % order.length]](s)}" class="art-s${c} art-draw" pathLength="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:${400 + i * 350}ms"/></g>`;
+    });
+    // Faint notebook rules and a margin line.
+    const lines = `<pattern id="ags-ruled" width="${width}" height="22" patternUnits="userSpaceOnUse"><path d="M0 21.5H${width}" class="art-s1" stroke-width=".7"/></pattern>`;
+    return {
+      defs: lines,
+      layer: `<rect width="${width}" height="${height}" fill="url(#ags-ruled)" opacity=".1"/>
+        <path d="M14 0V${height}" class="art-s3" stroke-width=".9" opacity=".25"/>
+        <g opacity=".5">${marks}</g>`,
+      motion: DRAW_ON,
+    };
+  },
+
+  lines(rand, { width, height }) {
+    const u = unit(height);
+    // A Bauhaus-style composition of fine lines in one corner, plus a red accent.
+    const cx = r1(width - u * between(rand, 3, 5));
+    const cy = r1(height * between(rand, 0.25, 0.75));
+    let arcs = '';
+    for (let i = 1; i <= 5; i += 1) {
+      arcs += `<circle cx="${cx}" cy="${cy}" r="${r1(u * (1.2 + i * 1.1))}" class="art-s1 art-draw" pathLength="1" stroke-width=".8" style="animation-delay:${i * 120}ms"/>`;
+    }
+    let hatch = '';
+    const x0 = r1(width * between(rand, 0.55, 0.7));
+    for (let i = 0; i < 9; i += 1) {
+      const x = x0 + i * u * 0.55;
+      hatch += `<path d="M${r1(x)} ${height}L${r1(x + u * 2)} ${r1(height - u * 2)}" class="art-s2 art-draw" pathLength="1" stroke-width=".7" style="animation-delay:${700 + i * 60}ms"/>`;
+    }
+    // A small triangle beside the circles, above them.
+    const s = u * 1.2;
+    const tx = r1(cx - u * 7.5);
+    const ty = r1(Math.max(s * 1.6 + 6, cy - u * 3));
+    return {
+      layer: `<g opacity=".32">${arcs}${hatch}
+          <path d="M${tx} ${ty}l${r1(s)} ${r1(-s * 1.6)}l${r1(s)} ${r1(s * 1.6)}Z" class="art-s1 art-draw" pathLength="1" stroke-width=".9" style="animation-delay:500ms"/>
+          <path d="M0 ${r1(height - u * 0.6)}H${r1(width * 0.35)}" class="art-s2 art-draw" pathLength="1" stroke-width=".7" style="animation-delay:300ms"/>
+        </g>
+        <circle cx="${cx}" cy="${cy}" r="${r1(u * 0.9)}" class="art-c3" opacity=".7"/>`,
+      motion: DRAW_ON,
+    };
+  },
+
+  stencil(rand, { width, height }) {
+    const u = unit(height);
+    // Bold shapes cut as a stencil: thick strokes broken by the stencil's bridges.
+    const bridge = (length, pieces) => `${r1(length / pieces - 3)} 3`;
+    const r = u * between(rand, 3.2, 4.2);
+    const cx = r1(width - r * 0.6);
+    const cy = r1(height * between(rand, 0.3, 0.7));
+    const ring = `<circle cx="${cx}" cy="${cy}" r="${r1(r)}" class="art-s1" stroke-width="${r1(u * 0.9)}" stroke-dasharray="${bridge(2 * Math.PI * r, 6)}"/>`;
+    // Chevrons pointing down the left margin.
+    const c = Math.min(u, 7);
+    const cy0 = r1(height * between(rand, 0.35, 0.5));
+    const chevrons = [0, 1, 2]
+      .map(
+        (i) =>
+          `<path d="M${r1(12 - c)} ${r1(cy0 + i * c * 1.4)}l${r1(c)} ${r1(c)}l${r1(c)} ${r1(-c)}" class="art-s3" stroke-width="${r1(c * 0.45)}" stroke-dasharray="${r1(c * 1.1)} 2"/>`,
+      )
+      .join('');
+    // Crop and registration marks in the corners.
+    const mark = (x, y) =>
+      `<g transform="translate(${x} ${y})"><circle r="4.5" class="art-s2" stroke-width=".8"/><path d="M-8 0H8M0 -8V8" class="art-s2" stroke-width=".8"/></g>`;
+    // Overspray: a few fine dots around the ring.
+    let spray = '';
+    for (let i = 0; i < 40; i += 1) {
+      const a = rand() * Math.PI * 2;
+      const d = r + u * 0.5 + rand() * u * 1.4;
+      spray += `<circle cx="${r1(cx + Math.cos(a) * d)}" cy="${r1(cy + Math.sin(a) * d)}" r="${r1(between(rand, 0.4, 1.1))}" class="art-c1"/>`;
+    }
+    return {
+      layer: `<g opacity=".16">${ring}</g><g opacity=".1">${spray}</g>
+        <g opacity=".35">${chevrons}</g>
+        <g opacity=".4">${mark(12, 12)}${mark(width - 12, height - 12)}</g>`,
+    };
+  },
+
+  ink(rand, { width, height }) {
+    const u = unit(height);
+    // A fountain-pen study: a sphere shaded with hatching and cross-hatching.
+    // It sits in the bottom right corner, partly off the card, so it never crowds a chart.
+    const R = u * between(rand, 4.2, 4.8);
+    const cx = width - R * 0.45;
+    const cy = height - R * 0.35;
+    const light = [-0.6, -0.8];
+    // Strokes across the sphere in direction (dx, dy), kept to where the shade is deeper than `depth`.
+    const strokes = (dx, dy, step, depth, delay) => {
+      let out = '';
+      const [nx, ny] = [-dy, dx];
+      let n = 0;
+      for (let k = -R + step / 2; k < R; k += step) {
+        const half = Math.sqrt(R * R - k * k);
+        const pts = [];
+        for (let t = -half; t <= half; t += half / 8) {
+          const x = k * nx + t * dx;
+          const y = k * ny + t * dy;
+          const shade = -(x * light[0] + y * light[1]) / R;
+          if (shade > depth) pts.push([cx + x, cy + y]);
+        }
+        if (pts.length < 2) continue;
+        const [a, b] = [pts[0], pts.at(-1)];
+        out += `<path d="M${r1(a[0])} ${r1(a[1])}L${r1(b[0] + between(rand, -0.5, 0.5))} ${r1(b[1] + between(rand, -0.5, 0.5))}" pathLength="1" class="art-draw" style="animation-delay:${delay + n * 25}ms"/>`;
+        n += 1;
+      }
+      return out;
+    };
+    const d = Math.SQRT1_2;
+    const shadow = [];
+    for (let i = 0; i < 6; i += 1) {
+      const w = R * (1.1 - i * 0.14);
+      const y = r1(cy + R + u * 0.5 + i * 2.2);
+      shadow.push(
+        `<path d="M${r1(cx - w + R * 0.3)} ${y}H${r1(cx + w + R * 0.3)}" pathLength="1" class="art-draw" style="animation-delay:${1400 + i * 40}ms"/>`,
+      );
+    }
+    return {
+      layer: `<g class="art-s1" stroke-width=".7" stroke-linecap="round" opacity=".38">
+          <circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(R)}" stroke-width="1" pathLength="1" class="art-draw"/>
+          ${strokes(d, -d, 3.2, -0.2, 300)}${strokes(d, d, 3.6, 0.35, 900)}${shadow.join('')}
+          <path d="M${r1(u * 1.5)} ${r1(height - u)}C${r1(width * 0.2)} ${r1(height - u * 1.6)} ${r1(width * 0.35)} ${r1(height - u * 0.4)} ${r1(width * 0.5)} ${r1(height - u)}" stroke-width=".8" pathLength="1" class="art-draw" style="animation-delay:200ms"/>
+        </g>
+        <circle cx="${r1(cx - R * 0.35)}" cy="${r1(cy - R * 0.4)}" r="1.6" class="art-c3" opacity=".6"/>`,
+      motion: DRAW_ON,
     };
   },
 };
