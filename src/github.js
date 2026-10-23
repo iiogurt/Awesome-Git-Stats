@@ -5,6 +5,9 @@ const API_URL = 'https://api.github.com';
 const PAGE_SIZE = 100;
 const MAX_PAGES = 10;
 const USER_AGENT = 'awesome-git-stats';
+// Give up on a slow GitHub request well before the serverless function is stopped,
+// so the visitor still gets an error card rather than a broken image.
+const REQUEST_TIMEOUT_MS = 8000;
 
 export class GitHubError extends Error {
   constructor(message, { status = 500, code = 'GITHUB_ERROR' } = {}) {
@@ -59,6 +62,7 @@ query ($owner: String!, $name: String!) {
     isFork
     isArchived
     isTemplate
+    isPrivate
     primaryLanguage { name color }
   }
 }`;
@@ -71,6 +75,7 @@ query ($login: String!, $id: String!) {
       description
       stargazerCount
       isFork
+      isPublic
       forks { totalCount }
       files(limit: 10) { name language { name color } }
     }
@@ -147,8 +152,23 @@ function normaliseRepo(node) {
   };
 }
 
+/** fetch() with a timeout; a timed-out request becomes a GitHubError. */
+async function request(fetchImpl, url, init) {
+  try {
+    return await fetchImpl(url, { ...init, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+  } catch (error) {
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
+      throw new GitHubError('GitHub took too long to respond, try again later', {
+        status: 504,
+        code: 'TIMEOUT',
+      });
+    }
+    throw error;
+  }
+}
+
 async function graphql(fetchImpl, token, variables, query = QUERY) {
-  const response = await fetchImpl(`${API_URL}/graphql`, {
+  const response = await request(fetchImpl, `${API_URL}/graphql`, {
     method: 'POST',
     headers: {
       authorization: `bearer ${token}`,
@@ -257,7 +277,7 @@ async function fetchWithGraphQL(
 }
 
 async function rest(fetchImpl, path) {
-  const response = await fetchImpl(`${API_URL}${path}`, {
+  const response = await request(fetchImpl, `${API_URL}${path}`, {
     headers: { accept: 'application/vnd.github+json', 'user-agent': USER_AGENT },
   });
   if (response.status === 404) {
@@ -362,7 +382,7 @@ async function renamedNotFound(promise, message) {
 }
 
 /**
- * Fetch one repository for the pin card, owned by anyone.
+ * Fetch one public repository for the pin card, owned by anyone.
  *
  * @returns {Promise<object>} name, fullName, description, stars, forks, flags and language
  */
@@ -386,7 +406,10 @@ export async function fetchRepo(
       'Repository not found',
     );
   }
-  if (!node) throw new GitHubError('Repository not found', { status: 404, code: 'NOT_FOUND' });
+  // A token may see private repositories; the card must never show them.
+  if (!node || node.isPrivate || node.private) {
+    throw new GitHubError('Repository not found', { status: 404, code: 'NOT_FOUND' });
+  }
   return {
     ...normaliseRepo(node),
     fullName: node.nameWithOwner ?? node.full_name ?? `${owner}/${name}`,
@@ -395,7 +418,7 @@ export async function fetchRepo(
 }
 
 /**
- * Fetch one of `username`'s gists for the gist card. Stars are only available
+ * Fetch one of `username`'s public gists for the gist card. Stars are only available
  * through GraphQL, so they are null without a token.
  */
 export async function fetchGist(
@@ -411,7 +434,10 @@ export async function fetchGist(
       'Gist not found',
     );
     const gist = data?.user?.gist;
-    if (!gist) throw new GitHubError('Gist not found', { status: 404, code: 'NOT_FOUND' });
+    // Secret gists stay secret, even when the token can read them.
+    if (!gist || gist.isPublic === false) {
+      throw new GitHubError('Gist not found', { status: 404, code: 'NOT_FOUND' });
+    }
     const file = gist.files?.[0];
     return {
       id: gist.name,
@@ -428,7 +454,7 @@ export async function fetchGist(
     rest(fetchImpl, `/gists/${encodeURIComponent(id)}`),
     'Gist not found',
   );
-  if (gist.owner?.login?.toLowerCase() !== username.toLowerCase()) {
+  if (gist.public === false || gist.owner?.login?.toLowerCase() !== username.toLowerCase()) {
     throw new GitHubError('Gist not found', { status: 404, code: 'NOT_FOUND' });
   }
   const file = Object.values(gist.files ?? {})[0];

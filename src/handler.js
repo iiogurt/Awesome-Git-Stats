@@ -6,6 +6,12 @@ import { computeStats } from './stats.js';
 
 const accountCache = new TtlCache();
 const ERROR_CACHE_SECONDS = 10 * 60;
+// Unknown users, repositories and gists are remembered for a while, so requests for
+// names that don't exist can't use up the tokens' GitHub quota.
+const NOT_FOUND_CACHE_MS = 5 * 60 * 1000;
+// A live card must be done well before Vercel stops the function (maxDuration 15s).
+// The Action has no such limit, so it only uses the per-request timeouts.
+const DEADLINE_MS = 12 * 1000;
 
 function allowedUsernames(env) {
   const raw = env.ALLOWED_USERNAMES;
@@ -53,20 +59,43 @@ async function cached(key, load) {
   try {
     return await pending;
   } catch (error) {
-    accountCache.delete(key);
+    if (error instanceof GitHubError && error.code === 'NOT_FOUND') {
+      accountCache.set(key, pending, NOT_FOUND_CACHE_MS);
+    } else {
+      accountCache.delete(key);
+    }
     throw error;
   }
 }
 
+// Reject with a timeout error when `promise` takes longer than `ms`.
+function withDeadline(promise, ms) {
+  let timer;
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(
+      () =>
+        reject(
+          new GitHubError('GitHub took too long to respond, try again later', {
+            status: 504,
+            code: 'TIMEOUT',
+          }),
+        ),
+      ms,
+    );
+  });
+  return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+}
+
 /**
  * Build a card for the given query parameters. Never throws: failures are
- * rendered as an error card so READMEs always show an image.
+ * rendered as an error card so READMEs always show an image. `deadlineMs` caps the time
+ * spent waiting for GitHub (the HTTP handler sets it; the Action waits as long as needed).
  *
  * @returns {Promise<{ status: number, svg: string, cacheSeconds: number }>}
  */
 export async function createCard(
   query,
-  { env = process.env, fetchImpl = globalThis.fetch, token } = {},
+  { env = process.env, fetchImpl = globalThis.fetch, token, deadlineMs = Infinity } = {},
 ) {
   let options;
   try {
@@ -95,7 +124,8 @@ export async function createCard(
 
   try {
     const tokens = token !== undefined ? [token].filter(Boolean) : tokensFromEnv(env);
-    const data = await loadData(options, { tokens, fetchImpl });
+    const pending = loadData(options, { tokens, fetchImpl });
+    const data = await (deadlineMs === Infinity ? pending : withDeadline(pending, deadlineMs));
     const languages =
       options.layout === 'overview' ? Math.min(options.langsCount, 4) : options.langsCount;
     // A pinned repository or gist is rendered as fetched.
@@ -128,8 +158,14 @@ function queryFromRequest(req) {
 
 /** Node / Vercel style request handler. */
 export default async function handler(req, res) {
-  const { status, svg, cacheSeconds } = await createCard(queryFromRequest(req));
-  res.statusCode = status;
+  const { status, svg, cacheSeconds } = await createCard(queryFromRequest(req), {
+    deadlineMs: DEADLINE_MS,
+  });
+  // Error cards are sent as 200: GitHub's image proxy may not show an image that
+  // comes with an error status, and the card exists to explain the error. The real
+  // status stays visible in a header.
+  res.statusCode = 200;
+  res.setHeader('X-Card-Status', String(status));
   res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
   res.setHeader(
     'Cache-Control',
