@@ -29,7 +29,7 @@ jobs:
     steps:
       - id: dependabot
         if: github.event.pull_request.user.login == 'dependabot[bot]'
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
       - name: Leave major updates for review
         if: steps.dependabot.outputs.update-type == 'version-update:semver-major'
         run: echo "::notice::Major update, so auto-merge stays off. Review and merge it by hand."
@@ -40,7 +40,7 @@ jobs:
       # their commits up with the next merge.
       - id: app-token
         if: github.event.pull_request.user.login != 'dependabot[bot]'
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
         with:
           app-id: ${{ vars.RELEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}

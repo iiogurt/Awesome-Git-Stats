@@ -85,10 +85,42 @@ describe('handler', () => {
       },
     };
     await handler({ url: '/api/stars' }, res);
-    assert.equal(res.statusCode, 400);
+    // Error cards are images too: 200, with the real status in a header.
+    assert.equal(res.statusCode, 200);
+    assert.equal(headers['x-card-status'], '400');
     assert.equal(headers['content-type'], 'image/svg+xml; charset=utf-8');
     assert.match(headers['cache-control'], /s-maxage=600/);
     assert.match(res.body, /Missing &quot;username&quot;/);
+  });
+});
+
+describe('createCard protects the token quota', () => {
+  beforeEach(() => clearCache());
+
+  it('remembers users that do not exist', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ json: { errors: [{ type: 'NOT_FOUND' }] } }));
+    const env = { GITHUB_TOKEN: 't' };
+    assert.equal((await createCard({ username: 'nobody-here' }, { env, fetchImpl })).status, 404);
+    assert.equal((await createCard({ username: 'nobody-here' }, { env, fetchImpl })).status, 404);
+    assert.equal(calls.length, 1);
+  });
+
+  it('retries other errors on the next request', async () => {
+    const { fetchImpl, calls } = mockFetch(() => ({ status: 502, json: {} }));
+    const env = { GITHUB_TOKEN: 't' };
+    await createCard({ username: 'octocat' }, { env, fetchImpl });
+    await createCard({ username: 'octocat' }, { env, fetchImpl });
+    assert.equal(calls.length, 2);
+  });
+
+  it('renders a timeout card when GitHub is too slow', async () => {
+    const fetchImpl = () => new Promise(() => {});
+    const result = await createCard(
+      { username: 'octocat' },
+      { env: { GITHUB_TOKEN: 't' }, fetchImpl, deadlineMs: 20 },
+    );
+    assert.equal(result.status, 504);
+    assert.match(result.svg, /took too long/);
   });
 });
 

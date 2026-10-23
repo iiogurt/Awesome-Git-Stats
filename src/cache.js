@@ -16,12 +16,12 @@ export class TtlCache {
     return entry.value;
   }
 
-  set(key, value) {
+  set(key, value, ttlMs = this.ttlMs) {
     if (this.entries.size >= this.maxEntries) {
       // Maps keep insertion order, so the first key is the oldest.
       this.entries.delete(this.entries.keys().next().value);
     }
-    this.entries.set(key, { value, expires: Date.now() + this.ttlMs });
+    this.entries.set(key, { value, expires: Date.now() + ttlMs });
   }
 
   delete(key) {

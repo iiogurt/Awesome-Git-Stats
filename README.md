@@ -280,6 +280,11 @@ The instance reads public data from the GitHub API. A token raises GitHub's limi
 4. Leave all **Permissions** untouched and click **Generate token**.
 5. Copy the token (it starts with `github_pat_`). GitHub shows it only once.
 
+> [!WARNING]
+> Don't use a classic token or one with access to private repositories. Cards never show
+> private repositories or secret gists, but the activity cards of the token's own account
+> would count its private contributions.
+
 ### Step 2: Put the code in your GitHub account
 
 **[Fork this repository](https://github.com/iiogurt/Awesome-Git-Stats/fork)** and click
@@ -358,7 +363,10 @@ save the token again as Sensitive, then redeploy (**Deployments → ⋯ → Rede
   roughly 5,000 uncached cards per hour, so for many users add more tokens (ideally from
   different accounts) in `GITHUB_TOKENS`. Requests are spread across all of them, and when one
   token hits its limit the next one takes over. Vercel's CDN caches every card (4 hours by
-  default), so popular cards cost almost nothing.
+  default), so popular cards cost almost nothing, and names that don't exist are remembered
+  for a few minutes. To stop one visitor from using up the tokens with many different names,
+  add a rate limit rule in **Vercel → Firewall** (for example 60 requests per minute per IP for
+  `/api/stars`).
 
 | Environment variable | Description                                                                    |
 | -------------------- | ------------------------------------------------------------------------------ |

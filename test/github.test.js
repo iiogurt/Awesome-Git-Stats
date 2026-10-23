@@ -312,6 +312,58 @@ describe('fetchRepo', () => {
   });
 });
 
+describe('private repositories and secret gists', () => {
+  it('never shows a private repository, even when the token can read it', async () => {
+    const graphql = mockFetch(() => ({
+      json: { data: { repository: { ...graphqlRepo('secret', 5), isPrivate: true } } },
+    }));
+    await assert.rejects(
+      fetchRepo('octo', 'secret', { token: 't', fetchImpl: graphql.fetchImpl }),
+      {
+        code: 'NOT_FOUND',
+        message: 'Repository not found',
+      },
+    );
+    const rest = mockFetch(() => ({
+      json: { name: 'secret', private: true, stargazers_count: 5 },
+    }));
+    await assert.rejects(fetchRepo('octo', 'secret', { token: '', fetchImpl: rest.fetchImpl }), {
+      code: 'NOT_FOUND',
+    });
+    assert.match(graphql.calls[0].body.query, /isPrivate/);
+  });
+
+  it('never shows a secret gist', async () => {
+    const gist = { name: 'abc', description: 'keys', isPublic: false, files: [] };
+    const graphql = mockFetch(() => ({ json: { data: { user: { gist } } } }));
+    await assert.rejects(fetchGist('octo', 'abc', { token: 't', fetchImpl: graphql.fetchImpl }), {
+      message: 'Gist not found',
+    });
+    const rest = mockFetch(() => ({
+      json: { id: 'abc', public: false, owner: { login: 'octo' }, files: {} },
+    }));
+    await assert.rejects(fetchGist('octo', 'abc', { token: '', fetchImpl: rest.fetchImpl }), {
+      message: 'Gist not found',
+    });
+  });
+});
+
+describe('request timeouts', () => {
+  it('turn a request GitHub never answers into a timeout error', async () => {
+    let signal;
+    const fetchImpl = async (url, init) => {
+      signal = init.signal;
+      throw new DOMException('The operation timed out.', 'TimeoutError');
+    };
+    await assert.rejects(fetchAccount('octocat', { token: 't', fetchImpl }), {
+      code: 'TIMEOUT',
+      status: 504,
+    });
+    assert.ok(signal instanceof AbortSignal);
+    await assert.rejects(fetchAccount('octocat', { token: '', fetchImpl }), { code: 'TIMEOUT' });
+  });
+});
+
 describe('fetchGist', () => {
   it('reads a gist with stars through GraphQL', async () => {
     const gist = {

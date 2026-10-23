@@ -15,3 +15,5 @@ Things we especially care about:
 - Markup or script injection into the generated SVG (for example through repository names,
   display names or query parameters).
 - Ways to make a deployment leak its `GITHUB_TOKEN`.
+- Ways to make a card show private data the token can read, such as private repositories or
+  secret gists.
