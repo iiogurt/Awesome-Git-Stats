@@ -207,6 +207,42 @@ describe('finishes', () => {
   });
 });
 
+describe('lab layout', () => {
+  it('shows the plots, the proposition and the elements', () => {
+    const svg = render({ layout: 'lab' });
+    assertWellFormed(svg);
+    assert.match(svg, /On the GitHub of Stellar Dev/);
+    for (const text of [
+      'weekday density',
+      'Fourier spectrum',
+      'cumulative contributions',
+      'rank–stars law',
+      'h-index',
+      'periodic table',
+    ]) {
+      assert.match(svg, new RegExp(text), text);
+    }
+    assert.match(svg, /<tspan class="m">T\*<\/tspan> = 7\.0 d/);
+    assert.match(svg, /class="el-symbol" text-anchor="middle">Ts</);
+    assert.match(svg, /0x[0-9a-f]{100,}/);
+  });
+
+  it('shows the Lorenz curve and a note without contribution data', () => {
+    const svg = render({ layout: 'lab' }, { ...sampleAccount, activity: null });
+    assertWellFormed(svg);
+    assert.match(svg, /Lorenz curve of stars/);
+    assert.match(svg, /needs a GitHub token/);
+    assert.doesNotMatch(svg, /Fourier spectrum|0x[0-9a-f]/);
+  });
+
+  it('copes with accounts without starred repositories', () => {
+    const svg = render({ layout: 'lab' }, { ...sampleAccount, repos: [] });
+    assertWellFormed(svg);
+    assert.match(svg, /Too few starred repositories/);
+    assert.match(svg, /the table is empty/);
+  });
+});
+
 describe('dashboard layout', () => {
   it('shows tiles, heatmap, charts and repos', () => {
     const svg = render({ layout: 'dashboard' });

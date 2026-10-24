@@ -9,8 +9,8 @@ A service that renders SVG cards of the GitHub stars an account (user or organiz
 earned, for embedding in profile READMEs with one Markdown image link:
 `https://<deployment>/api/stars?username=octocat&layout=repos&theme=tokyonight`.
 
-- 16 layouts (`LAYOUTS` in `src/options.js`), one renderer each in `src/render/`. The
-  `ACTIVITY_LAYOUTS` (dashboard, stats, streak, heatmap, skyline, radar, timeline, goal) also
+- 17 layouts (`LAYOUTS` in `src/options.js`), one renderer each in `src/render/`. The
+  `ACTIVITY_LAYOUTS` (dashboard, stats, streak, heatmap, skyline, radar, timeline, goal, lab) also
   fetch contribution activity (a second GraphQL query, users only, token required); streaks,
   heatmap levels and monthly totals come from `src/activity.js`, the S–C rank from
   `src/rank.js`. `languages` fetches bytes per language for every repo; `pin` (`repo=`) and
@@ -54,6 +54,7 @@ neon|pixel|sketch|block|flat`). Renderers draw shapes through the helpers (`trac
 | `src/github.js`                | GraphQL (with token) or REST fallback; normalises repos; `GitHubError`  |
 | `src/stats.js`                 | Totals, top repos, stars per language, code languages ("Other" groups)  |
 | `src/rank.js`                  | S–C rank and per-axis scores for the `stats` and `radar` layouts        |
+| `src/science.js`               | h-index, Gini, entropy, spectrum and fits for the `lab` layout          |
 | `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar       |
 | `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`)  |
 | `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers          |
