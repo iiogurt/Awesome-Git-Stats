@@ -3,6 +3,7 @@ import { renderCompact } from './compact.js';
 import { renderDashboard } from './dashboard.js';
 import { renderGoal } from './goal.js';
 import { renderHeatmap } from './heatmap.js';
+import { renderLab } from './lab.js';
 import { renderLanguages } from './languages.js';
 import { renderOverview } from './overview.js';
 import { renderGist, renderPin } from './pin.js';
@@ -35,6 +36,7 @@ const renderers = {
   treemap: renderTreemap,
   timeline: renderTimeline,
   goal: renderGoal,
+  lab: renderLab,
 };
 
 /**

@@ -59,6 +59,7 @@ const files = {
   'treemap.svg': render({ layout: 'treemap', theme: 'dark' }),
   'timeline.svg': render({ layout: 'timeline', theme: 'rose_pine' }),
   'goal.svg': render({ layout: 'goal', theme: 'ocean', goal: '1500' }),
+  'lab.svg': render({ layout: 'lab', theme: 'nord' }),
   // README header: the starry_night design in GitHub's dark and light mode.
   'hero-dark.svg': render({ layout: 'dashboard', theme: 'starry_night' }),
   'hero-light.svg': render({ layout: 'dashboard', theme: 'starry_night_light' }),
