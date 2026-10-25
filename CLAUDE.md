@@ -55,6 +55,7 @@ neon|pixel|sketch|block|flat`). Renderers draw shapes through the helpers (`trac
 | `src/stats.js`                 | Totals, top repos, stars per language, code languages ("Other" groups)  |
 | `src/rank.js`                  | S–C rank and per-axis scores for the `stats` and `radar` layouts        |
 | `src/science.js`               | h-index, Gini, entropy, spectrum and fits for the `lab` layout          |
+| `src/render/tex.js`            | Mini TeX → SVG tspans in embedded Computer Modern (`tex-fonts.js`)      |
 | `src/activity.js`              | Streaks, heatmap levels, weekday/monthly totals from the calendar       |
 | `src/themes.js`                | Theme tokens: `bg border title text muted accent track` (+ `gradient`)  |
 | `src/render/*.js`              | One renderer per layout, `common.js` for the frame and helpers          |
