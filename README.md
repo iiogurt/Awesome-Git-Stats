@@ -519,6 +519,10 @@ real computation on your data:
 - **χ:** the year as one byte per week, bit _i_ set when you contributed on day _i_ (Sunday
   first). A fingerprint for the curious.
 
+The formulas are typeset like LaTeX, in Computer Modern: the card embeds small subsets of
+MathJax's TeX fonts (about 25 KB), so they look the same on every device. GitHub's own `$…$`
+math only works in Markdown text, never inside images.
+
 Without contribution data, the Lorenz curve of your stars (whose area gives the Gini
 coefficient) takes the place of the activity charts.
 

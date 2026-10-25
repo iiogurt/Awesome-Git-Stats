@@ -222,7 +222,11 @@ describe('lab layout', () => {
     ]) {
       assert.match(svg, new RegExp(text), text);
     }
-    assert.match(svg, /<tspan class="m">T\*<\/tspan> = 7\.0 d/);
+    assert.match(
+      svg,
+      /T<\/tspan><tspan dy="-0\.571em" font-size="70%">\*<\/tspan><tspan dy="0\.4em" dx="\.08em"> = 7\.0 d<\/tspan>/,
+    );
+    assert.match(svg, /font-family:ags-tex/);
     assert.match(svg, /class="el-symbol" text-anchor="middle">Ts</);
     assert.match(svg, /0x[0-9a-f]{100,}/);
   });
@@ -232,7 +236,7 @@ describe('lab layout', () => {
     assertWellFormed(svg);
     assert.match(svg, /Lorenz curve of stars/);
     assert.match(svg, /needs a GitHub token/);
-    assert.doesNotMatch(svg, /Fourier spectrum|0x[0-9a-f]/);
+    assert.doesNotMatch(svg, /Fourier spectrum|class="hex/);
   });
 
   it('copes with accounts without starred repositories', () => {

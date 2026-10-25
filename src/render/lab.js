@@ -21,6 +21,7 @@ import {
   wrapText,
 } from './common.js';
 import { cellRx, cover, orb, underlay } from './materials.js';
+import { TEX_CSS, tex } from './tex.js';
 
 const WIDTH = 820;
 const HEIGHT = 510;
@@ -41,9 +42,9 @@ function plotArea({ x, y, width, height, rx }) {
   return `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${cellRx(rx)}" class="ghost"/>`;
 }
 
-/** A panel heading: a formula in math type, then a plain description. */
+/** A panel heading: a TeX formula, then a plain description. */
 function heading(x, y, formula, words) {
-  return `<text x="${x}" y="${y}" class="head"><tspan class="m">${formula}</tspan><tspan class="head-words" dx="8">${escapeXml(words)}</tspan></text>`;
+  return `<text x="${x}" y="${y}" class="head">${tex(formula)}<tspan class="head-words" dx="8">${escapeXml(words)}</tspan></text>`;
 }
 
 /** Smooth closed curve through the points (Catmull-Rom as cubic Béziers). */
@@ -87,7 +88,7 @@ function polar(activity, options) {
   const theta = -Math.PI / 2 + (mean.index * 2 * Math.PI) / 7;
   const tip = [cx + Math.cos(theta) * length, cy + Math.sin(theta) * length];
   const day = WEEKDAYS[Math.round(mean.index) % 7];
-  return `${heading(LEFT, ROW_A - 8, 'r(θ)', 'weekday density')}
+  return `${heading(LEFT, ROW_A - 8, 'r(\\theta)', 'weekday density')}
     ${plotArea({ x: LEFT, y: ROW_A, width: 220, height: 180, rx: 8 })}
     ${rings}${spokes}
     <g transform="translate(${cx} ${cy})"><g class="grow-out"${delay(options, 250)}><g transform="translate(${-cx} ${-cy})">
@@ -97,7 +98,7 @@ function polar(activity, options) {
       <path d="M${cx} ${cy}L${r1(tip[0])} ${r1(tip[1])}" class="vector" marker-end="url(#ags-arrow)"/>
       ${orb({ cx, cy, r: 2.5, fill: 'accent' })}
     </g>
-    <text x="${LEFT + 110}" y="${ROW_A + 172}" class="eq-small" text-anchor="middle"><tspan class="m">θ̄</tspan> = ${day} · <tspan class="m">R̄</tspan> = ${fixed(mean.length, 2)}</text>`;
+    <text x="${LEFT + 110}" y="${ROW_A + 172}" class="eq-small" text-anchor="middle">${tex(`\\bar\\theta = \\mathrm{${day}},\\ \\bar{R} = ${fixed(mean.length, 2)}`)}</text>`;
 }
 
 /** Amplitude spectrum of the daily series, with the dominant period marked. */
@@ -136,15 +137,15 @@ function fourier(activity, options) {
           return `<g class="fade"${delay(options, 1100)}>
             <path d="M${r1(x)} ${r1(y)}V${plot.y + plot.height}" class="peak-line"/>
             ${orb({ cx: r1(x), cy: r1(y), r: 3, fill: 'accent' })}
-            <text x="${r1(Math.min(x + 6, plot.x + plot.width - 70))}" y="${r1(y + 4)}" class="eq-small"><tspan class="m">T*</tspan> = ${fixed(period, 1)} d</text>
+            <text x="${r1(Math.min(x + 6, plot.x + plot.width - 70))}" y="${r1(y + 4)}" class="eq-small">${tex(`T^* = ${fixed(period, 1)}\\,\\mathrm{d}`)}</text>
           </g>`;
         })()
       : '';
-  return `${heading(x0, ROW_A - 8, '|ĉ(ƒ)|', 'Fourier spectrum')}
+  return `${heading(x0, ROW_A - 8, '|\\hat{c}(f)|', 'Fourier spectrum')}
     ${plotArea({ x: x0, y: ROW_A, width, height: 180, rx: 8 })}
     <path d="M${plot.x} ${plot.y}V${plot.y + plot.height}H${plot.x + plot.width}" class="axis-line"/>
     ${ticks}
-    <text x="${plot.x + plot.width}" y="${plot.y + plot.height + 28}" class="tick" text-anchor="end">ƒ (cycles / day)</text>
+    <text x="${plot.x + plot.width}" y="${plot.y + plot.height + 28}" class="tick" text-anchor="end">${tex('f\\ (\\text{cycles / day})')}</text>
     ${area ? `<path d="${area}" fill="url(#ags-lab-area)" class="fade"${delay(options, 600)}/>` : ''}
     ${line ? `<path d="${line}" class="curve draw" pathLength="1"/>` : ''}
     ${peak}`;
@@ -156,53 +157,48 @@ function proposition(stats, numbers, options, { x0, y0, width, step = 19 }) {
     .map(([formula, comment], i) => {
       const y = y0 + 24 + i * step;
       return `<g class="rise"${delay(options, 300 + i * 70)}>
-        <text x="${x0 + 14}" y="${y}" class="eq">${formula}</text>
+        <text x="${x0 + 14}" y="${y}" class="eq">${tex(formula)}</text>
         <text x="${x0 + width - 12}" y="${y}" class="comment" text-anchor="end">% ${escapeXml(comment)}</text>
       </g>`;
     })
     .join('');
-  return `${heading(x0, y0 - 8, '∴', 'Proposition 1')}
+  return `${heading(x0, y0 - 8, '\\therefore', 'Proposition 1')}
     ${plotArea({ x: x0, y: y0, width, height: 24 + numbers.length * step, rx: 8 })}
     ${rows}`;
 }
-
-const m = (symbol) => `<tspan class="m">${symbol}</tspan>`;
 
 function propositionRows(stats) {
   const stars = stats.topRepos.map((repo) => repo.stars);
   const h = hIndex(stars);
   const i10 = stars.filter((s) => s >= 10).length;
   const rows = [
-    [`${m('Σ★')} = ${formatExact(stats.totalStars)}`, 'stars earned'],
-    [
-      `${m('h')} = ${h},  ${m('i')}<tspan class="sub" dy="3">10</tspan><tspan dy="-3"> = ${i10}</tspan>`,
-      'h-index',
-    ],
-    [`${m('G')} = ${fixed(gini(stars), 2)}`, 'Gini of ★'],
-    [`${m('H')} = ${fixed(entropy(stats.languages.map((l) => l.stars)), 2)} bit`, 'entropy'],
+    [`\\Sigma\\star = ${formatExact(stats.totalStars)}`, 'stars earned'],
+    [`h = ${h},\\ i_{10} = ${i10}`, 'h-index'],
+    [`G = ${fixed(gini(stars), 2)}`, 'Gini of ★'],
+    [`H = ${fixed(entropy(stats.languages.map((l) => l.stars)), 2)}\\,\\mathrm{bit}`, 'entropy'],
   ];
   const a = stats.activity;
   if (a) {
     const { mean, sd } = moments(a.days.map((day) => day.count));
     const p = a.days.length ? a.activeDays / a.days.length : 0;
     rows.push(
-      [`${m('μ')} = ${fixed(mean, 2)},  ${m('σ')} = ${fixed(sd, 2)}`, 'per day'],
-      [`${m('P')}(${m('c')} &gt; 0) = ${fixed(p, 2)}`, 'active'],
+      [`\\mu = ${fixed(mean, 2)},\\ \\sigma = ${fixed(sd, 2)}`, 'per day'],
+      [`P(c > 0) = ${fixed(p, 2)}`, 'active'],
       [
-        `${m('ℓ')} = ${formatExact(a.streaks.current)},  ${m('ℓ')}<tspan class="sub" dy="3">max</tspan><tspan dy="-3"> = ${formatExact(a.streaks.longest.length)}</tspan>`,
+        `\\ell = ${formatExact(a.streaks.current)},\\ \\ell_{\\max} = ${formatExact(a.streaks.longest.length)}`,
         'streak, d',
       ],
     );
   } else {
     const repos = Math.max(stats.repoCount, 1);
     rows.push(
-      [`${m('n')} = ${formatExact(stats.repoCount)}`, 'repositories'],
-      [`${m('⟨★⟩')} = ${fixed(stats.totalStars / repos, 1)}`, 'mean per repo'],
-      [`${m('Σ⑂')} = ${formatExact(stats.totalForks)}`, 'forks'],
+      [`n = ${formatExact(stats.repoCount)}`, 'repositories'],
+      [`\\langle\\star\\rangle = ${fixed(stats.totalStars / repos, 1)}`, 'mean per repo'],
+      [`\\Sigma\\,\\mathrm{forks} = ${formatExact(stats.totalForks)}`, 'forks'],
     );
   }
   if (stats.followers != null) {
-    rows.push([`|${m('F')}| = ${formatExact(stats.followers)}`, 'followers']);
+    rows.push([`|F| = ${formatExact(stats.followers)}`, 'followers']);
   }
   return rows;
 }
@@ -225,15 +221,15 @@ function cumulative(activity, options, { x0, width }) {
     [px(n), py(clamp(fit.slope * n + fit.intercept))],
   ]);
   const sign = fit.intercept < 0 ? '−' : '+';
-  return `${heading(x0, ROW_B - 8, '∫₀ᵗ c dτ', 'cumulative contributions')}
+  return `${heading(x0, ROW_B - 8, '\\int_0^t c\\,d\\tau', 'cumulative contributions')}
     ${plotArea({ x: x0, y: ROW_B, width, height: 128, rx: 8 })}
     <path d="M${plot.x} ${plot.y}V${plot.y + plot.height}H${plot.x + plot.width}" class="axis-line"/>
-    <text x="${plot.x}" y="${plot.y + plot.height + 13}" class="tick">t − 365 d</text>
-    <text x="${plot.x + plot.width}" y="${plot.y + plot.height + 13}" class="tick" text-anchor="end">t</text>
+    <text x="${plot.x}" y="${plot.y + plot.height + 13}" class="tick">${tex('t - 365\\,\\mathrm{d}')}</text>
+    <text x="${plot.x + plot.width}" y="${plot.y + plot.height + 13}" class="tick" text-anchor="end">${tex('t')}</text>
     <path d="${fitLine}" class="fit fade"${delay(options, 1000)}/>
     <path d="${line}" class="curve draw" pathLength="1"/>
-    <text x="${plot.x + 8}" y="${plot.y + 12}" class="eq-small fade"${delay(options, 1100)}><tspan class="m">Ĉ(t)</tspan> = ${fixed(fit.slope, 2)}<tspan class="m">t</tspan> ${sign} ${formatExact(Math.abs(fit.intercept))}</text>
-    <text x="${plot.x + 8}" y="${plot.y + 27}" class="eq-small fade"${delay(options, 1200)}><tspan class="m">R²</tspan> = ${fixed(fit.r2, 3)}</text>
+    <text x="${plot.x + 8}" y="${plot.y + 12}" class="eq-small fade"${delay(options, 1100)}>${tex(`\\hat{C}(t) = ${fixed(fit.slope, 2)}t ${sign} ${formatExact(Math.abs(fit.intercept))}`)}</text>
+    <text x="${plot.x + 8}" y="${plot.y + 27}" class="eq-small fade"${delay(options, 1200)}>${tex(`R^2 = ${fixed(fit.r2, 3)}`)}</text>
     <text x="${plot.x + plot.width}" y="${r1(py(max) - 4)}" class="peak-label" text-anchor="end">${formatCount(running)}</text>`;
 }
 
@@ -241,7 +237,7 @@ function cumulative(activity, options, { x0, width }) {
 function rankPlot(stats, options, { x0, y0, width, height }) {
   const plot = { x: x0 + 30, y: y0 + 16, width: width - 44, height: height - 40 };
   const { points, alpha, fit } = zipf(stats.topRepos.map((repo) => repo.stars));
-  const head = heading(x0, y0 - 8, 's ∝ r<tspan dy="-5" class="sup">−α</tspan>', 'rank–stars law');
+  const head = heading(x0, y0 - 8, 's \\propto r^{-\\alpha}', 'rank–stars law');
   const panel = plotArea({ x: x0, y: y0, width, height, rx: 8 });
   if (points.length < 3) {
     return `${head}${panel}
@@ -255,13 +251,13 @@ function rankPlot(stats, options, { x0, y0, width, height }) {
   const yTicks = decades(maxY)
     .map(
       (d) =>
-        `<text x="${plot.x - 5}" y="${r1(py(d) + 3)}" class="tick" text-anchor="end">10<tspan dy="-4" class="sup">${d}</tspan></text>`,
+        `<text x="${plot.x - 5}" y="${r1(py(d) + 3)}" class="tick" text-anchor="end">${tex(`10^{${d}}`)}</text>`,
     )
     .join('');
   const xTicks = decades(maxX)
     .map(
       (d) =>
-        `<text x="${r1(px(d))}" y="${plot.y + plot.height + 13}" class="tick" text-anchor="middle">10<tspan dy="-4" class="sup">${d}</tspan></text>`,
+        `<text x="${r1(px(d))}" y="${plot.y + plot.height + 13}" class="tick" text-anchor="middle">${tex(`10^{${d}}`)}</text>`,
     )
     .join('');
   // Thin out long tails: the shape of the law shows with a few dozen points.
@@ -280,7 +276,7 @@ function rankPlot(stats, options, { x0, y0, width, height }) {
     ${yTicks}${xTicks}
     <g class="fade"${delay(options, 500)}>${dots}</g>
     <path d="${fitLine}" class="fit fade"${delay(options, 900)}/>
-    <text x="${plot.x + plot.width}" y="${plot.y + 10}" class="eq-small fade" text-anchor="end"${delay(options, 1000)}><tspan class="m">α</tspan> = ${fixed(alpha, 2)} · <tspan class="m">R²</tspan> = ${fixed(fit.r2, 2)}</text>`;
+    <text x="${plot.x + plot.width}" y="${plot.y + 10}" class="eq-small fade" text-anchor="end"${delay(options, 1000)}>${tex(`\\alpha = ${fixed(alpha, 2)},\\ R^2 = ${fixed(fit.r2, 2)}`)}</text>`;
 }
 
 /** The Lorenz curve of stars over repositories; the shaded lens is the Gini coefficient. */
@@ -296,7 +292,7 @@ function lorenzPlot(stats, options, { x0, width }) {
     <path d="M${plot.x} ${plot.y}V${plot.y + plot.height}H${plot.x + plot.width}" class="axis-line"/>
     <path d="M${px(0)} ${py(0)}L${px(1)} ${py(1)}" class="fit"/>
     ${points.length > 1 ? `<path d="${curve}L${px(1)} ${py(1)}L${px(0)} ${py(0)}Z" class="lens fade"${delay(options, 700)}/><path d="${curve}" class="curve draw" pathLength="1"/>` : ''}
-    <text x="${plot.x + 8}" y="${plot.y + 12}" class="eq-small"><tspan class="m">G</tspan> = 1 − 2∫₀¹<tspan class="m">L</tspan> = ${fixed(gini(stars), 2)}</text>`;
+    <text x="${plot.x + 8}" y="${plot.y + 12}" class="eq-small">${tex(`G = 1 - 2\\int_0^1 L\\,dp = ${fixed(gini(stars), 2)}`)}</text>`;
 }
 
 function noActivityNote(stats, { x0, width }) {
@@ -305,7 +301,7 @@ function noActivityNote(stats, { x0, width }) {
       ? 'Contribution activity is only available for user accounts.'
       : 'Contribution activity needs a GitHub token. The Action provides one automatically.';
   const lines = wrapText(why, width - 40, { fontSize: 11.5, maxLines: 3 });
-  return `${heading(x0, ROW_B - 8, 'c(t) = ∅', 'not observed')}
+  return `${heading(x0, ROW_B - 8, 'c(t) = \\emptyset', 'not observed')}
     ${plotArea({ x: x0, y: ROW_B, width, height: 128, rx: 8 })}
     ${lines.map((line, i) => `<text x="${x0 + width / 2}" y="${ROW_B + 58 + i * 17}" class="tick" text-anchor="middle">${escapeXml(line)}</text>`).join('')}`;
 }
@@ -344,7 +340,7 @@ function elements(stats, options) {
 function fingerprint(activity, options) {
   const hex = weekBits(activity.days);
   if (!hex) return '';
-  return `<text x="${LEFT}" y="${HEIGHT - 12}" class="hex fade"${delay(options, 1300)}><tspan class="m">χ</tspan> = 0x${hex}</text>`;
+  return `<text x="${LEFT}" y="${HEIGHT - 12}" class="hex fade"${delay(options, 1300)}>${tex('\\chi =')} 0x${hex}</text>`;
 }
 
 /**
@@ -371,7 +367,7 @@ export function renderLab(stats, options) {
       ${noActivityNote(stats, { x0: 415, width: RIGHT - 415 })}`;
 
   const css = `
-    .m{font-family:'Latin Modern Math','STIX Two Math','Cambria Math','Times New Roman',Times,serif;font-style:italic}
+    ${TEX_CSS}
     .head{font-size:14px;fill:var(--title)}
     .head-words{font-size:11px;fill:var(--muted);font-style:normal;letter-spacing:.04em}
     .subtitle{font-size:11px;fill:var(--muted);font-style:italic}
@@ -380,7 +376,6 @@ export function renderLab(stats, options) {
     .grid-edge{stroke-opacity:.5}
     .axis-line{fill:none;stroke:var(--muted);stroke-opacity:.7;stroke-width:1}
     .tick{font-size:9.5px;fill:var(--muted)}
-    .sup,.sub{font-size:8px}
     .shape{fill:var(--accent);fill-opacity:.3;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
     .vector{stroke:var(--title);stroke-width:1.6}
     .arrow{fill:var(--title)}
