@@ -477,26 +477,6 @@ needs a token (the GitHub Action uses its built-in one) and is only available fo
 accounts; organisations get repository statistics instead. It includes private contributions
 only if you've enabled _Include private contributions on my profile_ in your GitHub settings.
 
-## Themes
-
-Every design comes as a pair: a light theme and a dark theme that share colours, art and font,
-for example `tokyonight_light` + `tokyonight` or `sakura` + `sakura_dark`. See all of them side
-by side in the **[theme gallery](docs/themes.md)**.
-
-| Kind                     | Designs (light / dark variant in the gallery)                                                                                                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nature**               | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
-| **Smooth and flowing**   | `lava_lamp` · `abyss` · `koi_pond` · `silk` · `mesh` · `fizz` · `orrery` · `soundwave`                                                                                                                       |
-| **Space and sky**        | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
-| **Holidays**             | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
-| **Anime and manga**      | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
-| **Horror**               | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
-| **3D**                   | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
-| **Retro and tech**       | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
-| **Minimal and line art** | `doodle` · `line_art` · `stencil` · `ink`                                                                                                                                                                    |
-| **Bold and loud**        | `pop_art` · `inferno` · `memphis`                                                                                                                                                                            |
-| **Classic**              | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
-
 ### The lab notebook
 
 <img src="assets/examples/lab.svg" alt="lab layout, a dashboard of plots and formulas" width="820">
@@ -525,6 +505,26 @@ math only works in Markdown text, never inside images.
 
 Without contribution data, the Lorenz curve of your stars (whose area gives the Gini
 coefficient) takes the place of the activity charts.
+
+## Themes
+
+Every design comes as a pair: a light theme and a dark theme that share colours, art and font,
+for example `tokyonight_light` + `tokyonight` or `sakura` + `sakura_dark`. See all of them side
+by side in the **[theme gallery](docs/themes.md)**.
+
+| Kind                     | Designs (light / dark variant in the gallery)                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nature**               | `topographic` · `sakura` · `deep_sea` · `forest` · `rain` · `autumn` · `desert` · `tropical`                                                                                                                 |
+| **Smooth and flowing**   | `lava_lamp` · `abyss` · `koi_pond` · `silk` · `mesh` · `fizz` · `orrery` · `soundwave`                                                                                                                       |
+| **Space and sky**        | `starry_night` · `constellation` · `northern_lights` · `hyperspace`                                                                                                                                          |
+| **Holidays**             | `halloween` · `christmas` · `new_year` · `valentine` · `lunar_new_year`                                                                                                                                      |
+| **Anime and manga**      | `manga` · `anime_sky` · `mecha`                                                                                                                                                                              |
+| **Horror**               | `slasher` · `vhs` · `watchers`                                                                                                                                                                               |
+| **3D**                   | `glass` · `isometric` · `pulsar` · `chrome` · `hologram`                                                                                                                                                     |
+| **Retro and tech**       | `synthwave` · `cyberpunk` · `terminal` · `blueprint` · `parchment` · `matrix`                                                                                                                                |
+| **Minimal and line art** | `doodle` · `line_art` · `stencil` · `ink`                                                                                                                                                                    |
+| **Bold and loud**        | `pop_art` · `inferno` · `memphis`                                                                                                                                                                            |
+| **Classic**              | `default`/`dark` · `github_light`/`github_dark` · `tokyonight` · `dracula` · `nord` · `gruvbox` · `catppuccin` · `rose_pine` · `solarized` · `monokai` · `radical` · `sunset` · `aurora` · `ocean` · `candy` |
 
 ### Art styles
 
