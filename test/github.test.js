@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { GitHubError, fetchAccount, fetchGist, fetchRepo, tokensFromEnv } from '../src/github.js';
+import {
+  GitHubError,
+  REPO_LIMIT,
+  fetchAccount,
+  fetchGist,
+  fetchRepo,
+  tokensFromEnv,
+} from '../src/github.js';
+import { computeStats } from '../src/stats.js';
 import { graphqlPage, graphqlRepo, mockFetch } from './helpers.js';
 
 describe('fetchAccount (GraphQL)', () => {
@@ -27,22 +35,27 @@ describe('fetchAccount (GraphQL)', () => {
     assert.equal(account.repos[1].language, null);
   });
 
-  it('paginates until repositories have no stars', async () => {
+  it('paginates through every repository, unstarred ones included', async () => {
     const { fetchImpl, calls } = mockFetch((_call, index) => {
       if (index === 0) {
         return { json: graphqlPage([graphqlRepo('a', 5)], { hasNextPage: true, endCursor: 'c1' }) };
       }
-      return {
-        json: graphqlPage([graphqlRepo('b', 1), graphqlRepo('c', 0)], {
-          hasNextPage: true,
-          endCursor: 'c2',
-        }),
-      };
+      if (index === 1) {
+        return {
+          json: graphqlPage([graphqlRepo('b', 1), graphqlRepo('c', 0)], {
+            hasNextPage: true,
+            endCursor: 'c2',
+          }),
+        };
+      }
+      return { json: graphqlPage([graphqlRepo('d', 0)]) };
     });
     const account = await fetchAccount('octocat', { token: 't', fetchImpl });
-    assert.equal(calls.length, 2);
+    assert.equal(calls.length, 3);
     assert.equal(calls[1].body.variables.after, 'c1');
-    assert.equal(account.repos.length, 3);
+    assert.equal(calls[2].body.variables.after, 'c2');
+    assert.equal(account.repos.length, 4);
+    assert.equal(account.truncated, false);
   });
 
   it('requests forks when asked', async () => {
@@ -399,5 +412,263 @@ describe('fetchGist', () => {
     await assert.rejects(fetchGist('someone', 'abc123', { token: '', fetchImpl: rest.fetchImpl }), {
       message: 'Gist not found',
     });
+  });
+});
+
+// A page of `count` repositories named `${prefix}0`, `${prefix}1`, ...
+const repoPage = (prefix, count, stars, extra = {}) =>
+  Array.from({ length: count }, (_, i) => ({ ...graphqlRepo(`${prefix}${i}`, stars), ...extra }));
+
+describe('fetchAccount fork totals (#54)', () => {
+  it('counts the forks of unstarred repositories on later pages', async () => {
+    const { fetchImpl, calls } = mockFetch((_call, index) =>
+      index === 0
+        ? {
+            json: graphqlPage(
+              [{ ...graphqlRepo('star', 10), forkCount: 1 }, ...repoPage('zero', 99, 0)],
+              { hasNextPage: true, endCursor: 'c1', totalCount: 101 },
+            ),
+          }
+        : {
+            json: graphqlPage([{ ...graphqlRepo('forked', 0), forkCount: 100 }], {
+              totalCount: 101,
+            }),
+          },
+    );
+    const account = await fetchAccount('octocat', { token: 'fake', fetchImpl });
+    const stats = computeStats(account);
+    assert.equal(calls.length, 2);
+    assert.equal(stats.repoCount, 101);
+    assert.equal(stats.totalForks, 101);
+  });
+
+  it('gives the same totals whether or not language sizes are fetched', async () => {
+    const respond = (call, index) => {
+      const nodes =
+        index === 0 ? [graphqlRepo('a', 5), graphqlRepo('b', 0)] : [graphqlRepo('c', 0)];
+      for (const node of nodes) {
+        node.forkCount = 3;
+        if (call.body.variables.languages) {
+          node.languages = { totalSize: 0, pageInfo: { hasNextPage: false }, edges: [] };
+        }
+      }
+      return { json: graphqlPage(nodes, { hasNextPage: index === 0, endCursor: 'c1' }) };
+    };
+    const plain = await fetchAccount('octocat', {
+      token: 't',
+      fetchImpl: mockFetch(respond).fetchImpl,
+    });
+    const sized = await fetchAccount('octocat', {
+      token: 't',
+      codeLanguages: true,
+      fetchImpl: mockFetch(respond).fetchImpl,
+    });
+    const pick = ({ totalStars, totalForks, repoCount }) => ({ totalStars, totalForks, repoCount });
+    assert.deepEqual(pick(computeStats(plain)), pick(computeStats(sized)));
+    assert.deepEqual(pick(computeStats(plain)), { totalStars: 5, totalForks: 9, repoCount: 3 });
+  });
+});
+
+describe('fetchAccount repository limit (#56)', () => {
+  const pages = (last) =>
+    mockFetch((_call, index) => ({
+      json: graphqlPage(repoPage(`p${index}-`, 100, 1), {
+        hasNextPage: index < last,
+        endCursor: `c${index + 1}`,
+        totalCount: (last + 1) * 100 + (index < last ? 1 : 0),
+      }),
+    }));
+
+  it('marks GraphQL totals partial when the limit stops it', async () => {
+    const { fetchImpl, calls } = pages(99);
+    const account = await fetchAccount('octocat', { token: 't', fetchImpl });
+    assert.equal(calls.length, REPO_LIMIT / 100);
+    assert.equal(account.truncated, true);
+    const stats = computeStats(account);
+    assert.equal(stats.partial, true);
+    assert.equal(stats.totalStars, REPO_LIMIT);
+  });
+
+  it('is complete when the last allowed page really is the last', async () => {
+    const { fetchImpl, calls } = pages(REPO_LIMIT / 100 - 1);
+    const account = await fetchAccount('octocat', { token: 't', fetchImpl });
+    assert.equal(calls.length, REPO_LIMIT / 100);
+    assert.equal(account.truncated, false);
+    assert.equal(computeStats(account).partial, false);
+  });
+
+  const restPages = (publicRepos) =>
+    mockFetch(({ url }) => {
+      if (url.endsWith('/users/octocat')) {
+        return { json: { login: 'octocat', type: 'User', public_repos: publicRepos } };
+      }
+      const page = Number(new URL(url).searchParams.get('page'));
+      return {
+        json: Array.from({ length: 100 }, (_, i) => ({
+          name: `r${page}-${i}`,
+          stargazers_count: 1,
+          forks_count: 0,
+          fork: false,
+        })),
+      };
+    });
+
+  it('marks REST totals partial when more repositories remain', async () => {
+    const { fetchImpl, calls } = restPages(REPO_LIMIT + 1);
+    const account = await fetchAccount('octocat', { token: '', fetchImpl });
+    assert.equal(calls.length, 1 + REPO_LIMIT / 100);
+    assert.equal(account.truncated, true);
+  });
+
+  it('is complete over REST when the account has exactly the limit', async () => {
+    const { fetchImpl } = restPages(REPO_LIMIT);
+    const account = await fetchAccount('octocat', { token: '', fetchImpl });
+    assert.equal(account.truncated, false);
+  });
+});
+
+describe('fetchAccount language sizes (#55)', () => {
+  const languages = (names, size, { more = false, totalSize } = {}) => ({
+    totalSize: totalSize ?? names.length * size,
+    pageInfo: { hasNextPage: more, endCursor: more ? 'lang-cursor' : null },
+    edges: names.map((name) => ({ size, node: { name, color: '#123456' } })),
+  });
+  const eleven = Array.from({ length: 11 }, (_, i) => `L${i}`);
+
+  it('fetches the languages of a repository past the first ten', async () => {
+    const { fetchImpl, calls } = mockFetch(({ body }) => {
+      if (body.variables.login) {
+        const repo = graphqlRepo('big', 5);
+        repo.languages = languages(eleven.slice(0, 10), 100, { more: true, totalSize: 1100 });
+        return { json: graphqlPage([repo]) };
+      }
+      return { json: { data: { r0: { languages: languages(eleven.slice(10), 100) } } } };
+    });
+    const account = await fetchAccount('octocat', { token: 't', codeLanguages: true, fetchImpl });
+    assert.equal(calls.length, 2);
+    assert.deepEqual(calls[1].body.variables, { owner: 'octocat', n0: 'big', c0: 'lang-cursor' });
+    assert.equal(account.languagesComplete, true);
+    const { items } = computeStats(account, { languages: 8 }).codeLanguages;
+    assert.equal(
+      items.reduce((sum, lang) => sum + lang.value, 0),
+      1100,
+    );
+    assert.deepEqual(items.at(-1), {
+      name: 'Other',
+      color: '#8b949e',
+      value: 300,
+      share: 300 / 1100,
+    });
+    assert.ok(Math.abs(items[0].share - 1 / 11) < 1e-9);
+  });
+
+  it('ranks a language that is small everywhere but adds up across repositories', async () => {
+    // Each repository's ten largest languages leave out "Tiny"; together it is the largest.
+    const big = Array.from({ length: 10 }, (_, i) => `Big${i}`);
+    const repos = Array.from({ length: 30 }, (_, i) => {
+      const repo = graphqlRepo(`r${i}`, 1);
+      repo.languages = {
+        ...languages([big[i % 10]], 50, { more: true }),
+        totalSize: 50 + 40,
+        edges: big.map((name, j) => ({ size: j === i % 10 ? 50 : 1, node: { name, color: null } })),
+      };
+      return repo;
+    });
+    const { fetchImpl } = mockFetch(({ body }) => {
+      if (body.variables.login) return { json: graphqlPage(repos) };
+      const data = {};
+      for (const key of Object.keys(body.variables).filter((k) => k.startsWith('n'))) {
+        data[`r${key.slice(1)}`] = { languages: languages(['Tiny'], 31) };
+      }
+      return { json: { data } };
+    });
+    const account = await fetchAccount('octocat', { token: 't', codeLanguages: true, fetchImpl });
+    const { items } = computeStats(account, { languages: 3 }).codeLanguages;
+    assert.equal(items[0].name, 'Tiny');
+  });
+
+  it('keeps the card when a follow-up fails, counting the unread bytes as Other', async () => {
+    const { fetchImpl } = mockFetch(({ body }) => {
+      if (body.variables.login) {
+        const repo = graphqlRepo('gone', 5);
+        repo.languages = languages(['Go'], 100, { more: true, totalSize: 160 });
+        return { json: graphqlPage([repo]) };
+      }
+      return { json: { data: { r0: null }, errors: [{ type: 'NOT_FOUND', message: 'gone' }] } };
+    });
+    const account = await fetchAccount('octocat', { token: 't', codeLanguages: true, fetchImpl });
+    assert.equal(account.languagesComplete, false);
+    const { items } = computeStats(account).codeLanguages;
+    assert.deepEqual(
+      items.map(({ name, value }) => [name, value]),
+      [
+        ['Go', 100],
+        ['Other', 60],
+      ],
+    );
+  });
+
+  it('counts unlisted bytes as Other past the follow-up limit', async () => {
+    const repos = Array.from({ length: 70 }, (_, i) => {
+      const repo = graphqlRepo(`r${i}`, 1);
+      repo.languages = languages(['Go'], 100, { more: true, totalSize: 150 });
+      return repo;
+    });
+    const { fetchImpl, calls } = mockFetch(({ body }) => {
+      if (body.variables.login) return { json: graphqlPage(repos) };
+      const data = {};
+      for (const key of Object.keys(body.variables).filter((k) => k.startsWith('n'))) {
+        data[`r${key.slice(1)}`] = { languages: languages(['Shell'], 50) };
+      }
+      return { json: { data } };
+    });
+    const account = await fetchAccount('octocat', { token: 't', codeLanguages: true, fetchImpl });
+    assert.equal(calls.length, 1 + 3);
+    assert.equal(account.languagesComplete, false);
+    const { items } = computeStats(account, { languages: 1 }).codeLanguages;
+    // 70 × 150 bytes in all: Go 7,000; Shell 3,000 fetched + 500 unlisted, all in Other.
+    assert.deepEqual(
+      items.map(({ name, value }) => [name, value]),
+      [
+        ['Go', 7000],
+        ['Other', 3500],
+      ],
+    );
+  });
+});
+
+describe('fetchAccount cancellation (#53)', () => {
+  it('aborts the request in flight and starts no more once the signal fires', async () => {
+    const controller = new AbortController();
+    let inFlightAborted = false;
+    const { fetchImpl, calls } = mockFetch(async ({ init }, index) => {
+      if (index === 1) {
+        init.signal.addEventListener('abort', () => (inFlightAborted = true));
+        controller.abort();
+      }
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      return {
+        json: graphqlPage([graphqlRepo('a', 1)], { hasNextPage: true, endCursor: 'c' }),
+      };
+    });
+    await assert.rejects(
+      fetchAccount('octocat', { token: 't', fetchImpl, signal: controller.signal }),
+      { code: 'TIMEOUT', status: 504 },
+    );
+    assert.equal(calls.length, 2);
+    assert.equal(inFlightAborted, true);
+  });
+
+  it('does not fail over to another token after the signal fires', async () => {
+    const controller = new AbortController();
+    const { fetchImpl, calls } = mockFetch(() => {
+      controller.abort();
+      return { status: 429 };
+    });
+    await assert.rejects(
+      fetchAccount('octocat', { tokens: ['a', 'b', 'c'], fetchImpl, signal: controller.signal }),
+      { code: 'TIMEOUT' },
+    );
+    assert.equal(calls.length, 1);
   });
 });

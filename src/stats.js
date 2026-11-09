@@ -17,13 +17,22 @@ export function codeLanguages(repos, count = 5) {
     entry.value += value;
     totals.set(name, entry);
   };
+  // Bytes GitHub counted for a repository but whose language wasn't fetched (beyond
+  // the follow-up limit) still belong in the total, as "Other".
+  let unlisted = 0;
   for (const repo of repos) {
-    if (bySize) for (const lang of repo.codeLanguages ?? []) add(lang.name, lang.color, lang.size);
-    else if (repo.language) add(repo.language, repo.languageColor, 1);
+    if (bySize) {
+      let listed = 0;
+      for (const lang of repo.codeLanguages ?? []) {
+        add(lang.name, lang.color, lang.size);
+        listed += lang.size;
+      }
+      unlisted += Math.max(0, (repo.codeSize ?? listed) - listed);
+    } else if (repo.language) add(repo.language, repo.languageColor, 1);
   }
   const sorted = [...totals.values()].sort((a, b) => b.value - a.value);
   const items = sorted.slice(0, count);
-  const rest = sorted.slice(count).reduce((sum, lang) => sum + lang.value, 0);
+  const rest = sorted.slice(count).reduce((sum, lang) => sum + lang.value, 0) + unlisted;
   if (rest > 0) items.push({ name: 'Other', color: OTHER_COLOR, value: rest });
   const total = items.reduce((sum, lang) => sum + lang.value, 0);
   return {
@@ -78,7 +87,10 @@ export function computeStats(account, { exclude = [], languages = 5 } = {}) {
     followers: account.followers,
     totalStars,
     totalForks,
-    // Repos are fetched only until stars run out, so prefer the API's total.
+    // True when the account has more repositories than are fetched (MAX_PAGES), so
+    // the totals above count only the first ones.
+    partial: Boolean(account.truncated),
+    // The API's total also counts repositories past the fetch limit.
     repoCount: Math.max(
       (account.totalRepos ?? 0) - (account.repos.length - repos.length),
       repos.length,
