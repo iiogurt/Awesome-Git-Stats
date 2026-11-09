@@ -1,6 +1,6 @@
 import { ART_STYLES } from './render/art.js';
 import { FINISH_NAMES } from './render/materials.js';
-import { themes, resolveTheme } from './themes.js';
+import { isTheme, themes, resolveTheme } from './themes.js';
 
 export const LAYOUTS = [
   'overview',
@@ -110,7 +110,7 @@ export function parseOptions(query = {}) {
   const layout = LAYOUTS.includes(layoutParam) ? layoutParam : 'overview';
 
   const themeParam = String(first(query.theme) ?? 'default').toLowerCase();
-  const themeName = themeParam in themes ? themeParam : 'default';
+  const themeName = isTheme(themeParam) ? themeParam : 'default';
 
   const overrides = {};
   for (const [param, key] of Object.entries(COLOR_PARAMS)) {
@@ -164,7 +164,7 @@ export function parseOptions(query = {}) {
     // Some designs come with their own finish (line art is flat, ink is sketched).
     finish: FINISH_NAMES.includes(finishParam)
       ? finishParam
-      : (themes[themeName]?.finish ?? 'gloss'),
+      : (themes[themeName].finish ?? 'gloss'),
     repo,
     gist,
     goal: int(query.goal, { fallback: 1000, min: 1, max: 1000000 }),
@@ -182,7 +182,7 @@ export function parseOptions(query = {}) {
 /** Best-effort options for rendering an error card when parsing failed. */
 export function fallbackOptions(query = {}) {
   const themeParam = String(first(query.theme) ?? 'default').toLowerCase();
-  const themeName = themeParam in themes ? themeParam : 'default';
+  const themeName = isTheme(themeParam) ? themeParam : 'default';
   return {
     themeName,
     theme: resolveTheme(themeName),

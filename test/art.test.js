@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { parseOptions } from '../src/options.js';
 import { ART_DESCRIPTIONS, ART_STYLES, createRandom } from '../src/render/art.js';
@@ -114,5 +115,62 @@ describe('link builder', () => {
 
   it('describes every art style', () => {
     for (const art of ART_STYLES) assert.ok(ART_DESCRIPTIONS[art], art);
+  });
+});
+
+describe('link builder Action snippet', () => {
+  const html = readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
+  const pick = (pattern) => html.match(pattern)?.[0] ?? '';
+  // The page's own functions, run against a stand-in for the form.
+  const source = () =>
+    [
+      pick(/const LAYOUT_FIELDS = \{[\s\S]*?\n {6}\};/),
+      pick(/ {6}function params\(theme\) \{[\s\S]*?\n {6}\}\n/),
+      pick(/ {6}function themes\(\) \{[\s\S]*?\n {6}\}\n/),
+      pick(/ {6}\/\/ A YAML scalar[\s\S]*?\n {6}function actionStep[\s\S]*?\n {6}\}\n/),
+      'return { actionStep, themes };',
+    ].join('\n');
+  const build = (fields) => {
+    class FormData {
+      get(name) {
+        return fields[name] ?? null;
+      }
+    }
+    const catalog = new Map(designs.map((d) => [d.id, d]));
+    return new Function('FormData', 'form', 'designs', source())(FormData, {}, catalog);
+  };
+  const step = (fields) => {
+    const page = build({ layout: 'overview', design: 'github', mode: 'match', ...fields });
+    return page.actionStep(page.themes());
+  };
+
+  it('names the selected account in every mode', () => {
+    for (const mode of ['match', 'light', 'dark', 'custom']) {
+      const yaml = step({
+        username: ' octocat ',
+        mode,
+        light_theme: 'nord_light',
+        dark_theme: 'nord',
+      });
+      assert.match(yaml, /^ {4}username: octocat$/m, mode);
+    }
+  });
+
+  it('keeps the account for pin cards with a bare repository name', () => {
+    const yaml = step({ username: 'octocat', layout: 'pin', repo: 'Hello-World', mode: 'light' });
+    assert.match(yaml, /^ {4}username: octocat$/m);
+    assert.match(yaml, /^ {4}options: repo=Hello-World$/m);
+  });
+
+  it('keeps the account for gist cards', () => {
+    const yaml = step({ username: 'my-org', layout: 'gist', gist: 'aa5a315d61ae9438b18d' });
+    assert.match(yaml, /^ {4}username: my-org$/m);
+    assert.match(yaml, /^ {4}options: gist=aa5a315d61ae9438b18d$/m);
+  });
+
+  it('quotes values that YAML would misread', () => {
+    const yaml = step({ username: "it's: #1", layout: 'pin', repo: 'a b' });
+    assert.match(yaml, /^ {4}username: 'it''s: #1'$/m);
+    assert.match(yaml, /^ {4}options: 'repo=a\+b'$/m);
   });
 });
