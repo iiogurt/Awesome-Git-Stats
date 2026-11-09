@@ -26,45 +26,71 @@ function allowedUsernames(env) {
 
 // Fetch what a layout needs: one repository, one gist, or the account's repositories
 // (with contribution activity or language sizes for the layouts that show them).
-function loadData(options, { tokens, fetchImpl }) {
+function loadData(options, { tokens, fetchImpl, deadlineMs }) {
   const { layout, username, repo, gist } = options;
   if (layout === 'pin') {
     const key = `repo:${repo.owner}/${repo.name}`.toLowerCase();
-    return cached(key, () => fetchRepo(repo.owner, repo.name, { tokens, fetchImpl }));
+    return cached(key, deadlineMs, (signal) =>
+      fetchRepo(repo.owner, repo.name, { tokens, fetchImpl, signal }),
+    );
   }
   if (layout === 'gist') {
     const key = `gist:${username}:${gist}`.toLowerCase();
-    return cached(key, () => fetchGist(username, gist, { tokens, fetchImpl }));
+    return cached(key, deadlineMs, (signal) =>
+      fetchGist(username, gist, { tokens, fetchImpl, signal }),
+    );
   }
   const activity = ACTIVITY_LAYOUTS.includes(layout);
   const codeLanguages = layout === 'languages';
   const key = `${username.toLowerCase()}:${options.includeForks}:${activity}:${codeLanguages}`;
-  return cached(key, () =>
+  return cached(key, deadlineMs, (signal) =>
     fetchAccount(username, {
       tokens,
       includeForks: options.includeForks,
       activity,
       codeLanguages,
       fetchImpl,
+      signal,
     }),
   );
 }
 
-async function cached(key, load) {
-  const hit = accountCache.get(key);
-  if (hit) return hit;
-  const pending = load();
-  // Cache the promise so concurrent requests share one GitHub round trip.
-  accountCache.set(key, pending);
+/**
+ * Share one load per key between concurrent requests, so they make one set of GitHub
+ * requests. Each request waits up to its own deadline. The load is cancelled (its
+ * request in flight aborted, no further ones started) only when every request waiting
+ * for it has given up; one impatient request never cancels it for the others. A
+ * cancelled or failed load is dropped, so the next request starts afresh.
+ */
+async function cached(key, deadlineMs, load) {
+  let entry = accountCache.get(key);
+  if (!entry) {
+    const controller = new AbortController();
+    entry = { controller, waiters: 0, settled: false };
+    entry.promise = load(controller.signal);
+    accountCache.set(key, entry);
+    entry.promise.then(
+      () => (entry.settled = true),
+      (error) => {
+        entry.settled = true;
+        if (error instanceof GitHubError && error.code === 'NOT_FOUND') {
+          accountCache.set(key, entry, NOT_FOUND_CACHE_MS);
+        } else if (accountCache.get(key) === entry) {
+          accountCache.delete(key);
+        }
+      },
+    );
+  }
+  if (deadlineMs === Infinity) return entry.promise;
+  entry.waiters += 1;
   try {
-    return await pending;
-  } catch (error) {
-    if (error instanceof GitHubError && error.code === 'NOT_FOUND') {
-      accountCache.set(key, pending, NOT_FOUND_CACHE_MS);
-    } else {
-      accountCache.delete(key);
+    return await withDeadline(entry.promise, deadlineMs);
+  } finally {
+    entry.waiters -= 1;
+    if (entry.waiters === 0 && !entry.settled) {
+      entry.controller.abort();
+      if (accountCache.get(key) === entry) accountCache.delete(key);
     }
-    throw error;
   }
 }
 
@@ -124,8 +150,7 @@ export async function createCard(
 
   try {
     const tokens = token !== undefined ? [token].filter(Boolean) : tokensFromEnv(env);
-    const pending = loadData(options, { tokens, fetchImpl });
-    const data = await (deadlineMs === Infinity ? pending : withDeadline(pending, deadlineMs));
+    const data = await loadData(options, { tokens, fetchImpl, deadlineMs });
     const languages =
       options.layout === 'overview' ? Math.min(options.langsCount, 4) : options.langsCount;
     // A pinned repository or gist is rendered as fetched.

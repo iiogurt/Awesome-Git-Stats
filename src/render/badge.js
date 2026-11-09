@@ -37,11 +37,12 @@ export function renderBadge(stats, options) {
     width,
     height: HEIGHT,
     theme: options.theme,
-    options: { ...options, radius, animate: false },
+    // Too small for a footnote strip: a partial total is only noted in the title.
+    options: { ...options, radius, animate: false, footnote: null },
     withArt: false,
     title: null,
     body,
     css,
-    label: `${stats.name}: ${formatExact(stats.totalStars)} GitHub stars`,
+    label: `${stats.name}: ${formatExact(stats.totalStars)} GitHub stars${options.footnote ? ` (${options.footnote.toLowerCase()})` : ''}`,
   });
 }

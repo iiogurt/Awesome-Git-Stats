@@ -156,7 +156,7 @@ export function renderFrame({
   label,
   withArt = true,
 }) {
-  const { radius, hideBorder, hideTitle, animate } = options;
+  const { radius, hideBorder, hideTitle, animate, footnote } = options;
   const gradId = 'ags-bg';
   const bgFill = theme.gradient ? `url(#${gradId})` : 'var(--bg)';
   const borderOpacity = hideBorder ? 0 : 1;
@@ -177,7 +177,9 @@ export function renderFrame({
   const titleBlock =
     hideTitle || !title ? '' : `<text x="25" y="35" class="title fade">${escapeXml(title)}</text>`;
   const offset = hideTitle && title ? -25 : 0;
-  const finalHeight = height + offset;
+  // A footnote (partial data) gets a strip of its own below the content.
+  const noteHeight = footnote ? 14 : 0;
+  const finalHeight = height + offset + noteHeight;
   const font = FONTS[theme.font] ?? FONTS.sans;
   const strokeWidth = theme.borderWidth ?? 1;
   const inset = strokeWidth / 2;
@@ -195,8 +197,12 @@ export function renderFrame({
   <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true">${art.layer}</g>`
     : '';
 
+  const note = footnote
+    ? `\n  <text x="${width - 14}" y="${finalHeight - 9}" class="muted" font-size="9" text-anchor="end">${escapeXml(footnote)}</text>`
+    : '';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${finalHeight}" viewBox="0 0 ${width} ${finalHeight}" fill="none" role="img" aria-labelledby="ags-title">
-  <title id="ags-title">${escapeXml(label || title || 'GitHub stars')}</title>
+  <title id="ags-title">${escapeXml(label || title || 'GitHub stars')}${footnote ? ` (${escapeXml(footnote.toLowerCase())})` : ''}</title>
   <defs>${backgroundDefs(theme, gradId)}${art?.defs ?? ''}${finish.defs}</defs>
   <style>
     svg{${themeVars(theme)}}
@@ -220,7 +226,7 @@ export function renderFrame({
   <rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}" class="card"/>
   ${artLayer}
   ${titleBlock}
-  <g transform="translate(0 ${offset})">${body}</g>
+  <g transform="translate(0 ${offset})">${body}</g>${note}
 </svg>`;
 }
 

@@ -710,6 +710,21 @@ Private repositories never appear by name.
 </details>
 
 <details>
+<summary><b>The card says "First 1,000 repositories only"</b></summary>
+
+Cards read at most 1,000 public repositories per account, to keep each card fast and within
+GitHub's rate limits. For bigger accounts, stars, forks and languages count those 1,000
+repositories (the ones with the most stars), and the card says so in a footnote. The number of
+public repositories is always the full count. Activity layouts (`streak`, `heatmap`,
+`timeline`, `skyline`, `goal`) don't depend on repositories and never show the note.
+
+The `languages` layout reads every language of each repository. For a repository with more than
+10 languages, the rest are fetched in extra requests, for up to 60 such repositories. Code in
+languages that are still unread is counted as **Other**, so the percentages stay correct.
+
+</details>
+
+<details>
 <summary><b>Does it work for organizations?</b></summary>
 
 Yes, every layout works for organizations. Organizations have no contribution calendar, so the

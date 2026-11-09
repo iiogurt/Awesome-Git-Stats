@@ -3,7 +3,14 @@ import { parseColor } from './themes.js';
 
 const API_URL = 'https://api.github.com';
 const PAGE_SIZE = 100;
-const MAX_PAGES = 10;
+// At most 1,000 repositories per account; beyond that the totals are marked partial.
+export const MAX_PAGES = 10;
+export const REPO_LIMIT = MAX_PAGES * PAGE_SIZE;
+// Repositories with more than the first page of languages get follow-up requests, a
+// batch of repositories per request, for at most this many repositories. Bytes that are
+// still unlisted after that are counted as "Other".
+const LANGUAGE_BATCH = 20;
+const MAX_LANGUAGE_FOLLOW_UPS = 60;
 const USER_AGENT = 'awesome-git-stats';
 // Give up on a slow GitHub request well before the serverless function is stopped,
 // so the visitor still gets an error card rather than a broken image.
@@ -44,6 +51,8 @@ query ($login: String!, $after: String, $isFork: Boolean, $languages: Boolean = 
         isArchived
         primaryLanguage { name color }
         languages(first: 10, orderBy: { field: SIZE, direction: DESC }) @include(if: $languages) {
+          totalSize
+          pageInfo { hasNextPage endCursor }
           edges { size node { name color } }
         }
       }
@@ -131,13 +140,16 @@ function normaliseActivity(user) {
 
 const colorOf = (name, color) => parseColor(color ?? (name ? languageColors[name] : null));
 
-function normaliseRepo(node) {
-  const language = node.primaryLanguage?.name ?? node.language ?? null;
-  const code = node.languages?.edges?.map((edge) => ({
+const languageEdges = (edges = []) =>
+  edges.map((edge) => ({
     name: edge.node.name,
     color: colorOf(edge.node.name, edge.node.color),
     size: edge.size,
   }));
+
+function normaliseRepo(node) {
+  const language = node.primaryLanguage?.name ?? node.language ?? null;
+  const code = node.languages?.edges ? languageEdges(node.languages.edges) : undefined;
   return {
     name: node.name,
     description: node.description ?? '',
@@ -147,36 +159,52 @@ function normaliseRepo(node) {
     isArchived: Boolean(node.isArchived ?? node.archived),
     language,
     languageColor: colorOf(language, node.primaryLanguage?.color),
-    // Bytes of code per language, only when asked for (GraphQL only).
-    ...(code ? { codeLanguages: code } : {}),
+    // Bytes of code per language, only when asked for (GraphQL only). `codeSize` is the
+    // repository's total, which can exceed the listed languages until all are fetched.
+    ...(code ? { codeLanguages: code, codeSize: node.languages.totalSize ?? null } : {}),
   };
 }
 
-/** fetch() with a timeout; a timed-out request becomes a GitHubError. */
-async function request(fetchImpl, url, init) {
+const timeoutError = () =>
+  new GitHubError('GitHub took too long to respond, try again later', {
+    status: 504,
+    code: 'TIMEOUT',
+  });
+
+/**
+ * fetch() with a per-request timeout, also aborted by `signal` (the caller's overall
+ * budget). Nothing new starts once `signal` has fired. Either way the result is a
+ * TIMEOUT GitHubError.
+ */
+async function request(fetchImpl, url, init, signal) {
+  if (signal?.aborted) throw timeoutError();
+  const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   try {
-    return await fetchImpl(url, { ...init, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+    return await fetchImpl(url, {
+      ...init,
+      signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
+    });
   } catch (error) {
-    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
-      throw new GitHubError('GitHub took too long to respond, try again later', {
-        status: 504,
-        code: 'TIMEOUT',
-      });
-    }
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') throw timeoutError();
     throw error;
   }
 }
 
-async function graphql(fetchImpl, token, variables, query = QUERY) {
-  const response = await request(fetchImpl, `${API_URL}/graphql`, {
-    method: 'POST',
-    headers: {
-      authorization: `bearer ${token}`,
-      'content-type': 'application/json',
-      'user-agent': USER_AGENT,
+async function graphql(fetchImpl, token, variables, query = QUERY, signal) {
+  const response = await request(
+    fetchImpl,
+    `${API_URL}/graphql`,
+    {
+      method: 'POST',
+      headers: {
+        authorization: `bearer ${token}`,
+        'content-type': 'application/json',
+        'user-agent': USER_AGENT,
+      },
+      body: JSON.stringify({ query, variables }),
     },
-    body: JSON.stringify({ query, variables }),
-  });
+    signal,
+  );
   if (response.status === 401) {
     throw new GitHubError('The server GitHub token is invalid', { status: 500, code: 'BAD_TOKEN' });
   }
@@ -214,12 +242,12 @@ let rotation = 0;
  * limited or invalid. `state.index` remembers the token that worked so
  * later pages of the same request reuse it.
  */
-async function graphqlWithFailover(fetchImpl, tokens, variables, state, query) {
+async function graphqlWithFailover(fetchImpl, tokens, variables, state, query, signal) {
   let lastError;
   for (let attempt = 0; attempt < tokens.length; attempt += 1) {
     const index = (state.index + attempt) % tokens.length;
     try {
-      const data = await graphql(fetchImpl, tokens[index], variables, query);
+      const data = await graphql(fetchImpl, tokens[index], variables, query, signal);
       state.index = index;
       return data;
     } catch (error) {
@@ -230,20 +258,63 @@ async function graphqlWithFailover(fetchImpl, tokens, variables, state, query) {
   throw lastError;
 }
 
+// The rest of the languages of repositories that have more than the first page, a batch
+// of repositories per request (aliases r0, r1, ...). Returns false if some were left out.
+async function fetchMoreLanguages(owner, pending, { fetchImpl, tokens, state, signal }) {
+  const todo = pending.slice(0, MAX_LANGUAGE_FOLLOW_UPS);
+  for (let start = 0; start < todo.length; start += LANGUAGE_BATCH) {
+    const batch = todo.slice(start, start + LANGUAGE_BATCH);
+    const variables = { owner };
+    const fields = batch.map((item, i) => {
+      variables[`n${i}`] = item.repo.name;
+      variables[`c${i}`] = item.cursor;
+      return `r${i}: repository(owner: $owner, name: $n${i}) {
+    languages(first: 100, after: $c${i}, orderBy: { field: SIZE, direction: DESC }) {
+      edges { size node { name color } }
+    }
+  }`;
+    });
+    const params = batch.map((_, i) => `$n${i}: String!, $c${i}: String`).join(', ');
+    const query = `query ($owner: String!, ${params}) {\n  ${fields.join('\n  ')}\n}`;
+    let data;
+    try {
+      data = await graphqlWithFailover(fetchImpl, tokens, variables, state, query, signal);
+    } catch (error) {
+      // Only extra precision: a repository renamed or deleted meanwhile (or any other
+      // error but running out of time) leaves the unread bytes as "Other".
+      if (error.code === 'TIMEOUT') throw error;
+      return false;
+    }
+    batch.forEach((item, i) => {
+      item.repo.codeLanguages.push(...languageEdges(data?.[`r${i}`]?.languages?.edges));
+    });
+  }
+  return todo.length === pending.length;
+}
+
 async function fetchWithGraphQL(
   username,
-  { tokens, includeForks, activity, codeLanguages, fetchImpl },
+  { tokens, includeForks, activity, codeLanguages, fetchImpl, signal },
 ) {
   const repos = [];
+  const moreLanguages = [];
   const state = { index: rotation++ % tokens.length };
   let owner = null;
   let after = null;
-  for (let page = 0; page < MAX_PAGES; page += 1) {
+  let truncated = false;
+  // Every page, even past the starred repositories: unstarred ones still have forks.
+  for (let page = 0; ; page += 1) {
+    if (page === MAX_PAGES) {
+      truncated = true;
+      break;
+    }
     const data = await graphqlWithFailover(
       fetchImpl,
       tokens,
       { login: username, after, isFork: includeForks ? null : false, languages: codeLanguages },
       state,
+      QUERY,
+      signal,
     );
     const node = data?.repositoryOwner;
     if (!node) throw new GitHubError('User not found', { status: 404, code: 'NOT_FOUND' });
@@ -254,14 +325,18 @@ async function fetchWithGraphQL(
       followers: node.followers?.totalCount ?? null,
       totalRepos: node.repositories.totalCount,
     };
-    const nodes = node.repositories.nodes.map(normaliseRepo);
-    repos.push(...nodes);
-    // Repositories are sorted by stars, so once we reach zero we can stop,
-    // unless every repository counts (languages by code size).
-    const lastStars = nodes.at(-1)?.stars ?? 0;
-    if (!node.repositories.pageInfo.hasNextPage || (lastStars === 0 && !codeLanguages)) break;
+    for (const raw of node.repositories.nodes) {
+      const repo = normaliseRepo(raw);
+      repos.push(repo);
+      const languages = raw.languages?.pageInfo;
+      if (languages?.hasNextPage) moreLanguages.push({ repo, cursor: languages.endCursor });
+    }
+    if (!node.repositories.pageInfo.hasNextPage) break;
     after = node.repositories.pageInfo.endCursor;
   }
+  const languagesComplete = moreLanguages.length
+    ? await fetchMoreLanguages(owner.login, moreLanguages, { fetchImpl, tokens, state, signal })
+    : true;
   let activityData = null;
   if (activity && owner.type === 'User') {
     const data = await graphqlWithFailover(
@@ -270,16 +345,26 @@ async function fetchWithGraphQL(
       { login: owner.login },
       state,
       ACTIVITY_QUERY,
+      signal,
     );
     activityData = normaliseActivity(data?.user);
   }
-  return { ...owner, repos, activity: activityData };
+  return {
+    ...owner,
+    repos,
+    truncated,
+    ...(codeLanguages ? { languagesComplete } : {}),
+    activity: activityData,
+  };
 }
 
-async function rest(fetchImpl, path) {
-  const response = await request(fetchImpl, `${API_URL}${path}`, {
-    headers: { accept: 'application/vnd.github+json', 'user-agent': USER_AGENT },
-  });
+async function rest(fetchImpl, path, signal) {
+  const response = await request(
+    fetchImpl,
+    `${API_URL}${path}`,
+    { headers: { accept: 'application/vnd.github+json', 'user-agent': USER_AGENT } },
+    signal,
+  );
   if (response.status === 404) {
     throw new GitHubError('User not found', { status: 404, code: 'NOT_FOUND' });
   }
@@ -295,17 +380,21 @@ async function rest(fetchImpl, path) {
   return response.json();
 }
 
-async function fetchWithRest(username, { includeForks, fetchImpl }) {
-  const user = await rest(fetchImpl, `/users/${encodeURIComponent(username)}`);
+async function fetchWithRest(username, { includeForks, fetchImpl, signal }) {
+  const user = await rest(fetchImpl, `/users/${encodeURIComponent(username)}`, signal);
   const base = user.type === 'Organization' ? 'orgs' : 'users';
   const repos = [];
+  let truncated = false;
   for (let page = 1; page <= MAX_PAGES; page += 1) {
     const batch = await rest(
       fetchImpl,
       `/${base}/${encodeURIComponent(user.login)}/repos?per_page=${PAGE_SIZE}&page=${page}&type=owner`,
+      signal,
     );
     repos.push(...batch.map(normaliseRepo));
     if (batch.length < PAGE_SIZE) break;
+    // A full last page: more remain unless the account has exactly this many.
+    if (page === MAX_PAGES) truncated = (user.public_repos ?? Infinity) > MAX_PAGES * PAGE_SIZE;
   }
   const filtered = repos.filter((repo) => includeForks || !repo.isFork);
   filtered.sort((a, b) => b.stars - a.stars);
@@ -316,6 +405,7 @@ async function fetchWithRest(username, { includeForks, fetchImpl }) {
     followers: user.type === 'User' ? (user.followers ?? null) : null,
     totalRepos: filtered.length,
     repos: filtered,
+    truncated,
     // Contribution data is only available through the GraphQL API.
     activity: null,
   };
@@ -341,6 +431,11 @@ export function tokensFromEnv(env = process.env) {
  * @param {string} [options.token]     a single token (overrides `tokens`)
  * @param {string[]} [options.tokens]  tokens to use, defaults to tokensFromEnv()
  * @param {boolean} [options.activity]  also fetch contribution activity (users only)
+ * @param {boolean} [options.codeLanguages]  also fetch bytes of code per language
+ * @param {AbortSignal} [options.signal]  overall budget: aborts the request in flight and
+ *   starts no further ones
+ * @returns {Promise<object>} the account and its repositories; `truncated` is true when
+ *   the account has more than MAX_PAGES pages of repositories, so totals are partial
  */
 export async function fetchAccount(
   username,
@@ -351,6 +446,7 @@ export async function fetchAccount(
     activity = false,
     codeLanguages = false,
     fetchImpl = globalThis.fetch,
+    signal,
   } = {},
 ) {
   const usable = usableTokens(token, tokens);
@@ -361,9 +457,10 @@ export async function fetchAccount(
       activity,
       codeLanguages,
       fetchImpl,
+      signal,
     });
   }
-  return fetchWithRest(username, { includeForks, fetchImpl });
+  return fetchWithRest(username, { includeForks, fetchImpl, signal });
 }
 
 function usableTokens(token, tokens) {
@@ -389,20 +486,20 @@ async function renamedNotFound(promise, message) {
 export async function fetchRepo(
   owner,
   name,
-  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch } = {},
+  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch, signal } = {},
 ) {
   const usable = usableTokens(token, tokens);
   let node;
   if (usable.length) {
     const state = { index: rotation++ % usable.length };
     const data = await renamedNotFound(
-      graphqlWithFailover(fetchImpl, usable, { owner, name }, state, REPO_QUERY),
+      graphqlWithFailover(fetchImpl, usable, { owner, name }, state, REPO_QUERY, signal),
       'Repository not found',
     );
     node = data?.repository;
   } else {
     node = await renamedNotFound(
-      rest(fetchImpl, `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`),
+      rest(fetchImpl, `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`, signal),
       'Repository not found',
     );
   }
@@ -424,13 +521,13 @@ export async function fetchRepo(
 export async function fetchGist(
   username,
   id,
-  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch } = {},
+  { token, tokens = tokensFromEnv(), fetchImpl = globalThis.fetch, signal } = {},
 ) {
   const usable = usableTokens(token, tokens);
   if (usable.length) {
     const state = { index: rotation++ % usable.length };
     const data = await renamedNotFound(
-      graphqlWithFailover(fetchImpl, usable, { login: username, id }, state, GIST_QUERY),
+      graphqlWithFailover(fetchImpl, usable, { login: username, id }, state, GIST_QUERY, signal),
       'Gist not found',
     );
     const gist = data?.user?.gist;
@@ -451,7 +548,7 @@ export async function fetchGist(
     };
   }
   const gist = await renamedNotFound(
-    rest(fetchImpl, `/gists/${encodeURIComponent(id)}`),
+    rest(fetchImpl, `/gists/${encodeURIComponent(id)}`, signal),
     'Gist not found',
   );
   if (gist.public === false || gist.owner?.login?.toLowerCase() !== username.toLowerCase()) {
