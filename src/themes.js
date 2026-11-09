@@ -2248,9 +2248,14 @@ export const designs = [
 // Themes that are not a pair member themselves but belong to a design.
 const ALIASES = { light: 'default', auto: 'default' };
 
+/** Whether `name` is a built-in theme (own keys only, so `__proto__` is not one). */
+export function isTheme(name) {
+  return typeof name === 'string' && Object.hasOwn(themes, name);
+}
+
 /** The light and dark theme of the design `name` belongs to, e.g. tokyonight → tokyonight_light + tokyonight. */
 export function themePair(name) {
-  const theme = ALIASES[name] ?? name;
+  const theme = Object.hasOwn(ALIASES, name) ? ALIASES[name] : name;
   const design = designs.find((d) => d.light === theme || d.dark === theme);
   return design ? { light: design.light, dark: design.dark } : { light: 'default', dark: 'dark' };
 }
@@ -2270,7 +2275,7 @@ export function parseColor(value) {
  * variant so the user's colours are always respected.
  */
 export function resolveTheme(name, overrides = {}) {
-  const base = themes[name] || themes.default;
+  const base = isTheme(name) ? themes[name] : themes.default;
   const theme = { ...base };
   let overridden = false;
   for (const [key, value] of Object.entries(overrides)) {

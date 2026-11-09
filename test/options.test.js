@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { CACHE, OptionsError, isValidUsername, parseOptions } from '../src/options.js';
+import {
+  CACHE,
+  OptionsError,
+  fallbackOptions,
+  isValidUsername,
+  parseOptions,
+} from '../src/options.js';
 import { resolveTheme, themes } from '../src/themes.js';
 
 describe('isValidUsername', () => {
@@ -91,4 +97,23 @@ describe('themes', () => {
     assert.ok(resolveTheme('auto').dark);
     assert.equal(resolveTheme('auto', { accent: 'ff0000' }).dark, undefined);
   });
+});
+
+describe('inherited object keys as theme names', () => {
+  const names = ['__proto__', 'constructor', 'toString', 'hasOwnProperty', 'no_such_theme'];
+  const tokens = ['bg', 'border', 'title', 'text', 'muted', 'accent', 'track'];
+
+  for (const name of names) {
+    it(`falls back to the default theme for "${name}"`, () => {
+      const parsed = parseOptions({ username: 'octocat', theme: name });
+      assert.equal(parsed.themeName, 'default');
+      assert.equal(parsed.finish, themes.default.finish ?? 'gloss');
+      const fallback = fallbackOptions({ theme: name });
+      assert.equal(fallback.themeName, 'default');
+      const resolved = resolveTheme(name);
+      for (const theme of [parsed.theme, fallback.theme, resolved]) {
+        for (const token of tokens) assert.match(theme[token], /^#[0-9a-f]+$/i, token);
+      }
+    });
+  }
 });

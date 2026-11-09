@@ -1181,10 +1181,20 @@
         return linked ? `<a href="${PROJECT_URL}">\n${html.replace(/^/gm, '  ')}\n</a>` : html;
       }
 
+      // A YAML scalar: plain when it can't be misread, otherwise single-quoted.
+      const yaml = (value) =>
+        /^[a-z\d][\w./=&,-]*$/i.test(value) ? value : `'${value.replace(/'/g, "''")}'`;
+
       function actionStep(selected) {
         const data = new FormData(form);
         const query = params('default');
-        const lines = ['- uses: iiogurt/Awesome-Git-Stats@v1', '  with:'];
+        // Always name the account: the Action would otherwise render the repository owner,
+        // which differs when the step is copied into someone else's or an org's repository.
+        const lines = [
+          '- uses: iiogurt/Awesome-Git-Stats@v1',
+          '  with:',
+          `    username: ${yaml(query.get('username'))}`,
+        ];
         if (query.has('layout')) lines.push(`    layout: ${query.get('layout')}`);
         const design = designs.get(data.get('design'));
         if (selected.both) {
@@ -1197,7 +1207,7 @@
         }
         query.delete('username');
         query.delete('layout');
-        if (query.size) lines.push(`    options: ${decodeURIComponent(query.toString())}`);
+        if (query.size) lines.push(`    options: ${yaml(decodeURIComponent(query.toString()))}`);
         lines.push('    path: assets/stars.svg');
         return lines.join('\n');
       }

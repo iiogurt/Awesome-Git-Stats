@@ -96,3 +96,11 @@ describe('themePair', () => {
     }
   });
 });
+
+describe('themePair with inherited object keys', () => {
+  it('falls back to the default pair', () => {
+    for (const name of ['__proto__', 'constructor', 'toString']) {
+      assert.deepEqual(themePair(name), { light: 'default', dark: 'dark' });
+    }
+  });
+});
