@@ -98,9 +98,9 @@ function tiles(stats, options) {
       return `<g class="rise"${delay(options, 80 + i * 70)}>
       ${glassPanel({ x, y: 52, width, height: 60, rx: 9, base: 'tile' })}
       ${icon(item.path, { x: r1(x + width - 26), y: 62, size: 14, className: 'icon-accent' })}
-      <text x="${r1(x + 12)}" y="70" class="tile-label">${escapeXml(item.label)}</text>
-      <text x="${r1(x + 12)}" y="95" class="tile-value">${escapeXml(truncate(item.value, width - 20, 19, 700))}</text>
-      ${item.note ? `<text x="${r1(x + 12)}" y="107" class="tile-note">${escapeXml(item.note)}</text>` : ''}
+      <text x="${r1(x + 12)}" y="69" class="tile-label">${escapeXml(item.label)}</text>
+      <text x="${r1(x + 12)}" y="${item.note ? 91 : 96}" class="tile-value">${escapeXml(truncate(item.value, width - 20, 19, 700))}</text>
+      ${item.note ? `<text x="${r1(x + 12)}" y="105" class="tile-note">${escapeXml(item.note)}</text>` : ''}
     </g>`;
     })
     .join('');
@@ -197,8 +197,9 @@ function monthly(activity, options) {
   const months = activity.months;
   const x0 = LEFT;
   const width = 280;
-  const top = 296;
-  const height = 64;
+  // Starts low enough for the peak's label to clear the heading.
+  const top = 306;
+  const height = 54;
   const max = Math.max(...months.map((m) => m.total), 1);
   const stepX = months.length > 1 ? width / (months.length - 1) : 0;
   const points = months.map((m, i) => [
@@ -240,8 +241,8 @@ function mix(activity, options) {
       const y = 302 + i * 24;
       return `<text x="${x0}" y="${y}" class="row-label">${label}</text>
       <text x="${x0 + width}" y="${y}" class="row-value" text-anchor="end">${formatExact(n)}</text>
-      ${track({ x: x0, y: y + 5, width, height: 6 })}
-      ${glossBar({ x: x0, y: y + 5, width: Math.max(6, (n / max) * width), height: 6, fill: `mix${i}`, attrs: ` class="grow"${delay(options, 500 + i * 90)}` })}`;
+      ${track({ x: x0, y: y + 6, width, height: 4 })}
+      ${glossBar({ x: x0, y: y + 6, width: Math.max(6, (n / max) * width), height: 4, fill: `mix${i}`, attrs: ` class="grow"${delay(options, 500 + i * 90)}` })}`;
     })
     .join('');
   const footer = [
@@ -269,8 +270,8 @@ function topRepos(stats, options, x0 = 575) {
           return `<text x="${x0}" y="${y}" class="row-label">${escapeXml(truncate(repo.name, nameWidth, 12, 600))}</text>
         ${icon(STAR_PATH, { x: r1(x0 + width - measureText(count, 12, 700) - 15), y: y - 10, size: 11, className: 'icon-accent' })}
         <text x="${RIGHT}" y="${y}" class="row-value" text-anchor="end">${count}</text>
-        ${track({ x: x0, y: y + 5, width, height: 6 })}
-        ${glossBar({ x: x0, y: y + 5, width: Math.max(6, (repo.stars / max) * width), height: 6, fill: repo.languageColor ?? 'accent', attrs: ` class="grow"${delay(options, 600 + i * 90)}` })}`;
+        ${track({ x: x0, y: y + 6, width, height: 4 })}
+        ${glossBar({ x: x0, y: y + 6, width: Math.max(6, (repo.stars / max) * width), height: 4, fill: repo.languageColor ?? 'accent', attrs: ` class="grow"${delay(options, 600 + i * 90)}` })}`;
         })
         .join('')
     : `<text x="${x0}" y="310" class="axis">No starred repositories yet ✨</text>`;

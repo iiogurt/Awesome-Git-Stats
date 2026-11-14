@@ -543,10 +543,11 @@ Combine any theme with any art style using `art=`, for example `theme=dracula&ar
 Bars, rings, charts, dots and tiles come in ten surface finishes, chosen with `finish=` (or
 `options: finish=neon` in the Action). Every finish works with every theme and layout, so
 `theme=synthwave&finish=neon` or `theme=github_light&finish=sketch` are one parameter away.
-Most designs use `gloss`; the minimal ones bring their own (`doodle` and `ink` are sketched,
-`line_art` is flat, `stencil` is cut from paper), and `finish=` overrides it.
+Most designs use `flat`, plain shapes with no light or shadow; a few bring their own (`doodle`
+and `ink` are sketched, `stencil` is cut from paper), and `finish=` overrides it. Earlier
+versions were glossy by default: add `finish=gloss` to keep that look.
 
-| `gloss` (default)                                                           | `soft`                                                                    | `paper`                                                                     | `chrome`                                                                      | `holo`                                                                    |
+| `gloss`                                                                     | `soft`                                                                    | `paper`                                                                     | `chrome`                                                                      | `holo`                                                                    |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | <img src="assets/examples/finish-gloss.svg" alt="gloss finish" width="200"> | <img src="assets/examples/finish-soft.svg" alt="soft finish" width="200"> | <img src="assets/examples/finish-paper.svg" alt="paper finish" width="200"> | <img src="assets/examples/finish-chrome.svg" alt="chrome finish" width="200"> | <img src="assets/examples/finish-holo.svg" alt="holo finish" width="200"> |
 | Glossy plastic and glass: highlights, deep shade, frosted centres           | Soft-touch pastel plastic: washed colours, matte                          | Paper cut-outs: bevelled edges, stacked shadows                             | Polished metal with a sharp reflection                                        | Holographic foil that shimmers through the rainbow                        |
@@ -610,30 +611,31 @@ The same options work in both ways of using the project: as `options:` in the Ac
 (`count=8&hide_border=true`) or as URL parameters in a live link. Unknown values fall back to
 defaults, so a typo never breaks your README.
 
-| Parameter            | Description                                                                                                                                                  | Default                  |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
-| `username`           | GitHub user or organization (**required**)                                                                                                                   |                          |
-| `layout`             | One of the [layouts](#layouts)                                                                                                                               | `overview`               |
-| `theme`              | Any [theme](docs/themes.md)                                                                                                                                  | `default`                |
-| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                                                                                                 | theme's                  |
-| `custom_title`       | Replace the card title (max 60 characters)                                                                                                                   |                          |
-| `hide_title`         | Hide the title                                                                                                                                               | `false`                  |
-| `hide_border`        | Hide the border                                                                                                                                              | `false`                  |
-| `border_radius`      | Corner radius, `0`–`30`                                                                                                                                      | `10`                     |
-| `disable_animations` | Turn animations off                                                                                                                                          | `false`                  |
-| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                                                                                           | `5`                      |
-| `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |                          |
-| `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |                          |
-| `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`                   |
-| `finish`             | Surface of bars, rings and charts: `gloss`, `soft`, `paper`, `chrome`, `holo`, `neon`, `pixel`, `sketch`, `block` or `flat` ([Finishes](#finishes))          | design's, mostly `gloss` |
-| `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`                   |
-| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`                      |
-| `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |                          |
-| `exclude`            | Comma separated repository names to leave out                                                                                                                |                          |
-| `include_forks`      | Count stars on forked repositories                                                                                                                           | `false`                  |
-| `label`              | Label text of the `badge` layout (max 24 characters)                                                                                                         | `stars`                  |
-| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                                                                                                | `14400`                  |
-| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`                                                                                |                          |
+| Parameter            | Description                                                                                                                                                  | Default                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `username`           | GitHub user or organization (**required**)                                                                                                                   |                         |
+| `layout`             | One of the [layouts](#layouts)                                                                                                                               | `overview`              |
+| `theme`              | Any [theme](docs/themes.md)                                                                                                                                  | `default`               |
+| `art`                | Background [art style](docs/themes.md#art-styles), or `none`                                                                                                 | theme's                 |
+| `custom_title`       | Replace the card title (max 60 characters)                                                                                                                   |                         |
+| `hide_title`         | Hide the title                                                                                                                                               | `false`                 |
+| `hide_border`        | Hide the border                                                                                                                                              | `false`                 |
+| `border_radius`      | Corner radius, `0`–`30`                                                                                                                                      | `10`                    |
+| `disable_animations` | Turn animations off                                                                                                                                          | `false`                 |
+| `count`              | Repositories shown in the `repos` layout, `1`–`10`                                                                                                           | `5`                     |
+| `repo`               | Repository of the `pin` layout: `name` (yours) or `owner/name`                                                                                               |                         |
+| `gist`               | Gist id of the `gist` layout (one of your gists)                                                                                                             |                         |
+| `goal`               | Contribution goal of the `goal` layout                                                                                                                       | `1000`                  |
+| `finish`             | Surface of bars, rings and charts: `gloss`, `soft`, `paper`, `chrome`, `holo`, `neon`, `pixel`, `sketch`, `block` or `flat` ([Finishes](#finishes))          | design's, mostly `flat` |
+| `lang_style`         | Chart of the `languages` layout: `bars`, `donut`, `pie` or `waffle`                                                                                          | `bars`                  |
+| `lang_colors`        | Language colours: `github` (GitHub's own) or `theme` (toned to match the design)                                                                             | `theme` with art        |
+| `langs_count`        | Languages shown before grouping into "Other", `1`–`8` (max 4 in `overview`)                                                                                  | `5`                     |
+| `hide`               | Comma separated stats to hide. `overview`: `forks`, `repos`, `followers`, `top`; `stats`: `stars`, `commits`, `prs`, `issues`, `reviews`, `contribs`, `rank` |                         |
+| `exclude`            | Comma separated repository names to leave out                                                                                                                |                         |
+| `include_forks`      | Count stars on forked repositories                                                                                                                           | `false`                 |
+| `label`              | Label text of the `badge` layout (max 24 characters)                                                                                                         | `stars`                 |
+| `cache_seconds`      | Cache lifetime of a live link, `1800`–`86400`                                                                                                                | `14400`                 |
+| `*_color`            | Colour overrides: `bg`, `border`, `title`, `text`, `muted`, `accent`, `track`                                                                                |                         |
 
 Example with a few options combined:
 

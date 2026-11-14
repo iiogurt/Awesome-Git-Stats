@@ -657,21 +657,23 @@ function pixelBevel(g) {
 }
 
 export const FINISH_NAMES = Object.keys(FINISHES);
+/** The finish of designs that don't bring their own: plain shapes, no light or shadow. */
+export const DEFAULT_FINISH = 'flat';
 
 // The finish of the card being rendered: set by renderCard, which renders synchronously.
-let current = FINISHES.gloss;
+let current = FINISHES[DEFAULT_FINISH];
 
 /** Select the finish the helpers below draw with. */
 export function useFinish(name) {
-  current = FINISHES[name] ?? FINISHES.gloss;
+  current = FINISHES[name] ?? FINISHES[DEFAULT_FINISH];
 }
 
 /**
  * The gradients and patterns a card body refers to, in the given finish, and
  * the finish's CSS (with its animation when `animate`).
  */
-export function materials(body, finish = 'gloss', { animate = true } = {}) {
-  const f = FINISHES[finish] ?? FINISHES.gloss;
+export function materials(body, finish = DEFAULT_FINISH, { animate = true } = {}) {
+  const f = FINISHES[finish] ?? FINISHES[DEFAULT_FINISH];
   const used = (id) => body.includes(`url(#${id})`);
   const gradients = Object.keys(GRADIENTS)
     .filter(used)

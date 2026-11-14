@@ -47,12 +47,22 @@ describe('card options', () => {
     assert.equal(parse({ lang_style: 'sunburst' }).langStyle, 'bars');
   });
 
-  it('defaults to the glossy finish and accepts the others', () => {
-    assert.equal(parse({}).finish, 'gloss');
+  it("tones language colours to designs with art, and keeps GitHub's on classic ones", () => {
+    assert.equal(parse({}).langColors, 'github');
+    assert.equal(parse({ theme: 'dracula' }).langColors, 'github');
+    assert.equal(parse({ theme: 'terminal' }).langColors, 'theme');
+    assert.equal(parse({ theme: 'terminal', lang_colors: 'GitHub' }).langColors, 'github');
+    assert.equal(parse({ theme: 'dracula', lang_colors: 'theme' }).langColors, 'theme');
+    assert.equal(parse({ theme: 'terminal', lang_colors: 'rainbow' }).langColors, 'theme');
+  });
+
+  it('defaults to the flat finish and accepts the others', () => {
+    assert.equal(parse({}).finish, 'flat');
+    assert.equal(parse({ finish: 'gloss' }).finish, 'gloss');
     assert.equal(parse({ finish: 'Paper' }).finish, 'paper');
     assert.equal(parse({ finish: 'soft' }).finish, 'soft');
     assert.equal(parse({ finish: 'NEON' }).finish, 'neon');
-    assert.equal(parse({ finish: 'velvet' }).finish, 'gloss');
+    assert.equal(parse({ finish: 'velvet' }).finish, 'flat');
     // Minimal designs bring their own finish, which finish= still overrides.
     assert.equal(parse({ theme: 'ink' }).finish, 'sketch');
     assert.equal(parse({ theme: 'line_art_dark' }).finish, 'flat');

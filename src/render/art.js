@@ -63,6 +63,43 @@ export const ART_STYLES = [
   'ink',
 ];
 
+/**
+ * How much of a style shows under the card's content, 0 to 1. Styles made of separate
+ * objects or lines (glyphs, wires, creatures, rain) would cross the text, so they keep
+ * full strength only along the card's edges; textures and scenery are left whole.
+ */
+export const ART_UNDER_CONTENT = {
+  matrix: 0.22,
+  ridgeline: 0.22,
+  soundwave: 0.25,
+  circuit: 0.3,
+  constellation: 0.3,
+  hud: 0.3,
+  globe: 0.35,
+  warp: 0.3,
+  orbits: 0.4,
+  rain: 0.3,
+  jellyfish: 0.3,
+  koi: 0.35,
+  bubbles: 0.35,
+  hearts: 0.35,
+  eyes: 0.35,
+  haunted: 0.35,
+  leaves: 0.35,
+  sakura: 0.4,
+  memphis: 0.35,
+  fireworks: 0.35,
+  jungle: 0.4,
+  spheres: 0.4,
+  speedlines: 0.4,
+  isometric: 0.4,
+  festive: 0.5,
+  forest: 0.5,
+  fire: 0.5,
+  lava: 0.55,
+  topography: 0.6,
+};
+
 /** One-line descriptions, shown in the link builder and the theme gallery. */
 export const ART_DESCRIPTIONS = {
   starfield: 'A night sky of twinkling stars and sparkles, unique to every username.',

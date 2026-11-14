@@ -78,9 +78,11 @@ export function renderOverview(stats, options) {
       label: 'followers',
     });
   }
+  // Monospace labels are wider ("public repos" would touch "followers").
+  const columnStep = options.theme.font === 'mono' ? 86 : 78;
   const statsBlock = columns
     .filter((column) => !options.hide.includes(column.key))
-    .map((column, index) => statColumn({ ...column, x: 25 + index * 78, options, index }))
+    .map((column, index) => statColumn({ ...column, x: 25 + index * columnStep, options, index }))
     .join('');
 
   const top = stats.topRepos[0];

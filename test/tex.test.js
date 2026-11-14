@@ -2,7 +2,16 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { TEX_CSS, tex } from '../src/render/tex.js';
 
-const plain = (svg) => svg.replace(/<[^>]+>/g, '');
+// The text of an SVG fragment: tags removed until none are left (one pass could join the
+// pieces of a broken-up tag into a new one).
+const plain = (svg) => {
+  let text = svg;
+  for (let previous; previous !== text;) {
+    previous = text;
+    text = text.replace(/<[^>]+>/g, '');
+  }
+  return text;
+};
 
 describe('tex', () => {
   it('sets variables in italic and numbers and operators upright, spaced like TeX', () => {

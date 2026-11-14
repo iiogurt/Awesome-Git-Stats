@@ -86,12 +86,16 @@ export function renderTreemap(stats, options) {
       const ink = item.languageColor ? textColor(item.languageColor) : null;
       const inkAttr = ink ? ` fill="${ink}"` : '';
       const inkClass = ink ? '' : ' on-accent';
-      const name = truncate(item.name, w - 16, 12, 700);
+      // A name that doesn't fit is set smaller; one that would still lose most of
+      // its letters is left out (the tile keeps its tooltip).
+      const fits = measureText(item.name, 12, 700) <= w - 16;
+      const nameSize = fits ? 12 : 10;
+      const name = truncate(item.name, w - 14, nameSize, 700);
       const count = formatCount(item.stars);
-      const showName = w > 46 && h > 24 && name.length > 1;
+      const showName = w > 46 && h > 24 && name.length - 1 >= item.name.length * 0.6;
       const showStars = showName && h > 44 && w > measureText(count, 11) + 34;
       const label = showName
-        ? `<text x="${r1(x + 8)}" y="${r1(y + 18)}" class="cell-name${inkClass}"${inkAttr}>${escapeXml(name)}</text>`
+        ? `<text x="${r1(x + 8)}" y="${r1(y + 18)}" class="cell-name${inkClass}"${inkAttr}${fits ? '' : ' style="font-size:10px"'}>${escapeXml(name)}</text>`
         : '';
       const stars = showStars
         ? `<g opacity=".85">${icon(STAR_PATH, { x: r1(x + 8), y: r1(y + 26), size: 11, className: `cell-icon${inkClass}` }).replace('<path', `<path${inkAttr}`)}<text x="${r1(x + 23)}" y="${r1(y + 36)}" class="cell-stars${inkClass}"${inkAttr}>${count}</text></g>`

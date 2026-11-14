@@ -11,8 +11,8 @@ const WIDTH = 600;
 const HEIGHT = 330;
 // Screen vectors of one week (to the right, sloping down) and one weekday (away from the
 // viewer, up and to the right), and the tallest tower: a three-quarter view of the year.
-const WEEK = [7.4, 2.2];
-const DAY = [4.2, -3.6];
+const WEEK = [8.8, 1.9];
+const DAY = [4.6, -3.5];
 const MAX_HEIGHT = 90;
 
 const r1 = (n) => Math.round(n * 10) / 10;

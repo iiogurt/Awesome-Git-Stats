@@ -109,25 +109,29 @@ describe('repos without a language', () => {
       ...sampleAccount,
       repos: [{ ...sampleAccount.repos[0], language: 'Mystery', languageColor: null }],
     };
-    const svg = render({ layout: 'repos' }, account);
+    const svg = render({ layout: 'repos', finish: 'gloss' }, account);
     assert.match(svg, /<g class="grow"[^>]*><rect[^>]*class="accent halo"/);
+    assert.match(
+      render({ layout: 'repos' }, account),
+      /<g class="grow"[^>]*><rect[^>]*class="accent"/,
+    );
     assert.doesNotMatch(svg, /fill="var\(/);
   });
 });
 
 describe('materials', () => {
   it('give bars, rings and legend dots gloss and depth', () => {
-    const svg = render({ layout: 'languages', lang_style: 'donut' });
+    const svg = render({ layout: 'languages', lang_style: 'donut', finish: 'gloss' });
     assert.match(svg, /fill="url\(#ags-sphere\)"/);
     assert.match(svg, /stroke="url\(#ags-ring-light\)"/);
     assert.match(svg, /class="glass"/);
-    assert.match(render({ layout: 'repos' }), /fill="url\(#ags-inset\)"/);
+    assert.match(render({ layout: 'repos', finish: 'gloss' }), /fill="url\(#ags-inset\)"/);
   });
 
   it('only define the gradients a card uses', () => {
     const svg = render({ layout: 'badge' });
     assert.doesNotMatch(svg, /ags-sheen|ags-sphere/);
-    const pie = render({ layout: 'languages', lang_style: 'pie' });
+    const pie = render({ layout: 'languages', lang_style: 'pie', finish: 'gloss' });
     assert.match(pie, /id="ags-dome"/);
     assert.doesNotMatch(pie, /id="ags-inset"/);
   });
@@ -152,9 +156,12 @@ describe('finishes', () => {
     assert.equal(new Set(cards).size, FINISH_NAMES.length);
   });
 
-  it('keep the gloss as the default', () => {
-    assert.equal(render({ layout: 'repos' }), render({ layout: 'repos', finish: 'gloss' }));
+  it('default to flat: plain shapes with no gradients', () => {
+    assert.equal(render({ layout: 'repos' }), render({ layout: 'repos', finish: 'flat' }));
     assert.equal(render({ layout: 'repos', finish: 'velvet' }), render({ layout: 'repos' }));
+    for (const layout of ['repos', 'languages', 'overview', 'heatmap']) {
+      assert.doesNotMatch(render({ layout }), /url\(#ags-(sheen|sphere|inset|ring-light)/, layout);
+    }
   });
 
   it('cut pixel shapes into a mosaic with square corners', () => {
@@ -180,7 +187,7 @@ describe('finishes', () => {
   });
 
   it('extrude blocks with a side under every bar', () => {
-    const gloss = render({ layout: 'repos' });
+    const gloss = render({ layout: 'repos', finish: 'gloss' });
     const block = render({ layout: 'repos', finish: 'block' });
     const rects = (svg) => (svg.match(/<rect/g) ?? []).length;
     assert.ok(rects(block) > rects(gloss) + 20);
@@ -273,5 +280,36 @@ describe('dashboard layout', () => {
     assert.doesNotMatch(svg, /class="hm\d"/);
     const user = render({ layout: 'dashboard' }, { ...sampleAccount, activity: null });
     assert.match(user, /needs a GitHub token/);
+  });
+});
+
+describe('treemap labels', () => {
+  const svgFor = (names) =>
+    render(
+      { layout: 'treemap' },
+      {
+        ...sampleAccount,
+        repos: names.map((name, i) => ({
+          ...sampleAccount.repos[0],
+          name,
+          stars: [5000, 900, 700, 650, 600, 80][i],
+        })),
+      },
+    );
+
+  it('leave a name out instead of cutting most of it off', () => {
+    const svg = svgFor(['big', 'a-very-long-repository-name', 'b', 'c', 'd', 'e']);
+    assert.doesNotMatch(svg, /class="cell-name[^>]*>a-v?…/);
+    assert.match(svg, /<title>a-very-long-repository-name: 900 stars<\/title>/);
+  });
+});
+
+describe('monospace themes', () => {
+  it('space the overview columns for wider letters', () => {
+    const x = (svg) =>
+      [...svg.matchAll(/<text x="(\d+)" y="\d+" class="stat-label"/g)].map((m) => +m[1]);
+    const sans = x(render({ theme: 'dracula' }));
+    const mono = x(render({ theme: 'terminal' }));
+    assert.ok(mono[1] - mono[0] > sans[1] - sans[0]);
   });
 });
