@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none" role="img" aria-labelledby="ags-title">
   <title id="ags-title">Stellar Dev has earned 17,656 GitHub stars</title>
-  <defs><linearGradient id="ags-bg" gradientTransform="rotate(180 0.5 0.5)"><stop offset="0%" stop-color="#e3f3ee"/><stop offset="100%" stop-color="#cde8e1"/></linearGradient><radialGradient id="ags-sphere" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.14"/><stop offset="0.65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></radialGradient><linearGradient id="ags-ring-light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></linearGradient><radialGradient id="ags-hole"><stop offset="0.72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient><linearGradient id="ags-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.13"/><stop offset="0.4" stop-color="#fff" stop-opacity="0.04"/><stop offset="1" stop-color="#fff" stop-opacity="0.02"/></linearGradient><linearGradient id="ags-edge-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+  <defs><linearGradient id="ags-bg" gradientTransform="rotate(180 0.5 0.5)"><stop offset="0%" stop-color="#e3f3ee"/><stop offset="100%" stop-color="#cde8e1"/></linearGradient></defs>
   <style>
     svg{--bg:#d9eee8;--border:#2a7f6f44;--title:#155e52;--text:#1b3a35;--muted:#40645c;--accent:#e8590c;--track:#155e521a;--art1:#f76707;--art2:#fffaf0;--art3:#6fae7f;--shade:#1d4a42}
     
@@ -22,7 +22,7 @@
     .art-bg{fill:var(--bg)}.art-acc{fill:var(--accent)}
     .art-koishade{fill:var(--shade);opacity:.16}
     
-    .halo{opacity:.16}
+    
     
     .big{font-size:32px;font-weight:800;fill:var(--title)}
     .caption{font-size:12.5px;fill:var(--muted)}
@@ -36,8 +36,8 @@
     
   </style>
   <rect x="0.5" y="0.5" rx="10" width="494" height="194" class="card"/>
-  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath>
-  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><g transform="translate(415.2 143.9)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-0.1s"/></g><g transform="translate(334 66.8)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-3s"/></g><g transform="translate(220 183.6)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-4.7s"/></g><g transform="translate(218.1 72.2)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-7s"/></g><g transform="translate(354 62.4)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-6.2s"/></g><g transform="translate(247 51.9) rotate(82)"><g class="art-orbit" style="animation-duration:33s;animation-direction:reverse"><g transform="translate(63.3 0) rotate(-90) scale(1.7)"><g class="art-swish" style="animation-delay:-0s"><g transform="translate(2.5 3.5)" class="art-koishade"><path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class=""/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class=""/></g></g>
+  <clipPath id="ags-clip"><rect x="0.5" y="0.5" rx="10" width="494" height="194"/></clipPath><mask id="ags-artmask" maskUnits="userSpaceOnUse" x="0" y="0" width="495" height="195"><rect width="495" height="195" fill="#fff"/><rect x="6" y="6" width="483" height="183" rx="13" fill="#000" fill-opacity="0.161"/><rect x="12" y="12" width="471" height="171" rx="12" fill="#000" fill-opacity="0.161"/><rect x="18" y="18" width="459" height="159" rx="11" fill="#000" fill-opacity="0.161"/><rect x="24" y="24" width="447" height="147" rx="10" fill="#000" fill-opacity="0.161"/><rect x="30" y="30" width="435" height="135" rx="9" fill="#000" fill-opacity="0.161"/><rect x="36" y="36" width="423" height="123" rx="8" fill="#000" fill-opacity="0.161"/></mask>
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true"><g mask="url(#ags-artmask)"><g transform="translate(415.2 143.9)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-0.1s"/></g><g transform="translate(334 66.8)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-3s"/></g><g transform="translate(220 183.6)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-4.7s"/></g><g transform="translate(218.1 72.2)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-7s"/></g><g transform="translate(354 62.4)"><circle r="18.8" class="art-s2 art-ripple" stroke-width=".8" opacity=".3" style="animation-delay:-6.2s"/></g><g transform="translate(247 51.9) rotate(82)"><g class="art-orbit" style="animation-duration:33s;animation-direction:reverse"><g transform="translate(63.3 0) rotate(-90) scale(1.7)"><g class="art-swish" style="animation-delay:-0s"><g transform="translate(2.5 3.5)" class="art-koishade"><path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class=""/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class=""/></g></g>
         <ellipse cx="3" cy="-4.2" rx="2.8" ry="1.1" transform="rotate(-30 3 -4.2)" class="art-c2" opacity=".8"/>
         <ellipse cx="3" cy="4.2" rx="2.8" ry="1.1" transform="rotate(30 3 4.2)" class="art-c2" opacity=".8"/>
         <path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class="art-c2"/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class="art-c2 art-tail"/></g><g class="art-c1"><ellipse cx="1.8" cy="-0.1" rx="1.9" ry="1.3"/><ellipse cx="1.4" cy="-0.1" rx="2.8" ry="1.2"/></g></g></g></g></g><g transform="translate(235.8 170.4) rotate(249)"><g class="art-orbit" style="animation-duration:31.5s;animation-direction:reverse"><g transform="translate(51.9 0) rotate(-90) scale(1.6)"><g class="art-swish" style="animation-delay:-1.6s"><g transform="translate(2.5 3.5)" class="art-koishade"><path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class=""/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class=""/></g></g>
@@ -52,7 +52,7 @@
         <path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class="art-c2"/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class="art-c2 art-tail"/></g><g class="art-c1"><ellipse cx="-1.2" cy="1.5" rx="2.3" ry="1.6"/><ellipse cx="3.9" cy="-1.3" rx="2.5" ry="1"/></g></g></g></g></g><g transform="translate(311.9 34.2) rotate(336)"><g class="art-orbit" style="animation-duration:38.4s;animation-direction:reverse"><g transform="translate(38 0) rotate(-90) scale(1.7)"><g class="art-swish" style="animation-delay:-0.7s"><g transform="translate(2.5 3.5)" class="art-koishade"><path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class=""/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class=""/></g></g>
         <ellipse cx="3" cy="-4.2" rx="2.8" ry="1.1" transform="rotate(-30 3 -4.2)" class="art-c1" opacity=".8"/>
         <ellipse cx="3" cy="4.2" rx="2.8" ry="1.1" transform="rotate(30 3 4.2)" class="art-c1" opacity=".8"/>
-        <path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class="art-c1"/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class="art-c1 art-tail"/></g><g class="art-c2"><ellipse cx="7.6" cy="0.7" rx="3" ry="1.8"/><ellipse cx="1.9" cy="1.2" rx="2.4" ry="1.6"/><ellipse cx="5.5" cy="-0.8" rx="1.5" ry="1"/></g></g></g></g></g><g transform="translate(325.9 15.3) rotate(20)"><g class="art-pad" style="animation-delay:-9s"><path d="M0 0L10 -2A10.2 10.2 0 1 0 10 2Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(181.8 38.3) rotate(213)"><g class="art-pad" style="animation-delay:-6.1s"><path d="M0 0L12.8 -2.6A13.1 13.1 0 1 0 12.8 2.6Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(187.5 141.8) rotate(206)"><g class="art-pad" style="animation-delay:-4.9s"><path d="M0 0L8.9 -1.8A9.1 9.1 0 1 0 8.9 1.8Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(143.3 121.5) rotate(62)"><g class="art-pad" style="animation-delay:-5.9s"><path d="M0 0L9.3 -1.9A9.5 9.5 0 1 0 9.3 1.9Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(379.2 88.1) rotate(74)"><g class="art-pad" style="animation-delay:-7.1s"><path d="M0 0L12.5 -2.5A12.7 12.7 0 1 0 12.5 2.5Z" class="art-c3" opacity=".45"/></g></g></g>
+        <path d="M12 0C8 -4.6 -3 -4.8 -9 0C-3 4.8 8 4.6 12 0Z" class="art-c1"/><g transform="translate(-8.5 0)"><path d="M0 0L-7 -5Q-5 0 -7 5Z" class="art-c1 art-tail"/></g><g class="art-c2"><ellipse cx="7.6" cy="0.7" rx="3" ry="1.8"/><ellipse cx="1.9" cy="1.2" rx="2.4" ry="1.6"/><ellipse cx="5.5" cy="-0.8" rx="1.5" ry="1"/></g></g></g></g></g><g transform="translate(325.9 15.3) rotate(20)"><g class="art-pad" style="animation-delay:-9s"><path d="M0 0L10 -2A10.2 10.2 0 1 0 10 2Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(181.8 38.3) rotate(213)"><g class="art-pad" style="animation-delay:-6.1s"><path d="M0 0L12.8 -2.6A13.1 13.1 0 1 0 12.8 2.6Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(187.5 141.8) rotate(206)"><g class="art-pad" style="animation-delay:-4.9s"><path d="M0 0L8.9 -1.8A9.1 9.1 0 1 0 8.9 1.8Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(143.3 121.5) rotate(62)"><g class="art-pad" style="animation-delay:-5.9s"><path d="M0 0L9.3 -1.9A9.5 9.5 0 1 0 9.3 1.9Z" class="art-c3" opacity=".45"/></g></g><g transform="translate(379.2 88.1) rotate(74)"><g class="art-pad" style="animation-delay:-7.1s"><path d="M0 0L12.5 -2.5A12.7 12.7 0 1 0 12.5 2.5Z" class="art-c3" opacity=".45"/></g></g></g></g>
   <text x="25" y="35" class="title fade">Stellar Dev&#39;s GitHub Stars</text>
   <g transform="translate(0 0)">
   <g class="rise">
@@ -77,31 +77,30 @@
           <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
         </g>
   <g class="rise">
-        <circle cx="267" cy="66" r="5" fill="#3178c6"/><circle cx="267" cy="66" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267" cy="66" r="5" fill="#2879d2"/>
         <text x="279" y="70" class="lang-name">TypeScript</text>
         <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
       </g><g class="rise">
-        <circle cx="267" cy="88" r="5" fill="#dea584"/><circle cx="267" cy="88" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267" cy="88" r="5" fill="#de8c5c"/>
         <text x="279" y="92" class="lang-name">Rust</text>
         <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
       </g><g class="rise">
-        <circle cx="267" cy="110" r="5" fill="#00ADD8"/><circle cx="267" cy="110" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267" cy="110" r="5" fill="#09b4de"/>
         <text x="279" y="114" class="lang-name">Go</text>
         <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
       </g><g class="rise">
-        <circle cx="267" cy="132" r="5" fill="#3572A5"/><circle cx="267" cy="132" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267" cy="132" r="5" fill="#2b7bbe"/>
         <text x="279" y="136" class="lang-name">Python</text>
         <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="rise">
-        <circle cx="267" cy="154" r="5" fill="#8b949e"/><circle cx="267" cy="154" r="5" fill="url(#ags-sphere)"/>
+        <circle cx="267" cy="154" r="5" fill="#828c96"/>
         <text x="279" y="158" class="lang-name">Other</text>
         <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="pop">
     <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
-    <circle cx="432" cy="112" r="36" stroke="#3178c6" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#dea584" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#00ADD8" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3572A5" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8b949e" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
-    <circle cx="432" cy="112" r="36" fill="none" stroke="url(#ags-ring-light)" stroke-width="12"/>
-    <circle cx="432" cy="112" r="30" fill="url(#ags-hole)"/>
-    <circle cx="432" cy="112" r="26" class="glass"/><circle cx="432" cy="112" r="26" fill="url(#ags-glass)"/><circle cx="432" cy="112" r="26" fill="none" stroke="url(#ags-edge-v)" stroke-width="1"/>
+    <circle cx="432" cy="112" r="36" stroke="#2879d2" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#de8c5c" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#09b4de" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#2b7bbe" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#828c96" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    
+    <circle cx="432" cy="112" r="26" class="glass"/>
     <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>
   </g></g>
 </svg>

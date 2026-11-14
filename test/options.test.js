@@ -107,7 +107,7 @@ describe('inherited object keys as theme names', () => {
     it(`falls back to the default theme for "${name}"`, () => {
       const parsed = parseOptions({ username: 'octocat', theme: name });
       assert.equal(parsed.themeName, 'default');
-      assert.equal(parsed.finish, themes.default.finish ?? 'gloss');
+      assert.equal(parsed.finish, themes.default.finish ?? 'flat');
       const fallback = fallbackOptions({ theme: name });
       assert.equal(fallback.themeName, 'default');
       const resolved = resolveTheme(name);

@@ -1,4 +1,4 @@
-import { renderArt } from './art.js';
+import { ART_UNDER_CONTENT, renderArt } from './art.js';
 import { materials } from './materials.js';
 
 const FONTS = {
@@ -140,6 +140,23 @@ function backgroundDefs(theme, id) {
   return `<linearGradient id="${id}" gradientTransform="rotate(${angle} 0.5 0.5)">${stopTags}</linearGradient>`;
 }
 
+// A mask that keeps art at full strength along the card's edges and fades it to `strength`
+// under the content. The soft edge is a stack of inset rectangles rather than a blur,
+// which would be redrawn on every frame of the art's animation.
+const MASK_STEPS = 6;
+const MASK_STEP = 6;
+function contentMask(strength, width, height) {
+  if (!(strength < 1)) return '';
+  const opacity = (1 - strength ** (1 / MASK_STEPS)).toFixed(3);
+  let steps = '';
+  for (let i = 1; i <= MASK_STEPS; i += 1) {
+    const d = i * MASK_STEP;
+    if (width <= 2 * d || height <= 2 * d) break;
+    steps += `<rect x="${d}" y="${d}" width="${width - 2 * d}" height="${height - 2 * d}" rx="${Math.max(0, 14 - i)}" fill="#000" fill-opacity="${opacity}"/>`;
+  }
+  return `<mask id="ags-artmask" maskUnits="userSpaceOnUse" x="0" y="0" width="${width}" height="${height}"><rect width="${width}" height="${height}" fill="#fff"/>${steps}</mask>`;
+}
+
 /**
  * Wrap card content in a themed SVG frame. Colours are exposed as CSS
  * custom properties so the `auto` theme can follow the viewer's colour
@@ -184,7 +201,8 @@ export function renderFrame({
   const strokeWidth = theme.borderWidth ?? 1;
   const inset = strokeWidth / 2;
   const glow = theme.glow
-    ? '.title,.big{filter:drop-shadow(0 0 6px var(--accent))}.icon-accent{filter:drop-shadow(0 0 4px var(--accent))}'
+    ? // A faint halo: enough to read as neon, not enough to blur the letters.
+      '.title,.big{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 55%,transparent))}.icon-accent{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 60%,transparent))}'
     : '';
   const finish = materials(body, options.finish, { animate });
   const artName = options.art ?? theme.art;
@@ -192,9 +210,10 @@ export function renderFrame({
     withArt && artName && artName !== 'none'
       ? renderArt(artName, { width, height: finalHeight, seed: options.username, animate })
       : null;
+  const artMask = art ? contentMask(ART_UNDER_CONTENT[artName], width, finalHeight) : '';
   const artLayer = art
-    ? `<clipPath id="ags-clip"><rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}"/></clipPath>
-  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true">${art.layer}</g>`
+    ? `<clipPath id="ags-clip"><rect x="${inset}" y="${inset}" rx="${radius}" width="${width - strokeWidth}" height="${finalHeight - strokeWidth}"/></clipPath>${artMask}
+  <g class="art-layer" clip-path="url(#ags-clip)" aria-hidden="true">${artMask ? `<g mask="url(#ags-artmask)">${art.layer}</g>` : art.layer}</g>`
     : '';
 
   const note = footnote

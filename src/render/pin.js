@@ -30,8 +30,11 @@ function footer(item, options) {
   let x = 25;
   const parts = [];
   if (item.language) {
-    const fill = item.languageColor ? ` fill="${item.languageColor}"` : ' class="accent"';
-    parts.push(`<circle cx="${x + 6}" cy="98" r="6"${fill}/>
+    // The outline keeps a dot visible when its colour is close to the card's.
+    const fill = item.languageColor
+      ? ` fill="${item.languageColor}" class="lang-dot"`
+      : ' class="accent lang-dot"';
+    parts.push(`<circle cx="${x + 6}" cy="98" r="5.5"${fill}/>
       <text x="${x + 18}" y="102" class="meta">${escapeXml(truncate(item.language, 110, 12))}</text>`);
     x += measureText(truncate(item.language, 110, 12), 12) + 36;
   }
@@ -76,6 +79,7 @@ function renderPinned(item, options, { path, name, badges, label }) {
     .pin-title{font-size:16px;font-weight:700;fill:var(--title)}
     .desc{font-size:12px;fill:var(--text)}
     .meta{font-size:12px;fill:var(--muted)}
+    .lang-dot{stroke:var(--muted);stroke-opacity:.45;stroke-width:1}
     .badge{fill:none;stroke:var(--muted);stroke-opacity:.6}
     .badge-text{font-size:10px;fill:var(--muted)}`;
   return renderFrame({

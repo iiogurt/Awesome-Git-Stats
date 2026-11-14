@@ -15,6 +15,7 @@ import { renderStreak } from './streak.js';
 import { renderTimeline } from './timeline.js';
 import { renderTreemap } from './treemap.js';
 
+import { harmonise, themeTone } from '../colors.js';
 import { useFinish } from './materials.js';
 import { REPO_LIMIT } from '../github.js';
 
@@ -50,7 +51,31 @@ export function renderCard(data, options) {
   // Totals that leave out repositories past the fetch limit say so, in a footnote and
   // the accessible title (the badge only has room for the title).
   const footnote = data.partial && !ACTIVITY_ONLY.includes(options.layout) ? PARTIAL_NOTE : null;
-  return render(data, footnote ? { ...options, footnote } : options);
+  const shown = options.langColors === 'theme' ? matchLanguageColors(data, options.theme) : data;
+  return render(shown, footnote ? { ...options, footnote } : options);
+}
+
+// The data with every language colour moved toward the theme's tone (`lang_colors=theme`).
+function matchLanguageColors(data, theme) {
+  const tone = themeTone(theme);
+  const match = (color) => (color ? harmonise(color, tone) : color);
+  const recolor = (lang) => ({ ...lang, color: match(lang.color) });
+  return {
+    ...data,
+    ...(data.languageColor ? { languageColor: match(data.languageColor) } : {}),
+    ...(data.languages ? { languages: data.languages.map(recolor) } : {}),
+    ...(data.codeLanguages
+      ? { codeLanguages: { ...data.codeLanguages, items: data.codeLanguages.items.map(recolor) } }
+      : {}),
+    ...(data.topRepos
+      ? {
+          topRepos: data.topRepos.map((repo) => ({
+            ...repo,
+            languageColor: match(repo.languageColor),
+          })),
+        }
+      : {}),
+  };
 }
 
 // Layouts that show only contribution activity, which the repository limit doesn't affect.

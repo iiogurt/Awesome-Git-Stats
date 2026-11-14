@@ -1,5 +1,5 @@
 import { ART_STYLES } from './render/art.js';
-import { FINISH_NAMES } from './render/materials.js';
+import { DEFAULT_FINISH, FINISH_NAMES } from './render/materials.js';
 import { isTheme, themes, resolveTheme } from './themes.js';
 
 export const LAYOUTS = [
@@ -36,6 +36,7 @@ export const ACTIVITY_LAYOUTS = [
 ];
 
 export const LANGUAGE_STYLES = ['bars', 'donut', 'pie', 'waffle'];
+export const LANGUAGE_COLORS = ['github', 'theme'];
 
 const REPO_NAME = /^[\w.-]{1,100}$/;
 const GIST_ID = /^[\da-f]{1,64}$/i;
@@ -141,6 +142,7 @@ export function parseOptions(query = {}) {
     if (!GIST_ID.test(gist)) throw new OptionsError('Invalid gist id');
   }
   const langStyleParam = String(first(query.lang_style) ?? '').toLowerCase();
+  const langColorsParam = String(first(query.lang_colors) ?? '').toLowerCase();
   const finishParam = String(first(query.finish) ?? '').toLowerCase();
 
   const customTitle = first(query.custom_title);
@@ -161,10 +163,17 @@ export function parseOptions(query = {}) {
     count: int(query.count, { fallback: 5, min: 1, max: 10 }),
     langsCount: int(query.langs_count, { fallback: 5, min: 1, max: 8 }),
     langStyle: LANGUAGE_STYLES.includes(langStyleParam) ? langStyleParam : 'bars',
+    // Designs with background art tone the language colours to match; the classic
+    // palettes keep GitHub's own.
+    langColors: LANGUAGE_COLORS.includes(langColorsParam)
+      ? langColorsParam
+      : themes[themeName].art
+        ? 'theme'
+        : 'github',
     // Some designs come with their own finish (line art is flat, ink is sketched).
     finish: FINISH_NAMES.includes(finishParam)
       ? finishParam
-      : (themes[themeName].finish ?? 'gloss'),
+      : (themes[themeName].finish ?? DEFAULT_FINISH),
     repo,
     gist,
     goal: int(query.goal, { fallback: 1000, min: 1, max: 1000000 }),
