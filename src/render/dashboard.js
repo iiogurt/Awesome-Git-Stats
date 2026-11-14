@@ -345,7 +345,7 @@ export function renderDashboard(stats, options) {
   const css = `
     .since{font-size:12px;fill:var(--muted)}
     .tile{fill:var(--track);opacity:.6}
-    .tile-label{font-size:11px;fill:var(--muted)}
+    .tile-label{font-size:${options.theme.font === 'mono' ? 9.5 : 11}px;fill:var(--muted)}
     .tile-value{font-size:19px;font-weight:700;fill:var(--title)}
     .tile-note{font-size:9.5px;fill:var(--muted)}
     .section{font-size:13px;font-weight:600;fill:var(--text)}

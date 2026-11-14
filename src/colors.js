@@ -53,8 +53,18 @@ const GREY = 0.12;
  * What a theme's colours have in common, for `harmonise`: the saturation and lightness
  * its charts should sit at, and, when the title and accent share a hue (a green
  * terminal, a blueprint) or have none (black on white), the hue everything leans to.
+ *
+ * `partner` is the other theme of a light and dark pair. When only one of the two has
+ * a single hue, the other borrows it, so both cards of a design colour languages alike.
  */
-export function themeTone(theme) {
+export function themeTone(theme, partner) {
+  const own = toneOf(theme);
+  if (own.mono || !partner) return own;
+  const other = toneOf(partner);
+  return other.mono && other.hue !== null ? { ...own, mono: true, hue: other.hue } : own;
+}
+
+function toneOf(theme) {
   const title = toHsl(theme.title);
   const accent = toHsl(theme.accent);
   const [, , bgLight] = toHsl(theme.bg);

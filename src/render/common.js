@@ -140,6 +140,17 @@ function backgroundDefs(theme, id) {
   return `<linearGradient id="${id}" gradientTransform="rotate(${angle} 0.5 0.5)">${stopTags}</linearGradient>`;
 }
 
+// In a monospace font the comma of "17,656" takes a whole cell and splits the number in
+// two. Pull the comma and the digit after it closer, in text only (never in tooltips).
+function tightenCommas(body) {
+  return body.replace(
+    /(<(?:text|tspan)\b[^>]*>)([^<]+)/g,
+    (_, open, text) =>
+      open +
+      text.replace(/(\d),(\d)/g, '$1<tspan dx="-.17em">,</tspan><tspan dx="-.17em">$2</tspan>'),
+  );
+}
+
 // A mask that keeps art at full strength along the card's edges and fades it to `strength`
 // under the content. The soft edge is a stack of inset rectangles rather than a blur,
 // which would be redrawn on every frame of the art's animation.
@@ -204,6 +215,7 @@ export function renderFrame({
     ? // A faint halo: enough to read as neon, not enough to blur the letters.
       '.title,.big{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 55%,transparent))}.icon-accent{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 60%,transparent))}'
     : '';
+  if (theme.font === 'mono') body = tightenCommas(body);
   const finish = materials(body, options.finish, { animate });
   const artName = options.art ?? theme.art;
   const art =

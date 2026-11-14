@@ -313,3 +313,24 @@ describe('monospace themes', () => {
     assert.ok(mono[1] - mono[0] > sans[1] - sans[0]);
   });
 });
+
+describe('numbers in monospace themes', () => {
+  it('pull the thousands comma in, in text but not in tooltips', () => {
+    const mono = render({ theme: 'terminal' });
+    assert.match(mono, /17<tspan dx="-.17em">,<\/tspan><tspan dx="-.17em">6<\/tspan>56/);
+    assert.match(mono, /<title[^>]*>[^<]*17,656[^<]*<\/title>/);
+    assert.doesNotMatch(render({ theme: 'dracula' }), /dx="-.17em"/);
+    const treemap = render({ layout: 'treemap', theme: 'terminal' });
+    assert.doesNotMatch(treemap, /<title>[^<]*<tspan/);
+    assertWellFormed(treemap);
+    assertWellFormed(render({ layout: 'dashboard', theme: 'terminal' }));
+  });
+});
+
+describe('streak card', () => {
+  it('keeps the accent to the ring and the current streak number', () => {
+    const svg = render({ layout: 'streak' });
+    assert.match(svg, /\.label-accent\{[^}]*fill:var\(--text\)/);
+    assert.match(svg, /\.streak-big\{[^}]*fill:var\(--accent\)/);
+  });
+});
