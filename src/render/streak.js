@@ -75,7 +75,7 @@ export function renderStreak(stats, options) {
     .big{font-size:28px;font-weight:800;fill:var(--title)}
     .streak-big{font-size:28px;font-weight:800;fill:var(--accent)}
     .label{font-size:13px;font-weight:600;fill:var(--text)}
-    .label-accent{font-size:13px;font-weight:700;fill:var(--accent)}
+    .label-accent{font-size:13px;font-weight:700;fill:var(--text)}
     .dates{font-size:11px;fill:var(--muted)}
     .divider{stroke:var(--track);stroke-width:1}
     .ring{fill:none;stroke:var(--accent);stroke-width:6}

@@ -64,19 +64,19 @@
           <text x="25" y="183" class="top-line">Top repo <tspan class="top-name">nebula-ui</tspan> · ★ 8.4k</text>
         </g>
   <g class="rise">
-        <circle cx="267" cy="66" r="5" fill="#3986da"/>
+        <circle cx="267" cy="66" r="5" fill="#e6137b"/>
         <text x="279" y="70" class="lang-name">TypeScript</text>
         <text x="375" y="70" class="lang-pct" text-anchor="end">51%</text>
       </g><g class="rise">
-        <circle cx="267" cy="88" r="5" fill="#e29a70"/>
+        <circle cx="267" cy="88" r="5" fill="#f04054"/>
         <text x="279" y="92" class="lang-name">Rust</text>
         <text x="375" y="92" class="lang-pct" text-anchor="end">22%</text>
       </g><g class="rise">
-        <circle cx="267" cy="110" r="5" fill="#0bc6f5"/>
+        <circle cx="267" cy="110" r="5" fill="#f371b7"/>
         <text x="279" y="114" class="lang-name">Go</text>
         <text x="375" y="114" class="lang-pct" text-anchor="end">13%</text>
       </g><g class="rise">
-        <circle cx="267" cy="132" r="5" fill="#3188d0"/>
+        <circle cx="267" cy="132" r="5" fill="#d91276"/>
         <text x="279" y="136" class="lang-name">Python</text>
         <text x="375" y="136" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="rise">
@@ -85,7 +85,7 @@
         <text x="375" y="158" class="lang-pct" text-anchor="end">7%</text>
       </g><g class="pop">
     <circle cx="432" cy="112" r="36" stroke-width="12" fill="none" class="ring-track"/>
-    <circle cx="432" cy="112" r="36" stroke="#3986da" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#e29a70" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#0bc6f5" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#3188d0" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8f98a1" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
+    <circle cx="432" cy="112" r="36" stroke="#e6137b" stroke-width="12" fill="none" stroke-dasharray="112.94 226.19" stroke-dashoffset="0.00" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#f04054" stroke-width="12" fill="none" stroke-dasharray="49.16 226.19" stroke-dashoffset="-114.44" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#f371b7" stroke-width="12" fill="none" stroke-dasharray="26.81 226.19" stroke-dashoffset="-165.10" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#d91276" stroke-width="12" fill="none" stroke-dasharray="15.00 226.19" stroke-dashoffset="-193.41" transform="rotate(-90 432 112)"/><circle cx="432" cy="112" r="36" stroke="#8f98a1" stroke-width="12" fill="none" stroke-dasharray="14.78 226.19" stroke-dashoffset="-209.91" transform="rotate(-90 432 112)"/>
     
     <circle cx="432" cy="112" r="26" class="glass"/>
     <g class="twinkle"><path class="icon-accent" transform="translate(422 102) scale(1.25)" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></g>

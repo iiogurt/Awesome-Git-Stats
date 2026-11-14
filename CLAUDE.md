@@ -34,7 +34,7 @@ neon|pixel|sketch|block|flat`). Renderers draw shapes through the helpers (`trac
   bars, dots and panels, and check new shapes in every finish (labels must stay readable).
   The default is `flat` (`DEFAULT_FINISH`); `gloss` was the default in earlier versions.
 - Language colours (`lang_colors=github|theme`): designs with art tone GitHub's language
-  colours to the theme (`src/colors.js`: one-hue themes get shades of their hue, mixed
+  colours to the theme (`src/colors.js`: one-hue themes get shades of their hue, shared across a light and dark pair; mixed
   themes keep hues and match saturation and lightness); classic palettes keep GitHub's.
 - Art that would cross the text (`ART_UNDER_CONTENT` in `art.js`) is masked to full strength
   along the card's edges only. A new busy art style belongs in that list.

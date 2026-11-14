@@ -103,3 +103,27 @@ describe('art under the content', () => {
     assert.doesNotMatch(busy, /<filter|feGaussianBlur/);
   });
 });
+
+describe('light and dark pairs', () => {
+  it('colour languages alike when only one of the two has a single hue', () => {
+    for (const design of designs.filter((d) => themes[d.light].art)) {
+      const light = themeTone(themes[design.light], themes[design.dark]);
+      const dark = themeTone(themes[design.dark], themes[design.light]);
+      assert.equal(light.mono, dark.mono, design.id);
+    }
+    // Forest: the dark theme is all greens, the light one borrows its hue.
+    const forest = themeTone(themes.forest_light, themes.forest);
+    assert.equal(forest.hue, themeTone(themes.forest).hue);
+    assert.equal(themeTone(themes.forest_light).mono, false);
+  });
+
+  it('reach the cards', () => {
+    const hues = (svg) =>
+      [...svg.matchAll(/stroke="(#[0-9a-f]{6})" stroke-width="12"/g)].map((m) => hueOf(m[1]));
+    const light = hues(render({ theme: 'forest_light' }));
+    assert.ok(light.length >= 3);
+    const { hue } = themeTone(themes.forest);
+    // The last segment is the grey "Other".
+    for (const h of light.slice(0, -1)) assert.ok(apart(h, hue) <= 25, `${h}`);
+  });
+});
