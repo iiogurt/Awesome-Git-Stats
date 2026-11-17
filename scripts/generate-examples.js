@@ -60,6 +60,9 @@ const files = {
   'timeline.svg': render({ layout: 'timeline', theme: 'rose_pine' }),
   'goal.svg': render({ layout: 'goal', theme: 'ocean', goal: '1500' }),
   'lab.svg': render({ layout: 'lab', theme: 'nord' }),
+  'report.svg': render({ layout: 'report', theme: 'parchment', art: 'none' }),
+  'wheel.svg': render({ layout: 'wheel', theme: 'github_dark' }),
+  'terminal.svg': render({ layout: 'terminal', theme: 'github_dark' }),
   // README header: the starry_night design in GitHub's dark and light mode.
   'hero-dark.svg': render({ layout: 'dashboard', theme: 'starry_night' }),
   'hero-light.svg': render({ layout: 'dashboard', theme: 'starry_night_light' }),

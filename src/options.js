@@ -20,6 +20,9 @@ export const LAYOUTS = [
   'timeline',
   'goal',
   'lab',
+  'report',
+  'wheel',
+  'terminal',
 ];
 
 /** Layouts that need the contribution data of a user (GraphQL with a token). */
@@ -33,6 +36,9 @@ export const ACTIVITY_LAYOUTS = [
   'timeline',
   'goal',
   'lab',
+  'report',
+  'wheel',
+  'terminal',
 ];
 
 export const LANGUAGE_STYLES = ['bars', 'donut', 'pie', 'waffle'];

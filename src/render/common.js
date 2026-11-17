@@ -1,7 +1,7 @@
 import { ART_UNDER_CONTENT, renderArt } from './art.js';
 import { materials } from './materials.js';
 
-const FONTS = {
+export const FONTS = {
   sans: "'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif",
   mono: "'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace",
   serif: "Georgia, Cambria, 'Times New Roman', Times, serif",
@@ -183,6 +183,8 @@ export function renderFrame({
   css = '',
   label,
   withArt = true,
+  // A layout with a typeface of its own (the report is serif, the terminal monospace).
+  font: fontName = theme.font,
 }) {
   const { radius, hideBorder, hideTitle, animate, footnote } = options;
   const gradId = 'ags-bg';
@@ -208,14 +210,14 @@ export function renderFrame({
   // A footnote (partial data) gets a strip of its own below the content.
   const noteHeight = footnote ? 14 : 0;
   const finalHeight = height + offset + noteHeight;
-  const font = FONTS[theme.font] ?? FONTS.sans;
+  const font = FONTS[fontName] ?? FONTS.sans;
   const strokeWidth = theme.borderWidth ?? 1;
   const inset = strokeWidth / 2;
   const glow = theme.glow
     ? // A faint halo: enough to read as neon, not enough to blur the letters.
       '.title,.big{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 55%,transparent))}.icon-accent{filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent) 60%,transparent))}'
     : '';
-  if (theme.font === 'mono') body = tightenCommas(body);
+  if (fontName === 'mono') body = tightenCommas(body);
   const finish = materials(body, options.finish, { animate });
   const artName = options.art ?? theme.art;
   const art =
@@ -238,7 +240,7 @@ export function renderFrame({
   <style>
     svg{${themeVars(theme)}}
     ${darkBlock}
-    text{font-family:${font}${theme.font === 'mono' ? ';letter-spacing:-.06em' : ''}}
+    text{font-family:${font}${fontName === 'mono' ? ';letter-spacing:-.06em' : ''}}
     .title{font-size:18px;font-weight:600;fill:var(--title)}
     .text{fill:var(--text)}
     .muted{fill:var(--muted)}

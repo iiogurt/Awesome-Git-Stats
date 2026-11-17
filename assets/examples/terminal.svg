@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">Stellar Dev: 17,656 stars, 1,264 contributions in the last year, current streak 19 days</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#161b22;--border:#30363d;--title:#58a6ff;--text:#c9d1d9;--muted:#8b949e;--accent:#f2cc60;--track:#21262d;--art1:#f2cc60;--art2:#58a6ff;--art3:#f2cc60;--shade:#000000}
+    
+    text{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
+    
+    
+    text{font-family:'JetBrains Mono', 'Fira Code', SFMono-Regular, Menlo, Consolas, monospace;letter-spacing:0;font-size:12.5px}
+    .term{fill:var(--text)}
+    .term-dim{fill:var(--muted)}
+    .term-title{font-size:11.5px;fill:var(--muted)}
+    .term-bar{fill:var(--track);fill-opacity:.55}
+    .term-edge{fill:var(--border);fill-opacity:.6}
+    .term-arrow{fill:var(--accent);font-weight:700}
+    .term-home{fill:var(--title)}
+    .term-user{fill:var(--accent);font-weight:700}
+    .term-at{fill:var(--muted);font-weight:400}
+    .term-rule{fill:var(--muted);fill-opacity:.6}
+    .term-key{fill:var(--title);font-weight:700}
+    .term-dots{fill:var(--muted);font-weight:400}
+    .term-strong{fill:var(--title);font-weight:700}
+    .term-hot{fill:var(--accent)}
+    .term-num{fill:var(--accent)}
+    .term-cursor{fill:var(--text)}
+    .hm0{fill:var(--track)}
+    .hm1,.hm2,.hm3,.hm4{fill:var(--accent)}
+    .hm1{fill-opacity:.28}.hm2{fill-opacity:.5}.hm3{fill-opacity:.75}
+    @keyframes ags-blink{50%{opacity:0}}
+    .term-cursor{animation:ags-blink 1s steps(1) 1.8s 6}
+    @media (prefers-reduced-motion: reduce){.term-cursor{animation:none}}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="819" height="499" class="card"/>
+  
+  
+  <g transform="translate(0 0)"><path d="M0.5 30V10A10 10 0 0 1 10 0.5H810A10 10 0 0 1 819.5 10V30Z" class="term-bar"/>
+  <rect x="0.5" y="30" width="819" height="1" class="term-edge"/>
+  <circle cx="20" cy="15" r="5.5" fill="#ff5f57"/><circle cx="38" cy="15" r="5.5" fill="#febc2e"/><circle cx="56" cy="15" r="5.5" fill="#28c840"/>
+  <text x="410" y="19" class="term-title" text-anchor="middle">stellar-dev — gitfetch</text>
+  <text x="32" y="60" class="term fade" style="animation-delay:0ms"><tspan class="term-arrow">➜</tspan> <tspan class="term-home">~</tspan> gitfetch stellar-dev</text>
+  <text x="32" y="92" class="term-dim">last 26 weeks</text>
+    <g class="fade" style="animation-delay:200ms"><rect x="32" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="32" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="32" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="32" y="137" width="9" height="9" rx="1.5" class="hm3"/><rect x="32" y="148" width="9" height="9" rx="1.5" class="hm0"/><rect x="32" y="159" width="9" height="9" rx="1.5" class="hm3"/><rect x="32" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:215ms"><rect x="43" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="43" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="43" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="43" y="137" width="9" height="9" rx="1.5" class="hm3"/><rect x="43" y="148" width="9" height="9" rx="1.5" class="hm4"/><rect x="43" y="159" width="9" height="9" rx="1.5" class="hm0"/><rect x="43" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:230ms"><rect x="54" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="54" y="115" width="9" height="9" rx="1.5" class="hm3"/><rect x="54" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="54" y="137" width="9" height="9" rx="1.5" class="hm0"/><rect x="54" y="148" width="9" height="9" rx="1.5" class="hm3"/><rect x="54" y="159" width="9" height="9" rx="1.5" class="hm0"/><rect x="54" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:245ms"><rect x="65" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="65" y="115" width="9" height="9" rx="1.5" class="hm0"/><rect x="65" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="65" y="137" width="9" height="9" rx="1.5" class="hm3"/><rect x="65" y="148" width="9" height="9" rx="1.5" class="hm4"/><rect x="65" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="65" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:260ms"><rect x="76" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="76" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="76" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="76" y="137" width="9" height="9" rx="1.5" class="hm0"/><rect x="76" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="76" y="159" width="9" height="9" rx="1.5" class="hm3"/><rect x="76" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:275ms"><rect x="87" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="87" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="87" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="87" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="87" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="87" y="159" width="9" height="9" rx="1.5" class="hm3"/><rect x="87" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:290ms"><rect x="98" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="98" y="115" width="9" height="9" rx="1.5" class="hm3"/><rect x="98" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="98" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="98" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="98" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="98" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:305ms"><rect x="109" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="109" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="109" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="109" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="109" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="109" y="159" width="9" height="9" rx="1.5" class="hm0"/><rect x="109" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:320ms"><rect x="120" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="120" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="120" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="120" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="120" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="120" y="159" width="9" height="9" rx="1.5" class="hm2"/><rect x="120" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:335ms"><rect x="131" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="131" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="131" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="131" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="131" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="131" y="159" width="9" height="9" rx="1.5" class="hm2"/><rect x="131" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:350ms"><rect x="142" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="142" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="142" y="126" width="9" height="9" rx="1.5" class="hm0"/><rect x="142" y="137" width="9" height="9" rx="1.5" class="hm0"/><rect x="142" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="142" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="142" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:365ms"><rect x="153" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="153" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="153" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="153" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="153" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="153" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="153" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:380ms"><rect x="164" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="164" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="164" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="164" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="164" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="164" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="164" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:395ms"><rect x="175" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="175" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="175" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="175" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="175" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="175" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="175" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:410ms"><rect x="186" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="186" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="186" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="186" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="186" y="148" width="9" height="9" rx="1.5" class="hm0"/><rect x="186" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="186" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:425ms"><rect x="197" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="197" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="197" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="197" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="197" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="197" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="197" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:440ms"><rect x="208" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="208" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="208" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="208" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="208" y="148" width="9" height="9" rx="1.5" class="hm1"/><rect x="208" y="159" width="9" height="9" rx="1.5" class="hm2"/><rect x="208" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:455ms"><rect x="219" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="219" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="219" y="126" width="9" height="9" rx="1.5" class="hm1"/><rect x="219" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="219" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="219" y="159" width="9" height="9" rx="1.5" class="hm2"/><rect x="219" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:470ms"><rect x="230" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="230" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="230" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="230" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="230" y="148" width="9" height="9" rx="1.5" class="hm0"/><rect x="230" y="159" width="9" height="9" rx="1.5" class="hm0"/><rect x="230" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:485ms"><rect x="241" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="241" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="241" y="126" width="9" height="9" rx="1.5" class="hm0"/><rect x="241" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="241" y="148" width="9" height="9" rx="1.5" class="hm3"/><rect x="241" y="159" width="9" height="9" rx="1.5" class="hm2"/><rect x="241" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:500ms"><rect x="252" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="252" y="115" width="9" height="9" rx="1.5" class="hm1"/><rect x="252" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="252" y="137" width="9" height="9" rx="1.5" class="hm0"/><rect x="252" y="148" width="9" height="9" rx="1.5" class="hm3"/><rect x="252" y="159" width="9" height="9" rx="1.5" class="hm0"/><rect x="252" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:515ms"><rect x="263" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="263" y="115" width="9" height="9" rx="1.5" class="hm3"/><rect x="263" y="126" width="9" height="9" rx="1.5" class="hm0"/><rect x="263" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="263" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="263" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="263" y="170" width="9" height="9" rx="1.5" class="hm0"/></g><g class="fade" style="animation-delay:530ms"><rect x="274" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="274" y="115" width="9" height="9" rx="1.5" class="hm3"/><rect x="274" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="274" y="137" width="9" height="9" rx="1.5" class="hm3"/><rect x="274" y="148" width="9" height="9" rx="1.5" class="hm3"/><rect x="274" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="274" y="170" width="9" height="9" rx="1.5" class="hm1"/></g><g class="fade" style="animation-delay:545ms"><rect x="285" y="104" width="9" height="9" rx="1.5" class="hm0"/><rect x="285" y="115" width="9" height="9" rx="1.5" class="hm0"/><rect x="285" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="285" y="137" width="9" height="9" rx="1.5" class="hm2"/><rect x="285" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="285" y="159" width="9" height="9" rx="1.5" class="hm1"/><rect x="285" y="170" width="9" height="9" rx="1.5" class="hm2"/></g><g class="fade" style="animation-delay:560ms"><rect x="296" y="104" width="9" height="9" rx="1.5" class="hm3"/><rect x="296" y="115" width="9" height="9" rx="1.5" class="hm2"/><rect x="296" y="126" width="9" height="9" rx="1.5" class="hm3"/><rect x="296" y="137" width="9" height="9" rx="1.5" class="hm1"/><rect x="296" y="148" width="9" height="9" rx="1.5" class="hm3"/><rect x="296" y="159" width="9" height="9" rx="1.5" class="hm3"/><rect x="296" y="170" width="9" height="9" rx="1.5" class="hm2"/></g><g class="fade" style="animation-delay:575ms"><rect x="307" y="104" width="9" height="9" rx="1.5" class="hm1"/><rect x="307" y="115" width="9" height="9" rx="1.5" class="hm3"/><rect x="307" y="126" width="9" height="9" rx="1.5" class="hm2"/><rect x="307" y="137" width="9" height="9" rx="1.5" class="hm4"/><rect x="307" y="148" width="9" height="9" rx="1.5" class="hm2"/><rect x="307" y="159" width="9" height="9" rx="1.5" class="hm4"/><rect x="307" y="170" width="9" height="9" rx="1.5" class="hm2"/></g>
+  <g class="fade" style="animation-delay:500ms">
+    <text x="32" y="216" class="term-dim">months</text><g><rect x="92" y="204" width="7.5" height="12" rx="0.5" class="accent"/></g>
+      <text x="95.8" y="232" class="term-dim" text-anchor="middle">N</text><g><rect x="107" y="202" width="7.5" height="14" rx="0.5" class="accent"/></g>
+      <text x="110.8" y="232" class="term-dim" text-anchor="middle">D</text><g><rect x="122" y="200" width="7.5" height="16" rx="0.5" class="accent"/></g>
+      <text x="125.8" y="232" class="term-dim" text-anchor="middle">J</text><g><rect x="137" y="200" width="7.5" height="16" rx="0.5" class="accent"/></g>
+      <text x="140.8" y="232" class="term-dim" text-anchor="middle">F</text><g><rect x="152" y="200" width="7.5" height="16" rx="0.5" class="accent"/></g>
+      <text x="155.8" y="232" class="term-dim" text-anchor="middle">M</text><g><rect x="167" y="200" width="7.5" height="16" rx="0.5" class="accent"/></g>
+      <text x="170.8" y="232" class="term-dim" text-anchor="middle">A</text><g><rect x="182" y="204" width="7.5" height="12" rx="0.5" class="accent"/></g>
+      <text x="185.8" y="232" class="term-dim" text-anchor="middle">M</text><g><rect x="197" y="210" width="7.5" height="6" rx="0.5" class="accent"/></g>
+      <text x="200.8" y="232" class="term-dim" text-anchor="middle">J</text><g><rect x="212" y="210" width="7.5" height="6" rx="0.5" class="accent"/></g>
+      <text x="215.8" y="232" class="term-dim" text-anchor="middle">J</text><g><rect x="227" y="210" width="7.5" height="6" rx="0.5" class="accent"/></g>
+      <text x="230.8" y="232" class="term-dim" text-anchor="middle">A</text><g><rect x="242" y="206" width="7.5" height="10" rx="0.5" class="accent"/></g>
+      <text x="245.8" y="232" class="term-dim" text-anchor="middle">S</text><g><rect x="257" y="208" width="7.5" height="8" rx="0.5" class="accent"/></g>
+      <text x="260.8" y="232" class="term-dim" text-anchor="middle">O</text>
+    <text x="32" y="252" class="term-dim">peak 149 in Apr</text>
+  </g>
+  <g class="fade" style="animation-delay:150ms">
+    <text x="350" y="92" class="term-user">stellar-dev<tspan class="term-at">@</tspan>github</text>
+    <rect x="350" y="100" width="135" height="1.5" class="term-rule"/>
+  </g><g class="fade" style="animation-delay:250ms">
+      <text x="350" y="124" class="term-key">stars<tspan class="term-dots">......</tspan></text>
+      <text x="440" y="124" class="term term-strong">17,656</text>
+    </g><g class="fade" style="animation-delay:310ms">
+      <text x="350" y="143" class="term-key">repos<tspan class="term-dots">......</tspan></text>
+      <text x="440" y="143" class="term">64 public · 1.2k forks</text>
+    </g><g class="fade" style="animation-delay:370ms">
+      <text x="350" y="162" class="term-key">followers<tspan class="term-dots">..</tspan></text>
+      <text x="440" y="162" class="term">2,480</text>
+    </g><g class="fade" style="animation-delay:430ms">
+      <text x="350" y="181" class="term-key">contribs<tspan class="term-dots">...</tspan></text>
+      <text x="440" y="181" class="term term-hot">1,264 in the last year</text>
+    </g><g class="fade" style="animation-delay:490ms">
+      <text x="350" y="200" class="term-key">streak<tspan class="term-dots">.....</tspan></text>
+      <text x="440" y="200" class="term term-hot">19 days (best 39)</text>
+    </g><g class="fade" style="animation-delay:550ms">
+      <text x="350" y="219" class="term-key">prs<tspan class="term-dots">........</tspan></text>
+      <text x="440" y="219" class="term">642 all time</text>
+    </g><g class="fade" style="animation-delay:610ms">
+      <text x="350" y="238" class="term-key">reviews<tspan class="term-dots">....</tspan></text>
+      <text x="440" y="238" class="term">228</text>
+    </g><g class="fade" style="animation-delay:670ms">
+      <text x="350" y="257" class="term-key">rank<tspan class="term-dots">.......</tspan></text>
+      <text x="440" y="257" class="term term-strong">S · top &lt;1%</text>
+    </g><g class="fade" style="animation-delay:730ms">
+      <text x="350" y="276" class="term-key">since<tspan class="term-dots">......</tspan></text>
+      <text x="440" y="276" class="term">2018 · 8 years</text>
+    </g>
+  <text x="32" y="304" class="term fade" style="animation-delay:650ms"><tspan class="term-arrow">➜</tspan> <tspan class="term-home">~</tspan> gitfetch --top --langs</text>
+  <g class="fade" style="animation-delay:700ms">
+    <text x="47" y="338" class="term-dim">REPO</text>
+    <text x="234.5" y="338" class="term-dim" text-anchor="end">STARS</text>
+    <text x="249.5" y="338" class="term-dim">LANG</text>
+  </g><g class="fade" style="animation-delay:750ms">
+      <text x="47" y="358" class="term">nebula-ui</text>
+      <text x="234.5" y="358" class="term term-num" text-anchor="end">8.4k</text>
+      <text x="249.5" y="358" class="term-dim">TypeScript</text>
+    </g><g class="fade" style="animation-delay:810ms">
+      <text x="47" y="377" class="term">quasar-db</text>
+      <text x="234.5" y="377" class="term term-num" text-anchor="end">4k</text>
+      <text x="249.5" y="377" class="term-dim">Rust</text>
+    </g><g class="fade" style="animation-delay:870ms">
+      <text x="47" y="396" class="term">orbit-cli</text>
+      <text x="234.5" y="396" class="term term-num" text-anchor="end">2.2k</text>
+      <text x="249.5" y="396" class="term-dim">Go</text>
+    </g><g class="fade" style="animation-delay:930ms">
+      <text x="47" y="415" class="term">pulsar-ml</text>
+      <text x="234.5" y="415" class="term term-num" text-anchor="end">1.3k</text>
+      <text x="249.5" y="415" class="term-dim">Python</text>
+    </g><g class="fade" style="animation-delay:990ms">
+      <text x="47" y="434" class="term">comet.vim</text>
+      <text x="234.5" y="434" class="term term-num" text-anchor="end">640</text>
+      <text x="249.5" y="434" class="term-dim">Vim Script</text>
+    </g>
+  <g class="fade" style="animation-delay:700ms">
+    <text x="440" y="338" class="term-dim">LANGUAGE</text>
+    <text x="537.5" y="338" class="term-dim">SHARE OF STARS</text>
+  </g><g class="fade" style="animation-delay:800ms">
+      <text x="440" y="358" class="term">TypeScript</text>
+      <rect x="537.5" y="348" width="213" height="11" rx="5.5" class="track"/>
+      <g class="grow" style="animation-delay:850ms"><rect x="537.5" y="348" width="213" height="11" rx="1" fill="#3178c6"/></g>
+      <text x="788" y="358" class="term-dim" text-anchor="end">51%</text>
+    </g><g class="fade" style="animation-delay:860ms">
+      <text x="440" y="377" class="term">Rust</text>
+      <rect x="537.5" y="367" width="213" height="11" rx="5.5" class="track"/>
+      <g class="grow" style="animation-delay:910ms"><rect x="537.5" y="367" width="94.3" height="11" rx="1" fill="#dea584"/></g>
+      <text x="788" y="377" class="term-dim" text-anchor="end">22%</text>
+    </g><g class="fade" style="animation-delay:920ms">
+      <text x="440" y="396" class="term">Go</text>
+      <rect x="537.5" y="386" width="213" height="11" rx="5.5" class="track"/>
+      <g class="grow" style="animation-delay:970ms"><rect x="537.5" y="386" width="52.7" height="11" rx="1" fill="#00ADD8"/></g>
+      <text x="788" y="396" class="term-dim" text-anchor="end">13%</text>
+    </g><g class="fade" style="animation-delay:980ms">
+      <text x="440" y="415" class="term">Python</text>
+      <rect x="537.5" y="405" width="213" height="11" rx="5.5" class="track"/>
+      <g class="grow" style="animation-delay:1030ms"><rect x="537.5" y="405" width="30.7" height="11" rx="1" fill="#3572A5"/></g>
+      <text x="788" y="415" class="term-dim" text-anchor="end">7%</text>
+    </g><g class="fade" style="animation-delay:1040ms">
+      <text x="440" y="434" class="term">Vim Script</text>
+      <rect x="537.5" y="424" width="213" height="11" rx="5.5" class="track"/>
+      <g class="grow" style="animation-delay:1090ms"><rect x="537.5" y="424" width="15.3" height="11" rx="1" fill="#199f4b"/></g>
+      <text x="788" y="434" class="term-dim" text-anchor="end">4%</text>
+    </g>
+  <g class="fade" style="animation-delay:1100ms">
+    <text x="32" y="472" class="term"><tspan class="term-arrow">➜</tspan> <tspan class="term-home">~</tspan></text>
+    <rect x="62" y="460" width="6.8" height="15" class="term-cursor"/>
+  </g></g>
+</svg>

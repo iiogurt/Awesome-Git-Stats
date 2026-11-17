@@ -8,12 +8,15 @@ import { renderLanguages } from './languages.js';
 import { renderOverview } from './overview.js';
 import { renderGist, renderPin } from './pin.js';
 import { renderRadar } from './radar.js';
+import { renderReport } from './report.js';
 import { renderRepos } from './repos.js';
 import { renderSkyline } from './skyline.js';
 import { renderStats } from './stats.js';
 import { renderStreak } from './streak.js';
+import { renderTerminal } from './terminal.js';
 import { renderTimeline } from './timeline.js';
 import { renderTreemap } from './treemap.js';
+import { renderWheel } from './wheel.js';
 
 import { harmonise, themeTone } from '../colors.js';
 import { useFinish } from './materials.js';
@@ -40,6 +43,9 @@ const renderers = {
   timeline: renderTimeline,
   goal: renderGoal,
   lab: renderLab,
+  report: renderReport,
+  wheel: renderWheel,
+  terminal: renderTerminal,
 };
 
 /**
