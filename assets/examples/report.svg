@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470" fill="none" role="img" aria-labelledby="ags-title">
+  <title id="ags-title">The Stellar Dev Report: 17,656 stars, 1,264 contributions in the last year</title>
+  <defs></defs>
+  <style>
+    svg{--bg:#f4ecd8;--border:#d9c9a3;--title:#3b2f2f;--text:#4a3f35;--muted:#7d6b5d;--accent:#b5651d;--track:#00000014;--art1:#b5651d;--art2:#3b2f2f;--art3:#b5651d;--shade:#000000}
+    
+    text{font-family:Georgia, Cambria, 'Times New Roman', Times, serif}
+    .title{font-size:18px;font-weight:600;fill:var(--title)}
+    .text{fill:var(--text)}
+    .muted{fill:var(--muted)}
+    .accent{fill:var(--accent)}
+    .icon{fill:var(--muted)}
+    .icon-accent{fill:var(--accent)}
+    .track{fill:var(--track)}
+    .glass{fill:var(--bg);fill-opacity:.55}
+    .card{fill:var(--bg);stroke:var(--border);stroke-width:1;stroke-opacity:1}
+    
+    @keyframes ags-fade{from{opacity:0}to{opacity:1}}
+    @keyframes ags-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes ags-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes ags-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(8deg)}}
+    .fade{opacity:0;animation:ags-fade .6s ease-out forwards}
+    .rise{opacity:0;animation:ags-rise .6s ease-out forwards}
+    .grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:ags-grow .9s cubic-bezier(.22,1,.36,1) forwards}
+    .twinkle{transform-box:fill-box;transform-origin:center;animation:ags-twinkle 3s ease-in-out 1s infinite}
+    @media (prefers-reduced-motion: reduce){.fade,.rise,.grow,.twinkle{animation:none;opacity:1;transform:none}}
+    
+    
+    
+    .rp-sans{font-family:'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif}
+    .rp-kicker{font-size:10.5px;letter-spacing:.18em}
+    .rp-strong{font-weight:700;fill:var(--title)}
+    .rp-muted{fill:var(--muted)}
+    .rp-accent{fill:var(--accent)}
+    .rp-small{font-size:10.5px;fill:var(--muted)}
+    .rp-axis{font-size:10px;fill:var(--muted)}
+    .rp-big{font-weight:700;letter-spacing:-.03em;fill:var(--title)}
+    .rp-tag{font-size:26px;font-style:italic;fill:var(--title)}
+    .rp-tag.rp-accent{fill:var(--accent)}
+    .rp-intro{font-size:15.5px;fill:var(--text)}
+    .rp-fact{font-size:14px;fill:var(--text)}
+    .rp-value{font-size:14px;font-weight:700;fill:var(--text)}
+    .rp-rank{font-size:26px;font-style:italic;fill:var(--muted);fill-opacity:.45}
+    .rp-repo{font-size:15px;font-weight:700;fill:var(--text)}
+    .rp-count{font-size:15px;fill:var(--text)}
+    .rp-caption{font-size:13px;font-style:italic;fill:var(--muted)}
+    .rp-peak{font-size:13px;font-style:italic;fill:var(--text)}
+    .rp-note{font-size:13px;font-style:italic;fill:var(--muted)}
+    .rp-bar{stroke:var(--title);stroke-width:3}
+    .rp-rule{stroke:var(--title);stroke-width:1}
+    .rp-hair{stroke:var(--muted);stroke-opacity:.35;stroke-width:1}
+    .rp-dots{stroke:var(--muted);stroke-opacity:.5;stroke-dasharray:1 3}
+    .rp-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
+    .rp-area{fill:var(--accent);fill-opacity:.1}
+    .rp-dot{fill:var(--accent)}
+    .rp-ink0{fill:var(--title)}.rp-ink1{fill:var(--accent)}
+    .rp-ink2{fill:var(--muted)}.rp-ink3{fill:var(--muted);fill-opacity:.7}
+    .rp-ink4{fill:var(--muted);fill-opacity:.45}.rp-ink5{fill:var(--muted);fill-opacity:.28}
+  </style>
+  <rect x="0.5" y="0.5" rx="10" width="819" height="469" class="card"/>
+  
+  
+  <g transform="translate(0 0)">
+  <line x1="25" y1="26" x2="795" y2="26" class="rp-bar"/>
+  <text x="25" y="48" class="rp-sans rp-kicker rp-strong">THE STELLAR DEV REPORT</text>
+  <text x="795" y="48" class="rp-sans rp-kicker rp-muted" text-anchor="end">VOL. 8 · OCT 2025 – OCT 2026</text>
+  <line x1="25" y1="58" x2="795" y2="58" class="rp-rule"/>
+  <g class="rise" style="animation-delay:100ms">
+    <text x="25" y="150" class="rp-big" style="font-size:93px">17,656</text>
+    <text x="344.6" y="112" class="rp-tag rp-accent">stars,</text>
+    <text x="344.6" y="146" class="rp-tag">and counting.</text>
+  </g>
+  <text class="rp-intro fade" style="animation-delay:250ms"><tspan x="540" y="85">Ten repositories carry them,</tspan><tspan x="540" y="107">led by nebula-ui with 8,421.</tspan><tspan x="540" y="129">The year brought 1,264</tspan><tspan x="540" y="151">contributions on 278 days; the</tspan><tspan x="540" y="173">best one, May 14, had 31.</tspan></text>
+  <line x1="25" y1="188" x2="795" y2="188" class="rp-hair"/>
+  <text x="25" y="214" class="rp-sans rp-kicker rp-accent rp-strong">BY THE NUMBERS</text><text x="300" y="214" class="rp-sans rp-kicker rp-accent rp-strong">MOST STARRED</text><text x="572" y="214" class="rp-sans rp-kicker rp-accent rp-strong">THE YEAR, MONTH BY MONTH</text>
+  <line x1="287.5" y1="200" x2="287.5" y2="398" class="rp-hair"/>
+  <line x1="559.5" y1="200" x2="559.5" y2="398" class="rp-hair"/>
+  <g class="fade" style="animation-delay:300ms">
+      <text x="25" y="242" class="rp-fact">Contributions</text>
+      <text x="275" y="242" class="rp-value" text-anchor="end">1,264</text>
+      <line x1="25" y1="249" x2="275" y2="249" class="rp-dots"/></g><g class="fade" style="animation-delay:350ms">
+      <text x="25" y="266" class="rp-fact">Active days</text>
+      <text x="275" y="266" class="rp-value" text-anchor="end">278</text>
+      <line x1="25" y1="273" x2="275" y2="273" class="rp-dots"/></g><g class="fade" style="animation-delay:400ms">
+      <text x="25" y="290" class="rp-fact">Longest streak</text>
+      <text x="275" y="290" class="rp-value" text-anchor="end">39 days</text>
+      <line x1="25" y1="297" x2="275" y2="297" class="rp-dots"/></g><g class="fade" style="animation-delay:450ms">
+      <text x="25" y="314" class="rp-fact">Current streak</text>
+      <text x="275" y="314" class="rp-value" text-anchor="end">19 days</text>
+      <line x1="25" y1="321" x2="275" y2="321" class="rp-dots"/></g><g class="fade" style="animation-delay:500ms">
+      <text x="25" y="338" class="rp-fact">Pull requests</text>
+      <text x="275" y="338" class="rp-value" text-anchor="end">642</text>
+      <line x1="25" y1="345" x2="275" y2="345" class="rp-dots"/></g><g class="fade" style="animation-delay:550ms">
+      <text x="25" y="362" class="rp-fact">Followers</text>
+      <text x="275" y="362" class="rp-value" text-anchor="end">2,480</text>
+      <line x1="25" y1="369" x2="275" y2="369" class="rp-dots"/></g><g class="fade" style="animation-delay:600ms">
+      <text x="25" y="386" class="rp-fact">Forks</text>
+      <text x="275" y="386" class="rp-value" text-anchor="end">1,202</text>
+      <line x1="25" y1="393" x2="275" y2="393" class="rp-dots"/></g>
+  <g class="fade" style="animation-delay:400ms">
+      <text x="300" y="250" class="rp-rank">1</text>
+      <text x="328" y="243" class="rp-repo">nebula-ui</text>
+      <text x="328" y="258" class="rp-sans rp-small">TypeScript</text>
+      <text x="547" y="248" class="rp-count" text-anchor="end">8,421</text></g><g class="fade" style="animation-delay:460ms">
+      <text x="300" y="284" class="rp-rank">2</text>
+      <text x="328" y="277" class="rp-repo">quasar-db</text>
+      <text x="328" y="292" class="rp-sans rp-small">Rust</text>
+      <text x="547" y="282" class="rp-count" text-anchor="end">3,954</text></g><g class="fade" style="animation-delay:520ms">
+      <text x="300" y="318" class="rp-rank">3</text>
+      <text x="328" y="311" class="rp-repo">orbit-cli</text>
+      <text x="328" y="326" class="rp-sans rp-small">Go</text>
+      <text x="547" y="316" class="rp-count" text-anchor="end">2,210</text></g><g class="fade" style="animation-delay:580ms">
+      <text x="300" y="352" class="rp-rank">4</text>
+      <text x="328" y="345" class="rp-repo">pulsar-ml</text>
+      <text x="328" y="360" class="rp-sans rp-small">Python</text>
+      <text x="547" y="350" class="rp-count" text-anchor="end">1,288</text></g><g class="fade" style="animation-delay:640ms">
+      <text x="300" y="386" class="rp-rank">5</text>
+      <text x="328" y="379" class="rp-repo">comet.vim</text>
+      <text x="328" y="394" class="rp-sans rp-small">Vim Script</text>
+      <text x="547" y="384" class="rp-count" text-anchor="end">640</text></g>
+  <text class="rp-caption fade" style="animation-delay:500ms"><tspan x="572" y="242">Busiest month: April. Longest</tspan><tspan x="572" y="260">run: 39 days from Mar 10.</tspan></text>
+    <g class="fade" style="animation-delay:600ms">
+      <path d="M572 323.6L592.3 317.5L612.5 306.2L632.8 308.6L653.1 302.9L673.4 302L693.6 326.4L713.9 349.4L734.2 352.3L754.5 346.2L774.7 336.8L795 338.2L795 372L572 372Z" class="rp-area"/>
+      <path d="M572 323.6L592.3 317.5L612.5 306.2L632.8 308.6L653.1 302.9L673.4 302L693.6 326.4L713.9 349.4L734.2 352.3L754.5 346.2L774.7 336.8L795 338.2" class="rp-line"/>
+      <line x1="572" y1="372" x2="795" y2="372" class="rp-rule"/>
+      <text x="572" y="388" class="rp-sans rp-axis" text-anchor="start">Nov</text><text x="612.5" y="388" class="rp-sans rp-axis" text-anchor="middle">Jan</text><text x="653.1" y="388" class="rp-sans rp-axis" text-anchor="middle">Mar</text><text x="693.6" y="388" class="rp-sans rp-axis" text-anchor="middle">May</text><text x="734.2" y="388" class="rp-sans rp-axis" text-anchor="middle">Jul</text><text x="774.7" y="388" class="rp-sans rp-axis" text-anchor="middle">Sep</text>
+      <circle cx="673.4" cy="302" r="3.5" class="rp-dot"/>
+      <text x="673.4" y="293" class="rp-peak" text-anchor="middle">149 in April</text>
+    </g>
+  <line x1="25" y1="412" x2="795" y2="412" class="rp-rule"/>
+  <g class="fade" style="animation-delay:800ms"><rect x="25" y="424" width="387.6" height="5" class="rp-ink0"/><text x="25" y="448" class="rp-sans rp-small"><tspan class="rp-strong">TypeScript</tspan> 51%</text><rect x="414.6" y="424" width="170.4" height="5" class="rp-ink1"/><text x="414.6" y="448" class="rp-sans rp-small"><tspan class="rp-strong">Rust</tspan> 22%</text><rect x="587" y="424" width="94.4" height="5" class="rp-ink2"/><text x="587" y="448" class="rp-sans rp-small"><tspan class="rp-strong">Go</tspan> 13%</text><rect x="683.4" y="424" width="54.2" height="5" class="rp-ink3"/><text x="683.4" y="448" class="rp-sans rp-small"><tspan class="rp-strong">Python</tspan> 7%</text><rect x="739.6" y="424" width="25.9" height="5" class="rp-ink4"/><rect x="767.5" y="424" width="25.5" height="5" class="rp-ink5"/></g></g>
+</svg>

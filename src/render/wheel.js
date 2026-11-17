@@ -19,10 +19,10 @@ const TOP = 50;
 
 // The wheel: centred in the left part of the card, below the title.
 const SPLIT = 480;
-const CX = 245;
+const CX = 240;
 const CY = 256;
-const R0 = 90; // where the bars start
-const R_MAX = 52; // length of the busiest day's bar
+const R0 = 104; // where the bars start
+const R_MAX = 62; // length of the busiest day's bar
 const MIN_BAR = 4;
 const IDLE_BAR = 1.5;
 
@@ -116,7 +116,7 @@ function monthLabels(days) {
 /** The year's total in the middle of the wheel, scaled down if it is long. */
 function centre(activity, mono) {
   const total = formatExact(activity.total);
-  const inner = (R0 - 30) * 2;
+  const inner = (R0 - 33) * 2;
   const size = Math.min(34, r1(34 * (inner / textWidth(total, 34, 800, mono))));
   const average = activity.average;
   const perDay = `${average >= 10 ? formatExact(average) : r1(average)} a day`;
@@ -127,14 +127,15 @@ function centre(activity, mono) {
 
 /**
  * Where the best day's call-out goes: a short leader along the bar's direction,
- * then two lines of text anchored away from the wheel and kept inside the left
- * part of the card whatever the angle.
+ * then three short lines anchored away from the wheel (start on the right,
+ * end on the left, middle at the top and bottom) and clamped inside the left
+ * part of the card whatever the angle. Returns the SVG and the label's box.
  */
 export function bestDayLabel(activity, bestIndex, { mono = false } = {}) {
   const { days } = activity;
   const n = days.length;
   const best = days[bestIndex];
-  const max = Math.max(best.count, 1);
+  const max = Math.max(...days.map((d) => d.count), 1);
   const t = angleOf(bestIndex, n);
   const c = Math.cos(t);
   const s = Math.sin(t);
@@ -302,11 +303,12 @@ function footer(stats, mono) {
 
 /** The subtitle: the window the wheel covers, if it fits beside the title. */
 function subtitle(days, title, options, mono) {
-  if (!days.length) return '';
+  // Without a title, the content moves up into the subtitle's place.
+  if (!days.length || options.hideTitle) return '';
   const from = days[0].date;
   const to = days.at(-1).date;
   const range = `${monthName(from)} ${from.slice(0, 4)} – ${monthName(to)} ${to.slice(0, 4)}`;
-  const room = RIGHT - LEFT - (options.hideTitle ? 0 : textWidth(title, 18, 600, mono) + 24);
+  const room = RIGHT - LEFT - textWidth(title, 18, 600, mono) - 24;
   const text = [`${range} · one bar per day`, range].find(
     (t) => textWidth(t, 11.5, 400, mono) <= room,
   );

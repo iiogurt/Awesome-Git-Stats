@@ -17,8 +17,8 @@ earned, for embedding in profile READMEs with one Markdown image link:
   `src/rank.js`. `languages` fetches bytes per language for every repo; `pin` (`repo=`) and
   `gist` (`gist=`) fetch one repository or gist instead of the account (`fetchRepo`,
   `fetchGist`). Without activity those layouts render `renderNoActivity` rather than fail.
-  `report` (serif) and `terminal` (monospace) set their own typeface through `renderFrame`'s
-  `font`; `dashboard`, `stats` and `report` fall back to repository numbers without activity.
+  `report` is always serif (`renderFrame`'s `font`) and `terminal` always monospace (its own
+  CSS, on a fixed character grid); `dashboard`, `stats` and `report` fall back to repository numbers without activity.
 - 130 themes in `src/themes.js`, grouped into 64 `designs`: each design is a light + dark theme
   pair sharing colours, art, font and sometimes a default `finish` (15 classic palettes, 49
   artistic with background art, fonts and glow). Every design has a `category` from
