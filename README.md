@@ -8,7 +8,7 @@
 # Awesome Git Stats
 
 **Beautiful, animated stat cards for your GitHub profile README: stars, streaks, a contribution
-heatmap, a 3D skyline, rank, languages and more: 17 layouts in 130 themes that follow GitHub's light and dark mode.**
+heatmap, a 3D skyline, rank, languages and more: 20 layouts in 130 themes that follow GitHub's light and dark mode.**
 
 [![CI](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml/badge.svg)](https://github.com/iiogurt/Awesome-Git-Stats/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/iiogurt/Awesome-Git-Stats?sort=semver)](https://github.com/iiogurt/Awesome-Git-Stats/releases)
@@ -44,15 +44,15 @@ heatmap, a 3D skyline, rank, languages and more: 17 layouts in 130 themes that f
 
 ## Features
 
-| Feature                        | What you get                                                                                                                                                                                                                     |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **17 layouts**                 | Overview, stats with a rank, languages (bars, donut, pie, waffle), pinned repos and gists, streak, heatmap, a **3D skyline**, radar, treemap, timeline, a goal that fills up, a full **dashboard**, a **lab notebook** and more. |
-| **64 designs, 130 themes**     | Every design comes in a matching light and dark variant. 49 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D, bold and heavily animated, or minimal line art.             |
-| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                                            |
-| **Unique art**                 | 49 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                                                |
-| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                                                 |
-| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                                             |
-| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                                             |
+| Feature                        | What you get                                                                                                                                                                                                                                                                                    |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **20 layouts**                 | Overview, stats with a rank, languages (bars, donut, pie, waffle), pinned repos and gists, streak, heatmap, a **3D skyline**, radar, treemap, timeline, a goal that fills up, a full **dashboard**, a **lab notebook**, a magazine-style **report**, a **year wheel**, a **terminal** and more. |
+| **64 designs, 130 themes**     | Every design comes in a matching light and dark variant. 49 artistic designs with generated background art: nature, smooth and flowing, holidays, anime, horror, 3D, bold and heavily animated, or minimal line art.                                                                            |
+| **Follows GitHub's dark mode** | Visitors see the light or dark card according to their own GitHub appearance setting.                                                                                                                                                                                                           |
+| **Unique art**                 | 49 art styles, generated from your username: nobody else has your starfield, forest or fireworks.                                                                                                                                                                                               |
+| **No hosting needed**          | A GitHub Action renders the card on a schedule and commits it to your repository. Prefer a live link? Deploy your own instance to Vercel's free plan in minutes.                                                                                                                                |
+| **Accessible and robust**      | Animations from calm to bold that stop for people who prefer reduced motion, readable contrast in every theme, and an on-theme error card instead of a broken image.                                                                                                                            |
+| **Users and organizations**    | Works for any public GitHub account.                                                                                                                                                                                                                                                            |
 
 <table>
   <tr>
@@ -430,17 +430,20 @@ Choose a layout with `layout:` in the Action or `&layout=` in a live link.
 These show contribution data, which needs a token (the Action's built-in one is enough) and is
 only available for user accounts.
 
-| Layout      | Best for                                                                                         | Preview                                                               |
-| ----------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
-| `stats`     | Stars, commits, pull requests, issues, reviews and repos contributed to, with a rank from S to C | <img src="assets/examples/stats.svg" alt="stats" width="400">         |
-| `streak`    | Current and longest streak and the year's total                                                  | <img src="assets/examples/streak.svg" alt="streak" width="400">       |
-| `heatmap`   | Your contribution calendar, large                                                                | <img src="assets/examples/heatmap.svg" alt="heatmap" width="400">     |
-| `skyline`   | Your year as a 3D isometric city, one tower per day                                              | <img src="assets/examples/skyline.svg" alt="skyline" width="400">     |
-| `timeline`  | Contributions per month as a bar chart                                                           | <img src="assets/examples/timeline.svg" alt="timeline" width="400">   |
-| `radar`     | Your profile on six axes; the dashed ring is a typical GitHub user                               | <img src="assets/examples/radar.svg" alt="radar" width="400">         |
-| `goal`      | The card fills up like a tank as you near `goal=` contributions (default 1000)                   | <img src="assets/examples/goal.svg" alt="goal" width="300">           |
-| `dashboard` | Everything at once, as a profile banner                                                          | <img src="assets/examples/dashboard.svg" alt="dashboard" width="400"> |
-| `lab`       | The dashboard for scientists: spectra, fits and indices ([details](#the-lab-notebook))           | <img src="assets/examples/lab.svg" alt="lab" width="400">             |
+| Layout      | Best for                                                                                              | Preview                                                               |
+| ----------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `stats`     | Stars, commits, pull requests, issues, reviews and repos contributed to, with a rank from S to C      | <img src="assets/examples/stats.svg" alt="stats" width="400">         |
+| `streak`    | Current and longest streak and the year's total                                                       | <img src="assets/examples/streak.svg" alt="streak" width="400">       |
+| `heatmap`   | Your contribution calendar, large                                                                     | <img src="assets/examples/heatmap.svg" alt="heatmap" width="400">     |
+| `skyline`   | Your year as a 3D isometric city, one tower per day                                                   | <img src="assets/examples/skyline.svg" alt="skyline" width="400">     |
+| `timeline`  | Contributions per month as a bar chart                                                                | <img src="assets/examples/timeline.svg" alt="timeline" width="400">   |
+| `radar`     | Your profile on six axes; the dashed ring is a typical GitHub user                                    | <img src="assets/examples/radar.svg" alt="radar" width="400">         |
+| `goal`      | The card fills up like a tank as you near `goal=` contributions (default 1000)                        | <img src="assets/examples/goal.svg" alt="goal" width="300">           |
+| `dashboard` | Everything at once, as a profile banner                                                               | <img src="assets/examples/dashboard.svg" alt="dashboard" width="400"> |
+| `lab`       | The dashboard for scientists: spectra, fits and indices ([details](#the-lab-notebook))                | <img src="assets/examples/lab.svg" alt="lab" width="400">             |
+| `report`    | A magazine front page: stars as the headline, the year in three columns ([details](#more-dashboards)) | <img src="assets/examples/report.svg" alt="report" width="400">       |
+| `wheel`     | Every day of your year as a bar around a circle, with your numbers beside it                          | <img src="assets/examples/wheel.svg" alt="wheel" width="400">         |
+| `terminal`  | Your stats as a terminal window, in the style of `neofetch`                                           | <img src="assets/examples/terminal.svg" alt="terminal" width="400">   |
 
 ### Languages
 
@@ -476,6 +479,30 @@ if you haven't contributed yet today. Contribution data comes from GitHub's Grap
 needs a token (the GitHub Action uses its built-in one) and is only available for user
 accounts; organisations get repository statistics instead. It includes private contributions
 only if you've enabled _Include private contributions on my profile_ in your GitHub settings.
+
+### More dashboards
+
+Three more 820 px wide cards, each with a look of its own. All follow your theme's colours.
+
+<img src="assets/examples/report.svg" alt="report layout, a magazine front page of the year" width="820">
+
+`layout=report` is a magazine front page, always set in serif. The star count is the headline,
+and the sentences beside it and above the chart are written from your numbers: which repository
+leads, how many contributions on how many days, the best day, the busiest month and the longest
+streak. Below: your numbers, the five most starred repositories and the year month by month.
+Organizations, and instances without a token, get repository numbers and a list of languages
+instead of the year. `custom_title` replaces the masthead.
+
+<img src="assets/examples/wheel.svg" alt="wheel layout, a year of contributions around a circle" width="820">
+
+`layout=wheel` draws one bar per day around a circle, longer for busier days, with the year's
+total in the middle and the best day marked. Beside it: six headline numbers, the most starred
+repositories, the contribution mix and stars by language.
+
+<img src="assets/examples/terminal.svg" alt="terminal layout, stats in a terminal window" width="820">
+
+`layout=terminal` is a terminal window, always monospace: a small heatmap, a `key.... value`
+list with your rank, and tables of your top repositories and languages.
 
 ### The lab notebook
 

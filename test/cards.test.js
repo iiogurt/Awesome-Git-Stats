@@ -163,7 +163,9 @@ describe('new cards', () => {
 
   it('explain the missing data when there is no contribution activity', () => {
     const stats = computeStats({ ...sampleAccount, activity: null });
-    for (const layout of ACTIVITY_LAYOUTS.filter((l) => !['dashboard', 'stats'].includes(l))) {
+    // The dashboard, stats and report cards fall back to repository numbers instead.
+    const fallback = ['dashboard', 'stats', 'report'];
+    for (const layout of ACTIVITY_LAYOUTS.filter((l) => !fallback.includes(l))) {
       assert.match(render({ layout }, stats), /Contribution activity needs a/, layout);
     }
     assert.match(render({ layout: 'stats' }, stats), /need a GitHub token/);
