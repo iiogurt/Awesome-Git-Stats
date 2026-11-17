@@ -43,3 +43,21 @@ export function graphqlPage(nodes, { hasNextPage = false, endCursor = null, tota
     },
   };
 }
+
+/**
+ * The text of an SVG with its tags replaced by `gap`: repeated until none are left,
+ * since one pass could join the pieces of a broken-up tag into a new one.
+ */
+export function stripTags(svg, gap = '') {
+  let text = svg;
+  for (let previous; previous !== text;) {
+    previous = text;
+    text = text.replace(/<[^>]+>/g, gap);
+  }
+  return text;
+}
+
+/** Whether the markup contains an element of this name, in any letter case. */
+export function hasTag(svg, name) {
+  return svg.toLowerCase().includes(`<${name.toLowerCase()}`);
+}

@@ -5,6 +5,7 @@ import { renderCard } from '../src/render/index.js';
 import { bestDayLabel } from '../src/render/wheel.js';
 import { computeStats } from '../src/stats.js';
 import { sampleAccount } from './fixtures/account.js';
+import { hasTag } from './helpers.js';
 
 const WIDTH = 820;
 const HEIGHT = 470;
@@ -106,7 +107,7 @@ describe('wheel layout', () => {
       repos: [{ ...sampleAccount.repos[0], name: hostile }, ...sampleAccount.repos.slice(1)],
     };
     const svg = render({}, account);
-    assert.doesNotMatch(svg, /<script>/);
+    assert.equal(hasTag(svg, 'script'), false);
     assert.match(svg, /class="rl">&lt;script&gt;alert\(…</);
   });
 

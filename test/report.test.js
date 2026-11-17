@@ -4,16 +4,14 @@ import { parseOptions } from '../src/options.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { sampleAccount } from './fixtures/account.js';
+import { hasTag, stripTags } from './helpers.js';
 
 function render(query = {}, account = sampleAccount) {
   const options = parseOptions({ username: 'stellar-dev', layout: 'report', ...query });
   return renderCard(computeStats(account, { languages: options.langsCount }), options);
 }
 const text = (svg) =>
-  svg
-    .replace(/<style>[\s\S]*?<\/style>/, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ');
+  stripTags(svg.replace(/<style>[\s\S]*?<\/style>/, ''), ' ').replace(/\s+/g, ' ');
 
 describe('report layout', () => {
   it('leads with the star count and writes the year up from the data', () => {
@@ -86,7 +84,8 @@ describe('report layout', () => {
       repos: [{ ...sampleAccount.repos[0], name: '<script>', language: 'A&B' }],
     };
     const svg = render({}, evil);
-    assert.doesNotMatch(svg, /<script>|<b>/);
+    assert.equal(hasTag(svg, 'script'), false);
+    assert.equal(hasTag(svg, 'b>'), false);
     assert.match(svg, /&lt;script&gt;/);
     assert.doesNotMatch(svg, /(fill|stroke)="var\(/);
   });

@@ -4,6 +4,7 @@ import { parseOptions } from '../src/options.js';
 import { renderCard } from '../src/render/index.js';
 import { computeStats } from '../src/stats.js';
 import { sampleAccount } from './fixtures/account.js';
+import { stripTags } from './helpers.js';
 
 function render(query = {}, account = sampleAccount, tweak = (stats) => stats) {
   const options = parseOptions({ username: 'stellar-dev', layout: 'terminal', ...query });
@@ -12,10 +13,9 @@ function render(query = {}, account = sampleAccount, tweak = (stats) => stats) {
 
 // The visible text of the card, with the tspans that split numbers removed.
 const text = (svg) =>
-  svg
-    .replace(/<title[^>]*>[\s\S]*?<\/title>/g, '')
-    .replace(/<style>[\s\S]*?<\/style>/g, '')
-    .replace(/<[^>]+>/g, '')
+  stripTags(
+    svg.replace(/<title[^>]*>[\s\S]*?<\/title>/g, '').replace(/<style>[\s\S]*?<\/style>/g, ''),
+  )
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
